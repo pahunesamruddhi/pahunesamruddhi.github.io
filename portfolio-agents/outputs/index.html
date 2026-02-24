@@ -292,12 +292,15 @@
             overflow-y: auto;
             display: none;
             opacity: 0;
-            transition: opacity 0.3s;
+            transform: translateY(14px);
+            transition: opacity 0.38s cubic-bezier(0.25,0.46,0.45,0.94),
+                        transform 0.38s cubic-bezier(0.25,0.46,0.45,0.94);
         }
-        
+
         .case-study-overlay.active {
             display: block;
             opacity: 1;
+            transform: translateY(0);
         }
         
         .case-study-nav {
@@ -1768,6 +1771,112 @@
             .bento-card:not(.b-resume):hover { transform: none !important; }
             .b-proj::after, .b-blog-c::after { transition: none !important; }
             * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+        }
+
+        /* ================================================================
+           MICROINTERACTIONS — Motion Design System
+           ================================================================ */
+
+        /* ── Nav auto-hide ── */
+        .nav {
+            transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        .nav--hidden { transform: translateY(-100%); }
+
+        /* ── Nav link underline slide-in ── */
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -2px; left: 0;
+            width: 100%; height: 1.5px; background: #FF5500;
+            transform: scaleX(0); transform-origin: right;
+            transition: transform 0.28s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        .nav-link:hover::after { transform: scaleX(1); transform-origin: left; }
+
+        /* ── Scroll reveal: base class (applied via JS — invisible only when JS runs) ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.62s cubic-bezier(0.25,0.46,0.45,0.94),
+                        transform 0.62s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+        /* Stagger delays for sibling groups */
+        .reveal[data-delay="1"] { transition-delay: 0.10s; }
+        .reveal[data-delay="2"] { transition-delay: 0.20s; }
+        .reveal[data-delay="3"] { transition-delay: 0.30s; }
+        .reveal[data-delay="4"] { transition-delay: 0.40s; }
+
+        /* Directional overrides for specific element types */
+        .cs2-pullquote.reveal               { transform: translateX(-18px); }
+        .cs2-pullquote.reveal.in-view       { transform: translateX(0); }
+        .cs2-label.reveal, .cs2-kicker.reveal {
+            transform: translateX(-10px); transition-duration: 0.4s;
+        }
+        .cs2-label.reveal.in-view, .cs2-kicker.reveal.in-view { transform: translateX(0); }
+
+        /* ── Reading progress bar ── */
+        .cs-progress {
+            position: absolute; bottom: -1px; left: 0;
+            height: 2px; background: #FF5500; width: 0%;
+            pointer-events: none; z-index: 10;
+            transition: width 0.06s linear;
+        }
+        .case-study-nav { position: relative; }
+
+        /* ── Orange divider line-draw on open ── */
+        .cs2-hero-divider {
+            transform-origin: left;
+            transform: scaleX(0);
+            transition: transform 0.75s cubic-bezier(0.16,1,0.3,1) 0.2s;
+        }
+        .cs2-hero-divider.drawn { transform: scaleX(1); }
+
+        /* ── Bento headline: word-reveal spans (injected by JS) ── */
+        .b-headline-word {
+            display: inline-block;
+            opacity: 0; transform: translateY(16px);
+            transition: opacity 0.52s cubic-bezier(0.25,0.46,0.45,0.94),
+                        transform 0.52s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        .b-headline-word.in { opacity: 1; transform: translateY(0); }
+
+        /* ── Resume strip: shimmer on hover ── */
+        .b-resume::before {
+            content: ''; position: absolute; top: 0; left: -100%;
+            width: 45%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.13), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.65s cubic-bezier(0.25,0.46,0.45,0.94);
+            pointer-events: none; z-index: 2;
+        }
+        .b-resume:hover::before { left: 140%; }
+
+        /* ── Funnel gate: number pulse on expand ── */
+        @keyframes gateNumIn {
+            0%   { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .cs2-funnel-row.is-open .cs2-funnel-num {
+            animation: gateNumIn 0.38s cubic-bezier(0.25,0.46,0.45,0.94) both;
+        }
+
+        /* ── Count-up: tabular figures ── */
+        .count-up { font-variant-numeric: tabular-nums; }
+
+        /* ── Reduced motion: disable all motion additions ── */
+        @media (prefers-reduced-motion: reduce) {
+            .nav, .nav-link::after,
+            .b-headline-word, .cs2-hero-divider,
+            .b-resume::before,
+            .reveal, .reveal[data-delay] {
+                transition: none !important; animation: none !important;
+            }
+            .b-headline-word  { opacity: 1 !important; transform: none !important; }
+            .cs2-hero-divider { transform: scaleX(1) !important; }
+            .reveal           { opacity: 1 !important; transform: none !important; }
+            .cs2-funnel-row.is-open .cs2-funnel-num { animation: none !important; }
         }
     </style>
 </head>
@@ -3550,31 +3659,47 @@
             const overlay = document.getElementById(id);
             if (!overlay) return;
             document.body.style.overflow = 'hidden';
-            overlay.classList.add('active');
-            // Move focus to close button for keyboard users
+            // Set display first, then trigger transition on next two frames
+            overlay.style.display = 'block';
+            overlay.scrollTop = 0;
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+                overlay.classList.add('active');
+            }));
+            // Focus close button
             const close = overlay.querySelector('.close-case-study');
-            if (close) { overlay.scrollTop = 0; setTimeout(() => close.focus(), 50); }
+            if (close) setTimeout(() => close.focus(), 80);
+            // Draw orange divider line
+            setTimeout(() => {
+                overlay.querySelectorAll('.cs2-hero-divider').forEach(d => d.classList.add('drawn'));
+            }, 230);
+            // Lazy-init scroll reveals + count-ups on first open
+            if (!overlay.dataset.motionReady) {
+                overlay.dataset.motionReady = '1';
+                _initOverlayMotion(overlay);
+            }
         }
 
         function closeCaseStudy(id) {
             const overlay = document.getElementById(id);
             if (!overlay) return;
-            document.body.style.overflow = '';
             overlay.classList.remove('active');
+            // Reset divider for next open
+            overlay.querySelectorAll('.cs2-hero-divider').forEach(d => d.classList.remove('drawn'));
+            // Wait for transition before hiding + restoring scroll
+            setTimeout(() => {
+                overlay.style.display = '';
+                document.body.style.overflow = '';
+            }, 420);
             // Return focus to triggering card
             const trigger = document.querySelector(`[data-case-study="${id}"]`);
-            if (trigger) trigger.focus();
+            if (trigger) setTimeout(() => trigger.focus(), 50);
         }
 
         // ESC to close
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 document.querySelectorAll('.case-study-overlay.active').forEach(overlay => {
-                    const id = overlay.id;
-                    overlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                    const trigger = document.querySelector(`[data-case-study="${id}"]`);
-                    if (trigger) trigger.focus();
+                    closeCaseStudy(overlay.id);
                 });
             }
         });
@@ -3606,6 +3731,187 @@
                 }
             });
         });
+
+        // ════════════════════════════════════════════════════════
+        //  MOTION DESIGN SYSTEM
+        //  Every interaction has a purpose. Nothing is decorative.
+        // ════════════════════════════════════════════════════════
+        (function motionSystem() {
+            const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // ── 1. Bento page entrance: stagger cards in ─────────────────
+            // Pause breathing → stagger reveal → resume breathing
+            if (!noMotion) {
+                const cards = [...document.querySelectorAll('.bento-card')];
+                cards.forEach(card => {
+                    card.style.animationPlayState = 'paused';
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.96) translateY(12px)';
+                });
+                cards.forEach((card, i) => {
+                    setTimeout(() => {
+                        card.style.transition =
+                            'opacity 0.48s cubic-bezier(0.25,0.46,0.45,0.94),' +
+                            'transform 0.48s cubic-bezier(0.25,0.46,0.45,0.94)';
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1) translateY(0)';
+                        // Clear inline styles → CSS breathing takes over
+                        setTimeout(() => {
+                            card.style.transition = '';
+                            card.style.opacity = '';
+                            card.style.transform = '';
+                            card.style.animationPlayState = '';
+                        }, 520);
+                    }, 55 + i * 65);
+                });
+            }
+
+            // ── 2. Headline word-split reveal ────────────────────────────
+            // Splits "I build automation<br>that knows<br>when to stop."
+            // into per-word spans that cascade in after card 1 appears.
+            (function headlineReveal() {
+                const hl = document.querySelector('.b-headline');
+                if (!hl || noMotion) return;
+                let delay = 0;
+                hl.innerHTML = hl.innerHTML.split('<br>').map(line =>
+                    line.trim().split(' ').filter(Boolean).map(word => {
+                        const d = delay; delay += 0.065;
+                        return `<span class="b-headline-word" style="transition-delay:${d.toFixed(3)}s">${word}</span>`;
+                    }).join(' ')
+                ).join('<br>');
+                // Card 1 becomes visible ~300ms in; headline flows from there
+                setTimeout(() => {
+                    hl.querySelectorAll('.b-headline-word').forEach(w => w.classList.add('in'));
+                }, 290);
+            })();
+
+            // ── 3. Nav auto-hide on scroll direction ─────────────────────
+            // Hides on scroll down (focus on content), reveals on scroll up.
+            (function navBehavior() {
+                const nav = document.querySelector('.nav');
+                if (!nav) return;
+                let lastY = 0, hidden = false;
+                window.addEventListener('scroll', () => {
+                    const y = window.scrollY;
+                    if (y > lastY && y > 90 && !hidden) {
+                        nav.classList.add('nav--hidden'); hidden = true;
+                    } else if (y < lastY && hidden) {
+                        nav.classList.remove('nav--hidden'); hidden = false;
+                    }
+                    lastY = y;
+                }, { passive: true });
+            })();
+
+            // ── 4. Reading progress bars ─────────────────────────────────
+            // Injected into each case study's sticky nav.
+            // Shows how far through the case study the reader is.
+            document.querySelectorAll('.case-study-overlay').forEach(overlay => {
+                const navEl = overlay.querySelector('.case-study-nav');
+                if (!navEl) return;
+                const bar = document.createElement('div');
+                bar.className = 'cs-progress';
+                navEl.appendChild(bar);
+                overlay.addEventListener('scroll', () => {
+                    const max = overlay.scrollHeight - overlay.clientHeight;
+                    bar.style.width = max > 0
+                        ? Math.min(overlay.scrollTop / max * 100, 100).toFixed(1) + '%'
+                        : '0%';
+                }, { passive: true });
+            });
+
+            // ── 5. Scroll reveals inside case study overlays ─────────────
+            // Elements fade/slide in as user reads. Uses the overlay as the
+            // IntersectionObserver root so it responds to overlay scroll, not window.
+            window._initOverlayMotion = function(overlay) {
+                if (noMotion) return;
+                const sel = [
+                    '.cs2-h2', '.cs2-h3',
+                    '.cs2-label', '.cs2-kicker',
+                    '.cs2-p', '.cs2-pullquote',
+                    '.cs2-img-figure',
+                    '.cs2-box-dark', '.cs2-observations',
+                    '.cs2-two-col > *',
+                    '.cs2-persona',
+                    '.cs2-trade-row > *',
+                    '.cs2-insight-bar',
+                    '.cs2-pivot-table',
+                    '.cs2-timeline',
+                    '.cs2-final-quote',
+                    '.cs2-swap-banner',
+                    '.cs2-inquiry-vs',
+                    '.cs2-perception-split'
+                ].join(',');
+
+                const els = [...overlay.querySelectorAll(sel)];
+
+                // Stagger siblings: first child in a parent = no delay, 2nd = data-delay="1", etc.
+                const sibCount = new Map();
+                els.forEach(el => {
+                    const p = el.parentElement;
+                    const n = sibCount.get(p) || 0;
+                    if (n >= 1 && n <= 4) el.dataset.delay = n;
+                    sibCount.set(p, n + 1);
+                    el.classList.add('reveal');
+                });
+
+                const obs = new IntersectionObserver(entries => {
+                    entries.forEach(e => {
+                        if (e.isIntersecting) {
+                            e.target.classList.add('in-view');
+                            obs.unobserve(e.target);
+                        }
+                    });
+                }, { root: overlay, threshold: 0.07, rootMargin: '0px 0px -28px 0px' });
+
+                els.forEach(el => obs.observe(el));
+
+                // Count-up: numeric stat elements
+                overlay.querySelectorAll('.cs2-perception-big, .cs2-tl-time').forEach(el => {
+                    const raw = el.textContent.trim();
+                    const m = raw.match(/^([\d,]+)(\+?)$/);
+                    if (!m) return;
+                    const final = parseInt(m[1].replace(/,/g, ''));
+                    if (!final || final < 2) return;
+                    const suffix = m[2] || '';
+                    el.classList.add('count-up');
+                    const statObs = new IntersectionObserver(entries => {
+                        if (!entries[0].isIntersecting) return;
+                        statObs.disconnect();
+                        const t0 = performance.now();
+                        const tick = () => {
+                            const p = Math.min((performance.now() - t0) / 1100, 1);
+                            const ease = 1 - Math.pow(1 - p, 3); // easeOutCubic
+                            el.textContent = Math.round(final * ease).toLocaleString() + suffix;
+                            if (p < 1) requestAnimationFrame(tick);
+                        };
+                        requestAnimationFrame(tick);
+                    }, { root: overlay, threshold: 0.6 });
+                    statObs.observe(el);
+                });
+            };
+
+            // ── 6. Footer entrance ───────────────────────────────────────
+            // "Let's talk." and links slide up when the footer scrolls into view.
+            (function footerEntrance() {
+                const l = document.querySelector('.bento-footer-l');
+                const r = document.querySelector('.bento-footer-r');
+                if (!l || !r || noMotion) return;
+                l.classList.add('reveal');
+                r.classList.add('reveal');
+                r.dataset.delay = '1';
+                const obs = new IntersectionObserver(entries => {
+                    entries.forEach(e => {
+                        if (e.isIntersecting) {
+                            e.target.classList.add('in-view');
+                            obs.unobserve(e.target);
+                        }
+                    });
+                }, { threshold: 0.2 });
+                obs.observe(l);
+                obs.observe(r);
+            })();
+
+        })();
     </script>
     
 </body>
