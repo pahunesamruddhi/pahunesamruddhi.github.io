@@ -9,7 +9,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -952,184 +952,242 @@
         .cs2-iv-q--old { color: #333; text-decoration: line-through; text-decoration-color: #FF5500; }
         .cs2-iv-arrow { font-size: 32px; color: #FF5500; font-weight: 900; flex-shrink: 0; }
 
-        /* LOGIC FUNNEL — redesigned for visual hierarchy */
-        .cs2-funnel {
-            max-width: 1100px;
-            margin: 64px auto 0;
-            padding: 0 56px;
-            border-top: 1px solid rgba(255,255,255,0.08);
+        /* ── Logic Funnel Flow Diagram ──────────────────────────── */
+        .funnel-diagram-wrap {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 64px 56px 80px;
         }
-        .cs2-funnel-row {
+        .funnel-diagram-hdr {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 56px;
+            padding-bottom: 32px;
             border-bottom: 1px solid rgba(255,255,255,0.07);
-            cursor: pointer;
-            transition: background 0.25s;
         }
-        .cs2-funnel-row:hover  { background: rgba(255,255,255,0.02); }
-        .cs2-funnel-row.is-open { background: rgba(255,255,255,0.025); }
+        .funnel-diagram-sub {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+            max-width: 220px;
+            text-align: right;
+            padding-top: 6px;
+        }
 
-        /* Header: two-zone grid — left number badge | right content */
-        .cs2-funnel-header {
-            display: grid;
-            grid-template-columns: 80px 1fr;
-            align-items: start;
-            padding: 32px 0;
-            user-select: none;
+        /* Flow */
+        .funnel-flow { display: flex; flex-direction: column; }
+
+        /* Start / End nodes */
+        .funnel-node {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-left: 24px;
+            margin-left: 72px;
         }
-        .cs2-funnel-hd-left {
+        .funnel-node-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .funnel-node--start .funnel-node-dot { background: #333; border: 2px solid #666; }
+        .funnel-node--end   .funnel-node-dot { background: #FF5500; box-shadow: 0 0 12px rgba(255,85,0,0.4); }
+        .funnel-node-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #666;
+        }
+        .funnel-node--end .funnel-node-label { color: #FF5500; }
+
+        .funnel-v-line {
+            width: 1px;
+            height: 24px;
+            background: rgba(255,255,255,0.07);
+            margin-left: calc(72px + 35px);
+        }
+
+        /* Gate row */
+        .funnel-gate {
+            display: grid;
+            grid-template-columns: 72px 1fr 200px;
+            opacity: 0;
+            transform: translateX(-16px);
+        }
+        @keyframes funnelGateIn {
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .case-study-overlay.active .funnel-gate {
+            animation: funnelGateIn 0.5s cubic-bezier(0.25,0.46,0.45,0.94) forwards;
+        }
+        .case-study-overlay.active .funnel-gate:nth-child(1) { animation-delay: 0.10s; }
+        .case-study-overlay.active .funnel-gate:nth-child(2) { animation-delay: 0.22s; }
+        .case-study-overlay.active .funnel-gate:nth-child(3) { animation-delay: 0.34s; }
+        .case-study-overlay.active .funnel-gate:nth-child(4) { animation-delay: 0.46s; }
+        .case-study-overlay.active .funnel-gate:nth-child(5) { animation-delay: 0.58s; }
+
+        /* Num column */
+        .funnel-gate-num-col {
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
-            padding-right: 28px;
-            padding-top: 4px;
-            gap: 3px;
+            align-items: center;
+            padding-top: 28px;
         }
-        .cs2-funnel-gate-label {
-            font-size: 8px;
+        .funnel-gate-num {
+            font-size: 11px;
             font-weight: 700;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: rgba(255,85,0,0.55);
+            letter-spacing: 0.14em;
+            color: #444;
+            font-family: 'DM Mono', 'Courier New', monospace;
+            transition: color 0.3s;
             line-height: 1;
-            transition: color 0.25s;
+            margin-bottom: 16px;
         }
-        .cs2-funnel-row.is-open .cs2-funnel-gate-label { color: #FF5500; }
-        .cs2-funnel-num {
-            font-size: 36px;
-            font-weight: 900;
-            line-height: 1;
-            letter-spacing: -0.03em;
-            color: rgba(255,255,255,0.35);
+        .funnel-gate:hover .funnel-gate-num { color: #FF5500; }
+        .funnel-gate-connector {
+            width: 1px;
+            flex: 1;
+            background: rgba(255,255,255,0.07);
+            position: relative;
+            min-height: 48px;
+        }
+        .funnel-gate-connector::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0; height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 6px solid #333;
+        }
+
+        /* Gate body */
+        .funnel-gate-body {
+            padding: 20px 24px 36px;
+            border-left: 2px solid rgba(255,255,255,0.07);
+            transition: border-color 0.3s, background 0.3s;
+        }
+        .funnel-gate:hover .funnel-gate-body {
+            border-left-color: #FF5500;
+            background: rgba(255,85,0,0.03);
+        }
+        .funnel-gate-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #555;
+            margin-bottom: 8px;
+            display: block;
             transition: color 0.3s;
         }
-        .cs2-funnel-row.is-open .cs2-funnel-num { color: #FF5500; }
+        .funnel-gate:hover .funnel-gate-label { color: #FF5500; }
+        .funnel-gate-title {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: #fff;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+        .funnel-gate-desc {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #aaa;
+            max-width: 480px;
+            margin: 0;
+        }
+        .funnel-gate-prevents {
+            margin-top: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255,85,0,0.7);
+            font-family: 'DM Mono', 'Courier New', monospace;
+        }
+        .funnel-gate-prevents::before {
+            content: '×';
+            font-size: 14px;
+            color: #FF5500;
+            line-height: 1;
+        }
 
-        /* Right zone: title + prevents pill stacked */
-        .cs2-funnel-hd-main {
-            border-left: 1px solid rgba(255,255,255,0.08);
-            padding-left: 28px;
-            padding-right: 24px;
+        /* Constraint column — hidden until hover */
+        .funnel-gate-constraint {
+            padding: 20px;
             display: flex;
             flex-direction: column;
             gap: 10px;
+            border-left: 1px solid rgba(255,255,255,0.07);
+            opacity: 0;
+            transition: opacity 0.3s, background 0.3s;
         }
-        .cs2-funnel-title {
-            font-size: 26px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            color: rgba(255,255,255,0.42);
-            transition: color 0.25s;
-            margin: 0;
-            line-height: 1.15;
+        .funnel-gate:hover .funnel-gate-constraint {
+            opacity: 1;
+            background: rgba(255,85,0,0.10);
         }
-        .cs2-funnel-row:hover .cs2-funnel-title,
-        .cs2-funnel-row.is-open .cs2-funnel-title { color: #fff; }
-
-        /* Prevents pill — outcome visible in closed state for scannability */
-        .cs2-funnel-prevents-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 0.13em;
-            text-transform: uppercase;
-            color: rgba(255,85,0,0.55);
-            transition: color 0.25s;
-            width: fit-content;
-        }
-        .cs2-funnel-prevents-pill::before {
-            content: '';
-            display: inline-block;
-            width: 5px; height: 5px;
-            border-radius: 50%;
-            background: rgba(255,85,0,0.4);
-            transition: background 0.25s;
-            flex-shrink: 0;
-        }
-        .cs2-funnel-row.is-open .cs2-funnel-prevents-pill { color: #FF5500; }
-        .cs2-funnel-row.is-open .cs2-funnel-prevents-pill::before { background: #FF5500; }
-
-        /* Body: 2-column — Logic (primary) | Impact + Trade-off (secondary, stacked) */
-        .cs2-funnel-body {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1), padding-bottom 0.3s;
-            padding-left: 108px; /* aligns body left edge under title */
-        }
-        .cs2-funnel-row.is-open .cs2-funnel-body {
-            max-height: 480px;
-            padding-bottom: 44px;
-        }
-        .cs2-funnel-col--logic {
-            padding: 24px 48px 0 28px;
-            border-right: 1px solid rgba(255,255,255,0.06);
-        }
-        .cs2-funnel-col--right {
-            padding: 24px 0 0 48px;
-            display: flex;
-            flex-direction: column;
-        }
-        .cs2-funnel-col-constraint {
-            margin-top: 24px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.06);
-        }
-        .cs2-funnel-col-label {
-            display: block;
+        .funnel-constraint-label {
             font-size: 9px;
             font-weight: 700;
-            letter-spacing: 0.22em;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.55);
-            margin-bottom: 10px;
+            color: #FF5500;
         }
-        .cs2-funnel-col-constraint .cs2-funnel-col-label { color: rgba(255,85,0,0.75); }
-        .cs2-funnel-col-text {
-            font-size: 15px;
-            color: rgba(255,255,255,0.65);
-            line-height: 1.65;
-            margin: 0;
-        }
-        .cs2-funnel-col-constraint .cs2-funnel-col-text {
-            font-size: 13px;
-            color: rgba(255,255,255,0.42);
+        .funnel-constraint-text {
+            font-size: 12px;
+            line-height: 1.6;
+            color: #aaa;
             font-style: italic;
         }
 
-        /* Funnel step progress dots */
-        .cs2-funnel-steps {
+        /* Legend */
+        .funnel-legend {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.07);
             display: flex;
-            gap: 8px;
+            gap: 32px;
             align-items: center;
-            justify-content: center;
-            padding: 28px 0 8px;
+            flex-wrap: wrap;
         }
-        .cs2-funnel-step-dot {
-            width: 5px; height: 5px;
+        .funnel-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            color: #555;
+        }
+        .funnel-legend-dot {
+            width: 6px; height: 6px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.14);
-            transition: background 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
-                        transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
-            flex-shrink: 0;
         }
-        .cs2-funnel-step-dot.is-active {
-            background: #FF5500;
-            transform: scale(1.5);
+        .funnel-legend-dot--orange { background: #FF5500; }
+        .funnel-legend-dot--grey   { background: #555; }
+
+        /* UPI flow link */
+        .cs2-flow-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 32px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: #FF5500;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,85,0,0.35);
+            padding-bottom: 2px;
+            transition: border-color 0.2s, opacity 0.2s;
         }
-        /* Scroll hint */
-        .cs2-funnel-hint {
-            text-align: center;
-            font-size: 10px;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.22);
-            padding: 0 0 28px;
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-        .cs2-funnel-hint.visible { opacity: 1; }
+        .cs2-flow-link:hover { border-color: #FF5500; opacity: 0.8; }
 
         /* PERSONA GRID */
         .cs2-persona-grid {
@@ -1377,15 +1435,13 @@
             .cs2-gates { grid-template-columns: 1fr; }
             .cs2-gate--wide { grid-column: auto; }
             .cs2-gate-wide-inner { grid-template-columns: 1fr; gap: 32px; }
-            .cs2-funnel { padding: 0 24px; }
-            .cs2-funnel-header { grid-template-columns: 60px 1fr; padding: 24px 0; }
-            .cs2-funnel-hd-left { padding-right: 16px; }
-            .cs2-funnel-num { font-size: 26px; }
-            .cs2-funnel-title { font-size: 18px; }
-            .cs2-funnel-prevents-pill { font-size: 9px; }
-            .cs2-funnel-body { grid-template-columns: 1fr; padding-left: 60px; }
-            .cs2-funnel-col--logic { padding: 20px 0 20px 16px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
-            .cs2-funnel-col--right { padding: 20px 0 0 16px; }
+            .funnel-diagram-wrap { padding: 40px 24px 56px; }
+            .funnel-diagram-hdr { flex-direction: column; gap: 16px; }
+            .funnel-diagram-sub { text-align: left; max-width: 100%; }
+            .funnel-gate { grid-template-columns: 52px 1fr; }
+            .funnel-gate-constraint { display: none; }
+            .funnel-node { margin-left: 52px; }
+            .funnel-v-line { margin-left: calc(52px + 27px); }
             .cs2-gate-motto { align-items: flex-start; }
             .cs2-gate-motto span { font-size: 48px; }
             .cs2-persona-grid { grid-template-columns: 1fr; }
@@ -1668,7 +1724,7 @@
         .b-resume:hover .b-resume-arr { transform: translateX(6px); color: #fff; }
 
         /* Nav logo */
-        .nav-logo img { height: 26px; width: auto; display: block; }
+        .nav-logo img { height: 38px; width: auto; display: block; }
 
         /* Footer */
         .bento-footer {
@@ -1921,13 +1977,9 @@
         }
         .b-resume:hover::before { left: 140%; }
 
-        /* ── Funnel gate: number pulse on expand ── */
-        @keyframes gateNumIn {
-            0%   { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        .cs2-funnel-row.is-open .cs2-funnel-num {
-            animation: gateNumIn 0.38s cubic-bezier(0.25,0.46,0.45,0.94) both;
+        /* ── Funnel gate entry animation ── */
+        @keyframes funnelGateIn {
+            to { opacity: 1; transform: translateX(0); }
         }
 
         /* ── Count-up: tabular figures ── */
@@ -1942,7 +1994,7 @@
             .b-headline-word  { opacity: 1 !important; transform: none !important; }
             .cs2-hero-divider { transform: scaleX(1) !important; }
             .reveal           { opacity: 1 !important; transform: none !important; }
-            .cs2-funnel-row.is-open .cs2-funnel-num { animation: none !important; }
+            .funnel-gate { animation: none !important; opacity: 1 !important; transform: none !important; }
         }
     </style>
 </head>
@@ -2121,6 +2173,7 @@
                     <div class="cs2-hero-divider"></div>
                     <blockquote class="cs2-hero-quote">&ldquo;In the three seconds after a payment fails and the money leaves the account, a user enters a state of biological panic.&rdquo;</blockquote>
                     <p class="cs2-hero-sub">This is the story of building a system that manages that fear through logic.</p>
+                    <a href="#" class="cs2-flow-link" target="_blank" rel="noopener">View UPI Debit Flow &rarr;</a>
                 </div>
                 <div class="cs2-bg-word" aria-hidden="true">PANIC</div>
             </section>
@@ -2296,157 +2349,134 @@
             </section>
 
             <!-- ══════════════════════════════════════════════ 04 / THE ENGINE -->
-            <section class="cs2-sec cs2-sec--dark" style="padding-top:0;padding-bottom:0;">
-                <div class="cs2-sec-inner" style="padding-top:80px;padding-bottom:0;">
-                    <span class="cs2-label cs2-label--dim">04 / The Engine</span>
-                    <h2 class="cs2-h2 cs2-h2--white">The Logic<br>Funnel.</h2>
-                    <p class="cs2-p cs2-p--dark">Every complaint enters a gated sequence. Not to slow users down — but to prevent incorrect action and protect operational integrity.</p>
-                </div>
+            <section class="cs2-sec cs2-sec--dark" style="padding:0;">
+                <div class="funnel-diagram-wrap">
 
-                <div class="cs2-funnel">
-
-                    <div class="cs2-funnel-row is-open" onclick="toggleGate(this)">
-                        <div class="cs2-funnel-header">
-                            <div class="cs2-funnel-hd-left">
-                                <span class="cs2-funnel-gate-label">Gate</span>
-                                <span class="cs2-funnel-num">01</span>
-                            </div>
-                            <div class="cs2-funnel-hd-main">
-                                <h3 class="cs2-funnel-title">Cooling Period</h3>
-                                <div class="cs2-funnel-prevents-pill">Prevents duplicate investigations</div>
-                            </div>
+                    <!-- Header -->
+                    <div class="funnel-diagram-hdr">
+                        <div>
+                            <span class="cs2-label cs2-label--dim">04 / The Engine &middot; Failed UPI Debit &middot; Tier I Indian Bank</span>
+                            <h2 class="cs2-h2 cs2-h2--white" style="margin-top:16px;">The Logic<br><em style="font-style:italic;color:#888;">Funnel.</em></h2>
                         </div>
-                        <div class="cs2-funnel-body">
-                            <div class="cs2-funnel-col--logic">
-                                <span class="cs2-funnel-col-label">The Logic</span>
-                                <p class="cs2-funnel-col-text">We check the transaction timestamp. If within an active regulatory window, escalation is temporarily unavailable.</p>
-                            </div>
-                            <div class="cs2-funnel-col--right">
-                                <div class="cs2-funnel-col-impact">
-                                    <span class="cs2-funnel-col-label">The Impact</span>
-                                    <p class="cs2-funnel-col-text">Many failed debits auto-reverse during this window. Allowing immediate disputes creates duplicate investigations.</p>
-                                </div>
-                                <div class="cs2-funnel-col-constraint">
-                                    <span class="cs2-funnel-col-label">Trade-off</span>
-                                    <p class="cs2-funnel-col-text">We intentionally restrict the impulse to act instantly.</p>
-                                </div>
-                            </div>
+                        <div class="funnel-diagram-sub">
+                            5-gate diagnostic engine — from complaint intake to verified escalation. Every gate prevents a specific failure mode.
                         </div>
                     </div>
 
-                    <div class="cs2-funnel-row" onclick="toggleGate(this)">
-                        <div class="cs2-funnel-header">
-                            <div class="cs2-funnel-hd-left">
-                                <span class="cs2-funnel-gate-label">Gate</span>
-                                <span class="cs2-funnel-num">02</span>
+                    <!-- Flow -->
+                    <div class="funnel-flow">
+
+                        <div class="funnel-node funnel-node--start">
+                            <div class="funnel-node-dot"></div>
+                            <span class="funnel-node-label">Complaint Intake</span>
+                        </div>
+                        <div class="funnel-v-line"></div>
+
+                        <div class="funnel-gate">
+                            <div class="funnel-gate-num-col">
+                                <span class="funnel-gate-num">01</span>
+                                <div class="funnel-gate-connector"></div>
                             </div>
-                            <div class="cs2-funnel-hd-main">
-                                <h3 class="cs2-funnel-title">Debit Verification</h3>
-                                <div class="cs2-funnel-prevents-pill">Prevents ghost transaction tickets</div>
+                            <div class="funnel-gate-body">
+                                <span class="funnel-gate-label">Cooling Period</span>
+                                <div class="funnel-gate-title">Regulatory Window Check</div>
+                                <p class="funnel-gate-desc">Transaction timestamp is verified against active regulatory windows. If within a live reversal period, escalation is temporarily unavailable.</p>
+                                <span class="funnel-gate-prevents">Prevents: Duplicate Investigations</span>
+                            </div>
+                            <div class="funnel-gate-constraint">
+                                <span class="funnel-constraint-label">System Constraint</span>
+                                <span class="funnel-constraint-text">Intentionally restricts the impulse to act instantly. Many failed debits auto-reverse during this window.</span>
                             </div>
                         </div>
-                        <div class="cs2-funnel-body">
-                            <div class="cs2-funnel-col--logic">
-                                <span class="cs2-funnel-col-label">The Logic</span>
-                                <p class="cs2-funnel-col-text">The ledger is polled in real time. If no debit posted, the dispute path ends immediately.</p>
+
+                        <div class="funnel-gate">
+                            <div class="funnel-gate-num-col">
+                                <span class="funnel-gate-num">02</span>
+                                <div class="funnel-gate-connector"></div>
                             </div>
-                            <div class="cs2-funnel-col--right">
-                                <div class="cs2-funnel-col-impact">
-                                    <span class="cs2-funnel-col-label">The Impact</span>
-                                    <p class="cs2-funnel-col-text">Prevents ghost transaction tickets — cases where the perception of loss doesn't match ledger reality.</p>
-                                </div>
-                                <div class="cs2-funnel-col-constraint">
-                                    <span class="cs2-funnel-col-label">Trade-off</span>
-                                    <p class="cs2-funnel-col-text">Requires reliable ledger uptime. The system cannot afford ambiguity here.</p>
-                                </div>
+                            <div class="funnel-gate-body">
+                                <span class="funnel-gate-label">Debit Verification</span>
+                                <div class="funnel-gate-title">Real-Time Ledger Poll</div>
+                                <p class="funnel-gate-desc">The ledger is queried in real time. If no debit posted, the dispute path ends immediately.</p>
+                                <span class="funnel-gate-prevents">Prevents: Ghost Transaction Tickets</span>
+                            </div>
+                            <div class="funnel-gate-constraint">
+                                <span class="funnel-constraint-label">System Constraint</span>
+                                <span class="funnel-constraint-text">Requires reliable ledger uptime. The system cannot afford ambiguity here.</span>
                             </div>
                         </div>
+
+                        <div class="funnel-gate">
+                            <div class="funnel-gate-num-col">
+                                <span class="funnel-gate-num">03</span>
+                                <div class="funnel-gate-connector"></div>
+                            </div>
+                            <div class="funnel-gate-body">
+                                <span class="funnel-gate-label">Payment Classification</span>
+                                <div class="funnel-gate-title">One-Time vs. Recurring Mandate</div>
+                                <p class="funnel-gate-desc">UPI one-time debits are separated from NACH recurring mandates. Distinction matters legally, operationally, and across SLA windows.</p>
+                                <span class="funnel-gate-prevents">Prevents: Misrouting &amp; SLA Violations</span>
+                            </div>
+                            <div class="funnel-gate-constraint">
+                                <span class="funnel-constraint-label">System Constraint</span>
+                                <span class="funnel-constraint-text">Categorization adds logic complexity — but protects downstream accuracy across rail types.</span>
+                            </div>
+                        </div>
+
+                        <div class="funnel-gate">
+                            <div class="funnel-gate-num-col">
+                                <span class="funnel-gate-num">04</span>
+                                <div class="funnel-gate-connector"></div>
+                            </div>
+                            <div class="funnel-gate-body">
+                                <span class="funnel-gate-label">Regulatory Alignment</span>
+                                <div class="funnel-gate-title">Rail-Specific Escalation Rules</div>
+                                <p class="funnel-gate-desc">Escalation adapts to rail type: UPI, Card, or Mandate. Each carries distinct timelines and dispute rules reflected in real time.</p>
+                                <span class="funnel-gate-prevents">Prevents: Compliance Exposure</span>
+                            </div>
+                            <div class="funnel-gate-constraint">
+                                <span class="funnel-constraint-label">System Constraint</span>
+                                <span class="funnel-constraint-text">No refund promises. No premature liability. Interface mirrors regulatory constraints, not user impatience.</span>
+                            </div>
+                        </div>
+
+                        <div class="funnel-gate">
+                            <div class="funnel-gate-num-col">
+                                <span class="funnel-gate-num">05</span>
+                            </div>
+                            <div class="funnel-gate-body">
+                                <span class="funnel-gate-label">Active Confirmation</span>
+                                <div class="funnel-gate-title">Truth Before Tickets</div>
+                                <p class="funnel-gate-desc">Merchant, amount, and date are restated before submission. If session is idle, state is re-validated against current ledger to prevent stale consent.</p>
+                                <span class="funnel-gate-prevents">Prevents: Stale Consent Violations</span>
+                            </div>
+                            <div class="funnel-gate-constraint">
+                                <span class="funnel-constraint-label">System Constraint</span>
+                                <span class="funnel-constraint-text" style="color:rgba(255,85,0,0.9);font-weight:600;font-style:normal;">Truth before tickets.</span>
+                            </div>
+                        </div>
+
+                        <div class="funnel-v-line"></div>
+                        <div class="funnel-node funnel-node--end">
+                            <div class="funnel-node-dot"></div>
+                            <span class="funnel-node-label">Verified Escalation</span>
+                        </div>
+
                     </div>
 
-                    <div class="cs2-funnel-row" onclick="toggleGate(this)">
-                        <div class="cs2-funnel-header">
-                            <div class="cs2-funnel-hd-left">
-                                <span class="cs2-funnel-gate-label">Gate</span>
-                                <span class="cs2-funnel-num">03</span>
-                            </div>
-                            <div class="cs2-funnel-hd-main">
-                                <h3 class="cs2-funnel-title">Payment Classification</h3>
-                                <div class="cs2-funnel-prevents-pill">Prevents misrouting &amp; SLA violations</div>
-                            </div>
+                    <!-- Legend -->
+                    <div class="funnel-legend">
+                        <div class="funnel-legend-item">
+                            <div class="funnel-legend-dot funnel-legend-dot--grey"></div>
+                            Logic gate
                         </div>
-                        <div class="cs2-funnel-body">
-                            <div class="cs2-funnel-col--logic">
-                                <span class="cs2-funnel-col-label">The Logic</span>
-                                <p class="cs2-funnel-col-text">One-time UPI debits are separated from recurring mandates. This distinction matters legally, operationally, and for SLA compliance.</p>
-                            </div>
-                            <div class="cs2-funnel-col--right">
-                                <div class="cs2-funnel-col-impact">
-                                    <span class="cs2-funnel-col-label">The Impact</span>
-                                    <p class="cs2-funnel-col-text">Routing them incorrectly leads to misaligned investigations and broken SLAs.</p>
-                                </div>
-                                <div class="cs2-funnel-col-constraint">
-                                    <span class="cs2-funnel-col-label">Trade-off</span>
-                                    <p class="cs2-funnel-col-text">Categorization adds logic complexity — but protects downstream accuracy.</p>
-                                </div>
-                            </div>
+                        <div class="funnel-legend-item">
+                            <div class="funnel-legend-dot funnel-legend-dot--orange"></div>
+                            System constraint (hover to reveal)
                         </div>
-                    </div>
-
-                    <div class="cs2-funnel-row" onclick="toggleGate(this)">
-                        <div class="cs2-funnel-header">
-                            <div class="cs2-funnel-hd-left">
-                                <span class="cs2-funnel-gate-label">Gate</span>
-                                <span class="cs2-funnel-num">04</span>
-                            </div>
-                            <div class="cs2-funnel-hd-main">
-                                <h3 class="cs2-funnel-title">Regulatory Alignment</h3>
-                                <div class="cs2-funnel-prevents-pill">Prevents compliance exposure</div>
-                            </div>
-                        </div>
-                        <div class="cs2-funnel-body">
-                            <div class="cs2-funnel-col--logic">
-                                <span class="cs2-funnel-col-label">The Logic</span>
-                                <p class="cs2-funnel-col-text">Escalation adapts to rail type: UPI, Card, Mandate. Each carries distinct timelines and dispute rules.</p>
-                            </div>
-                            <div class="cs2-funnel-col--right">
-                                <div class="cs2-funnel-col-impact">
-                                    <span class="cs2-funnel-col-label">The Impact</span>
-                                    <p class="cs2-funnel-col-text">The interface reflects regulatory constraints in real time. The UI is compliance made visible.</p>
-                                </div>
-                                <div class="cs2-funnel-col-constraint">
-                                    <span class="cs2-funnel-col-label">Trade-off</span>
-                                    <p class="cs2-funnel-col-text">No refund promises. No premature liability. Strictness at entry prevents chaos downstream.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="cs2-funnel-row" onclick="toggleGate(this)">
-                        <div class="cs2-funnel-header">
-                            <div class="cs2-funnel-hd-left">
-                                <span class="cs2-funnel-gate-label">Gate</span>
-                                <span class="cs2-funnel-num">05</span>
-                            </div>
-                            <div class="cs2-funnel-hd-main">
-                                <h3 class="cs2-funnel-title">Active Confirmation</h3>
-                                <div class="cs2-funnel-prevents-pill">Prevents stale consent violations</div>
-                            </div>
-                        </div>
-                        <div class="cs2-funnel-body">
-                            <div class="cs2-funnel-col--logic">
-                                <span class="cs2-funnel-col-label">The Logic</span>
-                                <p class="cs2-funnel-col-text">Before submission, merchant, amount, and date are restated. If idle, state is re-validated every 15 minutes.</p>
-                            </div>
-                            <div class="cs2-funnel-col--right">
-                                <div class="cs2-funnel-col-impact">
-                                    <span class="cs2-funnel-col-label">The Impact</span>
-                                    <p class="cs2-funnel-col-text">Prevents stale consent in asynchronous channels like WhatsApp, where a dispute started at 10:00 may resume at 12:00.</p>
-                                </div>
-                                <div class="cs2-funnel-col-constraint">
-                                    <span class="cs2-funnel-col-label">Trade-off</span>
-                                    <p class="cs2-funnel-col-text" style="font-style:italic;color:rgba(255,85,0,0.9);font-weight:600;">Truth before tickets.</p>
-                                </div>
-                            </div>
+                        <div class="funnel-legend-item">
+                            <div class="funnel-legend-dot funnel-legend-dot--orange" style="box-shadow:0 0 8px rgba(255,85,0,0.5);"></div>
+                            Verified outcome
                         </div>
                     </div>
 
@@ -2459,7 +2489,7 @@
                     <figure class="cs2-img-figure">
                         <!-- Logic Funnel / 5-gate flow diagram -->
                         <div class="cs2-img-block cs2-img-block--tall">
-                            <img src="https://framerusercontent.com/images/lbyETPNcZ8piBEwk66800Itt8F8.png" alt="WhatsApp dispute resolution flow — 5-gate logic funnel showing Cooling Period through Active Confirmation" loading="lazy">
+                            <img src="../Content/The%205-gate%20diagnostic%20engine%20%E2%80%94%20from%20complaint%20intake%20to%20verified%20escalation.png" alt="The 5-gate diagnostic engine — from complaint intake to verified escalation" loading="lazy">
                             <div class="cs2-img-ph" aria-hidden="true">
                                 <div class="cs2-img-ph-line"></div>
                                 <span class="cs2-img-ph-label">Logic Funnel · WhatsApp UI Flow</span>
@@ -2528,7 +2558,7 @@
                     <figure class="cs2-img-figure">
                         <!-- Retail vs SME interface comparison -->
                         <div class="cs2-img-block">
-                            <img src="https://framerusercontent.com/images/Abow5GMUdqR35oFWvaium3Khuo.png" alt="Retail vs SME interface comparison — transaction carousel on left, UTR search on right" loading="lazy">
+                            <img src="../Content/One%20engine%2C%20two%20thresholds%20%E2%80%94%20same%20backend%20logic%2C%20different%20cognitive%20scaffolding.png" alt="One engine, two thresholds — same backend logic, different cognitive scaffolding" loading="lazy">
                             <div class="cs2-img-ph" aria-hidden="true">
                                 <div class="cs2-img-ph-line"></div>
                                 <span class="cs2-img-ph-label">Retail vs SME · Interface Comparison</span>
@@ -3722,13 +3752,6 @@
             });
         });
 
-        function toggleGate(row) {
-            const allRows = row.closest('.cs2-funnel').querySelectorAll('.cs2-funnel-row');
-            const isOpen = row.classList.contains('is-open');
-            allRows.forEach(r => r.classList.remove('is-open'));
-            if (!isOpen) row.classList.add('is-open');
-        }
-
         // Bento cursor glow + 3D tilt
         (function() {
             const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -3758,6 +3781,12 @@
             // Set display first, then trigger transition on next two frames
             overlay.style.display = 'block';
             overlay.scrollTop = 0;
+            // Restart funnel gate entry animations on each open
+            overlay.querySelectorAll('.funnel-gate').forEach(g => {
+                g.style.animation = 'none';
+                g.offsetHeight; // force reflow
+                g.style.animation = '';
+            });
             requestAnimationFrame(() => requestAnimationFrame(() => {
                 overlay.classList.add('active');
             }));
@@ -3956,142 +3985,6 @@
                 }, { root: overlay, threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
                 els.forEach(el => obs.observe(el));
-
-                // ── Logic Funnel: scroll-jail gate reveal ────────────────────
-                // Pattern: "scroll jail" — intercept wheel events when the funnel
-                // is in view, prevent overlay scroll, advance exactly one gate per
-                // discrete scroll step. Normal scroll resumes after gate 05.
-                //
-                // Why wheel (not scroll): wheel fires BEFORE the browser scrolls,
-                // so preventDefault() is possible. scroll fires AFTER, too late.
-                // passive:false is required to call preventDefault on wheel events.
-                const funnelEl   = overlay.querySelector('.cs2-funnel');
-                const funnelRows = funnelEl ? [...funnelEl.querySelectorAll('.cs2-funnel-row')] : [];
-
-                if (funnelEl && funnelRows.length) {
-                    // ── Inject progress dots + hint text (done once) ──────────
-                    const stepsEl = document.createElement('div');
-                    stepsEl.className = 'cs2-funnel-steps';
-                    const dots = funnelRows.map((_, i) => {
-                        const d = document.createElement('span');
-                        d.className = 'cs2-funnel-step-dot' + (i === 0 ? ' is-active' : '');
-                        stepsEl.appendChild(d);
-                        return d;
-                    });
-                    const hintEl = document.createElement('div');
-                    hintEl.className = 'cs2-funnel-hint';
-                    hintEl.textContent = '↓  scroll to reveal each gate';
-                    funnelEl.appendChild(stepsEl);
-                    funnelEl.appendChild(hintEl);
-
-                    // ── State ─────────────────────────────────────────────────
-                    let activeGate   = 0;     // index of currently open gate
-                    let jailActive   = false; // intercepting scroll?
-                    let transitioning = false; // gate animation in progress
-                    let deltaAccum   = 0;     // accumulated wheel delta (trackpad jitter filter)
-                    let exitCooldown = false; // brief lock after exiting jail to prevent instant re-entry
-                    const THRESHOLD  = 80;   // px of accumulated delta before advancing one gate
-                    const TRANS_MS   = 480;  // must match CSS max-height transition
-
-                    function updateDots(idx) {
-                        dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
-                    }
-
-                    function openGate(idx) {
-                        if (idx < 0 || idx >= funnelRows.length || transitioning) return;
-                        transitioning = true;
-                        funnelRows.forEach(r => r.classList.remove('is-open'));
-                        funnelRows[idx].classList.add('is-open');
-                        activeGate = idx;
-                        deltaAccum = 0;
-                        updateDots(idx);
-                        setTimeout(() => { transitioning = false; }, TRANS_MS);
-                    }
-
-                    function enterJail() {
-                        if (jailActive) return;
-                        jailActive  = true;
-                        deltaAccum  = 0;
-                        // Sync activeGate from DOM (user may have clicked manually)
-                        const domIdx = funnelRows.findIndex(r => r.classList.contains('is-open'));
-                        if (domIdx >= 0) { activeGate = domIdx; updateDots(activeGate); }
-                        // Show hint briefly
-                        hintEl.classList.add('visible');
-                        setTimeout(() => hintEl.classList.remove('visible'), 1800);
-                        // Snap: scroll overlay so funnel is near top of viewport
-                        const oRect = overlay.getBoundingClientRect();
-                        const fRect = funnelEl.getBoundingClientRect();
-                        const gap = fRect.top - oRect.top;
-                        if (gap > 100) {
-                            overlay.scrollTo({ top: overlay.scrollTop + gap - 72, behavior: 'smooth' });
-                        }
-                    }
-
-                    function exitJail() {
-                        jailActive   = false;
-                        deltaAccum   = 0;
-                        exitCooldown = true;
-                        setTimeout(() => { exitCooldown = false; }, 700);
-                    }
-
-                    function isFunnelInView() {
-                        const oRect = overlay.getBoundingClientRect();
-                        const fRect = funnelEl.getBoundingClientRect();
-                        // Funnel overlaps the central 70% of the overlay viewport
-                        return fRect.top  < oRect.top + oRect.height * 0.85 &&
-                               fRect.bottom > oRect.top + oRect.height * 0.15;
-                    }
-
-                    overlay.addEventListener('wheel', (e) => {
-                        // Horizontal scrolls (trackpad side-swipe) — ignore
-                        if (e.deltaY === 0) return;
-
-                        // Upward scroll — always release jail and scroll freely
-                        if (e.deltaY < 0) {
-                            if (jailActive) exitJail();
-                            return;
-                        }
-
-                        // Downward scroll but funnel not in view — no jail
-                        if (!isFunnelInView()) {
-                            if (jailActive) exitJail();
-                            return;
-                        }
-
-                        // Brief cooldown window after exiting — let a few scroll
-                        // events pass before considering re-entry
-                        if (exitCooldown) return;
-
-                        // Funnel in view, scrolling down, not in cooldown
-                        if (!jailActive) {
-                            e.preventDefault();
-                            enterJail();
-                            return;
-                        }
-
-                        // ── Inside jail: route delta to gate advancement ──────
-                        deltaAccum += e.deltaY;
-
-                        if (deltaAccum < THRESHOLD) {
-                            // Still accumulating — hold scroll position
-                            e.preventDefault();
-                            return;
-                        }
-
-                        // Threshold crossed — try to open next gate
-                        const nextIdx = activeGate + 1;
-
-                        if (nextIdx >= funnelRows.length) {
-                            // Past gate 05 — release jail; this event's delta
-                            // flows through to resume normal overlay scroll
-                            exitJail();
-                            return; // no preventDefault → overlay scrolls naturally
-                        }
-
-                        e.preventDefault();
-                        openGate(nextIdx);
-                    }, { passive: false }); // passive:false required for preventDefault
-                }
 
                 // Count-up: numeric stat elements
                 overlay.querySelectorAll('.cs2-perception-big, .cs2-tl-time').forEach(el => {
