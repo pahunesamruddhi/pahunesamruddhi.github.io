@@ -1,0 +1,3612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samruddhi Pahune — AI Systems & Automation Behavior Owner</title>
+    <meta name="description" content="I build automation that knows when to stop. Decision boundaries for financial AI.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --color-bg: #ffffff;
+            --color-bg-alt: #fafafa;
+            --color-text: #1a1a1a;
+            --color-text-muted: #666666;
+            --color-accent: #6366f1;
+            --color-accent-hover: #4f46e5;
+            --color-border: #e5e5e5;
+            
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 32px;
+            --spacing-xl: 48px;
+            --spacing-2xl: 64px;
+            --spacing-3xl: 96px;
+            
+            --border-radius: 8px;
+            --max-width: 1200px;
+            --max-width-wide: 1400px;
+            
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--color-text);
+            background: var(--color-bg);
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            line-height: 1.2;
+            font-weight: 700;
+        }
+        
+        h1 {font-size: 52px;}
+        h2 {font-size: 36px;}
+        h3 {font-size: 28px;}
+        h4 {font-size: 22px;}
+        h5 {font-size: 18px;}
+        
+        @media (max-width: 768px) {
+            h1 {font-size: 36px;}
+            h2 {font-size: 28px;}
+            h3 {font-size: 22px;}
+            h4 {font-size: 18px;}
+            body {font-size: 16px;}
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-border);
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .nav-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--spacing-md) var(--spacing-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-lg);
+        }
+        
+        .nav-link {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-link:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Hero Section */
+        .hero {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: calc(80px + var(--spacing-3xl)) var(--spacing-lg) var(--spacing-3xl);
+        }
+        
+        .hero-headline {
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-headline {font-size: 38px;}
+        }
+        
+        .hero-subheadline {
+            font-size: 20px;
+            line-height: 1.6;
+            color: var(--color-text-muted);
+            max-width: 700px;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .hero-cta {
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            background: var(--color-accent);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .hero-cta:hover {
+            background: var(--color-accent-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        /* Sections */
+        .section {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--spacing-3xl) var(--spacing-lg);
+        }
+        
+        .section-bg {
+            background: var(--color-bg-alt);
+        }
+        
+        .section-title {
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        /* Capabilities Grid */
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .capability-card {
+            padding: var(--spacing-lg);
+            background: var(--color-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .capability-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .capability-description {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--color-text-muted);
+        }
+        
+        /* Problems Grid */
+        .problems-grid {
+            display: grid;
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .problem-item {
+            padding: var(--spacing-lg);
+            border-left: 3px solid var(--color-accent);
+            background: var(--color-bg-alt);
+        }
+        
+        .problem-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .problem-description {
+            color: var(--color-text-muted);
+        }
+        
+        /* Case Study Grid */
+        .case-study-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .case-study-card {
+            background: var(--color-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .case-study-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .case-study-card-inner {
+            padding: var(--spacing-lg);
+        }
+        
+        .case-study-label {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .case-study-card-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .case-study-card-summary {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--color-text-muted);
+        }
+        
+        /* Case Study Overlay */
+        .case-study-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--color-bg);
+            z-index: 1000;
+            overflow-y: auto;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .case-study-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+        
+        .case-study-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 10;
+        }
+        
+        .case-study-nav-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--spacing-md) var(--spacing-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .close-case-study {
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: none;
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text);
+            transition: all 0.2s;
+        }
+        
+        .close-case-study:hover {
+            background: var(--color-bg-alt);
+        }
+        
+        .case-study-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: var(--spacing-3xl) var(--spacing-lg);
+        }
+        
+        .case-study-content h1 {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .case-study-content h2 {
+            margin-top: var(--spacing-2xl);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .case-study-content h3 {
+            margin-top: var(--spacing-xl);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .case-study-content h4 {
+            margin-top: var(--spacing-lg);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .case-study-content p {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .case-study-content ul {
+            margin-left: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .case-study-content li {
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        /* Callout */
+        .callout {
+            padding: var(--spacing-lg);
+            background: #f8f9ff;
+            border-radius: var(--border-radius);
+            margin: var(--spacing-xl) 0;
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+        
+        /* Table */
+        .trade-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--spacing-xl) 0;
+            font-size: 15px;
+        }
+        
+        .trade-table th {
+            background: var(--color-bg-alt);
+            padding: var(--spacing-sm);
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--color-border);
+        }
+        
+        .trade-table td {
+            padding: var(--spacing-sm);
+            border-bottom: 1px solid var(--color-border);
+            vertical-align: top;
+        }
+        
+        .trade-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .trade-table tr:nth-child(even) {
+            background: var(--color-bg-alt);
+        }
+        
+        /* Expandable Section */
+        .expandable {
+            margin: var(--spacing-lg) 0;
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .expandable-trigger {
+            width: 100%;
+            padding: var(--spacing-md);
+            background: var(--color-bg-alt);
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+        
+        .expandable-trigger:hover {
+            background: #f0f0f0;
+        }
+        
+        .expandable-icon {
+            font-size: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .expandable.active .expandable-icon {
+            transform: rotate(45deg);
+        }
+        
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .expandable-content-inner {
+            padding: var(--spacing-lg);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--color-bg-alt);
+            border-top: 1px solid var(--color-border);
+            padding: var(--spacing-3xl) var(--spacing-lg);
+        }
+        
+        .footer-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+        
+        .footer-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .footer-contact {
+            font-size: 18px;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .footer-link {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-inner {padding: var(--spacing-sm) var(--spacing-md);}
+            .hero {padding: calc(70px + var(--spacing-2xl)) var(--spacing-md) var(--spacing-2xl);}
+            .section {padding: var(--spacing-2xl) var(--spacing-md);}
+            .case-study-grid {grid-template-columns: 1fr;}
+            .capabilities-grid {grid-template-columns: 1fr;}
+            .case-study-content {padding: var(--spacing-2xl) var(--spacing-md);}
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* ================================================================
+           CS2: Designing for Panic — Full-page scoped styles
+           ================================================================ */
+
+        #cs2 { background: #0a0a0a; }
+
+        #cs2 .case-study-nav {
+            background: rgba(10,10,10,0.97) !important;
+            border-bottom-color: #222 !important;
+        }
+        #cs2 .case-study-nav-inner > div { color: #fff; }
+        #cs2 .close-case-study { color: #fff; border-color: #333; }
+        #cs2 .close-case-study:hover { background: #1a1a1a; }
+
+        .cs2-body { font-family: var(--font-sans); }
+
+        /* HERO */
+        .cs2-hero {
+            background: #0a0a0a;
+            padding: 120px 0 100px;
+            position: relative;
+            overflow: hidden;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+        }
+        .cs2-hero-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 56px;
+            position: relative;
+            z-index: 2;
+        }
+        .cs2-kicker {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #FF5500;
+            margin-bottom: 40px;
+            display: block;
+        }
+        .cs2-title {
+            font-size: 108px;
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+            color: #fff;
+            margin-bottom: 56px;
+        }
+        .cs2-hero-divider {
+            width: 56px;
+            height: 4px;
+            background: #FF5500;
+            margin-bottom: 40px;
+        }
+        .cs2-hero-quote {
+            font-size: 22px;
+            font-weight: 400;
+            line-height: 1.65;
+            color: #aaa;
+            margin-bottom: 20px;
+            font-style: italic;
+            border: none;
+            padding: 0;
+            max-width: 640px;
+        }
+        .cs2-hero-sub {
+            font-size: 15px;
+            color: #444;
+            margin: 0;
+        }
+        .cs2-bg-word {
+            position: absolute;
+            bottom: -60px;
+            right: -30px;
+            font-size: 340px;
+            font-weight: 900;
+            color: rgba(255,255,255,0.022);
+            letter-spacing: -0.07em;
+            line-height: 1;
+            pointer-events: none;
+            z-index: 1;
+            user-select: none;
+        }
+
+        /* SECTION SYSTEM */
+        .cs2-sec { padding: 96px 0; }
+        .cs2-sec--white  { background: #ffffff; }
+        .cs2-sec--grey   { background: #f2f2f2; }
+        .cs2-sec--dark   { background: #0a0a0a; }
+        .cs2-sec--mid    { background: #111111; }
+        .cs2-sec-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 56px;
+        }
+
+        /* LABEL / HEADING SYSTEM */
+        .cs2-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #FF5500;
+            margin-bottom: 40px;
+            display: block;
+        }
+        .cs2-label--dim { color: rgba(255,255,255,0.3); }
+
+        .cs2-h2 {
+            font-size: 72px;
+            font-weight: 900;
+            line-height: 0.92;
+            letter-spacing: -0.04em;
+            color: #0a0a0a;
+            margin-bottom: 40px;
+        }
+        .cs2-h2 em { font-style: italic; }
+        .cs2-h2--white { color: #ffffff; }
+
+        .cs2-h3 {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: #0a0a0a;
+            margin-bottom: 16px;
+            margin-top: 48px;
+        }
+        .cs2-h3--white { color: #fff; }
+
+        .cs2-p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 20px;
+            max-width: 640px;
+        }
+        .cs2-p--dark { color: #888; max-width: 640px; }
+        .cs2-p--full { max-width: 100%; }
+
+        .cs2-pullquote {
+            border-left: 4px solid #FF5500;
+            padding: 20px 28px;
+            margin: 36px 0;
+            font-size: 21px;
+            font-weight: 600;
+            line-height: 1.6;
+            color: #0a0a0a;
+            background: transparent;
+            font-style: normal;
+        }
+        .cs2-pullquote--dark { color: #ddd; }
+
+        .cs2-code {
+            font-family: 'Courier New', 'Consolas', monospace;
+            font-size: 14px;
+            background: #0f0f0f;
+            color: #FF5500;
+            padding: 32px 40px;
+            margin: 32px 0;
+            line-height: 2;
+            letter-spacing: 0.02em;
+            border-radius: 2px;
+        }
+        .cs2-sec--dark .cs2-code { background: rgba(255,255,255,0.04); }
+
+        /* TWO COLUMN */
+        .cs2-two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            margin-top: 48px;
+            align-items: start;
+        }
+
+        /* BOX DARK (used inside white sections) */
+        .cs2-box-dark {
+            background: #0a0a0a;
+            padding: 40px;
+            border-radius: 2px;
+        }
+        .cs2-box-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #555;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .cs2-pain-list { list-style: none; padding: 0; margin: 0; }
+        .cs2-pain-list li {
+            font-size: 16px;
+            color: #bbb;
+            padding: 14px 0;
+            border-bottom: 1px solid #1c1c1c;
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            line-height: 1.4;
+        }
+        .cs2-pain-list li::before {
+            content: '×';
+            color: #FF5500;
+            font-weight: 900;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .cs2-fear-quote {
+            font-size: 20px;
+            font-weight: 700;
+            color: #FF5500;
+            margin-top: 24px;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* PERCEPTION SPLIT (full-bleed, no inner wrapper) */
+        .cs2-perception-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 420px;
+        }
+        .cs2-perception-side {
+            padding: 80px 64px;
+            display: flex;
+            flex-direction: column;
+        }
+        .cs2-perception-side--light { background: #f2f2f2; }
+        .cs2-perception-side--dark  { background: #0a0a0a; }
+        .cs2-perception-big {
+            font-size: 56px;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            line-height: 0.92;
+            color: #0a0a0a;
+            margin: 20px 0 auto;
+        }
+        .cs2-perception-tag {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #FF5500;
+            margin-bottom: 8px;
+        }
+        .cs2-perception-count {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #555;
+            margin-top: 40px;
+        }
+        .cs2-system-states { list-style: none; padding: 0; margin: 20px 0 auto; }
+        .cs2-system-states li {
+            font-size: 16px;
+            color: #aaa;
+            padding: 14px 0;
+            border-bottom: 1px solid #1a1a1a;
+            display: flex;
+            gap: 12px;
+            line-height: 1.5;
+        }
+        .cs2-system-states li::before { content: '→'; color: #FF5500; flex-shrink: 0; }
+
+        /* ARCH DECISION BLOCK */
+        .cs2-arch-block {
+            border-top: 4px solid #FF5500;
+            padding-top: 48px;
+            margin-top: 80px;
+        }
+        .cs2-arch-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #FF5500;
+            margin-bottom: 24px;
+        }
+        .cs2-trade-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            margin-top: 32px;
+        }
+        .cs2-trade-item {
+            padding: 32px;
+            background: #f6f6f6;
+        }
+        .cs2-trade-item--outcome {
+            background: #fff7f3;
+            border-left: 3px solid #FF5500;
+        }
+        .cs2-trade-tag {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #bbb;
+            margin-bottom: 12px;
+        }
+        .cs2-trade-tag--orange { color: #FF5500; }
+        .cs2-trade-text { font-size: 15px; line-height: 1.75; color: #333; }
+
+        /* OBSERVATIONS */
+        .cs2-observations {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(255,255,255,0.06);
+            margin-top: 40px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .cs2-obs-item {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            padding: 24px 32px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            font-size: 17px;
+            color: #aaa;
+        }
+        .cs2-obs-item:last-child { border-bottom: none; }
+        .cs2-obs-icon {
+            font-size: 22px;
+            color: #FF5500;
+            font-weight: 900;
+            width: 36px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        /* INSIGHT BAR */
+        .cs2-insight-bar {
+            display: flex;
+            align-items: stretch;
+            border: 1px solid rgba(255,255,255,0.08);
+            margin-top: 48px;
+        }
+        .cs2-insight-item {
+            flex: 1;
+            padding: 32px 36px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .cs2-insight-divider {
+            display: flex;
+            align-items: center;
+            padding: 0 28px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            border-left: 1px solid rgba(255,255,255,0.06);
+            border-right: 1px solid rgba(255,255,255,0.06);
+        }
+        .cs2-insight-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #444;
+        }
+        .cs2-insight-verdict {
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: -0.01em;
+        }
+        .cs2-insight-verdict--bad  { color: #444; text-decoration: line-through; text-decoration-color: #FF5500; }
+        .cs2-insight-verdict--good { color: #FF5500; }
+
+        /* BEHAVIORAL SHIFT */
+        .cs2-shift-quote {
+            font-size: 40px;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            color: #0a0a0a;
+            margin: 32px 0;
+            line-height: 1.1;
+        }
+        .cs2-swap-banner {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            background: #0a0a0a;
+            padding: 48px 56px;
+            margin: 32px 0;
+        }
+        .cs2-swap-col { display: flex; flex-direction: column; gap: 10px; }
+        .cs2-swap-tag {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #444;
+        }
+        .cs2-swap-tag--orange { color: #FF5500; }
+        .cs2-swap-word-old {
+            font-size: 48px;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            color: #333;
+            text-decoration: line-through;
+            text-decoration-color: #FF5500;
+        }
+        .cs2-swap-word-new {
+            font-size: 48px;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            color: #FF5500;
+        }
+        .cs2-swap-arrow { font-size: 36px; color: #444; font-weight: 700; flex-shrink: 0; }
+
+        /* INQUIRY VS VALIDATION */
+        .cs2-inquiry-vs {
+            display: flex;
+            align-items: center;
+            gap: 48px;
+            margin: 48px 0;
+            padding: 48px 56px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .cs2-iv-col { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+        .cs2-iv-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #444;
+        }
+        .cs2-iv-label--orange { color: #FF5500; }
+        .cs2-iv-q {
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            color: #fff;
+            line-height: 1.2;
+        }
+        .cs2-iv-q--old { color: #333; text-decoration: line-through; text-decoration-color: #FF5500; }
+        .cs2-iv-arrow { font-size: 32px; color: #FF5500; font-weight: 900; flex-shrink: 0; }
+
+        /* LOGIC FUNNEL — accordion */
+        .cs2-funnel {
+            max-width: 1100px;
+            margin: 64px auto 0;
+            padding: 0 56px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .cs2-funnel-row {
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            cursor: pointer;
+            transition: background 0.25s;
+        }
+        .cs2-funnel-row:hover { background: rgba(255,255,255,0.025); }
+        .cs2-funnel-row.is-open { background: rgba(255,255,255,0.035); }
+        .cs2-funnel-header {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            padding: 24px 0;
+            user-select: none;
+        }
+        .cs2-funnel-num {
+            font-size: 68px;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.04em;
+            color: rgba(255,255,255,0.1);
+            transition: color 0.3s;
+            min-width: 90px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .cs2-funnel-row.is-open .cs2-funnel-num { color: #FF5500; }
+        .cs2-funnel-title {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: rgba(255,255,255,0.3);
+            flex: 1;
+            transition: color 0.25s;
+            margin: 0;
+        }
+        .cs2-funnel-row:hover .cs2-funnel-title,
+        .cs2-funnel-row.is-open .cs2-funnel-title { color: #fff; }
+        .cs2-funnel-chevron {
+            font-size: 22px;
+            line-height: 1;
+            color: rgba(255,255,255,0.18);
+            transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), color 0.25s;
+            flex-shrink: 0;
+        }
+        .cs2-funnel-row.is-open .cs2-funnel-chevron {
+            transform: rotate(90deg);
+            color: #FF5500;
+        }
+        .cs2-funnel-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1), padding-bottom 0.3s;
+        }
+        .cs2-funnel-row.is-open .cs2-funnel-body {
+            max-height: 320px;
+            padding-bottom: 40px;
+        }
+        .cs2-funnel-col {
+            padding: 20px 28px 0 0;
+            border-right: 1px solid rgba(255,255,255,0.05);
+        }
+        .cs2-funnel-col:first-child { padding-left: 118px; } /* aligns under title */
+        .cs2-funnel-col:last-child { border-right: none; padding-left: 20px; padding-right: 0; }
+        .cs2-funnel-col--constraint {
+            background: rgba(255,85,0,0.04);
+            border-left: 2px solid rgba(255,85,0,0.2);
+            border-right: none;
+            padding: 20px 0 0 20px;
+            border-radius: 0 0 6px 0;
+        }
+        .cs2-funnel-col-label {
+            display: block;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.25);
+            margin-bottom: 10px;
+        }
+        .cs2-funnel-col--constraint .cs2-funnel-col-label { color: rgba(255,85,0,0.7); }
+        .cs2-funnel-col-text {
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.65;
+            margin: 0;
+        }
+        .cs2-funnel-prevents {
+            margin-top: 16px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #FF5500;
+        }
+
+        /* PERSONA GRID */
+        .cs2-persona-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border: 1px solid #e4e4e4;
+            margin-top: 48px;
+        }
+        .cs2-persona { padding: 56px 52px; }
+        .cs2-persona:first-child { border-right: 1px solid #e4e4e4; }
+        .cs2-persona-tag {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #FF5500;
+            margin-bottom: 16px;
+        }
+        .cs2-persona-name {
+            font-size: 44px;
+            font-weight: 900;
+            letter-spacing: -0.035em;
+            line-height: 0.95;
+            color: #0a0a0a;
+            margin-bottom: 14px;
+        }
+        .cs2-persona-desc {
+            font-size: 15px;
+            color: #999;
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+        .cs2-persona-items { list-style: none; padding: 0; margin: 0; }
+        .cs2-persona-items li {
+            font-size: 16px;
+            color: #333;
+            padding: 14px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            line-height: 1.45;
+        }
+        .cs2-persona-items li::before { content: '→'; color: #FF5500; font-weight: 700; flex-shrink: 0; }
+        .cs2-persona-goal {
+            margin-top: 40px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #bbb;
+        }
+        .cs2-persona-goal span {
+            display: block;
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            color: #FF5500;
+            margin-top: 8px;
+            text-transform: none;
+        }
+
+        /* UI POINTS */
+        .cs2-ui-points {
+            display: flex;
+            flex-direction: column;
+            margin: 40px 0;
+            border-left: 4px solid #FF5500;
+        }
+        .cs2-ui-point {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            padding: 22px 32px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 18px;
+            color: #ccc;
+            font-weight: 500;
+        }
+        .cs2-ui-point:last-child { border-bottom: none; }
+        .cs2-ui-icon { color: #FF5500; font-weight: 900; font-size: 20px; flex-shrink: 0; }
+
+        /* TIMELINE */
+        .cs2-timeline {
+            display: flex;
+            align-items: center;
+            margin: 48px 0;
+            background: #e8e8e8;
+            padding: 48px 56px;
+        }
+        .cs2-tl-node { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+        .cs2-tl-time {
+            font-size: 36px;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            color: #0a0a0a;
+        }
+        .cs2-tl-time--orange { color: #FF5500; }
+        .cs2-tl-event { font-size: 13px; color: #777; line-height: 1.4; }
+        .cs2-tl-line {
+            width: 60px;
+            height: 2px;
+            background: #ccc;
+            flex-shrink: 0;
+            margin: 0 16px;
+            position: relative;
+        }
+        .cs2-tl-line::after {
+            content: '';
+            position: absolute;
+            right: -5px;
+            top: -4px;
+            width: 9px;
+            height: 9px;
+            border-top: 2px solid #bbb;
+            border-right: 2px solid #bbb;
+            transform: rotate(45deg);
+        }
+        .cs2-rule-box {
+            background: #fff;
+            border-left: 4px solid #FF5500;
+            padding: 36px 44px;
+            margin-top: 0;
+        }
+        .cs2-rule-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #FF5500;
+            margin-bottom: 12px;
+        }
+        .cs2-rule-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0a0a0a;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        .cs2-rule-sub { font-size: 15px; color: #888; line-height: 1.6; }
+
+        /* PIVOT TABLE */
+        .cs2-pivot-table { width: 100%; border-collapse: collapse; margin-top: 48px; }
+        .cs2-pivot-table th {
+            text-align: left;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.28);
+            padding: 16px 28px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .cs2-pivot-table td {
+            padding: 28px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            vertical-align: top;
+            font-size: 16px;
+        }
+        .cs2-pivot-table tr:last-child td { border-bottom: none; }
+        .cs2-pivot-table td:first-child {
+            font-size: 11px;
+            font-weight: 700;
+            color: #444;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            width: 240px;
+        }
+        .cs2-pivot-table td:nth-child(2) { color: #444; }
+        .cs2-pivot-table td:nth-child(3) { color: #FF5500; font-weight: 700; }
+
+        /* FINAL */
+        .cs2-final {
+            background: #FF5500;
+            padding: 128px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cs2-final::before {
+            content: '///';
+            position: absolute;
+            top: 30px;
+            right: 48px;
+            font-size: 140px;
+            font-weight: 900;
+            color: rgba(255,255,255,0.07);
+            letter-spacing: -0.05em;
+            line-height: 1;
+            pointer-events: none;
+        }
+        .cs2-final-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 48px;
+            position: relative;
+            z-index: 1;
+        }
+        .cs2-final-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 48px;
+        }
+        .cs2-final-quote {
+            font-size: 26px;
+            font-weight: 500;
+            line-height: 1.65;
+            color: rgba(255,255,255,0.92);
+            max-width: 680px;
+            margin: 0 auto 16px;
+            font-style: italic;
+            border: none;
+            padding: 0;
+        }
+        .cs2-final-support {
+            font-size: 15px;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 72px;
+        }
+        .cs2-final-words {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            line-height: 0.88;
+        }
+        .cs2-final-word {
+            font-size: 104px;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            color: #fff;
+        }
+
+        /* CS2 RESPONSIVE */
+        @media (max-width: 900px) {
+            .cs2-title { font-size: 64px; }
+            .cs2-h2 { font-size: 48px; }
+            .cs2-hero-inner, .cs2-sec-inner { padding: 0 28px; }
+            .cs2-two-col { grid-template-columns: 1fr; gap: 32px; }
+            .cs2-perception-split { grid-template-columns: 1fr; }
+            .cs2-perception-side { padding: 48px 32px; }
+            .cs2-gates { grid-template-columns: 1fr; }
+            .cs2-gate--wide { grid-column: auto; }
+            .cs2-gate-wide-inner { grid-template-columns: 1fr; gap: 32px; }
+            .cs2-funnel { padding: 0 28px; }
+            .cs2-funnel-num { font-size: 44px; min-width: 60px; }
+            .cs2-funnel-title { font-size: 18px; }
+            .cs2-funnel-body { grid-template-columns: 1fr; }
+            .cs2-funnel-col { padding: 12px 0 0 0 !important; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+            .cs2-funnel-col--constraint { border-left: none; border-top: 2px solid rgba(255,85,0,0.2); padding-top: 12px !important; }
+            .cs2-gate-motto { align-items: flex-start; }
+            .cs2-gate-motto span { font-size: 48px; }
+            .cs2-persona-grid { grid-template-columns: 1fr; }
+            .cs2-persona:first-child { border-right: none; border-bottom: 1px solid #e4e4e4; }
+            .cs2-trade-row { grid-template-columns: 1fr; gap: 2px; }
+            .cs2-inquiry-vs { flex-direction: column; gap: 24px; padding: 32px 28px; }
+            .cs2-swap-banner { flex-direction: column; gap: 16px; padding: 36px 28px; }
+            .cs2-timeline { flex-direction: column; align-items: flex-start; gap: 0; padding: 36px 32px; }
+            .cs2-tl-line { width: 2px; height: 40px; margin: 8px 0 8px 18px; }
+            .cs2-tl-line::after { display: none; }
+            .cs2-final-word { font-size: 64px; }
+            .cs2-final-quote { font-size: 20px; }
+            .cs2-bg-word { font-size: 160px; }
+            .cs2-insight-bar { flex-direction: column; }
+            .cs2-insight-divider { border: none; padding: 12px 36px; }
+        }
+
+        /* ================================================================
+           BENTO GRID — Homepage
+           ================================================================ */
+
+        .bento-page {
+            min-height: 100vh;
+            background: #ececec;
+            padding-top: 64px;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 1.8fr 1.2fr 1.5fr 1fr 1.5fr;
+            grid-template-rows: 260px 180px 200px 68px;
+            gap: 10px;
+            padding: 10px;
+            grid-template-areas:
+                "pos   pos    upi    upi    upi"
+                "pos   pos    smart  dottie icici"
+                "vihar vihar  bhopal dottie icici"
+                "blog  blog   resume resume resume";
+        }
+        .bento-card {
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
+            will-change: transform;
+            transition: box-shadow 0.4s ease;
+        }
+        @keyframes b-breathe  { 0%,100%{transform:scale(1) translateY(0)}       50%{transform:scale(1.009) translateY(-4px)} }
+        @keyframes b-breathe2 { 0%,100%{transform:scale(1) translateY(0) rotate(0)}  55%{transform:scale(1.006) translateY(-2px) rotate(0.25deg)} }
+        @keyframes b-breathe3 { 0%,100%{transform:scale(1) translateY(0) rotate(0)}  45%{transform:scale(1.011) translateY(-5px) rotate(-0.2deg)} }
+        @keyframes b-breathe4 { 0%,100%{transform:scale(1) translateY(0)}       60%{transform:scale(1.005) translateY(-3px)} }
+        .bento-card:nth-child(1)  { animation: b-breathe  6.2s ease-in-out infinite 0.0s; }
+        .bento-card:nth-child(2)  { animation: b-breathe2 5.1s ease-in-out infinite 1.4s; }
+        .bento-card:nth-child(3)  { animation: b-breathe3 4.4s ease-in-out infinite 0.3s; }
+        .bento-card:nth-child(4)  { animation: b-breathe  3.2s ease-in-out infinite 2.2s; }
+        .bento-card:nth-child(5)  { animation: b-breathe4 5.8s ease-in-out infinite 0.6s; }
+        .bento-card:nth-child(6)  { animation: b-breathe2 4.0s ease-in-out infinite 1.8s; }
+        .bento-card:nth-child(7)  { animation: b-breathe3 6.5s ease-in-out infinite 0.1s; }
+        .bento-card:nth-child(8)  { animation: b-breathe  4.7s ease-in-out infinite 2.8s; }
+        .bento-card:nth-child(9)  { animation: none; }
+        .bento-card:not(.b-resume):hover {
+            animation-play-state: paused;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+            z-index: 20;
+        }
+        .b-pos    { grid-area: pos; }
+        .b-upi    { grid-area: upi; }
+        .b-smart  { grid-area: smart; }
+        .b-dottie { grid-area: dottie; }
+        .b-icici  { grid-area: icici; }
+        .b-vihar  { grid-area: vihar; }
+        .b-bhopal { grid-area: bhopal; }
+        .b-blog   { grid-area: blog; }
+        .b-resume { grid-area: resume; }
+
+        /* Positioning card */
+        .b-pos {
+            background: #0a0a0a;
+            padding: 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .b-eyebrow {
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: #FF5500;
+        }
+        .b-headline {
+            font-size: 38px; font-weight: 900;
+            line-height: 0.93; letter-spacing: -0.04em;
+            color: #fff;
+        }
+        .b-pos-sub {
+            font-size: 13px; color: #999;
+            line-height: 1.65;
+        }
+        .b-pos-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+        .b-tag {
+            font-size: 10px; font-weight: 700;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: #999; border: 1px solid #222;
+            padding: 4px 10px; border-radius: 2px;
+        }
+
+        /* Project cards */
+        .b-proj {
+            background: #fff; padding: 32px;
+            display: flex; flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer; text-decoration: none; color: inherit;
+        }
+        .b-proj::after {
+            content: ''; position: absolute;
+            bottom: 0; left: 0; right: 0; height: 0;
+            background: #FF5500;
+            transition: height 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
+            z-index: 0;
+        }
+        .b-proj:hover::after { height: 100%; }
+        .b-proj > * { position: relative; z-index: 1; }
+
+        /* Cursor-tracking radial glow */
+        .b-glow {
+            position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+            background: radial-gradient(circle 220px at var(--gx, 50%) var(--gy, 50%), rgba(255,255,255,0.09), transparent 65%);
+            opacity: 0; transition: opacity 0.4s; z-index: 3;
+        }
+        .b-smart .b-glow, .b-vihar .b-glow, .b-bhopal .b-glow, .b-blog-c .b-glow {
+            background: radial-gradient(circle 220px at var(--gx, 50%) var(--gy, 50%), rgba(0,0,0,0.05), transparent 65%);
+        }
+        .bento-card:hover .b-glow { opacity: 1; }
+
+        /* Card icons */
+        .b-icon {
+            position: absolute; top: 22px; right: 22px;
+            width: 30px; height: 30px; pointer-events: none; z-index: 4;
+            color: #fff; opacity: 0.16;
+            transition: opacity 0.35s, transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        .b-proj:not(.b-proj--dark) .b-icon { color: #0a0a0a; opacity: 0.12; }
+        .b-blog-c .b-icon { color: #0a0a0a; opacity: 0.12; }
+        .b-pos .b-icon { color: #fff; opacity: 0.10; }
+        .b-proj:hover .b-icon,
+        .b-blog-c:hover .b-icon,
+        .b-pos:hover .b-icon { opacity: 0.55; transform: translate(2px, -2px) scale(1.1); }
+
+        .b-proj--dark { background: #111; }
+        .b-proj-num {
+            font-size: 10px; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: #ccc; transition: color 0.3s;
+        }
+        .b-proj--dark .b-proj-num { color: #333; }
+        .b-proj:hover .b-proj-num { color: rgba(255,255,255,0.45); }
+        .b-proj-name {
+            font-size: 26px; font-weight: 900;
+            letter-spacing: -0.03em; line-height: 1.0;
+            color: #0a0a0a; transition: color 0.3s;
+        }
+        .b-proj--dark .b-proj-name { color: #fff; }
+        .b-proj:hover .b-proj-name { color: #fff; }
+        .b-proj-desc {
+            font-size: 13px; line-height: 1.6;
+            color: #aaa; max-height: 0; overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.35s ease, opacity 0.3s ease 0.06s, color 0.3s;
+        }
+        .b-proj--dark .b-proj-desc { color: #555; }
+        .b-proj:hover .b-proj-desc { max-height: 80px; opacity: 1; color: rgba(255,255,255,0.85); }
+        .b-proj-foot { display: flex; justify-content: space-between; align-items: flex-end; }
+        .b-proj-cat {
+            font-size: 10px; font-weight: 700;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: #FF5500; transition: color 0.3s;
+        }
+        .b-proj:hover .b-proj-cat { color: rgba(255,255,255,0.6); }
+        .b-proj-arrow {
+            font-size: 22px; color: #ddd; line-height: 1;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .b-proj--dark .b-proj-arrow { color: #2a2a2a; }
+        .b-proj:hover .b-proj-arrow { color: #fff; transform: translate(4px,-4px); }
+
+        /* Blog card */
+        .b-blog-c {
+            background: #f5f5f5; padding: 32px;
+            display: flex; flex-direction: column;
+            justify-content: space-between; cursor: pointer;
+        }
+        .b-blog-c::after {
+            content: ''; position: absolute;
+            bottom: 0; left: 0; right: 0; height: 0;
+            background: #0a0a0a;
+            transition: height 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
+            z-index: 0;
+        }
+        .b-blog-c:hover::after { height: 100%; }
+        .b-blog-c > * { position: relative; z-index: 1; }
+        .b-blog-lbl {
+            font-size: 10px; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: #aaa; transition: color 0.3s;
+        }
+        .b-blog-c:hover .b-blog-lbl { color: #FF5500; }
+        .b-blog-ttl {
+            font-size: 26px; font-weight: 900;
+            letter-spacing: -0.03em; line-height: 1.0;
+            color: #0a0a0a; transition: color 0.3s;
+        }
+        .b-blog-c:hover .b-blog-ttl { color: #fff; }
+        .b-blog-arr {
+            font-size: 22px; color: #ddd; align-self: flex-end;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .b-blog-c:hover .b-blog-arr { color: #FF5500; transform: translate(4px,-4px); }
+
+        /* Resume strip */
+        .b-resume {
+            background: #FF5500;
+            display: flex; align-items: center;
+            justify-content: space-between;
+            padding: 0 44px; text-decoration: none;
+            transition: background 0.3s;
+        }
+        .b-resume:hover { background: #e84c00; transform: none !important; box-shadow: none !important; }
+
+        /* ── Per-card character ── */
+        .b-upi   { background: #0f0f0f; }
+        .b-smart { background: #f4efe9; }
+        .b-smart .b-proj-name, .b-smart .b-proj-num { color: #0a0a0a; }
+        .b-smart .b-proj-arrow { color: #bbb; }
+        .b-smart .b-proj-desc { color: #666; }
+        .b-dottie { background: #141416; }
+        .b-vihar  { background: #f0f0eb; }
+        .b-vihar .b-proj-name { color: #0a0a0a; }
+        .b-vihar .b-proj-arrow { color: #ccc; }
+        .b-vihar .b-proj-desc { color: #666; }
+        .b-bhopal { background: #e5e5e0; }
+        .b-bhopal .b-proj-name { color: #0a0a0a; }
+        .b-bhopal .b-proj-arrow { color: #bbb; }
+        .b-bhopal .b-proj-desc { color: #666; }
+
+        /* Narrow tall cards — larger name */
+        .b-dottie .b-proj-name { font-size: 28px; }
+        .b-icici  .b-proj-name { font-size: 28px; }
+        /* Wide short card — landscape name */
+        .b-upi .b-proj-name { font-size: 32px; }
+        /* Compact inner padding for small cells */
+        .b-proj { padding: 28px; }
+
+        /* Typographic watermarks — dark cards */
+        .b-upi::before, .b-dottie::before, .b-icici::before {
+            pointer-events: none; user-select: none; z-index: 0;
+            position: absolute; bottom: -24px; right: -8px;
+            font-size: 180px; font-weight: 900; line-height: 1;
+            letter-spacing: -0.07em; color: rgba(255,255,255,0.03);
+        }
+        .b-upi::before   { content: '01'; }
+        .b-dottie::before { content: '03'; }
+        .b-icici::before  { content: '04'; }
+
+        /* Typographic watermarks — light cards */
+        .b-smart::before, .b-vihar::before, .b-bhopal::before {
+            pointer-events: none; user-select: none; z-index: 0;
+            position: absolute; bottom: -16px; right: -8px;
+            font-size: 140px; font-weight: 900; line-height: 1;
+            letter-spacing: -0.07em; color: rgba(0,0,0,0.05);
+        }
+        .b-smart::before  { content: '02'; }
+        .b-vihar::before  { content: '05'; }
+        .b-bhopal::before { content: '06'; }
+
+        .b-resume-txt {
+            font-size: 13px; font-weight: 700;
+            letter-spacing: 0.1em; text-transform: uppercase; color: #fff;
+        }
+        .b-resume-arr {
+            font-size: 24px; color: rgba(255,255,255,0.6);
+            transition: transform 0.3s, color 0.3s;
+        }
+        .b-resume:hover .b-resume-arr { transform: translateX(6px); color: #fff; }
+
+        /* Nav logo */
+        .nav-logo img { height: 26px; width: auto; display: block; }
+
+        /* Footer */
+        .bento-footer {
+            padding: 48px 20px;
+            background: #ececec;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .bento-footer-l {
+            font-size: 22px; font-weight: 900;
+            letter-spacing: -0.02em; color: #0a0a0a;
+        }
+        .bento-footer-r { display: flex; gap: 24px; }
+        .bento-footer-lnk {
+            font-size: 13px; font-weight: 600;
+            color: #888; text-decoration: none;
+            letter-spacing: 0.05em; transition: color 0.2s;
+        }
+        .bento-footer-lnk:hover { color: #FF5500; }
+
+        /* Generic dark-nav overlay class */
+        .cs-dark .case-study-nav {
+            background: rgba(10,10,10,0.97) !important;
+            border-bottom-color: #222 !important;
+        }
+        .cs-dark .case-study-nav-inner > div { color: #fff; }
+        .cs-dark .close-case-study { color: #fff; border-color: #333; }
+        .cs-dark .close-case-study:hover { background: #1a1a1a; }
+
+        /* Bento responsive */
+        @media (max-width: 1024px) {
+            .bento-grid {
+                grid-template-columns: 1.8fr 1.2fr 1.5fr 1fr 1.5fr;
+                grid-template-rows: 220px 160px 180px 68px;
+            }
+            .b-headline { font-size: 32px; }
+        }
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-rows: auto;
+                gap: 8px; padding: 8px;
+                grid-template-areas:
+                    "pos    pos    pos"
+                    "upi    upi    upi"
+                    "smart  smart  dottie"
+                    "icici  vihar  vihar"
+                    "bhopal bhopal blog"
+                    "resume resume resume";
+            }
+            .b-headline { font-size: 34px; }
+            .b-pos { min-height: 220px; }
+            .b-proj, .b-blog-c { min-height: 160px; }
+            .b-resume { min-height: 60px; }
+            .b-upi::before, .b-dottie::before, .b-icici::before,
+            .b-smart::before, .b-vihar::before, .b-bhopal::before { display: none; }
+        }
+        @media (max-width: 480px) {
+            .bento-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-areas:
+                    "pos    pos"
+                    "upi    upi"
+                    "smart  dottie"
+                    "icici  vihar"
+                    "bhopal bhopal"
+                    "blog   blog"
+                    "resume resume";
+                padding: 6px; gap: 6px;
+            }
+            .b-headline { font-size: 28px; }
+        }
+
+        /* ================================================================
+           ACCESSIBILITY — Contrast · Focus · Motion · ARIA
+           ================================================================ */
+
+        /* Skip nav */
+        .skip-link {
+            position: absolute; top: -56px; left: 16px;
+            background: #FF5500; color: #fff;
+            padding: 12px 20px; font-size: 14px; font-weight: 700;
+            text-decoration: none; border-radius: 0 0 6px 6px;
+            z-index: 99999; transition: top 0.15s;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* Focus visible */
+        *:focus { outline: none; }
+        *:focus-visible { outline: 3px solid #FF5500; outline-offset: 3px; border-radius: 2px; }
+        .b-proj:focus-visible, .b-blog-c:focus-visible { outline: 4px solid #FF5500; outline-offset: -4px; }
+        .close-case-study:focus-visible { outline: 3px solid #FF5500; outline-offset: 2px; }
+
+        /* CONTRAST — dark bg (#0a0a0a, #111) */
+        .cs2-hero-sub                    { color: #999; }   /* was #444 → fail */
+        .cs2-box-label                   { color: #888; }   /* was #555 → fail */
+        .cs2-swap-tag                    { color: #888; }   /* was #444 → fail */
+        .cs2-swap-tag--orange            { color: #FF5500; }
+        .cs2-swap-word-old               { color: #666; }   /* was #333 → fail */
+        .cs2-swap-arrow                  { color: #888; }   /* was #444 → fail */
+        .cs2-iv-label                    { color: #888; }   /* was #444 → fail */
+        .cs2-iv-q--old                   { color: #666; }   /* was #333 → fail */
+        .cs2-gate-body                   { color: #aaa; }   /* was #777 → marginal */
+        .cs2-insight-label               { color: #888; }   /* was #444 → fail */
+        .cs2-insight-verdict--bad        { color: #888; text-decoration: line-through; text-decoration-color: #FF5500; }
+        .cs2-insight-divider             { color: #888; }   /* was #333 → fail */
+        .cs2-pivot-table td:first-child  { color: #888; }   /* was #444 → fail */
+        .cs2-pivot-table td:nth-child(2) { color: #aaa; }   /* was #444 → fail */
+
+        /* CONTRAST — light bg (#fff, #f2f2f2, #ececec) */
+        .cs2-persona-desc                { color: #555; }   /* was #999 → fail */
+        .cs2-persona-goal                { color: #555; }   /* was #bbb → #777 (4.38:1) → #555 (7.5:1) ✓ */
+        .cs2-trade-tag                   { color: #5a5a5a; } /* was #bbb → #777 (4.13:1) → #5a5a5a (5.5:1) ✓ */
+        .cs2-tl-event                    { color: #555; }   /* was #777 → fail on #e8e8e8 */
+        .cs2-rule-sub                    { color: #555; }   /* was #888 → fail small text */
+        .cs2-p                           { color: #333; }   /* light-bg body text (#444 → #333 for AA comfort) */
+        /* CRITICAL: override the cascade bug — .cs2-p {#333} above would override .cs2-p--dark {#888}
+           because it appears later in source order. This rule restores dark-section body text. */
+        .cs2-p--dark                     { color: #c4c4c4; } /* dark bg body text → was #888 (6.3:1) → now 11.7:1 ✓ */
+
+        /* CONTRAST — dark bg: rgba-based labels too faint */
+        .cs2-label--dim                  { color: rgba(255,255,255,0.55); } /* was 0.30 → 2.84:1 → now 6.86:1 ✓ */
+        .cs2-pivot-table th              { color: rgba(255,255,255,0.5);  } /* was 0.28 → 2.45:1 → now 5.69:1 ✓ */
+
+        /* CONTRAST — logic funnel inactive states (dark bg) */
+        .cs2-funnel-num                  { color: rgba(255,255,255,0.35); } /* was 0.10 → 1.33:1 → now 3.53:1 ✓ large text */
+        .cs2-funnel-title                { color: rgba(255,255,255,0.42); } /* was 0.30 → 2.84:1 → now 4.1:1 ✓ large text */
+        .cs2-funnel-col-label            { color: rgba(255,255,255,0.55); } /* was 0.25 → 2.35:1 → now 6.86:1 ✓ */
+        .cs2-funnel-col--constraint .cs2-funnel-col-label { color: rgba(255,85,0,0.92); } /* orange label: keeps accent, more opaque */
+
+        /* CONTRAST — bento */
+        .b-pos-sub                       { color: #999; }   /* was #555 → fail on dark */
+        .b-tag                           { color: #999; border-color: #444; }
+        .b-proj--dark .b-proj-num        { color: #888; }   /* was #333 → #666 (3.33:1) → #888 (5.37:1) ✓ */
+        .b-proj--dark .b-proj-desc       { color: #888; }   /* was #555 → fail */
+        .b-proj-desc                     { color: #555; }   /* was #aaa → fail on white */
+        .bento-footer-lnk                { color: #555; }   /* was #888 → fail on #ececec */
+
+        /* CONTRAST — orange bg (design tradeoff: white on #FF5500 = 3.0:1 max achievable) */
+        .cs2-final-label                 { color: rgba(255,255,255,0.95); } /* maximised within constraint */
+        .cs2-final-support               { color: rgba(255,255,255,0.95); } /* maximised within constraint */
+
+        /* Image blocks */
+        .cs2-img-figure { margin: 56px 0; }
+        .cs2-img-block {
+            width: 100%; aspect-ratio: 16/9;
+            background: #1c1c1c; border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 4px; overflow: hidden;
+            position: relative; display: flex;
+            align-items: center; justify-content: center;
+        }
+        .cs2-img-block--light { background: #f5f5f5; border: 1px dashed #d0d0d0; }
+        .cs2-img-block--tall  { aspect-ratio: 4/3; }
+        .cs2-img-block img {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: cover; object-position: top; display: block; z-index: 2;
+        }
+        .cs2-img-block img[src=""], .cs2-img-block img[src="#"] { display: none; }
+        .cs2-img-ph {
+            text-align: center; z-index: 1; pointer-events: none;
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+        }
+        .cs2-img-ph-line { width: 28px; height: 1px; background: #2e2e2e; }
+        .cs2-img-block--light .cs2-img-ph-line { background: #ccc; }
+        .cs2-img-ph-label {
+            font-size: 10px; font-weight: 700; letter-spacing: 0.22em;
+            text-transform: uppercase; color: #444;
+        }
+        .cs2-img-block--light .cs2-img-ph-label { color: #aaa; }
+        .cs2-img-caption {
+            margin-top: 10px; font-size: 12px;
+            color: #666; font-style: italic; display: block;
+        }
+        .cs2-img-block--light ~ .cs2-img-caption { color: #888; }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .bento-card { animation: none !important; }
+            .bento-card:not(.b-resume):hover { transform: none !important; }
+            .b-proj::after, .b-blog-c::after { transition: none !important; }
+            * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <img src="../source/square.png" alt="SAM — Samruddhi Pahune">
+            </a>
+            <div class="nav-links">
+                <a href="mailto:samruddhi@example.com" class="nav-link">Contact</a>
+                <a href="#" class="nav-link">Resume</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Bento Grid Homepage -->
+    <main id="main-content" class="bento-page">
+        <div class="bento-grid">
+
+            <!-- 1: Positioning Statement -->
+            <div class="bento-card b-pos">
+                <div class="b-glow"></div>
+                <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4" r="2"/><circle cx="4" cy="20" r="2"/><circle cx="20" cy="20" r="2"/><path d="M12 6v4M10 10H6a2 2 0 0 0-2 2v4M14 10h4a2 2 0 0 1 2 2v4"/></svg>
+                <span class="b-eyebrow">Samruddhi Pahune &mdash; AI Systems &amp; Automation</span>
+                <h1 class="b-headline">I build automation<br>that knows<br>when to stop.</h1>
+                <p class="b-pos-sub">I define decision boundaries for financial AI — the logic between what a user says and what a system is permitted to do. When to act. When to verify. When to stop.</p>
+                <div class="b-pos-tags">
+                    <span class="b-tag">Decision Boundaries</span>
+                    <span class="b-tag">Escalation Logic</span>
+                    <span class="b-tag">Risk-Aware Automation</span>
+                    <span class="b-tag">Fintech</span>
+                </div>
+            </div>
+
+            <!-- 2: Failed UPI Debit -->
+            <div class="bento-card b-proj b-proj--dark b-upi" data-case-study="cs2" role="button" tabindex="0" aria-label="Open case study: Failed UPI Debit">
+                <div class="b-glow"></div>
+                <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <div class="b-proj-num">01 &middot; Featured</div>
+                <div>
+                    <div class="b-proj-name">Failed UPI<br>Debit</div>
+                    <div class="b-proj-desc">Building a system that manages fear through logic. Ledger truth over user panic.</div>
+                </div>
+                <div class="b-proj-foot">
+                    <span class="b-proj-cat">Diagnostic Engine</span>
+                    <span class="b-proj-arrow">↗</span>
+                </div>
+            </div>
+
+            <!-- 3: Smartcoin -->
+            <div class="bento-card b-proj b-smart" data-case-study="cs-smartcoin" role="button" tabindex="0" aria-label="Open case study: Smartcoin">
+                <div class="b-glow"></div>
+                <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9h3a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 0 0 3H14M12 6v2M12 16v2"/></svg>
+                <div class="b-proj-num">02 &middot; Fintech</div>
+                <div>
+                    <div class="b-proj-name">Smartcoin</div>
+                    <div class="b-proj-desc">Turning borrowers into savers. Designing the bridge between survival and financial security.</div>
+                </div>
+                <div class="b-proj-foot">
+                    <span class="b-proj-cat">Behavior Design</span>
+                    <span class="b-proj-arrow">↗</span>
+                </div>
+            </div>
+
+            <!-- 4: Dottie -->
+            <div class="bento-card b-proj b-proj--dark b-dottie" data-case-study="cs-dottie" role="button" tabindex="0" aria-label="Open case study: Dottie — IndiGo voice assistant">
+                <div class="b-glow"></div>
+                <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3M9 22h6"/></svg>
+                <div class="b-proj-num">03 &middot; Voice</div>
+                <div>
+                    <div class="b-proj-name">Dottie</div>
+                    <div class="b-proj-desc">IndiGo's voice assistant. What if you could just call and book a flight?</div>
+                </div>
+                <div class="b-proj-foot">
+                    <span class="b-proj-cat">Conversation Design</span>
+                    <span class="b-proj-arrow">↗</span>
+                </div>
+            </div>
+
+            <!-- 5: Beyond Touchscreens -->
+            <div class="bento-card b-proj b-proj--dark b-icici" data-case-study="cs-icici" role="button" tabindex="0" aria-label="Open case study: Beyond Touchscreens — ICICI voicebot">
+                <div class="b-glow"></div>
+                <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-3.18-3.18 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 4.34l3-.87a2 2 0 0 1 2.07.98l1.34 2.69a2 2 0 0 1-.45 2.36L8.09 10a16 16 0 0 0 6 6l1.5-1.47a2 2 0 0 1 2.36-.45l2.69 1.34a2 2 0 0 1 .98 2.08z"/></svg>
+                <div class="b-proj-num">04 &middot; Banking AI</div>
+                <div>
+                    <div class="b-proj-name">Beyond<br>Touchscreens</div>
+                    <div class="b-proj-desc">India's first transactional voicebot. 70+ live use cases. No visual confirmation.</div>
+                </div>
+                <div class="b-proj-foot">
+                    <span class="b-proj-cat">AI Systems</span>
+                    <span class="b-proj-arrow">↗</span>
+                </div>
+            </div>
+
+            <!-- 6: Vihar -->
+            <div class="bento-card b-proj b-vihar" data-case-study="cs-vihar" role="button" tabindex="0" aria-label="Open case study: Vihar — Van Vihar National Park">
+                <div class="b-glow"></div>
+                <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88"/></svg>
+                <div class="b-proj-num">05 &middot; Service Design</div>
+                <div>
+                    <div class="b-proj-name">Vihar</div>
+                    <div class="b-proj-desc">80% of visitors missed the butterfly garden. An invisible guide fixed what signage couldn't.</div>
+                </div>
+                <div class="b-proj-foot">
+                    <span class="b-proj-cat">Experience Design</span>
+                    <span class="b-proj-arrow">↗</span>
+                </div>
+            </div>
+
+            <!-- 7: Bhopal By Bike -->
+            <div class="bento-card b-proj b-bhopal" data-case-study="cs-bhopal" role="button" tabindex="0" aria-label="Open case study: Bhopal By Bike — Chartered Cycles">
+                <div class="b-glow"></div>
+                <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5.5" cy="17.5" r="3"/><circle cx="18.5" cy="17.5" r="3"/><path d="M15 6a1 1 0 0 0-1-1h-3M8 17.5l2.5-5.5h7l-2-5.5"/><path d="M5.5 14.5l3.5-6.5"/></svg>
+                <div class="b-proj-num">06 &middot; Urban Design</div>
+                <div>
+                    <div class="b-proj-name">Bhopal<br>By Bike</div>
+                    <div class="b-proj-desc">500 bikes. 100 docking stations. Less than 3% adoption. The curious case of Bhopal's unridden cycles.</div>
+                </div>
+                <div class="b-proj-foot">
+                    <span class="b-proj-cat">Phygital Design</span>
+                    <span class="b-proj-arrow">↗</span>
+                </div>
+            </div>
+
+            <!-- 8: Blog -->
+            <div class="bento-card b-blog-c b-blog" onclick="window.open('#','_blank')" role="button" tabindex="0" aria-label="Open blog: Notes on AI Systems">
+                <div class="b-glow"></div>
+                <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                <span class="b-blog-lbl">Writing</span>
+                <div class="b-blog-ttl">Notes on<br>AI Systems</div>
+                <span class="b-blog-arr">↗</span>
+            </div>
+
+            <!-- 10: Resume strip -->
+            <a href="#" class="bento-card b-resume" target="_blank">
+                <span class="b-resume-txt">Resume &mdash; Download CV</span>
+                <span class="b-resume-arr">&#8594;</span>
+            </a>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="bento-footer">
+            <div class="bento-footer-l">Let&rsquo;s talk.</div>
+            <div class="bento-footer-r">
+                <a href="mailto:samruddhi@example.com" class="bento-footer-lnk">Email</a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener" class="bento-footer-lnk">LinkedIn</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Case Study Overlays -->
+    
+    <!-- Case Study 2: Designing for Panic -->
+    <div class="case-study-overlay" id="cs2" role="dialog" aria-modal="true" aria-labelledby="cs2-title">
+
+        <!-- Sticky nav -->
+        <div class="case-study-nav">
+            <div class="case-study-nav-inner">
+                <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Designing for Panic</div>
+                <button class="close-case-study" onclick="closeCaseStudy('cs2')" aria-label="Close case study and return to portfolio">← Back</button>
+            </div>
+        </div>
+
+        <div class="cs2-body">
+
+            <!-- ═══════════════════════════════════════════════════════ HERO -->
+            <section class="cs2-hero">
+                <div class="cs2-hero-inner">
+                    <span class="cs2-kicker">Case Study &middot; Failed UPI Debit &middot; Tier I Indian Bank</span>
+                    <h1 class="cs2-title" id="cs2-title">Designing<br>for Panic.</h1>
+                    <div class="cs2-hero-divider"></div>
+                    <blockquote class="cs2-hero-quote">&ldquo;In the three seconds after a payment fails and the money leaves the account, a user enters a state of biological panic.&rdquo;</blockquote>
+                    <p class="cs2-hero-sub">This is the story of building a system that manages that fear through logic.</p>
+                </div>
+                <div class="cs2-bg-word" aria-hidden="true">PANIC</div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════ 01 / THE CRISIS -->
+            <section class="cs2-sec cs2-sec--white">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">01 / The Crisis</span>
+                    <h2 class="cs2-h2">The Digital Banking<br><em>Graveyard.</em></h2>
+
+                    <div class="cs2-two-col">
+                        <div>
+                            <p class="cs2-p">India's digital payment landscape is built on <strong>UPI</strong> — a marvel of engineering that occasionally stutters.</p>
+                            <p class="cs2-p">When it does, the result is a <strong>&ldquo;Failed Debit.&rdquo;</strong></p>
+                            <blockquote class="cs2-pullquote">Trust is a currency that takes years to earn and milliseconds to lose.</blockquote>
+                            <p class="cs2-p">For a Tier I Indian Bank, these failures weren't minor glitches. They were a <strong>leading driver of customer churn.</strong></p>
+                        </div>
+                        <div>
+                            <div class="cs2-box-dark">
+                                <span class="cs2-box-label">Existing Support Experience</span>
+                                <ul class="cs2-pain-list">
+                                    <li>Cryptic error messages</li>
+                                    <li>45-minute wait times for a human agent</li>
+                                </ul>
+                                <p style="margin-top:24px;font-size:15px;color:#aaa;line-height:1.6;margin-bottom:0;">Both amplified the same fear:</p>
+                                <div class="cs2-fear-quote"><em>Has my money disappeared?</em></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Perception split — full bleed -->
+            <div class="cs2-perception-split">
+                <div class="cs2-perception-side cs2-perception-side--light">
+                    <span class="cs2-perception-tag">The User Sees</span>
+                    <div class="cs2-perception-big">Balance<br>Reduced.</div>
+                    <span class="cs2-perception-count">1&nbsp;&nbsp;signal</span>
+                </div>
+                <div class="cs2-perception-side cs2-perception-side--dark">
+                    <span class="cs2-perception-tag">The System Sees</span>
+                    <ul class="cs2-system-states">
+                        <li>The debit may never have posted</li>
+                        <li>The credit leg failed downstream</li>
+                        <li>An auto-reversal is already in motion</li>
+                        <li>Regulatory windows are still active</li>
+                    </ul>
+                    <span class="cs2-perception-count" style="color:#999;">4+&nbsp;&nbsp;possible states</span>
+                </div>
+            </div>
+
+            <!-- Architectural decision -->
+            <section class="cs2-sec cs2-sec--white" style="padding-top:72px;padding-bottom:80px;">
+                <div class="cs2-sec-inner">
+                    <div class="cs2-arch-block">
+                        <div class="cs2-arch-label">Architectural Decision</div>
+                        <p class="cs2-p" style="font-size:20px;font-weight:600;color:#0a0a0a;max-width:700px;">To bridge this perception gap, we surfaced <strong>real-time ledger truth</strong> during the moment of stress.</p>
+                        <div class="cs2-trade-row">
+                            <div class="cs2-trade-item">
+                                <div class="cs2-trade-tag">Trade-off</div>
+                                <div class="cs2-trade-text">Deep ledger access and higher computational overhead.</div>
+                            </div>
+                            <div class="cs2-trade-item cs2-trade-item--outcome">
+                                <div class="cs2-trade-tag cs2-trade-tag--orange">Outcome</div>
+                                <div class="cs2-trade-text">Prevented far costlier downstream confusion and incorrect investigations.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════ 02 / INVESTIGATION -->
+            <section class="cs2-sec cs2-sec--dark">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label cs2-label--dim">02 / Investigation</span>
+                    <h2 class="cs2-h2 cs2-h2--white">Logic Fails<br>Where Fear Begins.</h2>
+                    <p class="cs2-p cs2-p--dark">Research into high-anxiety users revealed: when people believe money is lost, <strong style="color:#fff;">cognition narrows.</strong></p>
+
+                    <div class="cs2-observations">
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon">&#8635;</span>
+                            <span>Frantic scanning of transaction history</span>
+                        </div>
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon">&ne;</span>
+                            <span>Confusion between order IDs and UTRs</span>
+                        </div>
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon">!</span>
+                            <span>Mistyped 12-digit reference numbers</span>
+                        </div>
+                    </div>
+
+                    <h3 class="cs2-h3 cs2-h3--white" style="margin-top:72px;">Why Traditional Chatbots Fail</h3>
+                    <p class="cs2-p cs2-p--dark">Most bots rely on recall:</p>
+                    <div class="cs2-code">User explains → System classifies → Escalate</div>
+                    <p class="cs2-p cs2-p--dark">But panic collapses recall. Language becomes unreliable.</p>
+
+                    <blockquote class="cs2-pullquote cs2-pullquote--dark">
+                        &ldquo;Money got cut&rdquo; could mean:
+                        <ul style="margin-top:16px;list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;">
+                            <li style="color:#aaa;">→ &nbsp;Failed UPI debit</li>
+                            <li style="color:#aaa;">→ &nbsp;Recurring NACH mandate</li>
+                            <li style="color:#aaa;">→ &nbsp;Subscription renewal</li>
+                            <li style="color:#aaa;">→ &nbsp;Pending refund</li>
+                        </ul>
+                    </blockquote>
+
+                    <div class="cs2-insight-bar">
+                        <div class="cs2-insight-item">
+                            <span class="cs2-insight-label">Language</span>
+                            <span class="cs2-insight-verdict cs2-insight-verdict--bad">Noise Variable</span>
+                        </div>
+                        <div class="cs2-insight-divider">vs</div>
+                        <div class="cs2-insight-item">
+                            <span class="cs2-insight-label">The Ledger</span>
+                            <span class="cs2-insight-verdict cs2-insight-verdict--good">Source of Truth</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Behavioral shift -->
+            <section class="cs2-sec cs2-sec--grey">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">The Behavioral Shift</span>
+                    <p class="cs2-p">We removed recall from the equation. Instead of asking for a UTR:</p>
+                    <div class="cs2-shift-quote">&ldquo;Which one of these is bothering you?&rdquo;</div>
+                    <p class="cs2-p">We pulled recent transactions into a carousel.</p>
+
+                    <div class="cs2-swap-banner">
+                        <div class="cs2-swap-col">
+                            <span class="cs2-swap-tag">Before</span>
+                            <span class="cs2-swap-word-old">Recall</span>
+                        </div>
+                        <span class="cs2-swap-arrow">→</span>
+                        <div class="cs2-swap-col">
+                            <span class="cs2-swap-tag cs2-swap-tag--orange">After</span>
+                            <span class="cs2-swap-word-new">Recognition</span>
+                        </div>
+                    </div>
+
+                    <p class="cs2-p"><strong>The system carries the complexity.</strong></p>
+                    <p class="cs2-p" style="color:#555;">Yes — performance demands increased. But every support request now maps to a verifiable event.</p>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════════ 03 / THE PIVOT -->
+            <section class="cs2-sec cs2-sec--dark">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label cs2-label--dim">03 / The Pivot</span>
+                    <h2 class="cs2-h2 cs2-h2--white">The Machine<br>of Reassurance.</h2>
+                    <p class="cs2-p cs2-p--dark">We stopped building a support bot.</p>
+                    <p style="font-size:26px;font-weight:800;color:#fff;line-height:1.3;margin-bottom:32px;">We built a <span style="color:#FF5500;">diagnostic engine.</span></p>
+
+                    <div class="cs2-inquiry-vs">
+                        <div class="cs2-iv-col">
+                            <span class="cs2-iv-label">Inquiry</span>
+                            <span class="cs2-iv-q cs2-iv-q--old">&ldquo;What happened?&rdquo;</span>
+                        </div>
+                        <span class="cs2-iv-arrow">→</span>
+                        <div class="cs2-iv-col">
+                            <span class="cs2-iv-label cs2-iv-label--orange">Validation</span>
+                            <span class="cs2-iv-q">&ldquo;Here&rsquo;s what we see.&rdquo;</span>
+                        </div>
+                    </div>
+
+                    <p class="cs2-p cs2-p--dark">Escalation is no longer triggered by emotion. It is triggered by <strong style="color:#FF5500;">verified system state.</strong></p>
+                    <p class="cs2-p cs2-p--dark">This felt stricter at first. But strictness at entry prevents chaos downstream.</p>
+
+                    <blockquote class="cs2-pullquote cs2-pullquote--dark">Faster resolution doesn&rsquo;t come from speed.<br>It comes from clarity.</blockquote>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════════ 04 / THE ENGINE -->
+            <section class="cs2-sec cs2-sec--dark" style="padding-top:0;padding-bottom:0;">
+                <div class="cs2-sec-inner" style="padding-top:80px;padding-bottom:0;">
+                    <span class="cs2-label cs2-label--dim">04 / The Engine</span>
+                    <h2 class="cs2-h2 cs2-h2--white">The Logic<br>Funnel.</h2>
+                    <p class="cs2-p cs2-p--dark">Every complaint enters a gated sequence. Not to slow users down — but to prevent incorrect action and protect operational integrity.</p>
+                </div>
+
+                <div class="cs2-funnel">
+
+                    <div class="cs2-funnel-row is-open" onclick="toggleGate(this)">
+                        <div class="cs2-funnel-header">
+                            <span class="cs2-funnel-num">01</span>
+                            <h3 class="cs2-funnel-title">Cooling Period</h3>
+                            <span class="cs2-funnel-chevron">›</span>
+                        </div>
+                        <div class="cs2-funnel-body">
+                            <div class="cs2-funnel-col">
+                                <span class="cs2-funnel-col-label">The Logic</span>
+                                <p class="cs2-funnel-col-text">We check the transaction timestamp. If within an active regulatory window, escalation is temporarily unavailable.</p>
+                            </div>
+                            <div class="cs2-funnel-col">
+                                <span class="cs2-funnel-col-label">The Impact</span>
+                                <p class="cs2-funnel-col-text">Many failed debits auto-reverse during this window. Allowing immediate disputes creates duplicate investigations.</p>
+                            </div>
+                            <div class="cs2-funnel-col cs2-funnel-col--constraint">
+                                <span class="cs2-funnel-col-label">System Constraint</span>
+                                <p class="cs2-funnel-col-text">We intentionally restrict the impulse to act instantly.</p>
+                                <div class="cs2-funnel-prevents">Prevents: Duplicate Investigations</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cs2-funnel-row" onclick="toggleGate(this)">
+                        <div class="cs2-funnel-header">
+                            <span class="cs2-funnel-num">02</span>
+                            <h3 class="cs2-funnel-title">Debit Verification</h3>
+                            <span class="cs2-funnel-chevron">›</span>
+                        </div>
+                        <div class="cs2-funnel-body">
+                            <div class="cs2-funnel-col">
+                                <span class="cs2-funnel-col-label">The Logic</span>
+                                <p class="cs2-funnel-col-text">The ledger is polled in real time. If no debit posted, the dispute path ends immediately.</p>
+                            </div>
+                            <div class="cs2-funnel-col">
+                                <span class="cs2-funnel-col-label">The Impact</span>
+                                <p class="cs2-funnel-col-text">Prevents ghost transaction tickets — cases where the perception of loss doesn't match ledger reality.</p>
+                            </div>
+                            <div class="cs2-funnel-col cs2-funnel-col--constraint">
+                                <span class="cs2-funnel-col-label">System Constraint</span>
+                                <p class="cs2-funnel-col-text">Requires reliable ledger uptime. The system cannot afford ambiguity here.</p>
+                                <div class="cs2-funnel-prevents">Prevents: Ghost Transaction Tickets</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cs2-funnel-row" onclick="toggleGate(this)">
+                        <div class="cs2-funnel-header">
+                            <span class="cs2-funnel-num">03</span>
+                            <h3 class="cs2-funnel-title">Payment Classification</h3>
+                            <span class="cs2-funnel-chevron">›</span>
+                        </div>
+                        <div class="cs2-funnel-body">
+                            <div class="cs2-funnel-col">
+                                <span class="cs2-funnel-col-label">The Logic</span>
+                                <p class="cs2-funnel-col-text">One-time UPI debits are separated from recurring mandates. This distinction matters legally, operationally, and SLA-bound.</p>
+                            </div>
+                            <div class="cs2-funnel-col">
+                                <span class="cs2-funnel-col-label">The Impact</span>
+                                <p class="cs2-funnel-col-text">Routing them incorrectly leads to misaligned investigations and broken SLAs.</p>
+                            </div>
+                            <div class="cs2-funnel-col cs2-funnel-col--constraint">
+                                <span class="cs2-funnel-col-label">System Constraint</span>
+                                <p class="cs2-funnel-col-text">Categorization adds logic complexity — but protects downstream accuracy.</p>
+                                <div class="cs2-funnel-prevents">Prevents: Misrouting &amp; SLA Violations</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cs2-funnel-row" onclick="toggleGate(this)">
+                        <div class="cs2-funnel-header">
+                            <span class="cs2-funnel-num">04</span>
+                            <h3 class="cs2-funnel-title">Regulatory Alignment</h3>
+                            <span class="cs2-funnel-chevron">›</span>
+                        </div>
+                        <div class="cs2-funnel-body">
+                            <div class="cs2-funnel-col">
+                                <span class="cs2-funnel-col-label">The Logic</span>
+                                <p class="cs2-funnel-col-text">Escalation adapts to rail type: UPI, Card, Mandate. Each carries distinct timelines and dispute rules.</p>
+                            </div>
+                            <div class="cs2-funnel-col">
+                                <span class="cs2-funnel-col-label">The Impact</span>
+                                <p class="cs2-funnel-col-text">The interface reflects those constraints in real time. No refund promises. No premature liability.</p>
+                            </div>
+                            <div class="cs2-funnel-col cs2-funnel-col--constraint">
+                                <span class="cs2-funnel-col-label">System Constraint</span>
+                                <p class="cs2-funnel-col-text">No refund promises. No premature liability.</p>
+                                <div class="cs2-funnel-prevents">Prevents: Compliance Exposure</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cs2-funnel-row" onclick="toggleGate(this)">
+                        <div class="cs2-funnel-header">
+                            <span class="cs2-funnel-num">05</span>
+                            <h3 class="cs2-funnel-title">Active Confirmation</h3>
+                            <span class="cs2-funnel-chevron">›</span>
+                        </div>
+                        <div class="cs2-funnel-body">
+                            <div class="cs2-funnel-col">
+                                <span class="cs2-funnel-col-label">The Logic</span>
+                                <p class="cs2-funnel-col-text">Before submission, merchant, amount, and date are restated. If idle, state is re-validated.</p>
+                            </div>
+                            <div class="cs2-funnel-col">
+                                <span class="cs2-funnel-col-label">The Impact</span>
+                                <p class="cs2-funnel-col-text">Prevents stale consent in asynchronous channels like WhatsApp.</p>
+                            </div>
+                            <div class="cs2-funnel-col cs2-funnel-col--constraint">
+                                <span class="cs2-funnel-col-label">System Constraint</span>
+                                <p class="cs2-funnel-col-text" style="font-style:italic;color:rgba(255,85,0,0.9);font-weight:600;">Truth before tickets.</p>
+                                <div class="cs2-funnel-prevents">Prevents: Stale Consent Violations</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════ 05 / TWO CONTEXTS -->
+            <section class="cs2-sec cs2-sec--dark" style="padding-top:0;padding-bottom:64px;">
+                <div class="cs2-sec-inner">
+                    <figure class="cs2-img-figure">
+                        <!-- Logic Funnel / 5-gate flow diagram -->
+                        <div class="cs2-img-block cs2-img-block--tall">
+                            <img src="https://framerusercontent.com/images/lbyETPNcZ8piBEwk66800Itt8F8.png" alt="WhatsApp dispute resolution flow — 5-gate logic funnel showing Cooling Period through Active Confirmation" loading="lazy">
+                            <div class="cs2-img-ph" aria-hidden="true">
+                                <div class="cs2-img-ph-line"></div>
+                                <span class="cs2-img-ph-label">Logic Funnel · WhatsApp UI Flow</span>
+                                <div class="cs2-img-ph-line"></div>
+                            </div>
+                        </div>
+                        <figcaption class="cs2-img-caption">The 5-gate diagnostic engine — from complaint intake to verified escalation</figcaption>
+                    </figure>
+                </div>
+            </section>
+            <section class="cs2-sec cs2-sec--white">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">05 / Two Contexts</span>
+                    <h2 class="cs2-h2">One Engine.<br>Different Thresholds.</h2>
+                    <p class="cs2-p">The backend logic remains constant. The interface adapts to cognitive context.</p>
+                </div>
+
+                <div class="cs2-persona-grid">
+                    <div class="cs2-persona">
+                        <div class="cs2-persona-tag">Retail Users</div>
+                        <div class="cs2-persona-name">High Anxiety<br>Low Frequency</div>
+                        <div class="cs2-persona-desc">They need clarity, not control.</div>
+                        <ul class="cs2-persona-items">
+                            <li>Carousel anchors memory</li>
+                            <li>No manual typing</li>
+                            <li>15-minute session reset</li>
+                        </ul>
+                        <div class="cs2-persona-goal">Goal<span>Reduce Panic</span></div>
+                    </div>
+                    <div class="cs2-persona">
+                        <div class="cs2-persona-tag">SME Merchants</div>
+                        <div class="cs2-persona-name">High Volume<br>High Precision</div>
+                        <div class="cs2-persona-desc">They need control, not reassurance.</div>
+                        <ul class="cs2-persona-items">
+                            <li>Direct ID search</li>
+                            <li>Extended session duration</li>
+                            <li>Manual verification allowed</li>
+                        </ul>
+                        <div class="cs2-persona-goal">Goal<span>Preserve Velocity</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════ 06 / UI STRATEGY -->
+            <section class="cs2-sec cs2-sec--dark">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label cs2-label--dim">06 / UI Strategy</span>
+                    <h2 class="cs2-h2 cs2-h2--white">UI as Visible<br>Compliance.</h2>
+                    <p class="cs2-p cs2-p--dark">The interface is not decoration. It is compliance made visible.</p>
+
+                    <div class="cs2-ui-points">
+                        <div class="cs2-ui-point"><span class="cs2-ui-icon">&mdash;</span><span>Binary buttons replace free text</span></div>
+                        <div class="cs2-ui-point"><span class="cs2-ui-icon">&mdash;</span><span>Intent is constrained to resolvable paths</span></div>
+                        <div class="cs2-ui-point"><span class="cs2-ui-icon">&mdash;</span><span>Conditional actions reflect regulatory state</span></div>
+                    </div>
+
+                    <p class="cs2-p cs2-p--dark" style="margin-top:32px;">The UI mirrors the system&rsquo;s constraints — not the user&rsquo;s impatience.</p>
+
+                    <div class="cs2-code">/ Path: Resolvable_Only<br>/ Action: Reg_Mirroring</div>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════ 07 / TIME DESIGN -->
+            <section class="cs2-sec cs2-sec--white" style="padding-top:0;padding-bottom:64px;">
+                <div class="cs2-sec-inner">
+                    <figure class="cs2-img-figure">
+                        <!-- Retail vs SME interface comparison -->
+                        <div class="cs2-img-block">
+                            <img src="https://framerusercontent.com/images/Abow5GMUdqR35oFWvaium3Khuo.png" alt="Retail vs SME interface comparison — transaction carousel on left, UTR search on right" loading="lazy">
+                            <div class="cs2-img-ph" aria-hidden="true">
+                                <div class="cs2-img-ph-line"></div>
+                                <span class="cs2-img-ph-label">Retail vs SME · Interface Comparison</span>
+                                <div class="cs2-img-ph-line"></div>
+                            </div>
+                        </div>
+                        <figcaption class="cs2-img-caption">One engine, two thresholds — same backend logic, different cognitive scaffolding</figcaption>
+                    </figure>
+                </div>
+            </section>
+            <section class="cs2-sec cs2-sec--grey">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">07 / Time Design</span>
+                    <h2 class="cs2-h2">Designing<br>for Time.</h2>
+                    <p class="cs2-p">Support on WhatsApp is asynchronous. A dispute started at 10:00 may be resumed at 12:00. In that time, an auto-reversal may succeed.</p>
+                    <p class="cs2-p">Without re-validation: the system could escalate a solved problem.</p>
+
+                    <div class="cs2-timeline">
+                        <div class="cs2-tl-node">
+                            <div class="cs2-tl-time">10:00</div>
+                            <div class="cs2-tl-event">Dispute started</div>
+                        </div>
+                        <div class="cs2-tl-line"></div>
+                        <div class="cs2-tl-node">
+                            <div class="cs2-tl-time cs2-tl-time--orange">10:15</div>
+                            <div class="cs2-tl-event" style="color:#FF5500;">Ledger silently rechecked</div>
+                        </div>
+                        <div class="cs2-tl-line"></div>
+                        <div class="cs2-tl-node">
+                            <div class="cs2-tl-time">12:00</div>
+                            <div class="cs2-tl-event">User returns — state re-validated</div>
+                        </div>
+                    </div>
+
+                    <div class="cs2-rule-box">
+                        <div class="cs2-rule-label">The Rule</div>
+                        <p class="cs2-rule-text">Every <strong>15 minutes</strong>, the ledger is silently rechecked.</p>
+                        <p class="cs2-rule-sub">If state has changed, the flow closes. This may force restarts — but it protects operational integrity.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ════════════════════════════════════ THE OPERATIONAL PIVOT -->
+            <section class="cs2-sec cs2-sec--dark">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label cs2-label--dim">The Operational Pivot</span>
+                    <table class="cs2-pivot-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Before</th>
+                                <th>After</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Escalation Trigger</td>
+                                <td>Complaint Driven</td>
+                                <td>Verified State</td>
+                            </tr>
+                            <tr>
+                                <td>Classification</td>
+                                <td>Language Based</td>
+                                <td>Ledger Validated</td>
+                            </tr>
+                            <tr>
+                                <td>Support Goal</td>
+                                <td>Speed (SLA)</td>
+                                <td>Correctness</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════════ FINAL CLOSE -->
+            <section class="cs2-final">
+                <div class="cs2-final-inner">
+                    <div class="cs2-final-label">Final Reflection</div>
+                    <blockquote class="cs2-final-quote">In high-stakes finance, reassurance doesn&rsquo;t come from faster responses. It comes from making the system&rsquo;s state visible — and refusing to act prematurely.</blockquote>
+                    <p class="cs2-final-support">Architecture protects trust.</p>
+                    <div class="cs2-final-words">
+                        <span class="cs2-final-word">Safe.</span>
+                        <span class="cs2-final-word">Logic.</span>
+                    </div>
+                </div>
+            </section>
+
+        </div><!-- end cs2-body -->
+    </div>
+    
+    <!-- Case Study: Smartcoin -->
+    <div class="case-study-overlay cs-dark" id="cs-smartcoin" role="dialog" aria-modal="true" aria-labelledby="cs-smartcoin-title">
+        <div class="case-study-nav">
+            <div class="case-study-nav-inner">
+                <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Smartcoin</div>
+                <button class="close-case-study" onclick="closeCaseStudy('cs-smartcoin')" aria-label="Close case study and return to portfolio">← Back</button>
+            </div>
+        </div>
+        <div class="cs2-body">
+
+            <!-- HERO -->
+            <section class="cs2-hero">
+                <div class="cs2-hero-inner">
+                    <span class="cs2-kicker">Case Study &middot; Smartcoin &middot; Fintech &middot; 1.1 Crore Users</span>
+                    <h1 class="cs2-title" id="cs-smartcoin-title">A Bridge<br>Between<br>Borrowing<br>&amp; Saving.</h1>
+                    <div class="cs2-hero-divider"></div>
+                    <blockquote class="cs2-hero-quote">&ldquo;If I had money to save, why would I take a loan from you?&rdquo;</blockquote>
+                    <p class="cs2-hero-sub">This is the story of making saving feel possible for people who came only to borrow.</p>
+                </div>
+                <div class="cs2-bg-word" aria-hidden="true">SAVE</div>
+            </section>
+
+            <!-- 01: THE PARADOX -->
+            <section class="cs2-sec cs2-sec--white">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">01 / The Paradox</span>
+                    <h2 class="cs2-h2">1.1 Crore Users.<br><em>Zero Savers.</em></h2>
+                    <div class="cs2-two-col">
+                        <div>
+                            <p class="cs2-p">SmartCoin had 1.1 crore users. Instant loans. Minimal paperwork. A product built for the underserved.</p>
+                            <p class="cs2-p">Savings features already existed — gold deposits, reward coins, micro-investments. But nobody was using them.</p>
+                            <p class="cs2-p">Many users didn&rsquo;t even know savings was an option.</p>
+                            <blockquote class="cs2-pullquote">Every journey collapsed into:<br>borrow → repay → exit.</blockquote>
+                        </div>
+                        <div>
+                            <div class="cs2-box-dark">
+                                <span class="cs2-box-label">The User&rsquo;s Mental Model</span>
+                                <ul class="cs2-pain-list">
+                                    <li>&ldquo;This is a loan app. Saving is for banks.&rdquo;</li>
+                                    <li>&ldquo;I don&rsquo;t have enough left over to save.&rdquo;</li>
+                                    <li>&ldquo;Where is the savings option even?&rdquo;</li>
+                                </ul>
+                                <div class="cs2-fear-quote"><em>Saving felt psychologically impossible.</em></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 02: THE RESEARCH -->
+            <section class="cs2-sec cs2-sec--dark">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label cs2-label--dim">02 / The Research</span>
+                    <h2 class="cs2-h2 cs2-h2--white">Read.<br>Analyze.<br>Listen.</h2>
+                    <div class="cs2-observations">
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon">01</span>
+                            <div><strong style="color:#fff;">Read everything</strong><span style="color:#888;"> — History of money, lending systems, behavioral economics of saving.</span></div>
+                        </div>
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon">02</span>
+                            <div><strong style="color:#fff;">Analyzed 1 lakh+ users</strong><span style="color:#888;"> — Demographics, credit scores, repayment behavior, feature usage patterns.</span></div>
+                        </div>
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon">03</span>
+                            <div><strong style="color:#fff;">30 interviews per segment</strong><span style="color:#888;"> — Motivations, financial habits, fears, and what &ldquo;security&rdquo; means to them.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 03: THREE PERSONAS -->
+            <section class="cs2-sec cs2-sec--grey">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">03 / Three Personas</span>
+                    <h2 class="cs2-h2">Not All Borrowers<br>Are the Same.</h2>
+                    <div class="cs2-persona-grid" style="grid-template-columns:1fr 1fr 1fr;">
+                        <div class="cs2-persona" style="border-right:1px solid #e4e4e4;">
+                            <div class="cs2-persona-tag">The Eternal Borrower</div>
+                            <div class="cs2-persona-name" style="font-size:28px;">Living on<br>the Edge</div>
+                            <div class="cs2-persona-desc">Borrows to survive the month. Saving feels like an insult.</div>
+                            <ul class="cs2-persona-items">
+                                <li>Borrow → repay → borrow again</li>
+                                <li>Surplus is immediately spent</li>
+                                <li>Saving = luxury, not option</li>
+                            </ul>
+                            <div class="cs2-persona-goal">Design challenge<span>Make saving invisible</span></div>
+                        </div>
+                        <div class="cs2-persona" style="border-right:1px solid #e4e4e4;">
+                            <div class="cs2-persona-tag">The Goal-Oriented Borrower</div>
+                            <div class="cs2-persona-name" style="font-size:28px;">Disciplined<br>by Necessity</div>
+                            <div class="cs2-persona-desc">Borrows for milestones. Already thinks about saving.</div>
+                            <ul class="cs2-persona-items">
+                                <li>Loan = investment in a goal</li>
+                                <li>Repayment is structured</li>
+                                <li>Needs a visible savings path</li>
+                            </ul>
+                            <div class="cs2-persona-goal">Design challenge<span>Make saving rewarding</span></div>
+                        </div>
+                        <div class="cs2-persona">
+                            <div class="cs2-persona-tag">The Profit-Driven Investor</div>
+                            <div class="cs2-persona-name" style="font-size:28px;">Credit as<br>Leverage</div>
+                            <div class="cs2-persona-desc">Small business owner. Loan = tool, not burden.</div>
+                            <ul class="cs2-persona-items">
+                                <li>Uses credit to generate revenue</li>
+                                <li>Tracks ROI on every rupee</li>
+                                <li>Needs savings to compound returns</li>
+                            </ul>
+                            <div class="cs2-persona-goal">Design challenge<span>Make saving strategic</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 04: THE CORE INSIGHT -->
+            <section class="cs2-sec cs2-sec--dark">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label cs2-label--dim">04 / The Core Insight</span>
+                    <h2 class="cs2-h2 cs2-h2--white">Borrowing<br>Overshadows<br>Saving.</h2>
+                    <p class="cs2-p cs2-p--dark">Every surface in the app pointed to one action. Every notification reinforced one identity. Every UX pattern said the same thing:</p>
+                    <div class="cs2-insight-bar">
+                        <div class="cs2-insight-item">
+                            <span class="cs2-insight-label">What the App Said</span>
+                            <span class="cs2-insight-verdict cs2-insight-verdict--bad">You are a borrower.</span>
+                        </div>
+                        <div class="cs2-insight-divider">→</div>
+                        <div class="cs2-insight-item">
+                            <span class="cs2-insight-label">What We Needed It to Say</span>
+                            <span class="cs2-insight-verdict cs2-insight-verdict--good">You are building stability.</span>
+                        </div>
+                    </div>
+                    <blockquote class="cs2-pullquote cs2-pullquote--dark">The problem wasn&rsquo;t that users couldn&rsquo;t save. It was that the product never gave them permission to.</blockquote>
+                </div>
+            </section>
+
+            <!-- PERCEPTION SPLIT -->
+            <div class="cs2-perception-split">
+                <div class="cs2-perception-side cs2-perception-side--light">
+                    <span class="cs2-perception-tag">Three Balances to Hold</span>
+                    <div class="cs2-perception-big">Immediate<br>Need vs.<br>Long-Term<br>Goal.</div>
+                    <span class="cs2-perception-count">Design constraints</span>
+                </div>
+                <div class="cs2-perception-side cs2-perception-side--dark">
+                    <span class="cs2-perception-tag">The Design Principles</span>
+                    <ul class="cs2-system-states">
+                        <li>Connect today&rsquo;s needs with tomorrow&rsquo;s security</li>
+                        <li>The path to financial wellness must be visible, obvious, natural</li>
+                        <li>Financial concepts must be demystified — not explained</li>
+                    </ul>
+                    <span class="cs2-perception-count" style="color:#999;">Speed vs. Understanding &middot; Borrowing vs. Saving</span>
+                </div>
+            </div>
+
+            <!-- Smartcoin image: old homepage / borrower-only identity -->
+            <section class="cs2-sec cs2-sec--dark" style="padding-top:0;padding-bottom:64px;">
+                <div class="cs2-sec-inner">
+                    <figure class="cs2-img-figure">
+                        <!-- SmartCoin original app (before) -->
+                        <div class="cs2-img-block">
+                            <img src="https://framerusercontent.com/images/H1M52tZE2GnDcsC9JvJScpKzPw.png" alt="SmartCoin original app — borrow-centric homepage with no saving entry point visible" loading="lazy">
+                            <div class="cs2-img-ph" aria-hidden="true">
+                                <div class="cs2-img-ph-line"></div>
+                                <span class="cs2-img-ph-label">Before · Borrow-Only Homepage</span>
+                                <div class="cs2-img-ph-line"></div>
+                            </div>
+                        </div>
+                        <figcaption class="cs2-img-caption">Every surface said one thing: you are a borrower. Saving was invisible by design.</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <!-- 05: THREE SOLUTIONS -->
+            <section class="cs2-sec cs2-sec--dark" style="padding-top:0;padding-bottom:0;">
+                <div class="cs2-sec-inner" style="padding-top:80px;padding-bottom:0;">
+                    <span class="cs2-label cs2-label--dim">05 / The Solutions</span>
+                    <h2 class="cs2-h2 cs2-h2--white">Design the<br>Bridge.</h2>
+                    <p class="cs2-p cs2-p--dark">Three interventions that moved saving from invisible to inevitable.</p>
+                </div>
+                <div class="cs2-gates">
+                    <div class="cs2-gate">
+                        <span class="cs2-gate-num" style="font-size:64px;">01</span>
+                        <div class="cs2-gate-title">Chillar — Auto-Save</div>
+                        <p class="cs2-gate-body">Auto-save &ldquo;loose change&rdquo; with each loan repayment. A small amount is rounded up and tucked away.</p>
+                        <p class="cs2-gate-body">Saving became a <strong style="color:#FF5500;">side-effect of repayment</strong> — invisible, effortless, inevitable.</p>
+                        <div class="cs2-gate-prevents">The Insight: Make saving a side-effect, not a decision</div>
+                    </div>
+                    <div class="cs2-gate">
+                        <span class="cs2-gate-num" style="font-size:64px;">02</span>
+                        <div class="cs2-gate-title">Savings Page Rebuilt</div>
+                        <p class="cs2-gate-body">The old model: a score out of 10. Cold. Confusing. Ignored.</p>
+                        <p class="cs2-gate-body">The new model: Save daily for 7 days = earn rewards. Visible streaks. Tangible outcomes. Emotional reinforcement.</p>
+                        <div class="cs2-gate-prevents">The Insight: Turn abstract saving into a daily ritual</div>
+                    </div>
+                    <div class="cs2-gate cs2-gate--wide">
+                        <span class="cs2-gate-num" style="font-size:64px;">03</span>
+                        <div class="cs2-gate-title">New Homepage Architecture</div>
+                        <div class="cs2-gate-wide-inner">
+                            <div>
+                                <p class="cs2-gate-body">The old homepage: loan balance, repayment due date. That&rsquo;s it. The entire product identity in two numbers.</p>
+                                <p class="cs2-gate-body">The new homepage: Credit Score + Reward Coins + Gold Savings — surfaced before the loan balance. The visual hierarchy changed the identity of the product.</p>
+                            </div>
+                            <div class="cs2-gate-motto">
+                                <span>Borrow.</span>
+                                <span>Save.</span>
+                                <span>Grow.</span>
+                            </div>
+                        </div>
+                        <div class="cs2-gate-prevents">The Insight: Architecture is identity. What you show first is what you are.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- OPERATIONAL PIVOT -->
+            <section class="cs2-sec cs2-sec--dark">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label cs2-label--dim">The Design Pivot</span>
+                    <table class="cs2-pivot-table">
+                        <thead>
+                            <tr><th></th><th>Before</th><th>After</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Homepage Lead</td><td>Loan balance</td><td>Credit Score + Gold + Rewards</td></tr>
+                            <tr><td>Saving Entry</td><td>Buried in settings</td><td>Front-page, streak-based</td></tr>
+                            <tr><td>Identity Signal</td><td>You are a borrower</td><td>You are building stability</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Smartcoin image: new homepage + Chillar feature -->
+            <section class="cs2-sec cs2-sec--grey" style="padding-top:64px;padding-bottom:64px;">
+                <div class="cs2-sec-inner">
+                    <figure class="cs2-img-figure" style="margin-top:0;">
+                        <!-- SmartCoin redesigned app (after) -->
+                        <div class="cs2-img-block cs2-img-block--light">
+                            <img src="https://framerusercontent.com/images/DbsS5Nvznopn8E9bEIAZlNguY.png" alt="SmartCoin redesigned app — dashboard showing Credit Score, Rewards and Gold Savings upfront alongside loan balance" loading="lazy">
+                            <div class="cs2-img-ph" aria-hidden="true">
+                                <div class="cs2-img-ph-line"></div>
+                                <span class="cs2-img-ph-label">After · Dashboard + Chillar Feature</span>
+                                <div class="cs2-img-ph-line"></div>
+                            </div>
+                        </div>
+                        <figcaption class="cs2-img-caption">New homepage surfaces saving as equal to borrowing. Chillar auto-saves loose change on every repayment.</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <!-- FINAL -->
+            <section class="cs2-final">
+                <div class="cs2-final-inner">
+                    <div class="cs2-final-label">Final Reflection</div>
+                    <blockquote class="cs2-final-quote">Design&rsquo;s job is to build bridges. From immediate need to long-term stability. From borrowing to saving. From survival to security.</blockquote>
+                    <p class="cs2-final-support">Architecture communicates identity. What you surface first is what you say you are.</p>
+                    <div class="cs2-final-words">
+                        <span class="cs2-final-word">Borrow.</span>
+                        <span class="cs2-final-word">Save.</span>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+    
+    <!-- Case Study: Dottie -->
+    <div class="case-study-overlay cs-dark" id="cs-dottie" role="dialog" aria-modal="true" aria-labelledby="cs-dottie-title">
+        <div class="case-study-nav">
+            <div class="case-study-nav-inner">
+                <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Dottie &mdash; IndiGo Voice Assistant</div>
+                <button class="close-case-study" onclick="closeCaseStudy('cs-dottie')" aria-label="Close case study and return to portfolio">← Back</button>
+            </div>
+        </div>
+        <div class="cs2-body">
+
+            <section class="cs2-hero">
+                <div class="cs2-hero-inner">
+                    <span class="cs2-kicker">Case Study &middot; Dottie &middot; IndiGo &middot; Speculative Design</span>
+                    <h1 class="cs2-title" id="cs-dottie-title">What If You<br>Could Just<br>Call and<br>Book?</h1>
+                    <div class="cs2-hero-divider"></div>
+                    <blockquote class="cs2-hero-quote">&ldquo;Book me a flight from Delhi to Goa tomorrow morning.&rdquo; No menus. No typing. No waiting.</blockquote>
+                    <p class="cs2-hero-sub">Designing IndiGo&rsquo;s voice assistant. A speculative exercise in translating brand identity into conversation.</p>
+                </div>
+                <div class="cs2-bg-word" aria-hidden="true">DING</div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--white">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">01 / The Brand Problem</span>
+                    <h2 class="cs2-h2">IndiGo is a<br><em>Visual Brand.</em></h2>
+                    <div class="cs2-two-col">
+                        <div>
+                            <p class="cs2-p">India&rsquo;s leading low-cost carrier. On-time. Professional. Reliable.</p>
+                            <p class="cs2-p">Brand voice: approachable, fun, modern. Wordplay. Slang. Emojis. &ldquo;6E = Sexy.&rdquo;</p>
+                            <p class="cs2-p">That voice lives entirely in visual touchpoints — ads, app copy, email.</p>
+                            <blockquote class="cs2-pullquote">Translating visual brand identity into a voice personality is not design. It&rsquo;s linguistics.</blockquote>
+                        </div>
+                        <div>
+                            <div class="cs2-box-dark">
+                                <span class="cs2-box-label">The Design Challenge</span>
+                                <ul class="cs2-pain-list">
+                                    <li>How does playfulness sound in voice?</li>
+                                    <li>How do you be efficient AND warm?</li>
+                                    <li>Where does fun end and trust begin?</li>
+                                </ul>
+                                <div class="cs2-fear-quote"><em>Brand is behavior, not just aesthetics.</em></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--grey">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">02 / Two Personas, One Channel</span>
+                    <h2 class="cs2-h2">Same Voice.<br>Different Needs.</h2>
+                    <div class="cs2-persona-grid">
+                        <div class="cs2-persona" style="border-right:1px solid #e4e4e4;">
+                            <div class="cs2-persona-tag">The Frequent Flyer</div>
+                            <div class="cs2-persona-name">Monthly<br>Work Travel</div>
+                            <div class="cs2-persona-desc">Needs efficiency. Zero friction. They know what they want.</div>
+                            <ul class="cs2-persona-items">
+                                <li>Skip the pleasantries</li>
+                                <li>Remember preferences</li>
+                                <li>Confirm and go</li>
+                            </ul>
+                            <div class="cs2-persona-goal">Goal<span>Speed</span></div>
+                        </div>
+                        <div class="cs2-persona">
+                            <div class="cs2-persona-tag">The Savvy Saver</div>
+                            <div class="cs2-persona-name">Occasional<br>Leisure Travel</div>
+                            <div class="cs2-persona-desc">Wants cheapest fares. Needs to understand trade-offs.</div>
+                            <ul class="cs2-persona-items">
+                                <li>Show me the options</li>
+                                <li>Explain the difference</li>
+                                <li>Help me decide</li>
+                            </ul>
+                            <div class="cs2-persona-goal">Goal<span>Value</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--dark">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label cs2-label--dim">03 / The Scope</span>
+                    <h2 class="cs2-h2 cs2-h2--white">What Dottie<br>Can &amp; Cannot Do.</h2>
+                    <div class="cs2-two-col">
+                        <div>
+                            <h3 class="cs2-h3 cs2-h3--white" style="margin-top:0;">Can ✓</h3>
+                            <ul class="cs2-system-states">
+                                <li>Book flights</li>
+                                <li>Manage bookings (reschedule, cancel, check-in)</li>
+                                <li>Add baggage, select seats</li>
+                                <li>Answer FAQs</li>
+                                <li>Escalate to human agent</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="cs2-h3 cs2-h3--white" style="margin-top:0;">Cannot ✗</h3>
+                            <ul class="cs2-system-states" style="border-color:#1a1a1a;">
+                                <li>Compare fares with other airlines</li>
+                                <li>Handle unusual or edge-case requests</li>
+                                <li>Replace human empathy in distress scenarios</li>
+                                <li>Process payment on-call</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cs2-arch-block" style="margin-top:48px;">
+                        <div class="cs2-arch-label">Payment Strategy</div>
+                        <p class="cs2-p cs2-p--dark">Payment never happens on-call. A secure link is sent via SMS/WhatsApp. Dottie waits, then resumes after confirmation.</p>
+                        <p class="cs2-p cs2-p--dark"><strong style="color:#FF5500;">Why?</strong> Voice + payment = maximum anxiety. Separating them protects trust at the highest-stakes moment.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--grey">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">04 / Dottie&rsquo;s Personality</span>
+                    <h2 class="cs2-h2">Modern.<br>Approachable.<br>Fun.</h2>
+                    <div class="cs2-observations">
+                        <div class="cs2-obs-item" style="background:#fff;">
+                            <span class="cs2-obs-icon" style="color:#FF5500;">&ldquo;</span>
+                            <div style="color:#0a0a0a;">Ding! You&rsquo;re set for Goa. <span style="color:#FF5500;">Get packing.</span></div>
+                        </div>
+                        <div class="cs2-obs-item" style="background:#fff;">
+                            <span class="cs2-obs-icon" style="color:#FF5500;">&ldquo;</span>
+                            <div style="color:#0a0a0a;">Early morning flights? <span style="color:#FF5500;">You must be a morning person.</span></div>
+                        </div>
+                        <div class="cs2-obs-item" style="background:#fff;">
+                            <span class="cs2-obs-icon" style="color:#FF5500;">&ldquo;</span>
+                            <div style="color:#0a0a0a;">I know this isn&rsquo;t ideal, but <span style="color:#FF5500;">let&rsquo;s fix it together.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--dark">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label cs2-label--dim">05 / The Logic</span>
+                    <h2 class="cs2-h2 cs2-h2--white">Always<br>Three Options.</h2>
+                    <p class="cs2-p cs2-p--dark">Dottie never shows one flight. Never shows ten. Always three — each with a clear trade-off.</p>
+                </div>
+                <div class="cs2-gates">
+                    <div class="cs2-gate">
+                        <span class="cs2-gate-num">01</span>
+                        <div class="cs2-gate-title">Cheapest</div>
+                        <p class="cs2-gate-body">Lowest fare. May have layovers, early/late times, or less legroom. For the Savvy Saver.</p>
+                        <div class="cs2-gate-prevents">Trade-off: Time for money</div>
+                    </div>
+                    <div class="cs2-gate">
+                        <span class="cs2-gate-num">02</span>
+                        <div class="cs2-gate-title">Fastest</div>
+                        <p class="cs2-gate-body">Shortest duration, most direct. May cost more. For the Frequent Flyer.</p>
+                        <div class="cs2-gate-prevents">Trade-off: Money for time</div>
+                    </div>
+                    <div class="cs2-gate cs2-gate--wide">
+                        <span class="cs2-gate-num">03</span>
+                        <div class="cs2-gate-title">Best Balance</div>
+                        <div class="cs2-gate-wide-inner">
+                            <div>
+                                <p class="cs2-gate-body">Good timing + reasonable fare. The Goldilocks option.</p>
+                                <p class="cs2-gate-body">Why three? Avoids decision paralysis. Each has a clear winner condition. Users self-select their own priority.</p>
+                            </div>
+                            <div class="cs2-gate-motto">
+                                <span>Cheap.</span>
+                                <span>Fast.</span>
+                                <span>Good.</span>
+                            </div>
+                        </div>
+                        <div class="cs2-gate-prevents">The insight: No single right answer — only the right answer for you</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dottie image: conversation flow / 3-option UI -->
+            <section class="cs2-sec cs2-sec--dark" style="padding-top:64px;padding-bottom:64px;">
+                <div class="cs2-sec-inner">
+                    <figure class="cs2-img-figure" style="margin-top:0;">
+                        <!-- Dottie conversation flow -->
+                        <div class="cs2-img-block cs2-img-block--tall">
+                            <img src="https://framerusercontent.com/images/ihZEdMrqL1xe5S47dqbhPpiGTgg.png" alt="Dottie IndiGo voice assistant — conversation flow showing flight booking with three options: cheapest, fastest, best balance" loading="lazy">
+                            <div class="cs2-img-ph" aria-hidden="true">
+                                <div class="cs2-img-ph-line"></div>
+                                <span class="cs2-img-ph-label">Dottie · Conversation Flow</span>
+                                <div class="cs2-img-ph-line"></div>
+                            </div>
+                        </div>
+                        <figcaption class="cs2-img-caption">Three options, clear trade-offs — Cheapest, Fastest, Best Balance. No menus, no typing.</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="cs2-final">
+                <div class="cs2-final-inner">
+                    <div class="cs2-final-label">Final Reflection</div>
+                    <blockquote class="cs2-final-quote">Brand identity is not visual. It&rsquo;s behavioral. Dottie is IndiGo&rsquo;s personality in conversation form — efficient, warm, and always three options ahead of you.</blockquote>
+                    <p class="cs2-final-support">This is speculative. The thinking is real.</p>
+                    <div class="cs2-final-words">
+                        <span class="cs2-final-word">Ding!</span>
+                        <span class="cs2-final-word">You&rsquo;re set.</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Case Study: Beyond Touchscreens (ICICI Voicebot) -->
+    <div class="case-study-overlay cs-dark" id="cs-icici" role="dialog" aria-modal="true" aria-labelledby="cs-icici-title">
+        <div class="case-study-nav">
+            <div class="case-study-nav-inner">
+                <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Beyond Touchscreens</div>
+                <button class="close-case-study" onclick="closeCaseStudy('cs-icici')" aria-label="Close case study and return to portfolio">← Back</button>
+            </div>
+        </div>
+        <div class="cs2-body">
+
+            <section class="cs2-hero">
+                <div class="cs2-hero-inner">
+                    <span class="cs2-kicker">Case Study &middot; ICICI Bank Voicebot &middot; Production &middot; 70+ Live Flows</span>
+                    <h1 class="cs2-title" id="cs-icici-title">Designing<br>Trust<br>in Voice.</h1>
+                    <div class="cs2-hero-divider"></div>
+                    <blockquote class="cs2-hero-quote">One misheard digit in a payment amount. One wrong card selected. Trust is gone.</blockquote>
+                    <p class="cs2-hero-sub">India&rsquo;s first transactional voicebot. No visual confirmation. No undo button. Just logic.</p>
+                </div>
+                <div class="cs2-bg-word" aria-hidden="true">VOICE</div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--white">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">01 / The Context</span>
+                    <h2 class="cs2-h2">Not an FAQ Bot.<br><em>Transactional.</em></h2>
+                    <div class="cs2-two-col">
+                        <div>
+                            <p class="cs2-p">ICICI Bank. NLP-powered voicebot on phone. Not a FAQ assistant — a transactional system handling real banking actions.</p>
+                            <p class="cs2-p"><strong>Payments. Card blocks. Security resets. Dispute initiation.</strong></p>
+                            <p class="cs2-p">High-stakes flows where one misstep is financial and regulatory liability.</p>
+                            <blockquote class="cs2-pullquote">Call 1800 1080. You&rsquo;ll hear it live.</blockquote>
+                        </div>
+                        <div>
+                            <div class="cs2-box-dark">
+                                <span class="cs2-box-label">Scale</span>
+                                <ul class="cs2-pain-list">
+                                    <li>70+ distinct live use cases</li>
+                                    <li>Millions of calls processed</li>
+                                    <li>One of India&rsquo;s first of its kind</li>
+                                </ul>
+                                <div class="cs2-fear-quote"><em>Mission-critical infrastructure.</em></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--dark">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label cs2-label--dim">02 / The Problem</span>
+                    <h2 class="cs2-h2 cs2-h2--white">Voice Removes<br>the Safety Net.</h2>
+                    <p class="cs2-p cs2-p--dark">Visual interfaces give users a confirmation screen. A review step. A way to see what they&rsquo;re about to do.</p>
+                    <p class="cs2-p cs2-p--dark">Voice has none of that. Everything is auditory. Intent must be inferred from spoken words under time pressure, in noisy environments, across accent diversity.</p>
+                    <div class="cs2-observations">
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon">!</span>
+                            <span>Users interrupt mid-sentence — changing intent or adding context</span>
+                        </div>
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon">!</span>
+                            <span>ASR errors are invisible to the user — they don&rsquo;t know they were misheard</span>
+                        </div>
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon">!</span>
+                            <span>High-anxiety context — banking + phone = maximum stress</span>
+                        </div>
+                    </div>
+                    <blockquote class="cs2-pullquote cs2-pullquote--dark">The system must know when intent is clear enough to act — and when ambiguity requires stopping.</blockquote>
+                </div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--grey">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">03 / The Architecture</span>
+                    <h2 class="cs2-h2">Intent Is Not<br>Utterance.</h2>
+                    <p class="cs2-p">&ldquo;Block card&rdquo; / &ldquo;stop card&rdquo; / &ldquo;card is gone&rdquo; / &ldquo;cancel my card&rdquo; — four different utterances. One intent. Different ASR confidence levels.</p>
+                    <p class="cs2-p">I built intent disambiguation hierarchies that separate the signal from the noise. Not what was said — what was meant.</p>
+                    <div class="cs2-swap-banner">
+                        <div class="cs2-swap-col">
+                            <span class="cs2-swap-tag">What was said</span>
+                            <span class="cs2-swap-word-old">Utterance</span>
+                        </div>
+                        <span class="cs2-swap-arrow">→</span>
+                        <div class="cs2-swap-col">
+                            <span class="cs2-swap-tag cs2-swap-tag--orange">What matters</span>
+                            <span class="cs2-swap-word-new">Intent</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--dark" style="padding-top:0;padding-bottom:0;">
+                <div class="cs2-sec-inner" style="padding-top:80px;padding-bottom:0;">
+                    <span class="cs2-label cs2-label--dim">04 / The System</span>
+                    <h2 class="cs2-h2 cs2-h2--white">When to Act.<br>When to Stop.</h2>
+                    <p class="cs2-p cs2-p--dark">Four decision layers that protect every high-stakes action.</p>
+                </div>
+                <div class="cs2-gates">
+                    <div class="cs2-gate">
+                        <span class="cs2-gate-num">01</span>
+                        <div class="cs2-gate-title">Intent Disambiguation</div>
+                        <p class="cs2-gate-body">Classify utterance into confirmed intent category. Multiple utterance patterns map to single intent. ASR confidence threshold determines certainty.</p>
+                        <div class="cs2-gate-prevents">Prevents: Acting on misclassified intent</div>
+                    </div>
+                    <div class="cs2-gate">
+                        <span class="cs2-gate-num">02</span>
+                        <div class="cs2-gate-title">Mandatory Confirmation Loops</div>
+                        <p class="cs2-gate-body">Every irreversible action requires explicit re-confirmation. Amount, card number, account — restated in voice before execution.</p>
+                        <div class="cs2-gate-prevents">Prevents: Action on misheard data</div>
+                    </div>
+                    <div class="cs2-gate">
+                        <span class="cs2-gate-num">03</span>
+                        <div class="cs2-gate-title">Escalation Policy</div>
+                        <p class="cs2-gate-body">Defined conditions under which the bot must stop and transfer to human. Not every escalation request is valid — but every ambiguous high-risk action is.</p>
+                        <div class="cs2-gate-prevents">Prevents: Bot acting beyond its confidence</div>
+                    </div>
+                    <div class="cs2-gate">
+                        <span class="cs2-gate-num">04</span>
+                        <div class="cs2-gate-title">Fallback Strategy</div>
+                        <p class="cs2-gate-body">Gentle re-prompts for low-confidence utterances. Agent transfer triggers for sustained confusion or high-value failure. Never silently fail.</p>
+                        <div class="cs2-gate-prevents">Prevents: Silent failure and trust collapse</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ICICI image: voicebot call flow / architecture diagram -->
+            <section class="cs2-sec cs2-sec--dark" style="padding-top:64px;padding-bottom:64px;">
+                <div class="cs2-sec-inner">
+                    <figure class="cs2-img-figure" style="margin-top:0;">
+                        <!-- ICICI voicebot architecture -->
+                        <div class="cs2-img-block">
+                            <img src="https://framerusercontent.com/images/4Ro5H2CMGTAFq6IF1rhfEtd1dB0.jpg" alt="ICICI Bank voicebot — NLP flow architecture showing intent recognition, fallback layers and escalation paths for 70+ use cases" loading="lazy">
+                            <div class="cs2-img-ph" aria-hidden="true">
+                                <div class="cs2-img-ph-line"></div>
+                                <span class="cs2-img-ph-label">Voicebot Architecture · Flow Design</span>
+                                <div class="cs2-img-ph-line"></div>
+                            </div>
+                        </div>
+                        <figcaption class="cs2-img-caption">70+ live use cases — from balance check to card blocking, all over a voice call</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--dark">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label cs2-label--dim">The Collaboration</span>
+                    <p class="cs2-p cs2-p--dark" style="font-size:20px;font-weight:600;color:#fff;max-width:100%;">This wasn&rsquo;t solo design work. It was behavior specification in a cross-functional environment.</p>
+                    <div class="cs2-observations">
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon">&rarr;</span>
+                            <span><strong style="color:#fff;">ML Engineers</strong> &mdash; intent training, ASR error patterns, confidence thresholds</span>
+                        </div>
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon">&rarr;</span>
+                            <span><strong style="color:#fff;">Compliance Teams</strong> &mdash; mandatory confirmation language, audit trail requirements</span>
+                        </div>
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon">&rarr;</span>
+                            <span><strong style="color:#fff;">Solution Architects</strong> &mdash; API orchestration, latency constraints, system boundaries</span>
+                        </div>
+                    </div>
+                    <blockquote class="cs2-pullquote cs2-pullquote--dark">My artifact was decision logic, not mockups.</blockquote>
+                </div>
+            </section>
+
+            <section class="cs2-final">
+                <div class="cs2-final-inner">
+                    <div class="cs2-final-label">Final Reflection</div>
+                    <blockquote class="cs2-final-quote">In voice, there is no undo. Every decision about when to act and when to stop is baked into the architecture — before a single call is made.</blockquote>
+                    <p class="cs2-final-support">The containment metrics are owned by ICICI. The conversation architecture is mine.</p>
+                    <div class="cs2-final-words">
+                        <span class="cs2-final-word">Trust</span>
+                        <span class="cs2-final-word">in Voice.</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Case Study: Vihar -->
+    <div class="case-study-overlay cs-dark" id="cs-vihar" role="dialog" aria-modal="true" aria-labelledby="cs-vihar-title">
+        <div class="case-study-nav">
+            <div class="case-study-nav-inner">
+                <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Vihar &mdash; Van Vihar National Park</div>
+                <button class="close-case-study" onclick="closeCaseStudy('cs-vihar')" aria-label="Close case study and return to portfolio">← Back</button>
+            </div>
+        </div>
+        <div class="cs2-body">
+
+            <section class="cs2-hero">
+                <div class="cs2-hero-inner">
+                    <span class="cs2-kicker">Case Study &middot; Van Vihar National Park &middot; Service Design</span>
+                    <h1 class="cs2-title" id="cs-vihar-title">The<br>Invisible<br>Guide.</h1>
+                    <div class="cs2-hero-divider"></div>
+                    <blockquote class="cs2-hero-quote">80% of first-time visitors never found the butterfly garden. 2,500 butterflies. 50+ species. Zero meters from the main path.</blockquote>
+                    <p class="cs2-hero-sub">A story about doubt, discovery, and what happens when service design gets out of the way.</p>
+                </div>
+                <div class="cs2-bg-word" aria-hidden="true">WILD</div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--white">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">01 / The Problem</span>
+                    <h2 class="cs2-h2">The Garden Was<br><em>Always There.</em></h2>
+                    <div class="cs2-two-col">
+                        <div>
+                            <p class="cs2-p">Van Vihar National Park, Bhopal. A butterfly garden housing 2,500 butterflies across 50+ species — one of the most remarkable experiences in the park.</p>
+                            <p class="cs2-p">80% of first-time visitors left without seeing it.</p>
+                            <p class="cs2-p">Not because it was hidden. Because the visitor journey failed to reveal it.</p>
+                            <blockquote class="cs2-pullquote">Discovery collapsed into checklist:<br>lions → tigers → crocodiles → exit.</blockquote>
+                        </div>
+                        <div>
+                            <div class="cs2-box-dark">
+                                <span class="cs2-box-label">Why the Journey Failed</span>
+                                <ul class="cs2-pain-list">
+                                    <li>Website: tariffs, timings, rules — no inspiration</li>
+                                    <li>Entry: cash-only queues, offline verification</li>
+                                    <li>Pathways: single road, no discovery prompts</li>
+                                </ul>
+                                <div class="cs2-fear-quote"><em>Bureaucracy kills curiosity.</em></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--grey">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">02 / Two Personas</span>
+                    <h2 class="cs2-h2">Same Park.<br>Different Minds.</h2>
+                    <div class="cs2-persona-grid">
+                        <div class="cs2-persona" style="border-right:1px solid #e4e4e4;">
+                            <div class="cs2-persona-tag">The Responsible Caretaker</div>
+                            <div class="cs2-persona-name">Safety &amp;<br>Clarity First</div>
+                            <div class="cs2-persona-desc">Needs predictability. Stays on the main road. Stress when uncertain.</div>
+                            <ul class="cs2-persona-items">
+                                <li>Avoids unclear paths</li>
+                                <li>Reads every sign</li>
+                                <li>Won&rsquo;t explore without permission</li>
+                            </ul>
+                            <div class="cs2-persona-goal">Design need<span>Clarity that enables</span></div>
+                        </div>
+                        <div class="cs2-persona">
+                            <div class="cs2-persona-tag">The Experience Seeker</div>
+                            <div class="cs2-persona-name">Discovery &amp;<br>Hidden Gems</div>
+                            <div class="cs2-persona-desc">Wants novelty. Explores if curious. Abandons if bureaucratic.</div>
+                            <ul class="cs2-persona-items">
+                                <li>Wants the unexpected</li>
+                                <li>Skips bureaucratic moments</li>
+                                <li>Needs a nudge, not a guide</li>
+                            </ul>
+                            <div class="cs2-persona-goal">Design need<span>Curiosity that rewards</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--dark">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label cs2-label--dim">03 / The Design Principles</span>
+                    <h2 class="cs2-h2 cs2-h2--white">Guide.<br>Support.<br>Subtle.</h2>
+                    <div class="cs2-observations">
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon">01</span>
+                            <span><strong style="color:#fff;">Guide, Don&rsquo;t Dictate</strong> &mdash; The experience should feel discovered, not prescribed.</span>
+                        </div>
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon">02</span>
+                            <span><strong style="color:#fff;">Support, Don&rsquo;t Overshadow</strong> &mdash; Service design enables nature. It never competes with it.</span>
+                        </div>
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon">03</span>
+                            <span><strong style="color:#fff;">Subtle, Not Silent</strong> &mdash; Guidance that is felt more than seen.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--dark" style="padding-top:0;padding-bottom:0;">
+                <div class="cs2-sec-inner" style="padding-top:64px;padding-bottom:0;">
+                    <span class="cs2-label cs2-label--dim">04 / The Invisible Guide</span>
+                    <h2 class="cs2-h2 cs2-h2--white">Five Interventions.<br>One Experience.</h2>
+                </div>
+                <div class="cs2-gates">
+                    <div class="cs2-gate">
+                        <span class="cs2-gate-num">01</span>
+                        <div class="cs2-gate-title">Giant QR at Entry</div>
+                        <p class="cs2-gate-body">Scan for instant tickets, digital payments, park access. No queues. No cash. No friction.</p>
+                        <div class="cs2-gate-prevents">Replaces: Bureaucratic entry experience</div>
+                    </div>
+                    <div class="cs2-gate">
+                        <span class="cs2-gate-num">02</span>
+                        <div class="cs2-gate-title">Living Map</div>
+                        <p class="cs2-gate-body">Full park view. Zoom for trails, animals, utilities. Enclosure stories on tap. The butterfly garden is visible from the first screen.</p>
+                        <div class="cs2-gate-prevents">Replaces: Static signage that hides options</div>
+                    </div>
+                    <div class="cs2-gate">
+                        <span class="cs2-gate-num">03</span>
+                        <div class="cs2-gate-title">Zebra Stripes</div>
+                        <p class="cs2-gate-body">Physical path markings on ground — mirrored exactly on the digital map. The physical and digital speak the same language.</p>
+                        <div class="cs2-gate-prevents">Replaces: Confusing path choices</div>
+                    </div>
+                    <div class="cs2-gate">
+                        <span class="cs2-gate-num">04</span>
+                        <div class="cs2-gate-title">Visual Stories</div>
+                        <p class="cs2-gate-body">Short animal stories at enclosures — &ldquo;The tiger rescued from captivity&rdquo; — instead of dense text panels. Stories, not facts.</p>
+                        <div class="cs2-gate-prevents">Replaces: Dense information boards</div>
+                    </div>
+                    <div class="cs2-gate cs2-gate--wide">
+                        <span class="cs2-gate-num">05</span>
+                        <div class="cs2-gate-title">Suggested Itineraries</div>
+                        <div class="cs2-gate-wide-inner">
+                            <div>
+                                <p class="cs2-gate-body">Curated paths matched to visitor type. &ldquo;Wildlife Explorer&rdquo; vs. &ldquo;Family Afternoon.&rdquo; The butterfly garden appears in both.</p>
+                                <p class="cs2-gate-body">The best experiences shouldn&rsquo;t require knowing to look for them.</p>
+                            </div>
+                            <div class="cs2-gate-motto">
+                                <span>See</span>
+                                <span>More.</span>
+                                <span>Always.</span>
+                            </div>
+                        </div>
+                        <div class="cs2-gate-prevents">Replaces: Default single-road experience</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Vihar image: park app UI / map interface -->
+            <section class="cs2-sec cs2-sec--white" style="padding-top:64px;padding-bottom:64px;">
+                <div class="cs2-sec-inner">
+                    <figure class="cs2-img-figure" style="margin-top:0;">
+                        <!-- Van Vihar living map / app UI -->
+                        <div class="cs2-img-block cs2-img-block--light">
+                            <img src="https://framerusercontent.com/images/HQpF4F0gcFMhsC0dtJSq9CPQd1g.png" alt="Van Vihar invisible guide app — living map showing park trails, animal enclosures, zebra stripe paths and suggested itineraries" loading="lazy">
+                            <div class="cs2-img-ph" aria-hidden="true">
+                                <div class="cs2-img-ph-line"></div>
+                                <span class="cs2-img-ph-label">Vihar App · Living Map UI</span>
+                                <div class="cs2-img-ph-line"></div>
+                            </div>
+                        </div>
+                        <figcaption class="cs2-img-caption">The invisible guide — QR entry, living map, zebra stripe paths, enclosure stories</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--grey">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">05 / Testing</span>
+                    <h2 class="cs2-h2">Campus Pilot.<br>Real Results.</h2>
+                    <p class="cs2-p">Concept tested on a university campus — hidden courtyards as &ldquo;attractions,&rdquo; QR codes replacing docking stations.</p>
+                    <div class="cs2-timeline">
+                        <div class="cs2-tl-node">
+                            <div class="cs2-tl-time">80%</div>
+                            <div class="cs2-tl-event">Scanned QR instantly on entering</div>
+                        </div>
+                        <div class="cs2-tl-line"></div>
+                        <div class="cs2-tl-node">
+                            <div class="cs2-tl-time cs2-tl-time--orange">100%</div>
+                            <div class="cs2-tl-event cs2-tl-event" style="color:#FF5500;">Discovered places never visited before</div>
+                        </div>
+                        <div class="cs2-tl-line"></div>
+                        <div class="cs2-tl-node">
+                            <div class="cs2-tl-time">Treasure Hunt</div>
+                            <div class="cs2-tl-event">How participants described the experience</div>
+                        </div>
+                    </div>
+                    <div class="cs2-rule-box">
+                        <div class="cs2-rule-label">The Insight</div>
+                        <p class="cs2-rule-text">The butterfly garden wasn&rsquo;t a hidden secret. It was a design failure.</p>
+                        <p class="cs2-rule-sub">Once the journey was redesigned to reveal it, people found it naturally.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cs2-final">
+                <div class="cs2-final-inner">
+                    <div class="cs2-final-label">Final Reflection</div>
+                    <blockquote class="cs2-final-quote">Great service design doesn&rsquo;t add complexity. It aligns behavior with intent by removing friction. The butterfly garden was always there. We just needed to show the way.</blockquote>
+                    <p class="cs2-final-support">The best guide is the one you don&rsquo;t notice.</p>
+                    <div class="cs2-final-words">
+                        <span class="cs2-final-word">Guide.</span>
+                        <span class="cs2-final-word">Discover.</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Case Study: Bhopal By Bike -->
+    <div class="case-study-overlay cs-dark" id="cs-bhopal" role="dialog" aria-modal="true" aria-labelledby="cs-bhopal-title">
+        <div class="case-study-nav">
+            <div class="case-study-nav-inner">
+                <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Bhopal By Bike</div>
+                <button class="close-case-study" onclick="closeCaseStudy('cs-bhopal')" aria-label="Close case study and return to portfolio">← Back</button>
+            </div>
+        </div>
+        <div class="cs2-body">
+
+            <section class="cs2-hero">
+                <div class="cs2-hero-inner">
+                    <span class="cs2-kicker">Case Study &middot; Chartered Cycles &middot; Urban Design &middot; Bhopal</span>
+                    <h1 class="cs2-title" id="cs-bhopal-title">The Curious<br>Case of<br>Bhopal&rsquo;s<br>Unridden Cycles.</h1>
+                    <div class="cs2-hero-divider"></div>
+                    <blockquote class="cs2-hero-quote">500 bikes. 100 docking stations. 2.3 million citizens. Less than 3% adoption. Five years later.</blockquote>
+                    <p class="cs2-hero-sub">The bikes were everywhere. Nobody was riding them. This is the story of why — and what to do about it.</p>
+                </div>
+                <div class="cs2-bg-word" aria-hidden="true">RIDE</div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--white">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">01 / The Paradox</span>
+                    <h2 class="cs2-h2">Everywhere.<br><em>But Unused.</em></h2>
+                    <div class="cs2-two-col">
+                        <div>
+                            <p class="cs2-p">2017. Bhopal launched Chartered Cycles — a city-wide bike-sharing network with GPS bikes and 100+ docking stations across the city.</p>
+                            <p class="cs2-p">Five years later: less than 3% of 2.3 million citizens had ever used them.</p>
+                            <p class="cs2-p">The bikes sat still. Visible everywhere. Used by almost no one.</p>
+                            <blockquote class="cs2-pullquote">A product visible to all, used by none — is worse than invisible.</blockquote>
+                        </div>
+                        <div>
+                            <div class="cs2-box-dark">
+                                <span class="cs2-box-label">The Visible Signs of Failure</span>
+                                <ul class="cs2-pain-list">
+                                    <li>Bikes at docks, never moving</li>
+                                    <li>Signage covered with advertisements</li>
+                                    <li>No one to explain how to use them</li>
+                                </ul>
+                                <div class="cs2-fear-quote"><em>Presence is not the same as usage.</em></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--dark">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label cs2-label--dim">02 / The Research</span>
+                    <h2 class="cs2-h2 cs2-h2--white">78 Surveys.<br>11 Dock Safaris.<br>No Assumptions.</h2>
+                    <div class="cs2-observations">
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon">78</span>
+                            <span>User surveys across demographics and neighborhoods</span>
+                        </div>
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon">11</span>
+                            <span>&ldquo;Dock safaris&rdquo; — observing real docking station behavior in person</span>
+                        </div>
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon">&#8594;</span>
+                            <span>Stakeholder interviews + app audits + comparative analysis: Yulu, Mobike, Amsterdam</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--grey">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">03 / The Disconnect</span>
+                    <h2 class="cs2-h2">Authority Says.<br>User Sees.</h2>
+                    <p class="cs2-p">The most striking finding: the gap between what operators believed and what users experienced.</p>
+                    <div class="cs2-pivot-table" style="background:#fff;border:1px solid #e4e4e4;border-radius:2px;overflow:hidden;">
+                        <table style="width:100%;border-collapse:collapse;">
+                            <thead>
+                                <tr style="background:#f5f5f5;">
+                                    <th style="text-align:left;padding:16px 24px;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#aaa;border-bottom:1px solid #e4e4e4;">Topic</th>
+                                    <th style="text-align:left;padding:16px 24px;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#aaa;border-bottom:1px solid #e4e4e4;">Authorities Said</th>
+                                    <th style="text-align:left;padding:16px 24px;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#FF5500;border-bottom:1px solid #e4e4e4;">Users Said</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding:20px 24px;font-size:12px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:0.1em;border-bottom:1px solid #f0f0f0;">Maintenance</td>
+                                    <td style="padding:20px 24px;font-size:15px;color:#555;border-bottom:1px solid #f0f0f0;">&ldquo;Twice daily&rdquo;</td>
+                                    <td style="padding:20px 24px;font-size:15px;color:#0a0a0a;font-weight:600;border-bottom:1px solid #f0f0f0;">&ldquo;Tyres punctured, lock problems&rdquo;</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:20px 24px;font-size:12px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:0.1em;border-bottom:1px solid #f0f0f0;">Usability</td>
+                                    <td style="padding:20px 24px;font-size:15px;color:#555;border-bottom:1px solid #f0f0f0;">&ldquo;Users figure it out&rdquo;</td>
+                                    <td style="padding:20px 24px;font-size:15px;color:#0a0a0a;font-weight:600;border-bottom:1px solid #f0f0f0;">&ldquo;Don&rsquo;t know how to use them&rdquo;</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:20px 24px;font-size:12px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:0.1em;">Features</td>
+                                    <td style="padding:20px 24px;font-size:15px;color:#555;">&ldquo;Can&rsquo;t give all comforts&rdquo;</td>
+                                    <td style="padding:20px 24px;font-size:15px;color:#0a0a0a;font-weight:600;">&ldquo;Extremely difficult to manage phone&rdquo;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--dark">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label cs2-label--dim">04 / Root Causes</span>
+                    <h2 class="cs2-h2 cs2-h2--white">Three Chains<br>of Failure.</h2>
+                </div>
+                <div class="cs2-gates">
+                    <div class="cs2-gate">
+                        <span class="cs2-gate-num" style="font-size:60px;">01</span>
+                        <div class="cs2-gate-title">Business Model → Neglected UX</div>
+                        <p class="cs2-gate-body">Revenue came from advertising on docking stations — not from rides. So rides were never optimized. The customer experience was a cost center, not a revenue driver.</p>
+                        <div class="cs2-gate-prevents">Result: UX investment was structurally disincentivized</div>
+                    </div>
+                    <div class="cs2-gate">
+                        <span class="cs2-gate-num" style="font-size:60px;">02</span>
+                        <div class="cs2-gate-title">Authority Attitude → Semantic Weakness</div>
+                        <p class="cs2-gate-body">Instructions buried under advertisements. Signage cluttered. No one responsible for communicating how the service worked. Operators assumed users would self-educate.</p>
+                        <div class="cs2-gate-prevents">Result: The service couldn&rsquo;t explain itself</div>
+                    </div>
+                    <div class="cs2-gate cs2-gate--wide">
+                        <span class="cs2-gate-num" style="font-size:60px;">03</span>
+                        <div class="cs2-gate-title">Declining Engagement → Negative Perception</div>
+                        <div class="cs2-gate-wide-inner">
+                            <div>
+                                <p class="cs2-gate-body">Bikes everywhere but rarely used = seemed like a failed service. Users assumed if it were good, others would be using it. Low usage validated low usage.</p>
+                                <p class="cs2-gate-body">Presence without participation reads as abandonment.</p>
+                            </div>
+                            <div class="cs2-gate-motto">
+                                <span>Visible.</span>
+                                <span>But</span>
+                                <span>Silent.</span>
+                            </div>
+                        </div>
+                        <div class="cs2-gate-prevents">Result: Social proof worked against adoption</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bhopal image: dock station / poster redesign -->
+            <section class="cs2-sec cs2-sec--dark" style="padding-top:64px;padding-bottom:64px;">
+                <div class="cs2-sec-inner">
+                    <figure class="cs2-img-figure" style="margin-top:0;">
+                        <!-- Bhopal dock station DSLR photo -->
+                        <div class="cs2-img-block">
+                            <img src="https://framerusercontent.com/images/Mj25Gh4oTWbkJtekyB90TXTDIM.png" alt="Chartered Cycles docking station with ad-cluttered signage and buried instructions — the communication failure made visible" loading="lazy">
+                            <div class="cs2-img-ph" aria-hidden="true">
+                                <div class="cs2-img-ph-line"></div>
+                                <span class="cs2-img-ph-label">Dock Station Audit · Before State</span>
+                                <div class="cs2-img-ph-line"></div>
+                            </div>
+                        </div>
+                        <figcaption class="cs2-img-caption">The dock station as found — ads everywhere, instructions nowhere. Visible but silent.</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--grey">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">05 / The Solution: Phygital</span>
+                    <h2 class="cs2-h2">Add a<br>Human Touch.</h2>
+                    <p class="cs2-p">Technology alone couldn&rsquo;t solve this. The barrier wasn&rsquo;t digital — it was human. So the solution had to be too.</p>
+                    <div class="cs2-observations" style="background:#fff;border-color:#e4e4e4;">
+                        <div class="cs2-obs-item" style="border-color:#e4e4e4;">
+                            <span class="cs2-obs-icon">🛒</span>
+                            <div><strong style="color:#0a0a0a;">Shop at the Dock</strong> <span style="color:#555;"> — Amul kiosk beside each dock. The shopkeeper becomes a friendly human guide who explains, demonstrates, vouches.</span></div>
+                        </div>
+                        <div class="cs2-obs-item" style="border-color:#e4e4e4;">
+                            <span class="cs2-obs-icon">📋</span>
+                            <div><strong style="color:#0a0a0a;">Redesigned Posters</strong> <span style="color:#555;"> — Clear instructions. Relatable language. Showcase affordability: &ldquo;₹20 for an hour.&rdquo; Show bikes as desirable, not institutional.</span></div>
+                        </div>
+                        <div class="cs2-obs-item" style="border-color:#e4e4e4;">
+                            <span class="cs2-obs-icon">📱</span>
+                            <div><strong style="color:#0a0a0a;">Pop-Up Info Board + QR</strong> <span style="color:#555;"> — Large QR code linking to a one-minute explainer video. Lower barrier than reading instructions.</span></div>
+                        </div>
+                        <div class="cs2-obs-item" style="border-color:#e4e4e4;">
+                            <span class="cs2-obs-icon">🚲</span>
+                            <div><strong style="color:#0a0a0a;">Posters on Bikes</strong> <span style="color:#555;"> — &ldquo;₹20 for an hour&rdquo; on the bike frame itself. Moving billboards that communicate value while cycling.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cs2-sec cs2-sec--grey" style="padding-top:0;">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">06 / Testing</span>
+                    <h2 class="cs2-h2">60% Scan Rate.<br>The Barrier<br>Was Understanding.</h2>
+                    <div class="cs2-timeline">
+                        <div class="cs2-tl-node">
+                            <div class="cs2-tl-time">45</div>
+                            <div class="cs2-tl-event">People approached the pilot station</div>
+                        </div>
+                        <div class="cs2-tl-line"></div>
+                        <div class="cs2-tl-node">
+                            <div class="cs2-tl-time cs2-tl-time--orange">27</div>
+                            <div class="cs2-tl-event" style="color:#FF5500;">Scanned QR to understand (60%)</div>
+                        </div>
+                        <div class="cs2-tl-line"></div>
+                        <div class="cs2-tl-node">
+                            <div class="cs2-tl-time">13</div>
+                            <div class="cs2-tl-event">Actually used the service (48% conversion)</div>
+                        </div>
+                    </div>
+                    <div class="cs2-rule-box">
+                        <div class="cs2-rule-label">The Proof</div>
+                        <p class="cs2-rule-text">The barrier was not apathy. It was not price. It was not technology.</p>
+                        <p class="cs2-rule-sub">It was a fundamental failure in communication. Once people understood, they used it.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cs2-final">
+                <div class="cs2-final-inner">
+                    <div class="cs2-final-label">Final Reflection</div>
+                    <blockquote class="cs2-final-quote">The biggest problems aren&rsquo;t about technology or price. They&rsquo;re about a fundamental failure in communication. The bikes were ready. The city wasn&rsquo;t told.</blockquote>
+                    <p class="cs2-final-support">Service design is conversation at scale.</p>
+                    <div class="cs2-final-words">
+                        <span class="cs2-final-word">Communicate.</span>
+                        <span class="cs2-final-word">Ride.</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Case study navigation — click + keyboard
+        document.querySelectorAll('[data-case-study]').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                openCaseStudy(card.getAttribute('data-case-study'));
+            });
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openCaseStudy(card.getAttribute('data-case-study'));
+                }
+            });
+        });
+
+        // Blog card keyboard
+        document.querySelectorAll('[role="button"]:not([data-case-study])').forEach(el => {
+            el.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+            });
+        });
+
+        function toggleGate(row) {
+            const allRows = row.closest('.cs2-funnel').querySelectorAll('.cs2-funnel-row');
+            const isOpen = row.classList.contains('is-open');
+            allRows.forEach(r => r.classList.remove('is-open'));
+            if (!isOpen) row.classList.add('is-open');
+        }
+
+        // Bento cursor glow + 3D tilt
+        (function() {
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            document.querySelectorAll('.bento-card:not(.b-resume)').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const r = card.getBoundingClientRect();
+                    const px = (e.clientX - r.left) / r.width;
+                    const py = (e.clientY - r.top) / r.height;
+                    card.style.setProperty('--gx', (px * 100).toFixed(1) + '%');
+                    card.style.setProperty('--gy', (py * 100).toFixed(1) + '%');
+                    if (!prefersReduced) {
+                        const tx = (px - 0.5) * 6;
+                        const ty = (py - 0.5) * -6;
+                        card.style.transform = `scale(1.022) translateY(-5px) perspective(900px) rotateX(${ty.toFixed(2)}deg) rotateY(${tx.toFixed(2)}deg)`;
+                    }
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = '';
+                });
+            });
+        })();
+
+        function openCaseStudy(id) {
+            const overlay = document.getElementById(id);
+            if (!overlay) return;
+            document.body.style.overflow = 'hidden';
+            overlay.classList.add('active');
+            // Move focus to close button for keyboard users
+            const close = overlay.querySelector('.close-case-study');
+            if (close) { overlay.scrollTop = 0; setTimeout(() => close.focus(), 50); }
+        }
+
+        function closeCaseStudy(id) {
+            const overlay = document.getElementById(id);
+            if (!overlay) return;
+            document.body.style.overflow = '';
+            overlay.classList.remove('active');
+            // Return focus to triggering card
+            const trigger = document.querySelector(`[data-case-study="${id}"]`);
+            if (trigger) trigger.focus();
+        }
+
+        // ESC to close
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.case-study-overlay.active').forEach(overlay => {
+                    const id = overlay.id;
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                    const trigger = document.querySelector(`[data-case-study="${id}"]`);
+                    if (trigger) trigger.focus();
+                });
+            }
+        });
+        
+        // Expandable sections
+        function toggleExpandable(button) {
+            const expandable = button.parentElement;
+            const content = expandable.querySelector('.expandable-content');
+            
+            if (expandable.classList.contains('active')) {
+                expandable.classList.remove('active');
+                content.style.maxHeight = null;
+            } else {
+                expandable.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + 'px';
+            }
+        }
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && !this.hasAttribute('data-case-study')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>
