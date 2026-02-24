@@ -3854,28 +3854,40 @@
                 els.forEach(el => obs.observe(el));
 
                 // ── Logic Funnel: auto-open gates on scroll ──────────────────
-                // As each gate scrolls into the upper portion of the viewport,
-                // it opens automatically. Closes the previous one. Manual click
-                // (toggleGate) still works independently.
+                // IntersectionObserver can't be used here: opening/closing a gate
+                // changes max-height, shifting every subsequent gate's DOM position
+                // mid-transition and causing cascading false triggers.
+                //
+                // Instead: scroll event + a transition lock.
+                // On each scroll we read getBoundingClientRect() (always current),
+                // find the last gate header above the midpoint of the overlay, and
+                // open it. The 480ms lock prevents any further switch while the
+                // max-height animation (0.45s) is running — so layout shifts from
+                // one gate closing never trigger the next.
                 const funnelRows = [...overlay.querySelectorAll('.cs2-funnel-row')];
                 if (funnelRows.length) {
-                    const funnelObs = new IntersectionObserver(entries => {
-                        entries.forEach(entry => {
-                            if (!entry.isIntersecting) return;
-                            const row = entry.target;
-                            if (row.classList.contains('is-open')) return; // already open
-                            // Close all, open this one
-                            funnelRows.forEach(r => r.classList.remove('is-open'));
-                            row.classList.add('is-open');
+                    let funnelLocked = false;
+
+                    function setActiveGate(idx) {
+                        const current = funnelRows.findIndex(r => r.classList.contains('is-open'));
+                        if (current === idx || funnelLocked) return;
+                        funnelLocked = true;
+                        funnelRows.forEach(r => r.classList.remove('is-open'));
+                        funnelRows[idx].classList.add('is-open');
+                        setTimeout(() => { funnelLocked = false; }, 480);
+                    }
+
+                    overlay.addEventListener('scroll', () => {
+                        if (funnelLocked) return;
+                        const oRect = overlay.getBoundingClientRect();
+                        const midY  = oRect.top + oRect.height * 0.50; // screen midpoint
+                        let activeIdx = -1;
+                        funnelRows.forEach((row, i) => {
+                            const hRect = row.querySelector('.cs2-funnel-header').getBoundingClientRect();
+                            if (hRect.top <= midY) activeIdx = i;
                         });
-                    }, {
-                        root: overlay,
-                        // Gate fires when it enters the top 55% of the overlay viewport.
-                        // Keeps the active gate anchored near the reading line.
-                        rootMargin: '0px 0px -45% 0px',
-                        threshold: 0.5
-                    });
-                    funnelRows.forEach(row => funnelObs.observe(row));
+                        if (activeIdx >= 0) setActiveGate(activeIdx);
+                    }, { passive: true });
                 }
 
                 // Count-up: numeric stat elements
