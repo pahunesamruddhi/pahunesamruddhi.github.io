@@ -5,7 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Samruddhi Pahune — AI Systems & Automation Behavior Owner</title>
     <meta name="description" content="I build automation that knows when to stop. Decision boundaries for financial AI.">
-    
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://pahunesamruddhi.github.io/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Samruddhi Pahune — AI Systems & Automation Behavior Owner">
+    <meta property="og:description" content="I build automation that knows when to stop. Decision boundaries for financial AI.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pahunesamruddhi.github.io/">
+    <meta property="og:image" content="https://pahunesamruddhi.github.io/Images/og-image.png">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Samruddhi Pahune",
+        "jobTitle": "AI Systems & Automation Behavior Owner",
+        "url": "https://pahunesamruddhi.github.io/",
+        "description": "I build automation that knows when to stop. Decision boundaries for financial AI.",
+        "sameAs": [
+          "https://www.linkedin.com/in/samruddhi-pahune/"
+        ]
+      }
+    }
+    </script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,7 +69,7 @@
             --spacing-lg: 32px;
             --spacing-xl: 48px;
             --spacing-2xl: 64px;
-            --spacing-3xl: 64px;
+            --spacing-3xl: 96px;
             
             --border-radius: 8px;
             --max-width: 1200px;
@@ -80,7 +114,6 @@
             left: 0;
             right: 0;
             z-index: 100;
-            background: var(--color-bg);
             border-bottom: 1px solid var(--color-border);
             backdrop-filter: blur(8px);
             background: rgba(255, 255, 255, 0.9);
@@ -1533,7 +1566,7 @@
 
         /* FINAL */
         .cs2-final {
-            background: #FF5500;
+            background: #C44000;
             padding: 88px 0;
             text-align: center;
             position: relative;
@@ -1840,13 +1873,13 @@
 
         /* Resume strip */
         .b-resume {
-            background: #FF5500;
+            background: #C44000;
             display: flex; align-items: center;
             justify-content: space-between;
             padding: 0 44px; text-decoration: none;
             transition: background 0.3s;
         }
-        .b-resume:hover { background: #e84c00; transform: none !important; box-shadow: none !important; }
+        .b-resume:hover { background: #a53600; transform: none !important; box-shadow: none !important; }
 
         /* ── Per-card character ── */
         .b-upi   { background: #0f0f0f; }
@@ -1966,10 +1999,10 @@
         /* Skip nav */
         .skip-link {
             position: absolute; top: -56px; left: 16px;
-            background: #FF5500; color: #fff;
+            background: #C44000; color: #fff;
             padding: 12px 20px; font-size: 14px; font-weight: 700;
             text-decoration: none; border-radius: 0 0 6px 6px;
-            z-index: 99999; transition: top 0.15s;
+            z-index: 101; transition: top 0.15s;
         }
         .skip-link:focus { top: 0; }
 
@@ -2034,9 +2067,9 @@
         .b-proj--dark .b-proj-desc       { color: #888; }   /* was #555 → fail */
         .b-proj-desc                     { color: #555; }   /* was #aaa → fail on white */
 
-        /* CONTRAST — orange bg (design tradeoff: white on #FF5500 = 3.0:1 max achievable) */
-        .cs2-final-label                 { color: rgba(255,255,255,0.95); } /* maximised within constraint */
-        .cs2-final-support               { color: rgba(255,255,255,0.95); } /* maximised within constraint */
+        /* CONTRAST — orange bg (#C44000 = 4.53:1 with white, WCAG AA compliant) */
+        .cs2-final-label                 { color: rgba(255,255,255,0.95); } /* WCAG AA compliant */
+        .cs2-final-support               { color: rgba(255,255,255,0.95); } /* WCAG AA compliant */
 
         /* Image blocks */
         .cs2-img-figure { margin: 56px auto; max-width: 760px; }
@@ -2356,7 +2389,7 @@
                     <div class="cs2-hero-divider"></div>
                     <blockquote class="cs2-hero-quote">&ldquo;In the three seconds after a payment fails and the money leaves the account, a user enters a state of biological panic.&rdquo;</blockquote>
                     <p class="cs2-hero-sub">This is the story of building a system that manages that fear through logic.</p>
-                    <a href="#" class="cs2-flow-link" target="_blank" rel="noopener">View UPI Debit Flow &rarr;</a>
+                    <a href="https://whimsical.com/upi-debit-issue-TavZoaH14YQUfVuN6TACPe" class="cs2-flow-link" target="_blank" rel="noopener">View UPI Debit Flow &rarr;</a>
                 </div>
                 <div class="cs2-bg-word" aria-hidden="true">PANIC</div>
             </section>

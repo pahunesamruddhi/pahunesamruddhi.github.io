@@ -38,6 +38,12 @@ pahunesamruddhi.github.io/
 
 ---
 
+## Source of Truth
+
+**`docs/index.html` is the canonical, hand-maintained source of truth for the live site.** The `portfolio-agents/` pipeline generates draft content but its output (`outputs/index.html`) is NOT deployed directly. All final edits happen in `docs/index.html`.
+
+---
+
 ## Deployment Workflow
 
 1. Edit `docs/index.html` (or assets in `docs/Images/`, `docs/Content/`)
@@ -91,19 +97,31 @@ These agents are standalone prompts, NOT Claude Code agents. They stay as-is.
 
 ## Design System
 
-### Colors (CSS Custom Properties)
+### Colors
+
+**CSS Custom Properties (`:root`):**
 ```
 --color-bg:           #ffffff
 --color-bg-alt:       #fafafa
 --color-text:         #1a1a1a
 --color-text-muted:   #666666
---color-accent:       #6366f1  (indigo)
---color-accent-hover: #4f46e5
+--color-accent:       #6366f1  (indigo — declared but unused in practice)
+--color-accent-hover: #4f46e5  (unused in practice)
 --color-border:       #e5e5e5
 ```
 
+**Actual palette used throughout the site (hardcoded, 500+ instances):**
+- **Accent orange:** `#FF5500` — primary brand accent (buttons, highlights, hover states, labels)
+- **Dark backgrounds:** `#0a0a0a` (case study hero BGs), `#111111`, `#1c1c1c`, `#1a1a1a`
+- **Light backgrounds:** `#ffffff`, `#fafafa`, `#f2f2f2`, `#f5f5f5`
+- **Text grays:** `#555`, `#666`, `#888`, `#999`, `#aaa`
+- **Borders/dividers:** `#e5e5e5`, `#ececec`, `#ddd`
+
+> **Note:** The `:root` `--color-accent: #6366f1` (indigo) is a vestige from an earlier design iteration. The actual accent color is `#FF5500` (orange), used 100+ times as hardcoded values. A future refactoring pass should migrate these to CSS custom properties.
+
 ### Typography
 - **Font:** Inter (sans-serif), with system stack fallback
+- **Monospace:** DM Mono (400, 500) — used for technical/code elements, stat labels, and metric displays
 - **Body:** 17px / 1.6 line-height (16px on mobile)
 - **H1:** 42px (30px mobile) | **H2:** 30px (24px mobile) | **H3:** 24px (20px mobile)
 - **Hero headline:** 56px (38px mobile)
@@ -126,7 +144,7 @@ These agents are standalone prompts, NOT Claude Code agents. They stay as-is.
 ```
 --spacing-xs:  8px    --spacing-sm:  16px   --spacing-md:  24px
 --spacing-lg:  32px   --spacing-xl:  48px   --spacing-2xl: 64px
---spacing-3xl: 64px
+--spacing-3xl: 96px
 ```
 
 ### Layout
@@ -206,3 +224,67 @@ All JS is inline at the bottom of `index.html`. Key systems:
 10. **Use CSS custom properties** for any new colors, spacing, or layout values. Never hardcode.
 11. **Inline everything.** New CSS goes in the `<style>` block; new JS goes in the `<script>` block. Both inside `index.html`.
 12. **Images in WebP/AVIF.** All new images should be in modern formats with explicit width/height attributes.
+
+---
+
+## Session Preferences — Visual Editing
+
+### Sizing
+- Always ask for **absolute pixel values** when the user requests size changes. If they say "make it bigger," respond: "What target height in pixels?"
+- Never apply relative size changes (%, "twice", "half") without calculating and confirming the computed result first.
+
+### Edit Granularity
+- When a message contains 3+ independent changes, apply them as **separate atomic edits** (one replace per logical change) so the user can undo selectively.
+- After each visual change, state the computed pixel/rem values so the user can validate without inspecting CSS.
+
+### File Tracking
+- `outputs/index.html` is NOT git-tracked. It is the working build artifact.
+- Before any `git reset`, warn the user which files are untracked and will NOT be affected.
+- The canonical deployed version lives in `docs/index.html`.
+
+### Case Studies
+- There are 6 case study overlays: cs2, cs-smartcoin, cs-dottie, cs-icici, cs-vihar, cs-bhopal
+- Each overlay is a `position: fixed` div with `overflow-y: auto`
+- The main `.nav` should always remain visible above overlays (z-index: 100 > overlay z-index)
+
+### CSS Architecture
+- **Case study component system:** All 6 case studies share the `.cs2-*` class prefix (265+ selectors). This originated from case study 2 (Failed UPI Debit) and was adopted as the universal case study namespace. All `.cs2-*` classes are shared components, not specific to case study 2.
+- Homepage grid: `.bento-page` > `.bento-grid` (5-column, 4-row)
+- Header: `.nav` → `.nav-inner` (52px height) → `.nav-logo` + `.nav-links`
+- Card structure: `.b-proj-num`, `.b-proj-name`, `.b-proj-desc`, `.b-proj-cat`
+- Blog strip: `.b-blog-c` with `::after` wipe animation
+- Resume strip: `.b-resume` (orange, horizontal)
+
+### Visual Design Guide
+- Always reference `visual-design-guide.md` before modifying case study typography.
+- Typographic scale: Display → Section → Statement → Lead → Body → Aside
+- All sizing uses `clamp()` for responsive scaling
+
+### What NOT to Change (unless explicitly asked)
+- Grid template areas / column ratios
+- Card animations (b-breathe keyframes)
+- Color palette (#0a0a0a, #FF5500, #C44000, #ececec, #f5f5f5)
+- Hover state behavior (wipe-up reveal, glow, pause animation)
+
+### Known Technical Debt (Deferred Refactoring)
+
+**Hardcoded colors (~500+ instances):**
+- `#FF5500` / `#C44000` (orange): ~120 occurrences
+- `#0a0a0a` (dark): ~60 occurrences
+- `#999`, `#666`, `#888`, etc. (grays): ~100+ occurrences
+- Most are in inline `style=""` attributes within case study content
+- **Future fix:** Define CSS custom properties (`--cs-accent`, `--cs-dark-bg`, `--cs-text-muted`) and migrate inline values
+
+**Inline styles (~570 instances):**
+- Top repeated patterns: `color:#999`, `font-size:15px`, `padding-top:24px`, `color:#666`
+- All within case study overlay content
+- **Future fix:** Extract top-10 patterns into utility classes (`.text-muted`, `.text-sm`, `.pt-md`)
+
+---
+
+## Local References
+
+| Reference | Path | Purpose |
+|-----------|------|---------|
+| Portfolio Project Context | `.claude/references/portfolio-project-context.md` | Site structure, positioning, source material |
+| Visual Editing Planning Template | `.claude/references/visual-editing-planning-template.md` | Upfront spec template for 3+ CSS changes |
