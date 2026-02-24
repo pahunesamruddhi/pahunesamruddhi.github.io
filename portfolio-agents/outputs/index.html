@@ -1796,25 +1796,19 @@
         /* ── Scroll reveal: base class (applied via JS — invisible only when JS runs) ── */
         .reveal {
             opacity: 0;
-            transform: translateY(22px);
-            transition: opacity 0.62s cubic-bezier(0.25,0.46,0.45,0.94),
-                        transform 0.62s cubic-bezier(0.25,0.46,0.45,0.94);
+            transform: translateY(10px);
+            transition: opacity 0.55s cubic-bezier(0.25,0.46,0.45,0.94),
+                        transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
         }
         .reveal.in-view { opacity: 1; transform: translateY(0); }
 
-        /* Stagger delays for sibling groups */
-        .reveal[data-delay="1"] { transition-delay: 0.10s; }
-        .reveal[data-delay="2"] { transition-delay: 0.20s; }
-        .reveal[data-delay="3"] { transition-delay: 0.30s; }
-        .reveal[data-delay="4"] { transition-delay: 0.40s; }
+        /* Stagger delays for persona grids */
+        .reveal[data-delay="1"] { transition-delay: 0.12s; }
+        .reveal[data-delay="2"] { transition-delay: 0.24s; }
 
-        /* Directional overrides for specific element types */
-        .cs2-pullquote.reveal               { transform: translateX(-18px); }
+        /* Pull quotes: slide from left — they are statements that stop the reader */
+        .cs2-pullquote.reveal               { transform: translateX(-14px); }
         .cs2-pullquote.reveal.in-view       { transform: translateX(0); }
-        .cs2-label.reveal, .cs2-kicker.reveal {
-            transform: translateX(-10px); transition-duration: 0.4s;
-        }
-        .cs2-label.reveal.in-view, .cs2-kicker.reveal.in-view { transform: translateX(0); }
 
         /* ── Reading progress bar ── */
         .cs-progress {
@@ -1870,9 +1864,7 @@
             .nav, .nav-link::after,
             .b-headline-word, .cs2-hero-divider,
             .b-resume::before,
-            .reveal, .reveal[data-delay] {
-                transition: none !important; animation: none !important;
-            }
+            .reveal { transition: none !important; animation: none !important; }
             .b-headline-word  { opacity: 1 !important; transform: none !important; }
             .cs2-hero-divider { transform: scaleX(1) !important; }
             .reveal           { opacity: 1 !important; transform: none !important; }
@@ -3824,32 +3816,28 @@
             // IntersectionObserver root so it responds to overlay scroll, not window.
             window._initOverlayMotion = function(overlay) {
                 if (noMotion) return;
+
+                // Sparse reveals: only 4 element types that genuinely benefit.
+                // Pull quotes  → slide from left  (statements that stop the reader)
+                // Images       → fade up           (natural section boundaries)
+                // Persona cards→ stagger fade up   (shows breadth of research)
+                // Final quote  → fade up           (the last word should land)
                 const sel = [
-                    '.cs2-h2', '.cs2-h3',
-                    '.cs2-label', '.cs2-kicker',
-                    '.cs2-p', '.cs2-pullquote',
+                    '.cs2-pullquote',
                     '.cs2-img-figure',
-                    '.cs2-box-dark', '.cs2-observations',
-                    '.cs2-two-col > *',
                     '.cs2-persona',
-                    '.cs2-trade-row > *',
-                    '.cs2-insight-bar',
-                    '.cs2-pivot-table',
-                    '.cs2-timeline',
-                    '.cs2-final-quote',
-                    '.cs2-swap-banner',
-                    '.cs2-inquiry-vs',
-                    '.cs2-perception-split'
+                    '.cs2-final-quote'
                 ].join(',');
 
                 const els = [...overlay.querySelectorAll(sel)];
 
-                // Stagger siblings: first child in a parent = no delay, 2nd = data-delay="1", etc.
+                // Stagger persona siblings only (they appear in grids)
                 const sibCount = new Map();
                 els.forEach(el => {
+                    if (!el.classList.contains('cs2-persona')) { el.classList.add('reveal'); return; }
                     const p = el.parentElement;
                     const n = sibCount.get(p) || 0;
-                    if (n >= 1 && n <= 4) el.dataset.delay = n;
+                    if (n >= 1 && n <= 2) el.dataset.delay = n;
                     sibCount.set(p, n + 1);
                     el.classList.add('reveal');
                 });
@@ -3861,9 +3849,34 @@
                             obs.unobserve(e.target);
                         }
                     });
-                }, { root: overlay, threshold: 0.07, rootMargin: '0px 0px -28px 0px' });
+                }, { root: overlay, threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
                 els.forEach(el => obs.observe(el));
+
+                // ── Logic Funnel: auto-open gates on scroll ──────────────────
+                // As each gate scrolls into the upper portion of the viewport,
+                // it opens automatically. Closes the previous one. Manual click
+                // (toggleGate) still works independently.
+                const funnelRows = [...overlay.querySelectorAll('.cs2-funnel-row')];
+                if (funnelRows.length) {
+                    const funnelObs = new IntersectionObserver(entries => {
+                        entries.forEach(entry => {
+                            if (!entry.isIntersecting) return;
+                            const row = entry.target;
+                            if (row.classList.contains('is-open')) return; // already open
+                            // Close all, open this one
+                            funnelRows.forEach(r => r.classList.remove('is-open'));
+                            row.classList.add('is-open');
+                        });
+                    }, {
+                        root: overlay,
+                        // Gate fires when it enters the top 55% of the overlay viewport.
+                        // Keeps the active gate anchored near the reading line.
+                        rootMargin: '0px 0px -45% 0px',
+                        threshold: 0.5
+                    });
+                    funnelRows.forEach(row => funnelObs.observe(row));
+                }
 
                 // Count-up: numeric stat elements
                 overlay.querySelectorAll('.cs2-perception-big, .cs2-tl-time').forEach(el => {
