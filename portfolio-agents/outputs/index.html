@@ -1056,6 +1056,39 @@
             color: #FF5500;
         }
 
+        /* Funnel step progress dots */
+        .cs2-funnel-steps {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: center;
+            padding: 28px 0 8px;
+        }
+        .cs2-funnel-step-dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.14);
+            transition: background 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+                        transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+            flex-shrink: 0;
+        }
+        .cs2-funnel-step-dot.is-active {
+            background: #FF5500;
+            transform: scale(1.5);
+        }
+        /* Scroll hint */
+        .cs2-funnel-hint {
+            text-align: center;
+            font-size: 10px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.22);
+            padding: 0 0 28px;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .cs2-funnel-hint.visible { opacity: 1; }
+
         /* PERSONA GRID */
         .cs2-persona-grid {
             display: grid;
@@ -3853,41 +3886,140 @@
 
                 els.forEach(el => obs.observe(el));
 
-                // ── Logic Funnel: auto-open gates on scroll ──────────────────
-                // IntersectionObserver can't be used here: opening/closing a gate
-                // changes max-height, shifting every subsequent gate's DOM position
-                // mid-transition and causing cascading false triggers.
+                // ── Logic Funnel: scroll-jail gate reveal ────────────────────
+                // Pattern: "scroll jail" — intercept wheel events when the funnel
+                // is in view, prevent overlay scroll, advance exactly one gate per
+                // discrete scroll step. Normal scroll resumes after gate 05.
                 //
-                // Instead: scroll event + a transition lock.
-                // On each scroll we read getBoundingClientRect() (always current),
-                // find the last gate header above the midpoint of the overlay, and
-                // open it. The 480ms lock prevents any further switch while the
-                // max-height animation (0.45s) is running — so layout shifts from
-                // one gate closing never trigger the next.
-                const funnelRows = [...overlay.querySelectorAll('.cs2-funnel-row')];
-                if (funnelRows.length) {
-                    let funnelLocked = false;
+                // Why wheel (not scroll): wheel fires BEFORE the browser scrolls,
+                // so preventDefault() is possible. scroll fires AFTER, too late.
+                // passive:false is required to call preventDefault on wheel events.
+                const funnelEl   = overlay.querySelector('.cs2-funnel');
+                const funnelRows = funnelEl ? [...funnelEl.querySelectorAll('.cs2-funnel-row')] : [];
 
-                    function setActiveGate(idx) {
-                        const current = funnelRows.findIndex(r => r.classList.contains('is-open'));
-                        if (current === idx || funnelLocked) return;
-                        funnelLocked = true;
-                        funnelRows.forEach(r => r.classList.remove('is-open'));
-                        funnelRows[idx].classList.add('is-open');
-                        setTimeout(() => { funnelLocked = false; }, 480);
+                if (funnelEl && funnelRows.length) {
+                    // ── Inject progress dots + hint text (done once) ──────────
+                    const stepsEl = document.createElement('div');
+                    stepsEl.className = 'cs2-funnel-steps';
+                    const dots = funnelRows.map((_, i) => {
+                        const d = document.createElement('span');
+                        d.className = 'cs2-funnel-step-dot' + (i === 0 ? ' is-active' : '');
+                        stepsEl.appendChild(d);
+                        return d;
+                    });
+                    const hintEl = document.createElement('div');
+                    hintEl.className = 'cs2-funnel-hint';
+                    hintEl.textContent = '↓  scroll to reveal each gate';
+                    funnelEl.appendChild(stepsEl);
+                    funnelEl.appendChild(hintEl);
+
+                    // ── State ─────────────────────────────────────────────────
+                    let activeGate   = 0;     // index of currently open gate
+                    let jailActive   = false; // intercepting scroll?
+                    let transitioning = false; // gate animation in progress
+                    let deltaAccum   = 0;     // accumulated wheel delta (trackpad jitter filter)
+                    let exitCooldown = false; // brief lock after exiting jail to prevent instant re-entry
+                    const THRESHOLD  = 80;   // px of accumulated delta before advancing one gate
+                    const TRANS_MS   = 480;  // must match CSS max-height transition
+
+                    function updateDots(idx) {
+                        dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
                     }
 
-                    overlay.addEventListener('scroll', () => {
-                        if (funnelLocked) return;
+                    function openGate(idx) {
+                        if (idx < 0 || idx >= funnelRows.length || transitioning) return;
+                        transitioning = true;
+                        funnelRows.forEach(r => r.classList.remove('is-open'));
+                        funnelRows[idx].classList.add('is-open');
+                        activeGate = idx;
+                        deltaAccum = 0;
+                        updateDots(idx);
+                        setTimeout(() => { transitioning = false; }, TRANS_MS);
+                    }
+
+                    function enterJail() {
+                        if (jailActive) return;
+                        jailActive  = true;
+                        deltaAccum  = 0;
+                        // Sync activeGate from DOM (user may have clicked manually)
+                        const domIdx = funnelRows.findIndex(r => r.classList.contains('is-open'));
+                        if (domIdx >= 0) { activeGate = domIdx; updateDots(activeGate); }
+                        // Show hint briefly
+                        hintEl.classList.add('visible');
+                        setTimeout(() => hintEl.classList.remove('visible'), 1800);
+                        // Snap: scroll overlay so funnel is near top of viewport
                         const oRect = overlay.getBoundingClientRect();
-                        const midY  = oRect.top + oRect.height * 0.50; // screen midpoint
-                        let activeIdx = -1;
-                        funnelRows.forEach((row, i) => {
-                            const hRect = row.querySelector('.cs2-funnel-header').getBoundingClientRect();
-                            if (hRect.top <= midY) activeIdx = i;
-                        });
-                        if (activeIdx >= 0) setActiveGate(activeIdx);
-                    }, { passive: true });
+                        const fRect = funnelEl.getBoundingClientRect();
+                        const gap = fRect.top - oRect.top;
+                        if (gap > 100) {
+                            overlay.scrollTo({ top: overlay.scrollTop + gap - 72, behavior: 'smooth' });
+                        }
+                    }
+
+                    function exitJail() {
+                        jailActive   = false;
+                        deltaAccum   = 0;
+                        exitCooldown = true;
+                        setTimeout(() => { exitCooldown = false; }, 700);
+                    }
+
+                    function isFunnelInView() {
+                        const oRect = overlay.getBoundingClientRect();
+                        const fRect = funnelEl.getBoundingClientRect();
+                        // Funnel overlaps the central 70% of the overlay viewport
+                        return fRect.top  < oRect.top + oRect.height * 0.85 &&
+                               fRect.bottom > oRect.top + oRect.height * 0.15;
+                    }
+
+                    overlay.addEventListener('wheel', (e) => {
+                        // Horizontal scrolls (trackpad side-swipe) — ignore
+                        if (e.deltaY === 0) return;
+
+                        // Upward scroll — always release jail and scroll freely
+                        if (e.deltaY < 0) {
+                            if (jailActive) exitJail();
+                            return;
+                        }
+
+                        // Downward scroll but funnel not in view — no jail
+                        if (!isFunnelInView()) {
+                            if (jailActive) exitJail();
+                            return;
+                        }
+
+                        // Brief cooldown window after exiting — let a few scroll
+                        // events pass before considering re-entry
+                        if (exitCooldown) return;
+
+                        // Funnel in view, scrolling down, not in cooldown
+                        if (!jailActive) {
+                            e.preventDefault();
+                            enterJail();
+                            return;
+                        }
+
+                        // ── Inside jail: route delta to gate advancement ──────
+                        deltaAccum += e.deltaY;
+
+                        if (deltaAccum < THRESHOLD) {
+                            // Still accumulating — hold scroll position
+                            e.preventDefault();
+                            return;
+                        }
+
+                        // Threshold crossed — try to open next gate
+                        const nextIdx = activeGate + 1;
+
+                        if (nextIdx >= funnelRows.length) {
+                            // Past gate 05 — release jail; this event's delta
+                            // flows through to resume normal overlay scroll
+                            exitJail();
+                            return; // no preventDefault → overlay scrolls naturally
+                        }
+
+                        e.preventDefault();
+                        openGate(nextIdx);
+                    }, { passive: false }); // passive:false required for preventDefault
                 }
 
                 // Count-up: numeric stat elements
