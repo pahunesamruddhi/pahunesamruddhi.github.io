@@ -89,7 +89,8 @@
         .nav-inner {
             max-width: var(--max-width);
             margin: 0 auto;
-            padding: var(--spacing-md) var(--spacing-lg);
+            padding: 0 var(--spacing-lg);
+            height: 52px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -100,6 +101,15 @@
             font-weight: 700;
             color: var(--color-text);
             text-decoration: none;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-logo img {
+            height: calc((100% - 10px) * 0.54);
+            width: auto;
+            display: block;
         }
         
         .nav-links {
@@ -286,9 +296,12 @@
         /* Case Study Overlay */
         .case-study-overlay {
             position: fixed;
-            inset: 0;
+            top: 52px;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: var(--color-bg);
-            z-index: 1000;
+            z-index: 90;
             overflow-y: auto;
             display: none;
             opacity: 0;
@@ -1627,16 +1640,20 @@
            ================================================================ */
 
         .bento-page {
-            min-height: 100vh;
+            height: 100vh;
             background: #ececec;
-            padding-top: 64px;
+            padding-top: 62px;
+            overflow: hidden;
+            box-sizing: border-box;
         }
         .bento-grid {
             display: grid;
             grid-template-columns: 1.8fr 1.2fr 1.5fr 1fr 1.5fr;
-            grid-template-rows: 200px 150px 160px 56px;
+            grid-template-rows: 1fr 0.72fr 0.78fr 48px;
             gap: 10px;
             padding: 10px;
+            height: 100%;
+            box-sizing: border-box;
             grid-template-areas:
                 "pos   pos    upi    upi    upi"
                 "pos   pos    smart  dottie icici"
@@ -1789,9 +1806,10 @@
 
         /* Blog card */
         .b-blog-c {
-            background: #f5f5f5; padding: 32px;
-            display: flex; flex-direction: column;
-            justify-content: space-between; cursor: pointer;
+            background: #f5f5f5; padding: 0 44px;
+            display: flex; flex-direction: row;
+            align-items: center; gap: 16px;
+            cursor: pointer;
         }
         .b-blog-c::after {
             content: ''; position: absolute;
@@ -1809,13 +1827,13 @@
         }
         .b-blog-c:hover .b-blog-lbl { color: #FF5500; }
         .b-blog-ttl {
-            font-size: 26px; font-weight: 900;
-            letter-spacing: -0.03em; line-height: 1.0;
+            font-size: 16px; font-weight: 900;
+            letter-spacing: -0.01em; line-height: 1.0;
             color: #0a0a0a; transition: color 0.3s;
         }
         .b-blog-c:hover .b-blog-ttl { color: #fff; }
         .b-blog-arr {
-            font-size: 22px; color: #ddd; align-self: flex-end;
+            font-size: 18px; color: #ddd; margin-left: auto;
             transition: color 0.3s, transform 0.3s;
         }
         .b-blog-c:hover .b-blog-arr { color: #FF5500; transform: translate(4px,-4px); }
@@ -1886,26 +1904,7 @@
         }
         .b-resume:hover .b-resume-arr { transform: translateX(6px); color: #fff; }
 
-        /* Nav logo */
-        .nav-logo img { height: 38px; width: auto; display: block; }
-
-        /* Footer */
-        .bento-footer {
-            padding: 48px 20px;
-            background: #ececec;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .bento-footer-l {
-            font-size: 22px; font-weight: 900;
-            letter-spacing: -0.02em; color: #0a0a0a;
-        }
-        .bento-footer-r { display: flex; gap: 24px; }
-        .bento-footer-lnk {
-            font-size: 13px; font-weight: 600;
-            color: #888; text-decoration: none;
-            letter-spacing: 0.05em; transition: color 0.2s;
-        }
-        .bento-footer-lnk:hover { color: #FF5500; }
+        /* Nav logo — handled in base .nav-logo img rule */
 
         /* Generic dark-nav overlay class */
         .cs-dark .case-study-nav {
@@ -1920,7 +1919,7 @@
         @media (max-width: 1024px) {
             .bento-grid {
                 grid-template-columns: 1.8fr 1.2fr 1.5fr 1fr 1.5fr;
-                grid-template-rows: 180px 140px 150px 56px;
+                grid-template-rows: 1fr 0.72fr 0.78fr 48px;
             }
             .b-headline { font-size: 28px; }
         }
@@ -2034,7 +2033,6 @@
         .b-proj--dark .b-proj-num        { color: #888; }   /* was #333 → #666 (3.33:1) → #888 (5.37:1) ✓ */
         .b-proj--dark .b-proj-desc       { color: #888; }   /* was #555 → fail */
         .b-proj-desc                     { color: #555; }   /* was #aaa → fail on white */
-        .bento-footer-lnk                { color: #555; }   /* was #888 → fail on #ececec */
 
         /* CONTRAST — orange bg (design tradeoff: white on #FF5500 = 3.0:1 max achievable) */
         .cs2-final-label                 { color: rgba(255,255,255,0.95); } /* maximised within constraint */
@@ -2149,7 +2147,7 @@
             pointer-events: none; z-index: 10;
             transition: width 0.06s linear;
         }
-        .case-study-nav { position: relative; }
+        .case-study-nav { position: sticky; top: 0; }
 
         /* ── Orange divider line-draw on open ── */
         .cs2-hero-divider {
@@ -2210,8 +2208,8 @@
                 <img src="../source/square.png" alt="SAM — Samruddhi Pahune">
             </a>
             <div class="nav-links">
-                <a href="mailto:samruddhi@example.com" class="nav-link">Contact</a>
-                <a href="#" class="nav-link">Resume</a>
+                <a href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&su=Let%27s+Connect&to=pahunesamruddhi@gmail.com" target="_blank" rel="noopener" class="nav-link">Contact</a>
+                <a href="https://drive.google.com/file/d/1ddNeOfB12lvKfKnd0p1swr2TlEX51NjY/view?usp=sharing" target="_blank" rel="noopener" class="nav-link">Resume</a>
             </div>
         </div>
     </nav>
@@ -2239,13 +2237,13 @@
             <div class="bento-card b-proj b-proj--dark b-upi" data-case-study="cs2" role="button" tabindex="0" aria-label="Open case study: Failed UPI Debit">
                 <div class="b-glow"></div>
                 <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                <div class="b-proj-num">01 &middot; Featured</div>
+                <div class="b-proj-num">01 &middot; Behavior Design &middot; Banking AI</div>
                 <div>
                     <div class="b-proj-name">Failed UPI<br>Debit</div>
-                    <div class="b-proj-desc">Building a system that manages fear through logic. Ledger truth over user panic.</div>
+                    <div class="b-proj-desc">5-gate diagnostic engine. Escalation logic driven by ledger state, not user emotion.</div>
                 </div>
                 <div class="b-proj-foot">
-                    <span class="b-proj-cat">Diagnostic Engine</span>
+                    <span class="b-proj-cat">Decision Boundaries</span>
                     <span class="b-proj-arrow">↗</span>
                 </div>
             </div>
@@ -2254,13 +2252,13 @@
             <div class="bento-card b-proj b-smart" data-case-study="cs-smartcoin" role="button" tabindex="0" aria-label="Open case study: SmartCoin">
                 <div class="b-glow"></div>
                 <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9h3a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 0 0 3H14M12 6v2M12 16v2"/></svg>
-                <div class="b-proj-num">03 &middot; Fintech &middot; Behavioral Design</div>
+                <div class="b-proj-num">02 &middot; Fintech &middot; Behavioral Systems</div>
                 <div>
                     <div class="b-proj-name">SmartCoin</div>
-                    <div class="b-proj-desc">A bridge between borrowing and saving. A belief that was structurally true under one design became structurally false under a different one.</div>
+                    <div class="b-proj-desc">Restructured product behavior to surface savings within a borrowing-first system. Persona-driven segmentation across 1L users.</div>
                 </div>
                 <div class="b-proj-foot">
-                    <span class="b-proj-cat">Behavioral Design &middot; 2023</span>
+                    <span class="b-proj-cat">Product Behavior &middot; Fintech</span>
                     <span class="b-proj-arrow">↗</span>
                 </div>
             </div>
@@ -2269,13 +2267,13 @@
             <div class="bento-card b-proj b-proj--dark b-dottie" data-case-study="cs-dottie" role="button" tabindex="0" aria-label="Open case study: Dottie — IndiGo voice assistant">
                 <div class="b-glow"></div>
                 <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3M9 22h6"/></svg>
-                <div class="b-proj-num">03 &middot; Voice</div>
+                <div class="b-proj-num">03 &middot; Voice AI &middot; Speculative</div>
                 <div>
                     <div class="b-proj-name">Dottie</div>
-                    <div class="b-proj-desc">IndiGo's voice assistant. What if you could just call and book a flight?</div>
+                    <div class="b-proj-desc">Voice personality system for IndiGo. Confidence branching, payment separation, and three-option decision architecture.</div>
                 </div>
                 <div class="b-proj-foot">
-                    <span class="b-proj-cat">Conversation Design</span>
+                    <span class="b-proj-cat">AI Behavior Design</span>
                     <span class="b-proj-arrow">↗</span>
                 </div>
             </div>
@@ -2284,13 +2282,13 @@
             <div class="bento-card b-proj b-proj--dark b-icici" data-case-study="cs-icici" role="button" tabindex="0" aria-label="Open case study: Beyond Touchscreens — ICICI voicebot">
                 <div class="b-glow"></div>
                 <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-3.18-3.18 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 4.34l3-.87a2 2 0 0 1 2.07.98l1.34 2.69a2 2 0 0 1-.45 2.36L8.09 10a16 16 0 0 0 6 6l1.5-1.47a2 2 0 0 1 2.36-.45l2.69 1.34a2 2 0 0 1 .98 2.08z"/></svg>
-                <div class="b-proj-num">04 &middot; Banking AI</div>
+                <div class="b-proj-num">04 &middot; Production &middot; Banking AI</div>
                 <div>
                     <div class="b-proj-name">Beyond<br>Touchscreens</div>
-                    <div class="b-proj-desc">India's first transactional voicebot. 70+ live use cases. No visual confirmation.</div>
+                    <div class="b-proj-desc">70+ live transactional flows. Defined fallback logic, escalation policy, and safe-failure patterns for voice banking.</div>
                 </div>
                 <div class="b-proj-foot">
-                    <span class="b-proj-cat">AI Systems</span>
+                    <span class="b-proj-cat">AI Systems &middot; Production</span>
                     <span class="b-proj-arrow">↗</span>
                 </div>
             </div>
@@ -2299,13 +2297,13 @@
             <div class="bento-card b-proj b-vihar" data-case-study="cs-vihar" role="button" tabindex="0" aria-label="Open case study: Vihar — Van Vihar National Park">
                 <div class="b-glow"></div>
                 <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88"/></svg>
-                <div class="b-proj-num">05 &middot; Service Design</div>
+                <div class="b-proj-num">05 &middot; Service Systems</div>
                 <div>
                     <div class="b-proj-name">Vihar</div>
-                    <div class="b-proj-desc">80% of visitors missed the butterfly garden. An invisible guide fixed what signage couldn't.</div>
+                    <div class="b-proj-desc">80% of visitors missed key zones. Redesigned decision architecture across physical touchpoints.</div>
                 </div>
                 <div class="b-proj-foot">
-                    <span class="b-proj-cat">Experience Design</span>
+                    <span class="b-proj-cat">Systems Thinking</span>
                     <span class="b-proj-arrow">↗</span>
                 </div>
             </div>
@@ -2314,23 +2312,23 @@
             <div class="bento-card b-proj b-bhopal" data-case-study="cs-bhopal" role="button" tabindex="0" aria-label="Open case study: Bhopal By Bike — Chartered Cycles">
                 <div class="b-glow"></div>
                 <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5.5" cy="17.5" r="3"/><circle cx="18.5" cy="17.5" r="3"/><path d="M15 6a1 1 0 0 0-1-1h-3M8 17.5l2.5-5.5h7l-2-5.5"/><path d="M5.5 14.5l3.5-6.5"/></svg>
-                <div class="b-proj-num">06 &middot; Urban Design</div>
+                <div class="b-proj-num">06 &middot; Adoption Systems</div>
                 <div>
                     <div class="b-proj-name">Bhopal<br>By Bike</div>
-                    <div class="b-proj-desc">500 bikes. 100 docking stations. Less than 3% adoption. The curious case of Bhopal's unridden cycles.</div>
+                    <div class="b-proj-desc">500 bikes, 3% adoption. Diagnosed three chains of failure. Phygital intervention achieved 60% scan rate.</div>
                 </div>
                 <div class="b-proj-foot">
-                    <span class="b-proj-cat">Phygital Design</span>
+                    <span class="b-proj-cat">Service Strategy</span>
                     <span class="b-proj-arrow">↗</span>
                 </div>
             </div>
 
-            <!-- 8: Blog -->
-            <div class="bento-card b-blog-c b-blog" onclick="window.open('#','_blank')" role="button" tabindex="0" aria-label="Open blog: Notes on AI Systems">
+            <!-- 8: Behavioral Design -->
+            <div class="bento-card b-blog-c b-blog" onclick="window.open('https://www.instagram.com/decisions_by_design/?next=%2Fthinksome.sam%2F','_blank')" role="button" tabindex="0" aria-label="Open: Behavioral Design on Instagram">
                 <div class="b-glow"></div>
                 <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                <span class="b-blog-lbl">Writing</span>
-                <div class="b-blog-ttl">Notes on<br>AI Systems</div>
+                <span class="b-blog-lbl">Instagram</span>
+                <div class="b-blog-ttl">Behavioral Design</div>
                 <span class="b-blog-arr">↗</span>
             </div>
 
@@ -2341,29 +2339,12 @@
             </a>
 
         </div>
-
-        <!-- Footer -->
-        <div class="bento-footer">
-            <div class="bento-footer-l">Let&rsquo;s talk.</div>
-            <div class="bento-footer-r">
-                <a href="mailto:samruddhi@example.com" class="bento-footer-lnk">Email</a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener" class="bento-footer-lnk">LinkedIn</a>
-            </div>
-        </div>
     </main>
 
     <!-- Case Study Overlays -->
     
     <!-- Case Study 2: Designing for Panic -->
     <div class="case-study-overlay" id="cs2" role="dialog" aria-modal="true" aria-labelledby="cs2-title">
-
-        <!-- Sticky nav -->
-        <div class="case-study-nav">
-            <div class="case-study-nav-inner">
-                <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Designing for Panic</div>
-                <button class="close-case-study" onclick="closeCaseStudy('cs2')" aria-label="Close case study and return to portfolio">← Back</button>
-            </div>
-        </div>
 
         <div class="cs2-body">
 
@@ -2854,12 +2835,6 @@
     
     <!-- Case Study: SmartCoin -->
     <div class="case-study-overlay cs-dark" id="cs-smartcoin" role="dialog" aria-modal="true" aria-labelledby="cs-smartcoin-title">
-        <div class="case-study-nav">
-            <div class="case-study-nav-inner">
-                <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">SmartCoin</div>
-                <button class="close-case-study" onclick="closeCaseStudy('cs-smartcoin')" aria-label="Close case study and return to portfolio">&larr; Back</button>
-            </div>
-        </div>
         <div class="cs2-body">
 
             <!-- ═══════════════════════════════════════════════════════ HERO -->
@@ -3469,12 +3444,6 @@
     
     <!-- Case Study: Dottie -->
     <div class="case-study-overlay cs-dark" id="cs-dottie" role="dialog" aria-modal="true" aria-labelledby="cs-dottie-title">
-        <div class="case-study-nav">
-            <div class="case-study-nav-inner">
-                <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Dottie &mdash; IndiGo Voice Assistant</div>
-                <button class="close-case-study" onclick="closeCaseStudy('cs-dottie')" aria-label="Close case study and return to portfolio">&larr; Back</button>
-            </div>
-        </div>
         <div class="cs2-body">
 
             <!-- ═══════════════════════════════════════════════════════ HERO -->
@@ -3978,12 +3947,6 @@
 
     <!-- Case Study: Beyond Touchscreens (ICICI Voicebot) -->
     <div class="case-study-overlay cs-dark" id="cs-icici" role="dialog" aria-modal="true" aria-labelledby="cs-icici-title">
-        <div class="case-study-nav">
-            <div class="case-study-nav-inner">
-                <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">ICICI Bank Voicebot &mdash; Beyond Touchscreens</div>
-                <button class="close-case-study" onclick="closeCaseStudy('cs-icici')" aria-label="Close case study and return to portfolio">&larr; Back</button>
-            </div>
-        </div>
         <div class="cs2-body">
 
             <!-- ═══════════════════════════════════════════════════════ HERO -->
@@ -4321,12 +4284,6 @@
 
     <!-- Case Study: Vihar -->
     <div class="case-study-overlay cs-dark" id="cs-vihar" role="dialog" aria-modal="true" aria-labelledby="cs-vihar-title">
-        <div class="case-study-nav">
-            <div class="case-study-nav-inner">
-                <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Vihar &mdash; Van Vihar National Park</div>
-                <button class="close-case-study" onclick="closeCaseStudy('cs-vihar')" aria-label="Close case study and return to portfolio">&larr; Back</button>
-            </div>
-        </div>
         <div class="cs2-body">
 
             <!-- ═══════════════════════════════════════════════════════ HERO -->
@@ -4891,12 +4848,6 @@
 
     <!-- Case Study: Bhopal By Bike -->
     <div class="case-study-overlay cs-dark" id="cs-bhopal" role="dialog" aria-modal="true" aria-labelledby="cs-bhopal-title">
-        <div class="case-study-nav">
-            <div class="case-study-nav-inner">
-                <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Bhopal By Bike</div>
-                <button class="close-case-study" onclick="closeCaseStudy('cs-bhopal')" aria-label="Close case study and return to portfolio">← Back</button>
-            </div>
-        </div>
         <div class="cs2-body">
 
             <section class="cs2-hero">
@@ -5396,27 +5347,6 @@
                     statObs.observe(el);
                 });
             };
-
-            // ── 6. Footer entrance ───────────────────────────────────────
-            // "Let's talk." and links slide up when the footer scrolls into view.
-            (function footerEntrance() {
-                const l = document.querySelector('.bento-footer-l');
-                const r = document.querySelector('.bento-footer-r');
-                if (!l || !r || noMotion) return;
-                l.classList.add('reveal');
-                r.classList.add('reveal');
-                r.dataset.delay = '1';
-                const obs = new IntersectionObserver(entries => {
-                    entries.forEach(e => {
-                        if (e.isIntersecting) {
-                            e.target.classList.add('in-view');
-                            obs.unobserve(e.target);
-                        }
-                    });
-                }, { threshold: 0.2 });
-                obs.observe(l);
-                obs.observe(r);
-            })();
 
         })();
     </script>
