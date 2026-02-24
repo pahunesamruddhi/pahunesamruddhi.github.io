@@ -1,0 +1,4 @@
+{
+  "name": "design-token-extractor",
+  "description": "Extract design tokens from Figma or CSS into reusable CSS variables, JSON, or JS format. Use when user asks to extract design tokens, create design variables, standardize design values, or export from Figma."
+}

@@ -1,0 +1,4 @@
+{
+  "name": "asset-optimizer",
+  "description": "Bulk image compression, WebP/AVIF conversion, responsive srcset generation, and asset optimization. Use when user asks to optimize images, compress assets, convert to WebP, or generate responsive images."
+}

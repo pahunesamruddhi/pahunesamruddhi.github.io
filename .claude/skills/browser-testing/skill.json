@@ -1,0 +1,4 @@
+{
+  "name": "browser-testing",
+  "description": "Cross-browser compatibility testing matrix and responsive breakpoint validation. Use when user asks for browser testing, cross-browser check, responsive testing, or device testing."
+}

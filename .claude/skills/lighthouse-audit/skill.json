@@ -1,0 +1,4 @@
+{
+  "name": "lighthouse-audit",
+  "description": "Run Lighthouse audit and report Performance, Accessibility, SEO, and Best Practices scores. Use when user asks for Lighthouse audit, performance score, site audit, or web vitals check."
+}
