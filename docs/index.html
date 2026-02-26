@@ -655,9 +655,9 @@
         .cs2-sec--dark   { background: #0a0a0a; }
         .cs2-sec--mid    { background: #111111; }
         .cs2-sec-inner {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 56px;
+            padding: 0 40px;
         }
 
         /* LABEL / HEADING SYSTEM */
@@ -1268,16 +1268,20 @@
         .cs2-flow-link {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             margin-top: 32px;
-            font-size: 13px;
+            font-size: 16px;
             font-weight: 700;
             letter-spacing: 0.06em;
-            color: #FF5500;
+            color: white;
             text-decoration: none;
-            border-bottom: 1px solid rgba(255,85,0,0.35);
-            padding-bottom: 2px;
-            transition: border-color 0.2s, opacity 0.2s;
+            background: #FF5500;
+            padding: 12px 24px;
+            border-radius: 4px;
+            transition: background 0.2s, opacity 0.2s;
+        }
+        .cs2-flow-link:hover {
+            background: #E64A00;
         }
         .cs2-flow-link:hover { border-color: #FF5500; opacity: 0.8; }
 
@@ -2039,22 +2043,22 @@
         .cs2-final-support               { color: rgba(255,255,255,0.95); } /* maximised within constraint */
 
         /* Image blocks */
-        .cs2-img-figure { margin: 56px auto; max-width: 760px; }
-        .cs2-img-figure--wide { max-width: 880px; }
+        .cs2-img-figure { margin: 56px auto; max-width: 1120px; }
+        .cs2-img-figure--wide { max-width: 1200px; }
         .cs2-img-figure--medium { max-width: 500px; }
         .cs2-img-figure--phone { max-width: 340px; }
         .cs2-img-block {
-            width: 100%; aspect-ratio: 16/9;
-            background: #1c1c1c; border: 1px solid rgba(255,255,255,0.07);
+            width: 100%; aspect-ratio: auto;
+            background: #0a0a0a; border: 1px solid rgba(255,255,255,0.07);
             border-radius: 4px; overflow: hidden;
             position: relative; display: flex;
             align-items: center; justify-content: center;
         }
-        .cs2-img-block--light { background: #f5f5f5; border: 1px dashed #d0d0d0; }
-        .cs2-img-block--tall  { aspect-ratio: 4/3; }
+        .cs2-img-block--light { background: #ffffff; border: 1px solid #e0e0e0; }
+        .cs2-img-block--tall  { aspect-ratio: auto; }
         .cs2-img-block img {
-            position: absolute; inset: 0; width: 100%; height: 100%;
-            object-fit: cover; object-position: top; display: block; z-index: 2;
+            position: relative; width: 100%; height: auto;
+            object-fit: contain; object-position: center; display: block; z-index: 2;
         }
         .cs2-img-block--contain img { object-fit: contain; object-position: center; }
         .cs2-img-block--natural { aspect-ratio: unset; }
@@ -2356,7 +2360,6 @@
                     <div class="cs2-hero-divider"></div>
                     <blockquote class="cs2-hero-quote">&ldquo;In the three seconds after a payment fails and the money leaves the account, a user enters a state of biological panic.&rdquo;</blockquote>
                     <p class="cs2-hero-sub">This is the story of building a system that manages that fear through logic.</p>
-                    <a href="#" class="cs2-flow-link" target="_blank" rel="noopener">View UPI Debit Flow &rarr;</a>
                 </div>
                 <div class="cs2-bg-word" aria-hidden="true">PANIC</div>
             </section>
@@ -2714,6 +2717,10 @@
                         <div class="cs2-persona-goal">Goal<span>Preserve Velocity</span></div>
                     </div>
                 </div>
+
+                <div style="text-align: center; padding: 32px 0;">
+                    <a href="https://whimsical.com/upi-debit-issue-TavZoaH14YQUfVuN6TACPe" class="cs2-flow-link" target="_blank" rel="noopener">View UPI Debit Flow &rarr;</a>
+                </div>
             </section>
 
             <!-- ══════════════════════════════════════════ 06 / UI STRATEGY -->
@@ -2736,7 +2743,7 @@
             </section>
 
             <!-- ══════════════════════════════════════════ 07 / TIME DESIGN -->
-            <section class="cs2-sec cs2-sec--white" style="padding-top:0;padding-bottom:64px;">
+            <section class="cs2-sec cs2-sec--dark" style="padding-top:0;padding-bottom:64px;">
                 <div class="cs2-sec-inner">
                     <figure class="cs2-img-figure">
                         <!-- Retail vs SME interface comparison -->
