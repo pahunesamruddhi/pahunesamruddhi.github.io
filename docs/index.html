@@ -893,50 +893,64 @@
             color: #fff;
         }
 
-        /* VOICE TRANSCRIPT UI */
+        /* VOICE TRANSCRIPT UI - CHAT BUBBLES */
         .cs2-transcript {
             width: 100%;
-            max-width: 800px;
-            margin: 56px 0;
+            max-width: 700px;
+            margin: 56px auto;
             display: flex;
             flex-direction: column;
-            gap: 32px;
+            gap: 16px;
         }
 
-        .cs2-ts-row {
-            display: grid;
-            grid-template-columns: 100px 1fr;
-            gap: 32px;
-            align-items: flex-start;
+        .cs2-chat-bubble {
+            display: flex;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: chatAppear 0.5s ease forwards;
         }
 
-        .cs2-ts-label {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #999;
-            text-align: right;
-            padding-top: 6px;
-        }
-
-        .cs2-ts-text {
-            font-size: 22px;
+        .cs2-chat-msg {
+            max-width: 85%;
+            padding: 14px 20px;
+            font-size: 18px;
             line-height: 1.5;
-            color: #0a0a0a;
             font-weight: 500;
+            position: relative;
         }
 
-        .cs2-ts-text--user {
-            color: #666;
+        /* Bot Message (Left) */
+        .cs2-chat-bubble--bot {
+            justify-content: flex-start;
+        }
+
+        .cs2-chat-bubble--bot .cs2-chat-msg {
+            background-color: #fff;
+            color: #0a0a0a;
+            border-radius: 20px 20px 20px 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        /* User Message (Right) */
+        .cs2-chat-bubble--user {
+            justify-content: flex-end;
+        }
+
+        .cs2-chat-bubble--user .cs2-chat-msg {
+            background-color: #f0f0f0;
+            color: #333;
+            border-radius: 20px 20px 4px 20px;
         }
 
         .cs2-ts-system {
-            grid-column: 1 / -1;
             display: flex;
             align-items: center;
             gap: 16px;
             margin: 16px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: chatAppear 0.5s ease forwards;
         }
 
         .cs2-ts-system::before,
@@ -953,6 +967,54 @@
             letter-spacing: 0.12em;
             text-transform: uppercase;
             color: #FF5500;
+        }
+
+        /* Staggered Animations */
+        @keyframes chatAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cs2-transcript> :nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .cs2-transcript> :nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .cs2-transcript> :nth-child(3) {
+            animation-delay: 1.4s;
+        }
+
+        .cs2-transcript> :nth-child(4) {
+            animation-delay: 2.2s;
+        }
+
+        .cs2-transcript> :nth-child(5) {
+            animation-delay: 2.6s;
+        }
+
+        .cs2-transcript> :nth-child(6) {
+            animation-delay: 3.2s;
+        }
+
+        .cs2-transcript> :nth-child(7) {
+            animation-delay: 3.8s;
+        }
+
+        .cs2-transcript> :nth-child(8) {
+            animation-delay: 4.8s;
+        }
+
+        .cs2-transcript> :nth-child(9) {
+            animation-delay: 5.6s;
+        }
+
+        .cs2-transcript> :nth-child(10) {
+            animation-delay: 6.4s;
         }
 
         .cs2-ts-resolved {
@@ -973,10 +1035,12 @@
                 grid-template-columns: 1fr;
                 gap: 8px;
             }
+
             .cs2-ts-label {
                 text-align: left;
                 padding-top: 0;
             }
+
             .cs2-ts-text {
                 font-size: 18px;
             }
@@ -3831,447 +3895,508 @@
 
     <!-- Case Study Overlays -->
 
-<!-- Case Study 2: Where Did My Money Go? -->
-<div class="case-study-overlay" id="cs2" role="dialog" aria-modal="true" aria-labelledby="cs2-title">
+    <!-- Case Study 2: Where Did My Money Go? -->
+    <div class="case-study-overlay" id="cs2" role="dialog" aria-modal="true" aria-labelledby="cs2-title">
 
-    <div class="cs2-body">
+        <div class="cs2-body">
 
-        <!-- ═══════════════════════════════════════════════════════ HERO -->
-        <section class="cs2-hero">
-            <div class="cs2-hero-inner">
-                <span class="cs2-kicker">Case Study &middot; Failed UPI Debit &middot; Tier I Indian Bank</span>
-                <h1 class="cs2-title" id="cs2-title">Where Did<br>My Money Go?</h1>
-                <div class="cs2-hero-divider"></div>
-                <blockquote class="cs2-hero-quote">&ldquo;160 million moments a month where someone is standing somewhere &mdash; a grocery store, a petrol pump, a chai stall &mdash; staring at their phone, thinking: where did my money go?&rdquo;</blockquote>
-                <p class="cs2-hero-sub">This is the story of turning panic into diagnosis.</p>
+            <!-- ═══════════════════════════════════════════════════════ HERO -->
+            <section class="cs2-hero">
+                <div class="cs2-hero-inner">
+                    <span class="cs2-kicker">Case Study &middot; Failed UPI Debit &middot; Tier I Indian Bank</span>
+                    <h1 class="cs2-title" id="cs2-title">Where Did<br>My Money Go?</h1>
+                    <div class="cs2-hero-divider"></div>
+                    <blockquote class="cs2-hero-quote">&ldquo;160 million moments a month where someone is standing
+                        somewhere &mdash; a grocery store, a petrol pump, a chai stall &mdash; staring at their phone,
+                        thinking: where did my money go?&rdquo;</blockquote>
+                    <p class="cs2-hero-sub">This is the story of turning panic into diagnosis.</p>
+                </div>
+                <div class="cs2-bg-word" aria-hidden="true">PANIC</div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════ 01 / THE MOMENT -->
+            <section class="cs2-sec cs2-sec--dark">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label cs2-label--dim">01 / The Moment</span>
+                    <h2 class="cs2-h2 cs2-h2--white">20 Billion<br><em>Payments.</em></h2>
+
+                    <p class="cs2-lead cs2-lead--dark"><strong>Every month.</strong> NPCI puts failure rates at under
+                        1%. That sounds like the system works &mdash; until you do the math.</p>
+                </div>
+            </section>
+
+            <!-- Perception split — full bleed -->
+            <div class="cs2-perception-split">
+                <div class="cs2-perception-side cs2-perception-side--dark" style="background:#111;">
+                    <span class="cs2-perception-tag">1% of 20 Billion</span>
+                    <div class="cs2-perception-big" style="color:#FF5500;">160M</div>
+                    <span class="cs2-perception-count" style="color:#999;">failed transactions / month</span>
+                </div>
+                <div class="cs2-perception-side cs2-perception-side--dark">
+                    <span class="cs2-perception-tag">Each One</span>
+                    <div class="cs2-perception-big" style="color:#fff;">A Person.<br>Waiting.</div>
+                    <span class="cs2-perception-count" style="color:#666;">staring at their phone</span>
+                </div>
             </div>
-            <div class="cs2-bg-word" aria-hidden="true">PANIC</div>
-        </section>
 
-        <!-- ═══════════════════════════════════════════════ 01 / THE MOMENT -->
-        <section class="cs2-sec cs2-sec--dark">
-            <div class="cs2-sec-inner">
-                <span class="cs2-label cs2-label--dim">01 / The Moment</span>
-                <h2 class="cs2-h2 cs2-h2--white">20 Billion<br><em>Payments.</em></h2>
+            <!-- The Scene -->
+            <section class="cs2-sec cs2-sec--white">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">8:42 PM &middot; Grocery Store Queue</span>
+                    <p class="cs2-p">You scan the QR. Phone buzzes &mdash; amount deducted. You look up at the
+                        shopkeeper. He&rsquo;s looking at his machine. Waiting for the confirmation sound.</p>
+                    <p class="cs2-p"><strong>It doesn&rsquo;t come.</strong></p>
+                    <p class="cs2-p">You show him your debit notification. He shakes his head. Minutes pass. Your app
+                        says <em>pending.</em> Your notification says <em>debited.</em> He says he didn&rsquo;t get it.
+                    </p>
 
-                <p class="cs2-lead cs2-lead--dark"><strong>Every month.</strong> NPCI puts failure rates at under 1%. That sounds like the system works &mdash; until you do the math.</p>
-            </div>
-        </section>
+                    <div class="cs2-statement" style="margin-top:40px;">Where did my money go?</div>
+                </div>
+            </section>
 
-        <!-- Perception split — full bleed -->
-        <div class="cs2-perception-split">
-            <div class="cs2-perception-side cs2-perception-side--dark" style="background:#111;">
-                <span class="cs2-perception-tag">1% of 20 Billion</span>
-                <div class="cs2-perception-big" style="color:#FF5500;">160M</div>
-                <span class="cs2-perception-count" style="color:#999;">failed transactions / month</span>
-            </div>
-            <div class="cs2-perception-side cs2-perception-side--dark">
-                <span class="cs2-perception-tag">Each One</span>
-                <div class="cs2-perception-big" style="color:#fff;">A Person.<br>Waiting.</div>
-                <span class="cs2-perception-count" style="color:#666;">staring at their phone</span>
-            </div>
-        </div>
+            <!-- ══════════════════════════════════════════ 02 / THE PATTERNS -->
+            <section class="cs2-sec cs2-sec--dark">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label cs2-label--dim">02 / The Patterns</span>
+                    <h2 class="cs2-h2 cs2-h2--white">I Went to Forums.<br><em>Not Documentation.</em></h2>
 
-        <!-- The Scene -->
-        <section class="cs2-sec cs2-sec--white">
-            <div class="cs2-sec-inner">
-                <span class="cs2-label">8:42 PM &middot; Grocery Store Queue</span>
-                <p class="cs2-p">You scan the QR. Phone buzzes &mdash; amount deducted. You look up at the shopkeeper. He&rsquo;s looking at his machine. Waiting for the confirmation sound.</p>
-                <p class="cs2-p"><strong>It doesn&rsquo;t come.</strong></p>
-                <p class="cs2-p">You show him your debit notification. He shakes his head. Minutes pass. Your app says <em>pending.</em> Your notification says <em>debited.</em> He says he didn&rsquo;t get it.</p>
+                    <p class="cs2-lead cs2-lead--dark">Where people actually scream about failed payments. I
+                        didn&rsquo;t go in with a hypothesis. I went in with a question: <strong>what is actually
+                            happening to these people?</strong></p>
 
-                <div class="cs2-statement" style="margin-top:40px;">Where did my money go?</div>
-            </div>
-        </section>
+                    <h3 class="cs2-h3 cs2-h3--white" style="margin-top:56px;">Three patterns kept appearing.</h3>
 
-        <!-- ══════════════════════════════════════════ 02 / THE PATTERNS -->
-        <section class="cs2-sec cs2-sec--dark">
-            <div class="cs2-sec-inner">
-                <span class="cs2-label cs2-label--dim">02 / The Patterns</span>
-                <h2 class="cs2-h2 cs2-h2--white">I Went to Forums.<br><em>Not Documentation.</em></h2>
+                    <div class="cs2-observations" style="margin-top:32px;">
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon" style="color:#FF5500;font-weight:700;">01</span>
+                            <div>
+                                <strong style="color:#fff;">Delayed Refunds</strong>
+                                <p class="cs2-p cs2-p--dark" style="margin-top:8px;">The money was coming back.
+                                    Sometimes within hours. The system had already initiated the reversal. But the user
+                                    had no way of knowing. So they panicked. Called. Opened tickets. On transactions
+                                    that were already fixing themselves.</p>
+                            </div>
+                        </div>
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon" style="color:#FF5500;font-weight:700;">02</span>
+                            <div>
+                                <strong style="color:#fff;">No Status Clarity</strong>
+                                <p class="cs2-p cs2-p--dark" style="margin-top:8px;">The UPI app says pending. The bank
+                                    says successful. Same transaction, same moment &mdash; two completely different
+                                    realities. Nobody told the user which one was true.</p>
+                            </div>
+                        </div>
+                        <div class="cs2-obs-item">
+                            <span class="cs2-obs-icon" style="color:#FF5500;font-weight:700;">03</span>
+                            <div>
+                                <strong style="color:#fff;">A Responsibility Loop</strong>
+                                <p class="cs2-p cs2-p--dark" style="margin-top:8px;">App says talk to the bank. Bank
+                                    says it shows successful. Back to the app. &ldquo;Running in circles&rdquo; showed
+                                    up so many times across complaint threads it started feeling like a pattern.</p>
+                            </div>
+                        </div>
+                    </div>
 
-                <p class="cs2-lead cs2-lead--dark">Where people actually scream about failed payments. I didn&rsquo;t go in with a hypothesis. I went in with a question: <strong>what is actually happening to these people?</strong></p>
+                    <blockquote class="cs2-pullquote cs2-pullquote--dark" style="margin-top:48px;">One thing caused all
+                        three: the screen the user was looking at had no idea what was actually happening to their
+                        money.</blockquote>
+                </div>
+            </section>
 
-                <h3 class="cs2-h3 cs2-h3--white" style="margin-top:56px;">Three patterns kept appearing.</h3>
+            <!-- The Other Side of the Gap -->
+            <section class="cs2-sec cs2-sec--white">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">The Other Side of the Gap</span>
+                    <h3 class="cs2-h3" style="margin-top:0;">It wasn&rsquo;t just the user suffering.</h3>
 
-                <div class="cs2-observations" style="margin-top:32px;">
-                    <div class="cs2-obs-item">
-                        <span class="cs2-obs-icon" style="color:#FF5500;font-weight:700;">01</span>
+                    <p class="cs2-p">When that panicking person finally reaches support, a ticket gets opened. The
+                        bank&rsquo;s investigation team picks it up. They pull the transaction, check the records
+                        &mdash; and most of the time, <strong>the money already came back on its own.</strong></p>
+                    <p class="cs2-p">The system had already fixed it. But the investigation has started. The
+                        bank&rsquo;s compliance team has spent time on a case that didn&rsquo;t need to exist.</p>
+
+                    <div class="cs2-two-col" style="margin-top:48px;">
+                        <div class="cs2-box-dark">
+                            <span class="cs2-box-label">The User</span>
+                            <ul class="cs2-pain-list">
+                                <li>Sees money debited</li>
+                                <li>No status clarity</li>
+                                <li>Panics, calls support</li>
+                            </ul>
+                        </div>
+                        <div class="cs2-box-dark">
+                            <span class="cs2-box-label">The Bank</span>
+                            <ul class="cs2-pain-list">
+                                <li>Opens investigation ticket</li>
+                                <li>Pulls transaction records</li>
+                                <li>Finds money already returned</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p class="cs2-p" style="margin-top:32px;">Two people. Same information gap. Both acting rationally
+                        with what they could see. Neither wrong. <strong>The information just wasn&rsquo;t
+                            there.</strong></p>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════ 03 / THE LANGUAGE PROBLEM -->
+            <section class="cs2-sec cs2-sec--dark">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label cs2-label--dim">03 / The Language Problem</span>
+                    <h2 class="cs2-h2 cs2-h2--white">Fifteen Realities.<br><em>Three Words.</em></h2>
+
+                    <p class="cs2-lead cs2-lead--dark">Stress narrows cognition. In that state, you say the only thing
+                        that makes sense: <strong>&ldquo;money got cut from my account.&rdquo;</strong></p>
+
+                    <p class="cs2-p cs2-p--dark">On the bank side? Same three words. <strong>Fifteen different
+                            realities</strong> &mdash; succeeded but slow to reflect, in transit, reversal processing,
+                        duplicate charge, mandate they forgot about, notification that fired when nothing moved. Some
+                        resolve themselves. Some need a human. Some are fraud.</p>
+
+                    <div class="cs2-statement" style="margin-top:40px;color:#fff;">The information that distinguishes
+                        the fifteen cases isn&rsquo;t in the language. It was never in the language.</div>
+
+                    <div class="cs2-insight-bar" style="margin-top:40px;">
+                        <div class="cs2-insight-item">
+                            <span class="cs2-insight-label">Language</span>
+                            <span class="cs2-insight-verdict cs2-insight-verdict--bad">Noise</span>
+                        </div>
+                        <div class="cs2-insight-divider">vs</div>
+                        <div class="cs2-insight-item">
+                            <span class="cs2-insight-label">The Ledger</span>
+                            <span class="cs2-insight-verdict cs2-insight-verdict--good">Source of Truth</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════════ 04 / THE TENSION -->
+            <section class="cs2-sec cs2-sec--white">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">04 / The Tension</span>
+                    <h2 class="cs2-h2">Empathy vs.<br><em>Compliance.</em></h2>
+
+                    <p class="cs2-lead"><strong>Empathy</strong> says &mdash; be warm, be fast, reassure.
+                        <strong>Compliance</strong> says &mdash; be slow, be verified, protect the bank.</p>
+
+                    <p class="cs2-p">Reassuring before you&rsquo;ve checked the ledger isn&rsquo;t kindness &mdash;
+                        it&rsquo;s a guess. Every system I&rsquo;ve seen compromises between the two. But a human agent
+                        doesn&rsquo;t. They pull the transaction first. <strong>Diagnose first, talk second.</strong>
+                    </p>
+
+                    <div style="border-top:3px solid #FF5500;padding:32px 0 0;margin:48px 0 32px;">
+                        <p class="cs2-statement">The tension only exists because the conversation starts before anyone
+                            knows what&rsquo;s true.</p>
+                    </div>
+
+                    <div class="cs2-swap-banner" style="margin-top:40px;">
+                        <div class="cs2-swap-col">
+                            <span class="cs2-swap-tag">Before</span>
+                            <span class="cs2-swap-word-old">Support Conversation</span>
+                        </div>
+                        <span class="cs2-swap-arrow">&rarr;</span>
+                        <div class="cs2-swap-col">
+                            <span class="cs2-swap-tag cs2-swap-tag--orange">After</span>
+                            <span class="cs2-swap-word-new">Diagnostic Engine</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════════ 05 / THE ENGINE -->
+            <section class="cs2-sec cs2-sec--dark" style="padding:0;">
+                <div class="funnel-diagram-wrap">
+
+                    <!-- Header -->
+                    <div class="funnel-diagram-hdr">
                         <div>
-                            <strong style="color:#fff;">Delayed Refunds</strong>
-                            <p class="cs2-p cs2-p--dark" style="margin-top:8px;">The money was coming back. Sometimes within hours. The system had already initiated the reversal. But the user had no way of knowing. So they panicked. Called. Opened tickets. On transactions that were already fixing themselves.</p>
+                            <span class="cs2-label cs2-label--dim">05 / The Engine</span>
+                            <h2 class="cs2-h2 cs2-h2--white" style="margin-top:16px;">Five Gates.</h2>
+                        </div>
+                        <div class="funnel-diagram-sub">
+                            Before anything gets escalated &mdash; before a ticket, before an agent &mdash; the engine
+                            runs five checks.
                         </div>
                     </div>
-                    <div class="cs2-obs-item">
-                        <span class="cs2-obs-icon" style="color:#FF5500;font-weight:700;">02</span>
+
+                    <!-- Flow -->
+                    <div class="funnel-flow">
+
+                        <div class="funnel-node funnel-node--start">
+                            <div class="funnel-node-dot"></div>
+                            <span class="funnel-node-label">User Reaches Support</span>
+                        </div>
+                        <div class="funnel-v-line"></div>
+
+                        <div class="funnel-gate">
+                            <div class="funnel-gate-num-col">
+                                <span class="funnel-gate-num">01</span>
+                                <div class="funnel-gate-connector"></div>
+                            </div>
+                            <div class="funnel-gate-body">
+                                <span class="funnel-gate-label">Debit Verification</span>
+                                <div class="funnel-gate-title">Did Money Actually Leave?</div>
+                                <p class="funnel-gate-desc">Sometimes the notification fires but the ledger didn&rsquo;t
+                                    move. If no debit posted &mdash; resolved. Right there. Under 30 seconds.</p>
+                                <span class="funnel-gate-prevents">Prevents: Ghost Transaction Tickets</span>
+                            </div>
+                            <div class="funnel-gate-constraint">
+                                <span class="funnel-constraint-label">System Constraint</span>
+                                <span class="funnel-constraint-text">Requires reliable ledger uptime. The system cannot
+                                    afford ambiguity here.</span>
+                            </div>
+                        </div>
+
+                        <div class="funnel-gate">
+                            <div class="funnel-gate-num-col">
+                                <span class="funnel-gate-num">02</span>
+                                <div class="funnel-gate-connector"></div>
+                            </div>
+                            <div class="funnel-gate-body">
+                                <span class="funnel-gate-label">Payment Classification</span>
+                                <div class="funnel-gate-title">What Payment Channel?</div>
+                                <p class="funnel-gate-desc">UPI, card, mandate, subscription &mdash; each has different
+                                    lifecycle rules, different regulatory timelines, different dispute mechanisms. The
+                                    engine classifies from the ledger, not from what the user said.</p>
+                                <span class="funnel-gate-prevents">Prevents: Misrouting &amp; SLA Violations</span>
+                            </div>
+                            <div class="funnel-gate-constraint">
+                                <span class="funnel-constraint-label">System Constraint</span>
+                                <span class="funnel-constraint-text">Categorization adds logic complexity &mdash; but
+                                    protects downstream accuracy across rail types.</span>
+                            </div>
+                        </div>
+
+                        <div class="funnel-gate">
+                            <div class="funnel-gate-num-col">
+                                <span class="funnel-gate-num">03</span>
+                                <div class="funnel-gate-connector"></div>
+                            </div>
+                            <div class="funnel-gate-body">
+                                <span class="funnel-gate-label">Real-Time Ledger Poll</span>
+                                <div class="funnel-gate-title">What Does the Ledger Say Right Now?</div>
+                                <p class="funnel-gate-desc">Not when the notification went out. Not five minutes ago.
+                                    Right now. Because by the time someone reaches support, the transaction might have
+                                    auto-reversed. If the money came back &mdash; done.</p>
+                                <span class="funnel-gate-prevents">Prevents: Investigating Resolved Transactions</span>
+                            </div>
+                            <div class="funnel-gate-constraint">
+                                <span class="funnel-constraint-label">System Constraint</span>
+                                <span class="funnel-constraint-text">Requires real-time ledger access. Higher overhead
+                                    but prevents far costlier investigations.</span>
+                            </div>
+                        </div>
+
+                        <div class="funnel-gate">
+                            <div class="funnel-gate-num-col">
+                                <span class="funnel-gate-num">04</span>
+                                <div class="funnel-gate-connector"></div>
+                            </div>
+                            <div class="funnel-gate-body">
+                                <span class="funnel-gate-label">Reversal Check</span>
+                                <div class="funnel-gate-title">Has the Refund Already Landed?</div>
+                                <p class="funnel-gate-desc">If an auto-reversal completed while the user was in the
+                                    queue &mdash; the system catches it. No point investigating money that&rsquo;s
+                                    already returned.</p>
+                                <span class="funnel-gate-prevents">Prevents: Duplicate Investigations</span>
+                            </div>
+                            <div class="funnel-gate-constraint">
+                                <span class="funnel-constraint-label">System Constraint</span>
+                                <span class="funnel-constraint-text">Must check credit leg independently, not assume
+                                    from debit status.</span>
+                            </div>
+                        </div>
+
+                        <div class="funnel-gate">
+                            <div class="funnel-gate-num-col">
+                                <span class="funnel-gate-num">05</span>
+                            </div>
+                            <div class="funnel-gate-body">
+                                <span class="funnel-gate-label">Reversal Window</span>
+                                <div class="funnel-gate-title">Is the Window Still Open?</div>
+                                <p class="funnel-gate-desc">If yes, the system waits &mdash; but tells the user exactly
+                                    what&rsquo;s happening, exactly when to expect resolution, and exactly what will
+                                    happen if it doesn&rsquo;t resolve. Raising a dispute too early can push an
+                                    auto-reversing transaction into a multi-day investigation loop.</p>
+                                <span class="funnel-gate-prevents">Prevents: Premature Escalation</span>
+                            </div>
+                            <div class="funnel-gate-constraint">
+                                <span class="funnel-constraint-label">System Constraint</span>
+                                <span class="funnel-constraint-text"
+                                    style="color:rgba(255,85,0,0.9);font-weight:600;font-style:normal;">Intentionally
+                                    restricts the impulse to act instantly.</span>
+                            </div>
+                        </div>
+
+                        <div class="funnel-v-line"></div>
+                        <div class="funnel-node funnel-node--end">
+                            <div class="funnel-node-dot"></div>
+                            <span class="funnel-node-label">Verified Escalation</span>
+                        </div>
+
+                    </div>
+
+                    <!-- Legend -->
+                    <div class="funnel-legend">
+                        <div class="funnel-legend-item">
+                            <div class="funnel-legend-dot funnel-legend-dot--grey"></div>
+                            Logic gate
+                        </div>
+                        <div class="funnel-legend-item">
+                            <div class="funnel-legend-dot funnel-legend-dot--orange"></div>
+                            System constraint (hover to reveal)
+                        </div>
+                        <div class="funnel-legend-item">
+                            <div class="funnel-legend-dot funnel-legend-dot--orange"
+                                style="box-shadow:0 0 8px rgba(255,85,0,0.5);"></div>
+                            Verified outcome
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- All five pass -->
+            <section class="cs2-sec cs2-sec--dark" style="padding-top:0;">
+                <div class="cs2-sec-inner">
+                    <p class="cs2-lead cs2-lead--dark"><strong>All five pass.</strong> Only then does the system offer
+                        to raise a service request. Verified. Correctly classified. With explicit user consent.</p>
+                    <blockquote class="cs2-pullquote cs2-pullquote--dark">Ghost tickets become structurally impossible.
+                    </blockquote>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════════ 06 / IN PRACTICE -->
+            <section class="cs2-sec cs2-sec--grey">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label">06 / In Practice</span>
+                    <h2 class="cs2-h2">A Ghost Ticket<br><em>That Never Existed.</em></h2>
+
+                    <!-- Voice Transcript UI -->
+                    <div class="cs2-transcript">
+                        <div class="cs2-chat-bubble cs2-chat-bubble--user">
+                            <div class="cs2-chat-msg">My payment says pending but money got deducted.</div>
+                        </div>
+
+                        <div class="cs2-ts-system">
+                            <div class="cs2-ts-system-text">Authenticating &middot; OTP sent</div>
+                        </div>
+
+                        <div class="cs2-chat-bubble cs2-chat-bubble--bot">
+                            <div class="cs2-chat-msg">I can see three recent transactions on your account. Was it the
+                                &#x20B9;1,200 to BigBasket at 8:42 PM?</div>
+                        </div>
+
+                        <div class="cs2-chat-bubble cs2-chat-bubble--user">
+                            <div class="cs2-chat-msg">Yes, that one.</div>
+                        </div>
+
+                        <div class="cs2-ts-system">
+                            <div class="cs2-ts-system-text">Engine running &middot; Gate 1&hellip; Gate 2&hellip; Gate
+                                3&hellip;</div>
+                        </div>
+
+                        <div class="cs2-ts-system">
+                            <div class="cs2-ts-system-text" style="color:#FF5500;">Gate 4 &mdash; Reversal detected
+                            </div>
+                        </div>
+
+                        <div class="cs2-chat-bubble cs2-chat-bubble--bot">
+                            <div class="cs2-chat-msg">Good news &mdash; a reversal of &#x20B9;1,200 was already
+                                processed and credited back to your account. The notification fired when the payment was
+                                initiated, but the reversal has since completed.</div>
+                        </div>
+
+                        <div class="cs2-chat-bubble cs2-chat-bubble--user">
+                            <div class="cs2-chat-msg">But I got the debit message, it said money was deducted.</div>
+                        </div>
+
+                        <div class="cs2-chat-bubble cs2-chat-bubble--bot">
+                            <div class="cs2-chat-msg">I understand. The debit notification and the actual ledger state
+                                can diverge briefly. I&rsquo;d suggest checking your current balance. If it still
+                                doesn&rsquo;t reflect, please call back and we&rsquo;ll escalate.</div>
+                        </div>
+
+                        <div class="cs2-ts-resolved">&#10003; RESOLVED &middot; UNDER 2 MINUTES &middot; NO TICKET
+                            CREATED</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════════ 07 / WHAT SHIPPED -->
+            <section class="cs2-sec cs2-sec--dark">
+                <div class="cs2-sec-inner">
+                    <span class="cs2-label cs2-label--dim">07 / What Shipped</span>
+                    <h2 class="cs2-h2 cs2-h2--white">The Core Idea<br><em
+                            style="font-style:italic;color:#888;">Shipped.</em></h2>
+
+                    <div class="cs2-two-col" style="margin-top:48px;">
                         <div>
-                            <strong style="color:#fff;">No Status Clarity</strong>
-                            <p class="cs2-p cs2-p--dark" style="margin-top:8px;">The UPI app says pending. The bank says successful. Same transaction, same moment &mdash; two completely different realities. Nobody told the user which one was true.</p>
+                            <h3 class="cs2-h3 cs2-h3--white" style="margin-top:0;">What went live</h3>
+                            <div class="cs2-observations">
+                                <div class="cs2-obs-item">
+                                    <span class="cs2-obs-icon" style="color:#FF5500;font-weight:700;">&#10003;</span>
+                                    <div>
+                                        <strong style="color:#fff;">Rail detection</strong>
+                                        <p class="cs2-p cs2-p--dark" style="margin-top:8px;">Each payment rail has
+                                            different lifecycle rules. You can&rsquo;t interpret transaction state
+                                            without knowing the rail first.</p>
+                                    </div>
+                                </div>
+                                <div class="cs2-obs-item">
+                                    <span class="cs2-obs-icon" style="color:#FF5500;font-weight:700;">&#10003;</span>
+                                    <div>
+                                        <strong style="color:#fff;">Five-gate diagnostic engine</strong>
+                                        <p class="cs2-p cs2-p--dark" style="margin-top:8px;">The core logic that checks
+                                            the ledger before any conversation begins.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="cs2-obs-item">
-                        <span class="cs2-obs-icon" style="color:#FF5500;font-weight:700;">03</span>
                         <div>
-                            <strong style="color:#fff;">A Responsibility Loop</strong>
-                            <p class="cs2-p cs2-p--dark" style="margin-top:8px;">App says talk to the bank. Bank says it shows successful. Back to the app. &ldquo;Running in circles&rdquo; showed up so many times across complaint threads it started feeling like a pattern.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <blockquote class="cs2-pullquote cs2-pullquote--dark" style="margin-top:48px;">One thing caused all three: the screen the user was looking at had no idea what was actually happening to their money.</blockquote>
-            </div>
-        </section>
-
-        <!-- The Other Side of the Gap -->
-        <section class="cs2-sec cs2-sec--white">
-            <div class="cs2-sec-inner">
-                <span class="cs2-label">The Other Side of the Gap</span>
-                <h3 class="cs2-h3" style="margin-top:0;">It wasn&rsquo;t just the user suffering.</h3>
-
-                <p class="cs2-p">When that panicking person finally reaches support, a ticket gets opened. The bank&rsquo;s investigation team picks it up. They pull the transaction, check the records &mdash; and most of the time, <strong>the money already came back on its own.</strong></p>
-                <p class="cs2-p">The system had already fixed it. But the investigation has started. The bank&rsquo;s compliance team has spent time on a case that didn&rsquo;t need to exist.</p>
-
-                <div class="cs2-two-col" style="margin-top:48px;">
-                    <div class="cs2-box-dark">
-                        <span class="cs2-box-label">The User</span>
-                        <ul class="cs2-pain-list">
-                            <li>Sees money debited</li>
-                            <li>No status clarity</li>
-                            <li>Panics, calls support</li>
-                        </ul>
-                    </div>
-                    <div class="cs2-box-dark">
-                        <span class="cs2-box-label">The Bank</span>
-                        <ul class="cs2-pain-list">
-                            <li>Opens investigation ticket</li>
-                            <li>Pulls transaction records</li>
-                            <li>Finds money already returned</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <p class="cs2-p" style="margin-top:32px;">Two people. Same information gap. Both acting rationally with what they could see. Neither wrong. <strong>The information just wasn&rsquo;t there.</strong></p>
-            </div>
-        </section>
-
-        <!-- ══════════════════════════════════════════ 03 / THE LANGUAGE PROBLEM -->
-        <section class="cs2-sec cs2-sec--dark">
-            <div class="cs2-sec-inner">
-                <span class="cs2-label cs2-label--dim">03 / The Language Problem</span>
-                <h2 class="cs2-h2 cs2-h2--white">Fifteen Realities.<br><em>Three Words.</em></h2>
-
-                <p class="cs2-lead cs2-lead--dark">Stress narrows cognition. In that state, you say the only thing that makes sense: <strong>&ldquo;money got cut from my account.&rdquo;</strong></p>
-
-                <p class="cs2-p cs2-p--dark">On the bank side? Same three words. <strong>Fifteen different realities</strong> &mdash; succeeded but slow to reflect, in transit, reversal processing, duplicate charge, mandate they forgot about, notification that fired when nothing moved. Some resolve themselves. Some need a human. Some are fraud.</p>
-
-                <div class="cs2-statement" style="margin-top:40px;color:#fff;">The information that distinguishes the fifteen cases isn&rsquo;t in the language. It was never in the language.</div>
-
-                <div class="cs2-insight-bar" style="margin-top:40px;">
-                    <div class="cs2-insight-item">
-                        <span class="cs2-insight-label">Language</span>
-                        <span class="cs2-insight-verdict cs2-insight-verdict--bad">Noise</span>
-                    </div>
-                    <div class="cs2-insight-divider">vs</div>
-                    <div class="cs2-insight-item">
-                        <span class="cs2-insight-label">The Ledger</span>
-                        <span class="cs2-insight-verdict cs2-insight-verdict--good">Source of Truth</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ══════════════════════════════════════════════ 04 / THE TENSION -->
-        <section class="cs2-sec cs2-sec--white">
-            <div class="cs2-sec-inner">
-                <span class="cs2-label">04 / The Tension</span>
-                <h2 class="cs2-h2">Empathy vs.<br><em>Compliance.</em></h2>
-
-                <p class="cs2-lead"><strong>Empathy</strong> says &mdash; be warm, be fast, reassure. <strong>Compliance</strong> says &mdash; be slow, be verified, protect the bank.</p>
-
-                <p class="cs2-p">Reassuring before you&rsquo;ve checked the ledger isn&rsquo;t kindness &mdash; it&rsquo;s a guess. Every system I&rsquo;ve seen compromises between the two. But a human agent doesn&rsquo;t. They pull the transaction first. <strong>Diagnose first, talk second.</strong></p>
-
-                <div style="border-top:3px solid #FF5500;padding:32px 0 0;margin:48px 0 32px;">
-                    <p class="cs2-statement">The tension only exists because the conversation starts before anyone knows what&rsquo;s true.</p>
-                </div>
-
-                <div class="cs2-swap-banner" style="margin-top:40px;">
-                    <div class="cs2-swap-col">
-                        <span class="cs2-swap-tag">Before</span>
-                        <span class="cs2-swap-word-old">Support Conversation</span>
-                    </div>
-                    <span class="cs2-swap-arrow">&rarr;</span>
-                    <div class="cs2-swap-col">
-                        <span class="cs2-swap-tag cs2-swap-tag--orange">After</span>
-                        <span class="cs2-swap-word-new">Diagnostic Engine</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ══════════════════════════════════════════════ 05 / THE ENGINE -->
-        <section class="cs2-sec cs2-sec--dark" style="padding:0;">
-            <div class="funnel-diagram-wrap">
-
-                <!-- Header -->
-                <div class="funnel-diagram-hdr">
-                    <div>
-                        <span class="cs2-label cs2-label--dim">05 / The Engine</span>
-                        <h2 class="cs2-h2 cs2-h2--white" style="margin-top:16px;">Five Gates.</h2>
-                    </div>
-                    <div class="funnel-diagram-sub">
-                        Before anything gets escalated &mdash; before a ticket, before an agent &mdash; the engine runs five checks.
-                    </div>
-                </div>
-
-                <!-- Flow -->
-                <div class="funnel-flow">
-
-                    <div class="funnel-node funnel-node--start">
-                        <div class="funnel-node-dot"></div>
-                        <span class="funnel-node-label">User Reaches Support</span>
-                    </div>
-                    <div class="funnel-v-line"></div>
-
-                    <div class="funnel-gate">
-                        <div class="funnel-gate-num-col">
-                            <span class="funnel-gate-num">01</span>
-                            <div class="funnel-gate-connector"></div>
-                        </div>
-                        <div class="funnel-gate-body">
-                            <span class="funnel-gate-label">Debit Verification</span>
-                            <div class="funnel-gate-title">Did Money Actually Leave?</div>
-                            <p class="funnel-gate-desc">Sometimes the notification fires but the ledger didn&rsquo;t move. If no debit posted &mdash; resolved. Right there. Under 30 seconds.</p>
-                            <span class="funnel-gate-prevents">Prevents: Ghost Transaction Tickets</span>
-                        </div>
-                        <div class="funnel-gate-constraint">
-                            <span class="funnel-constraint-label">System Constraint</span>
-                            <span class="funnel-constraint-text">Requires reliable ledger uptime. The system cannot afford ambiguity here.</span>
-                        </div>
-                    </div>
-
-                    <div class="funnel-gate">
-                        <div class="funnel-gate-num-col">
-                            <span class="funnel-gate-num">02</span>
-                            <div class="funnel-gate-connector"></div>
-                        </div>
-                        <div class="funnel-gate-body">
-                            <span class="funnel-gate-label">Payment Classification</span>
-                            <div class="funnel-gate-title">What Payment Channel?</div>
-                            <p class="funnel-gate-desc">UPI, card, mandate, subscription &mdash; each has different lifecycle rules, different regulatory timelines, different dispute mechanisms. The engine classifies from the ledger, not from what the user said.</p>
-                            <span class="funnel-gate-prevents">Prevents: Misrouting &amp; SLA Violations</span>
-                        </div>
-                        <div class="funnel-gate-constraint">
-                            <span class="funnel-constraint-label">System Constraint</span>
-                            <span class="funnel-constraint-text">Categorization adds logic complexity &mdash; but protects downstream accuracy across rail types.</span>
-                        </div>
-                    </div>
-
-                    <div class="funnel-gate">
-                        <div class="funnel-gate-num-col">
-                            <span class="funnel-gate-num">03</span>
-                            <div class="funnel-gate-connector"></div>
-                        </div>
-                        <div class="funnel-gate-body">
-                            <span class="funnel-gate-label">Real-Time Ledger Poll</span>
-                            <div class="funnel-gate-title">What Does the Ledger Say Right Now?</div>
-                            <p class="funnel-gate-desc">Not when the notification went out. Not five minutes ago. Right now. Because by the time someone reaches support, the transaction might have auto-reversed. If the money came back &mdash; done.</p>
-                            <span class="funnel-gate-prevents">Prevents: Investigating Resolved Transactions</span>
-                        </div>
-                        <div class="funnel-gate-constraint">
-                            <span class="funnel-constraint-label">System Constraint</span>
-                            <span class="funnel-constraint-text">Requires real-time ledger access. Higher overhead but prevents far costlier investigations.</span>
-                        </div>
-                    </div>
-
-                    <div class="funnel-gate">
-                        <div class="funnel-gate-num-col">
-                            <span class="funnel-gate-num">04</span>
-                            <div class="funnel-gate-connector"></div>
-                        </div>
-                        <div class="funnel-gate-body">
-                            <span class="funnel-gate-label">Reversal Check</span>
-                            <div class="funnel-gate-title">Has the Refund Already Landed?</div>
-                            <p class="funnel-gate-desc">If an auto-reversal completed while the user was in the queue &mdash; the system catches it. No point investigating money that&rsquo;s already returned.</p>
-                            <span class="funnel-gate-prevents">Prevents: Duplicate Investigations</span>
-                        </div>
-                        <div class="funnel-gate-constraint">
-                            <span class="funnel-constraint-label">System Constraint</span>
-                            <span class="funnel-constraint-text">Must check credit leg independently, not assume from debit status.</span>
-                        </div>
-                    </div>
-
-                    <div class="funnel-gate">
-                        <div class="funnel-gate-num-col">
-                            <span class="funnel-gate-num">05</span>
-                        </div>
-                        <div class="funnel-gate-body">
-                            <span class="funnel-gate-label">Reversal Window</span>
-                            <div class="funnel-gate-title">Is the Window Still Open?</div>
-                            <p class="funnel-gate-desc">If yes, the system waits &mdash; but tells the user exactly what&rsquo;s happening, exactly when to expect resolution, and exactly what will happen if it doesn&rsquo;t resolve. Raising a dispute too early can push an auto-reversing transaction into a multi-day investigation loop.</p>
-                            <span class="funnel-gate-prevents">Prevents: Premature Escalation</span>
-                        </div>
-                        <div class="funnel-gate-constraint">
-                            <span class="funnel-constraint-label">System Constraint</span>
-                            <span class="funnel-constraint-text" style="color:rgba(255,85,0,0.9);font-weight:600;font-style:normal;">Intentionally restricts the impulse to act instantly.</span>
-                        </div>
-                    </div>
-
-                    <div class="funnel-v-line"></div>
-                    <div class="funnel-node funnel-node--end">
-                        <div class="funnel-node-dot"></div>
-                        <span class="funnel-node-label">Verified Escalation</span>
-                    </div>
-
-                </div>
-
-                <!-- Legend -->
-                <div class="funnel-legend">
-                    <div class="funnel-legend-item">
-                        <div class="funnel-legend-dot funnel-legend-dot--grey"></div>
-                        Logic gate
-                    </div>
-                    <div class="funnel-legend-item">
-                        <div class="funnel-legend-dot funnel-legend-dot--orange"></div>
-                        System constraint (hover to reveal)
-                    </div>
-                    <div class="funnel-legend-item">
-                        <div class="funnel-legend-dot funnel-legend-dot--orange"
-                            style="box-shadow:0 0 8px rgba(255,85,0,0.5);"></div>
-                        Verified outcome
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- All five pass -->
-        <section class="cs2-sec cs2-sec--dark" style="padding-top:0;">
-            <div class="cs2-sec-inner">
-                <p class="cs2-lead cs2-lead--dark"><strong>All five pass.</strong> Only then does the system offer to raise a service request. Verified. Correctly classified. With explicit user consent.</p>
-                <blockquote class="cs2-pullquote cs2-pullquote--dark">Ghost tickets become structurally impossible.</blockquote>
-            </div>
-        </section>
-
-        <!-- ══════════════════════════════════════════════ 06 / IN PRACTICE -->
-        <section class="cs2-sec cs2-sec--grey">
-            <div class="cs2-sec-inner">
-                <span class="cs2-label">06 / In Practice</span>
-                <h2 class="cs2-h2">A Ghost Ticket<br><em>That Never Existed.</em></h2>
-
-                <!-- Voice Transcript UI -->
-                <div class="cs2-transcript">
-                    <div class="cs2-ts-row">
-                        <div class="cs2-ts-label">User</div>
-                        <div class="cs2-ts-text cs2-ts-text--user">&ldquo;My payment says pending but money got deducted.&rdquo;</div>
-                    </div>
-
-                    <div class="cs2-ts-system">
-                        <div class="cs2-ts-system-text">Authenticating &middot; OTP sent</div>
-                    </div>
-
-                    <div class="cs2-ts-row">
-                        <div class="cs2-ts-label">Voicebot</div>
-                        <div class="cs2-ts-text">&ldquo;I can see three recent transactions on your account. Was it the &#x20B9;1,200 to BigBasket at 8:42 PM?&rdquo;</div>
-                    </div>
-
-                    <div class="cs2-ts-row">
-                        <div class="cs2-ts-label">User</div>
-                        <div class="cs2-ts-text cs2-ts-text--user">&ldquo;Yes, that one.&rdquo;</div>
-                    </div>
-
-                    <div class="cs2-ts-system">
-                        <div class="cs2-ts-system-text">Engine running &middot; Gate 1&hellip; Gate 2&hellip; Gate 3&hellip;</div>
-                    </div>
-
-                    <div class="cs2-ts-system">
-                        <div class="cs2-ts-system-text" style="color:#FF5500;">Gate 4 &mdash; Reversal detected</div>
-                    </div>
-
-                    <div class="cs2-ts-row">
-                        <div class="cs2-ts-label">Voicebot</div>
-                        <div class="cs2-ts-text">&ldquo;Good news &mdash; a reversal of &#x20B9;1,200 was already processed and credited back to your account. The notification fired when the payment was initiated, but the reversal has since completed.&rdquo;</div>
-                    </div>
-
-                    <div class="cs2-ts-row">
-                        <div class="cs2-ts-label">User</div>
-                        <div class="cs2-ts-text cs2-ts-text--user">&ldquo;But I got the debit message, it said money was deducted.&rdquo;</div>
-                    </div>
-
-                    <div class="cs2-ts-row">
-                        <div class="cs2-ts-label">Voicebot</div>
-                        <div class="cs2-ts-text">&ldquo;I understand. The debit notification and the actual ledger state can diverge briefly. I&rsquo;d suggest checking your current balance. If it still doesn&rsquo;t reflect, please call back and we&rsquo;ll escalate.&rdquo;</div>
-                    </div>
-
-                    <div class="cs2-ts-resolved">&#10003; RESOLVED &middot; UNDER 2 MINUTES &middot; NO TICKET CREATED</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ══════════════════════════════════════════════ 07 / WHAT SHIPPED -->
-        <section class="cs2-sec cs2-sec--dark">
-            <div class="cs2-sec-inner">
-                <span class="cs2-label cs2-label--dim">07 / What Shipped</span>
-                <h2 class="cs2-h2 cs2-h2--white">The Core Idea<br><em style="font-style:italic;color:#888;">Shipped.</em></h2>
-
-                <div class="cs2-two-col" style="margin-top:48px;">
-                    <div>
-                        <h3 class="cs2-h3 cs2-h3--white" style="margin-top:0;">What went live</h3>
-                        <div class="cs2-observations">
-                            <div class="cs2-obs-item">
-                                <span class="cs2-obs-icon" style="color:#FF5500;font-weight:700;">&#10003;</span>
-                                <div>
-                                    <strong style="color:#fff;">Rail detection</strong>
-                                    <p class="cs2-p cs2-p--dark" style="margin-top:8px;">Each payment rail has different lifecycle rules. You can&rsquo;t interpret transaction state without knowing the rail first.</p>
+                            <h3 class="cs2-h3 cs2-h3--white" style="margin-top:0;">What was deferred</h3>
+                            <div class="cs2-observations">
+                                <div class="cs2-obs-item">
+                                    <span class="cs2-obs-icon" style="color:#666;font-weight:700;">&ndash;</span>
+                                    <div>
+                                        <strong style="color:#888;">Last-three-transactions UI</strong>
+                                        <p class="cs2-p cs2-p--dark" style="margin-top:8px;">Shipped with a simpler
+                                            amount-and-date entry approach.</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="cs2-obs-item">
-                                <span class="cs2-obs-icon" style="color:#FF5500;font-weight:700;">&#10003;</span>
-                                <div>
-                                    <strong style="color:#fff;">Five-gate diagnostic engine</strong>
-                                    <p class="cs2-p cs2-p--dark" style="margin-top:8px;">The core logic that checks the ledger before any conversation begins.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="cs2-h3 cs2-h3--white" style="margin-top:0;">What was deferred</h3>
-                        <div class="cs2-observations">
-                            <div class="cs2-obs-item">
-                                <span class="cs2-obs-icon" style="color:#666;font-weight:700;">&ndash;</span>
-                                <div>
-                                    <strong style="color:#888;">Last-three-transactions UI</strong>
-                                    <p class="cs2-p cs2-p--dark" style="margin-top:8px;">Shipped with a simpler amount-and-date entry approach.</p>
-                                </div>
-                            </div>
-                            <div class="cs2-obs-item">
-                                <span class="cs2-obs-icon" style="color:#666;font-weight:700;">&ndash;</span>
-                                <div>
-                                    <strong style="color:#888;">Proactive SR raise</strong>
-                                    <p class="cs2-p cs2-p--dark" style="margin-top:8px;">Deferred for a later phase. The infrastructure wasn&rsquo;t ready.</p>
+                                <div class="cs2-obs-item">
+                                    <span class="cs2-obs-icon" style="color:#666;font-weight:700;">&ndash;</span>
+                                    <div>
+                                        <strong style="color:#888;">Proactive SR raise</strong>
+                                        <p class="cs2-p cs2-p--dark" style="margin-top:8px;">Deferred for a later phase.
+                                            The infrastructure wasn&rsquo;t ready.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- ══════════════════════════════════════════════════ FINAL CLOSE -->
-        <section class="cs2-final">
-            <div class="cs2-final-inner">
-                <div class="cs2-final-label">Final Reflection</div>
-                <blockquote class="cs2-final-quote">&ldquo;Where did my money go?&rdquo; Most systems try to answer that moment with empathy. But reassurance without certainty is still a guess.</blockquote>
-                <p class="cs2-final-support">Trust is not restored by empathy alone.</p>
-                <div class="cs2-final-words">
-                    <span class="cs2-final-word"
-                        style="font-size:clamp(20px,3vw,28px);font-weight:900;letter-spacing:-0.02em;">It is preserved
-                        by systems<br>that refuse to guess.</span>
+            <!-- ══════════════════════════════════════════════════ FINAL CLOSE -->
+            <section class="cs2-final">
+                <div class="cs2-final-inner">
+                    <div class="cs2-final-label">Final Reflection</div>
+                    <blockquote class="cs2-final-quote">&ldquo;Where did my money go?&rdquo; Most systems try to answer
+                        that moment with empathy. But reassurance without certainty is still a guess.</blockquote>
+                    <p class="cs2-final-support">Trust is not restored by empathy alone.</p>
+                    <div class="cs2-final-words">
+                        <span class="cs2-final-word"
+                            style="font-size:clamp(20px,3vw,28px);font-weight:900;letter-spacing:-0.02em;">It is
+                            preserved
+                            by systems<br>that refuse to guess.</span>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-    </div><!-- end cs2-body -->
-</div>
+        </div><!-- end cs2-body -->
+    </div>
 
     <!-- Case Study: SmartCoin -->
     <div class="case-study-overlay cs-dark" id="cs-smartcoin" role="dialog" aria-modal="true"
@@ -4326,7 +4451,8 @@
                         <p class="cs2-p cs2-p--dark">You open SmartCoin. You need a loan. You apply. You get it. <strong
                                 style="color:#fff;">You return to the homepage.</strong></p>
                         <p class="cs2-p cs2-p--dark">You make repayments. You earn reward coins for paying on time.
-                            <strong style="color:#fff;">You return to the homepage.</strong></p>
+                            <strong style="color:#fff;">You return to the homepage.</strong>
+                        </p>
                         <p class="cs2-p cs2-p--dark">You repay the loan in full. <strong style="color:#fff;">You return
                                 to the homepage.</strong></p>
                     </div>
@@ -4785,7 +4911,8 @@
                         <ul class="cs2-system-states">
                             <li><strong>For the Eternal Borrower:</strong> The belief <em>&ldquo;I can&rsquo;t save
                                     because I&rsquo;m borrowing&rdquo;</em> becomes structurally false. Repayment
-                                <em>is</em> saving now. No mental model shift required.</li>
+                                <em>is</em> saving now. No mental model shift required.
+                            </li>
                             <li><strong>For the Goal-Oriented Borrower:</strong> Savings goals pre-populate based on
                                 their borrowing purpose and repayment stage. The app starts connecting what
                                 they&rsquo;re doing to what they&rsquo;re trying to achieve.</li>
@@ -4840,7 +4967,8 @@
                         <p class="cs2-p"><strong style="color:#FF5500;">Close the loop at the moment of
                                 earning.</strong> After any repayment, referral, or daily saving &mdash; a popup.
                             <em>&ldquo;You&rsquo;ve earned X coins. Convert them now.&rdquo;</em> The earning and the
-                            redeeming happen in the same breath.</p>
+                            redeeming happen in the same breath.
+                        </p>
                         <div class="cs2-code" style="margin-top:32px;">Repayment &rarr; coins earned &rarr; prompt
                             &rarr; savings page.</div>
                         <p class="cs2-p" style="margin-top:16px;">A journey that previously ended now has three more
@@ -5404,7 +5532,8 @@
                     <h2 class="cs2-h2">Always<br><em>Three Options.</em></h2>
 
                     <p class="cs2-lead">Before the conversation flows, one design decision deserves its own moment:
-                        <strong>how Dottie suggests flights.</strong></p>
+                        <strong>how Dottie suggests flights.</strong>
+                    </p>
                     <p class="cs2-aside">Not by listing every option. By negotiating trade-offs.</p>
                 </div>
 
@@ -5917,7 +6046,8 @@
                                 They get anxious and go quiet. They say <em>&ldquo;stop my card&rdquo;</em> and
                                 <em>&ldquo;block my card&rdquo;</em> and <em>&ldquo;my card&rsquo;s gone&rdquo;</em>
                                 &mdash; all meaning the same thing. The system had to be designed for how people
-                                actually speak under stress, not how they speak when calm and deliberate.</p>
+                                actually speak under stress, not how they speak when calm and deliberate.
+                            </p>
                         </div>
                     </div>
 
@@ -5952,7 +6082,8 @@
 
                     <p class="cs2-lead cs2-lead--dark">Every flow was built around one question before anything else:
                         <strong style="color:#fff;">what is the worst thing that can happen here, and how do we prevent
-                            it?</strong></p>
+                            it?</strong>
+                    </p>
 
                     <p class="cs2-aside cs2-aside--dark" style="margin-top:16px;">Not as a compliance checklist. As the
                         actual starting point for design.</p>
@@ -6589,7 +6720,8 @@
                 <div class="cs2-sec-inner">
                     <h3 class="cs2-h3" style="margin-top:0;">Two People, One Problem</h3>
                     <p class="cs2-lead">The research produced two archetypes &mdash; not demographics, but two different
-                        <strong>relationships with uncertainty in an unfamiliar place.</strong></p>
+                        <strong>relationships with uncertainty in an unfamiliar place.</strong>
+                    </p>
                 </div>
 
                 <div class="cs2-persona-grid">
@@ -6711,7 +6843,8 @@
                         as saying yes.</p>
                     <p class="cs2-aside cs2-aside--dark">Each rejection sharpened what the Invisible Guide had to be:
                         <strong style="color:#fff;">subtle enough to preserve wonder, present enough to eliminate the
-                            gamble.</strong></p>
+                            gamble.</strong>
+                    </p>
                 </div>
             </section>
 
@@ -6744,7 +6877,8 @@
                             entry. Scan. Everything opens.</p>
                         <p class="cs2-aside">More important than eliminating friction: it shifts the
                             <strong>register</strong> of arrival. The first thing the visit asks isn&rsquo;t <em>prove
-                                you have a ticket</em> &mdash; it&rsquo;s <em>what might you find in here?</em></p>
+                                you have a ticket</em> &mdash; it&rsquo;s <em>what might you find in here?</em>
+                        </p>
                         <p class="cs2-aside">The Caretaker&rsquo;s anxiety drops the moment they feel oriented. The
                             Seeker&rsquo;s curiosity activates the moment entry stops feeling like an obstacle.</p>
                         <p class="cs2-lead cs2-lead--xl"><strong>Both people enter differently. And a visit that begins
