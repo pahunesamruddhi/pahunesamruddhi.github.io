@@ -4,309 +4,327 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Samruddhi Pahune — Conversation Designer</title>
-<meta name="description" content="Samruddhi Pahune designs voice and chat AI for high-stakes moments — banking voicebots, payment disputes, airline booking. Every word is load-bearing.">
+<meta name="description" content="Samruddhi Pahune designs voice and chat AI for high-stakes moments — banking voicebots, payment disputes, airline booking.">
 <meta property="og:title" content="Samruddhi Pahune — Conversation Designer">
-<meta property="og:description" content="I design what machines say — and when they should stop. Voice & chat AI for fintech.">
+<meta property="og:description" content="I design what machines say — and when they should stop.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#0b0b0c">
+<meta name="theme-color" content="#f6f1ea">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ff4d1f'/%3E%3Cpath d='M16 20h32a6 6 0 0 1 6 6v12a6 6 0 0 1-6 6H30l-10 8v-8h-4a6 6 0 0 1-6-6V26a6 6 0 0 1 6-6z' fill='%230b0b0c'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23cfc6f2'/%3E%3Cpath d='M16 20h32a6 6 0 0 1 6 6v12a6 6 0 0 1-6 6H30l-10 8v-8h-4a6 6 0 0 1-6-6V26a6 6 0 0 1 6-6z' fill='%23e9785a'/%3E%3C/svg%3E">
 <style>
 :root{
-  --ink:#0b0b0c;
-  --ink-2:#141416;
-  --ink-3:#1e1e21;
-  --cream:#efeae0;
-  --cream-2:#e4ddd0;
-  --mute:#8a867f;
-  --line:rgba(239,234,224,.14);
-  --line-dark:rgba(11,11,12,.14);
-  --accent:#ff4d1f;
-  --accent-2:#ffb199;
+  --bg:#f6f1ea;
+  --bg-2:#efe8de;
+  --card:#fffdfa;
+  --ink:#34304a;
+  --ink-2:#5c586b;
+  --mute:#8f8a99;
+  --line:rgba(52,48,74,.12);
+  --coral:#e9785a;
+  --lav:#d9d2f5;
+  --lav-2:#bfb4ec;
+  --sage:#d3e6d6;
+  --peach:#fadccd;
+  --butter:#f7e7b0;
+  --sky:#d4e6f4;
+  --rose:#f3d1dc;
   --sans:'Inter Tight',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
   --serif:'Instrument Serif',Georgia,serif;
   --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
   --ease:cubic-bezier(.22,1,.36,1);
   --gutter:clamp(16px,4vw,56px);
+  --shadow:0 30px 60px -30px rgba(52,48,74,.28);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
-body{background:var(--ink);color:var(--cream);font-family:var(--sans);font-size:16px;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 img{display:block;max-width:100%}
-::selection{background:var(--accent);color:var(--ink)}
+::selection{background:var(--lav);color:var(--ink)}
 .serif{font-family:var(--serif);font-weight:400;font-style:italic;letter-spacing:-.01em}
 .mono{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase}
-.accent{color:var(--accent)}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.skip{position:fixed;left:16px;top:-60px;z-index:200;background:var(--accent);color:var(--ink);padding:10px 14px;border-radius:8px}
+.skip{position:fixed;left:16px;top:-60px;z-index:200;background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:8px}
 .skip:focus{top:16px}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
-
-/* ---------- grain ---------- */
-.grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:90;opacity:.06;
+:focus-visible{outline:2px solid var(--coral);outline-offset:3px;border-radius:6px}
+.grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:90;opacity:.035;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation:grain 1.2s steps(6) infinite}
-@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-4%)}60%{transform:translate(-4%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-4%)}75%{transform:translate(-4%,-1%)}100%{transform:translate(0,0)}}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--ink-2);margin-bottom:22px;background:var(--card);border:1px solid var(--line);padding:7px 14px;border-radius:999px}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--coral)}
+.h2{font-size:clamp(40px,6vw,96px);line-height:.95;letter-spacing:-.05em;font-weight:600}
+.h2 .serif{font-weight:400;letter-spacing:-.03em;color:var(--coral)}
+.sec{padding:clamp(80px,11vw,150px) var(--gutter)}
+.sec__head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:clamp(36px,6vw,72px)}
+.sec__head p{max-width:30ch;color:var(--ink-2);font-size:17px}
 
-/* ---------- loader ---------- */
-.loader{position:fixed;inset:0;z-index:150;background:var(--accent);color:var(--ink);display:flex;flex-direction:column;justify-content:space-between;padding:var(--gutter)}
+/* loader */
+.loader{position:fixed;inset:0;z-index:150;background:var(--lav);color:var(--ink);display:flex;flex-direction:column;justify-content:space-between;padding:var(--gutter)}
 .loader__top{display:flex;justify-content:space-between}
 .loader__mid{display:flex;align-items:center;gap:18px}
-.loader__bubble{display:inline-flex;gap:8px;background:var(--ink);padding:18px 22px;border-radius:28px 28px 28px 6px}
-.loader__bubble span{width:12px;height:12px;border-radius:50%;background:var(--accent);animation:typing 1s infinite var(--ease)}
+.loader__bubble{display:inline-flex;gap:8px;background:var(--card);padding:18px 22px;border-radius:28px 28px 28px 6px;box-shadow:var(--shadow)}
+.loader__bubble span{width:12px;height:12px;border-radius:50%;background:var(--coral);animation:typing 1s infinite var(--ease)}
 .loader__bubble span:nth-child(2){animation-delay:.15s}.loader__bubble span:nth-child(3){animation-delay:.3s}
 .loader__word{font-family:var(--serif);font-style:italic;font-size:clamp(28px,4vw,52px)}
-.loader__count{font-size:clamp(90px,22vw,320px);font-weight:600;line-height:.8;letter-spacing:-.06em;align-self:flex-end;font-variant-numeric:tabular-nums}
+.loader__count{font-size:clamp(90px,20vw,300px);font-weight:600;line-height:.8;letter-spacing:-.06em;align-self:flex-end;font-variant-numeric:tabular-nums}
 @keyframes typing{0%,60%,100%{transform:translateY(0);opacity:.45}30%{transform:translateY(-7px);opacity:1}}
-.no-js .loader,.reduced .loader{display:none}
+.reduced .loader{display:none}
 
-/* ---------- cursor ---------- */
-.cursor{position:fixed;left:0;top:0;z-index:140;pointer-events:none;mix-blend-mode:difference}
-.cursor__dot{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:#fff;transition:transform .35s var(--ease)}
-.cursor__label{position:absolute;transform:translate(-50%,-50%) scale(0);width:96px;height:96px;border-radius:50% 50% 50% 8px;background:#fff;color:#000;display:grid;place-items:center;font:500 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;transition:transform .45s var(--ease)}
+/* cursor */
+.cursor{position:fixed;left:0;top:0;z-index:140;pointer-events:none}
+.cursor__dot{position:absolute;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--coral);opacity:.85;transition:transform .35s var(--ease),opacity .3s}
+.cursor__label{position:absolute;transform:translate(-50%,-50%) scale(0);width:92px;height:92px;border-radius:50% 50% 50% 10px;background:var(--lav-2);color:var(--ink);display:grid;place-items:center;font:500 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;transition:transform .45s var(--ease)}
 .cursor.is-label .cursor__label{transform:translate(-50%,-50%) scale(1)}
 .cursor.is-label .cursor__dot{transform:scale(0)}
-.cursor.is-hover .cursor__dot{transform:scale(4)}
+.cursor.is-hover .cursor__dot{transform:scale(3);opacity:.35}
 @media (hover:none),(pointer:coarse){.cursor{display:none}}
 
-/* ---------- nav ---------- */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px var(--gutter);mix-blend-mode:difference;color:#fff;transition:transform .5s var(--ease)}
-.nav.is-hidden{transform:translateY(-110%)}
-.logo{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.02em;font-size:18px}
-.logo__mark{width:30px;height:30px;border-radius:10px 10px 10px 3px;background:#fff;color:#000;display:grid;place-items:center;font:600 13px var(--sans)}
-.nav__links{display:flex;gap:28px;align-items:center}
-.nav__links a{position:relative;font-size:14px}
-.nav__links a::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .5s var(--ease)}
-.nav__links a:hover::after{transform:scaleX(1);transform-origin:left}
-.nav__clock{font:400 12px var(--mono);opacity:.7}
-.nav__cta{border:1px solid #fff;border-radius:999px;padding:8px 16px}
-@media (max-width:760px){.nav__links a:not(.nav__cta),.nav__clock{display:none}}
+/* nav */
+.nav{position:fixed;top:14px;left:var(--gutter);right:var(--gutter);z-index:100;display:flex;align-items:center;justify-content:space-between;padding:10px 12px 10px 16px;border-radius:999px;background:rgba(255,253,250,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);transition:transform .5s var(--ease)}
+.nav.is-hidden{transform:translateY(-140%)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.02em;font-size:17px}
+.logo__mark{width:30px;height:30px;border-radius:10px 10px 10px 3px;background:var(--coral);color:#fff;display:grid;place-items:center;font:600 12px var(--sans)}
+.nav__links{display:flex;gap:24px;align-items:center}
+.nav__links a{font-size:14px;color:var(--ink-2);transition:color .3s}
+.nav__links a:hover{color:var(--ink)}
+.nav__clock{font:400 12px var(--mono);color:var(--mute)}
+.nav__cta{background:var(--ink);color:var(--bg)!important;border-radius:999px;padding:9px 16px}
+@media (max-width:820px){.nav__links a:not(.nav__cta),.nav__clock{display:none}}
 
-/* ---------- hero ---------- */
-.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:120px var(--gutter) 40px;overflow:hidden}
-.hero__wave{position:absolute;inset:0;width:100%;height:100%;z-index:0}
-.hero__meta{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(24px,4vw,48px);color:var(--mute)}
-.hero__meta .status{display:inline-flex;align-items:center;gap:10px;color:var(--cream)}
-.status__dot{width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 0 0 rgba(61,220,132,.6);animation:pulse 2s infinite}
-@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(61,220,132,0)}100%{box-shadow:0 0 0 0 rgba(61,220,132,0)}}
-.hero__title{position:relative;z-index:2;font-size:clamp(46px,min(9vw,14.5vh),176px);line-height:.9;font-weight:600;letter-spacing:-.055em}
-.hero__title .line{display:block;overflow:hidden;padding-bottom:.06em}
+/* hero */
+.hero{position:relative;min-height:100svh;display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(24px,4vw,64px);align-items:center;padding:110px var(--gutter) 60px;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:0;animation:drift 18s ease-in-out infinite alternate}
+.blob--1{width:46vw;height:46vw;background:var(--lav);left:-12vw;top:-14vw}
+.blob--2{width:36vw;height:36vw;background:var(--peach);right:-8vw;top:8vh;animation-duration:22s}
+.blob--3{width:30vw;height:30vw;background:var(--sage);left:30vw;bottom:-14vw;animation-duration:26s}
+@keyframes drift{to{transform:translate(4vw,3vw) scale(1.12)}}
+.hero__wave{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.hero__copy{position:relative;z-index:2}
+.status{display:inline-flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 14px;color:var(--ink-2)}
+.status__dot{width:8px;height:8px;border-radius:50%;background:#6cc28a;animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(108,194,138,.6)}70%{box-shadow:0 0 0 10px rgba(108,194,138,0)}100%{box-shadow:0 0 0 0 rgba(108,194,138,0)}}
+.hero__title{margin:26px 0 24px;font-size:clamp(44px,min(6.6vw,11vh),118px);line-height:.94;font-weight:600;letter-spacing:-.055em}
+.hero__title .line{display:block;overflow:hidden;padding-bottom:.07em}
 .hero__title .line>span{display:inline-block}
-.hero__title .serif{font-weight:400;letter-spacing:-.03em;color:var(--accent)}
-.caret{display:inline-block;width:.07em;height:.78em;background:var(--accent);margin-left:.06em;vertical-align:-.04em;animation:blink 1s steps(1) infinite}
+.hero__title .serif{font-weight:400;letter-spacing:-.03em;color:var(--coral)}
+.caret{display:inline-block;width:.06em;height:.75em;background:var(--coral);margin-left:.06em;vertical-align:-.03em;border-radius:2px;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-.hero__foot{position:relative;z-index:2;display:grid;grid-template-columns:1.2fr 1fr auto;gap:32px;align-items:end;margin-top:clamp(28px,4vw,56px);padding-top:24px;border-top:1px solid var(--line)}
-.hero__lede{font-size:clamp(17px,1.5vw,21px);max-width:38ch;color:var(--cream)}
-.hero__lede em{font-family:var(--serif);font-size:1.15em}
-.hero__tags{display:flex;flex-wrap:wrap;gap:8px}
-.tag{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font:400 12px var(--mono);color:var(--mute)}
-.scroll-cue{display:flex;align-items:center;gap:10px;color:var(--mute)}
-.scroll-cue__bar{width:1px;height:48px;background:var(--line);position:relative;overflow:hidden}
-.scroll-cue__bar::after{content:'';position:absolute;left:0;top:-50%;width:1px;height:50%;background:var(--accent);animation:cue 1.8s infinite var(--ease)}
-@keyframes cue{to{top:110%}}
-@media (max-width:900px){.hero__foot{grid-template-columns:1fr}.scroll-cue{display:none}}
+.hero__lede{font-size:clamp(17px,1.4vw,20px);max-width:34ch;color:var(--ink-2)}
+.hero__lede em{font-family:var(--serif);font-size:1.15em;color:var(--ink)}
+.hero__ctas{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 24px;border-radius:999px;background:var(--ink);color:var(--bg);font-size:15px;font-weight:500;transition:background .3s}
+.btn--soft{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.btn--soft:hover{background:var(--lav)}
 
-.bubbles{position:absolute;inset:0;z-index:1;pointer-events:none}
-.fbubble{position:absolute;max-width:260px;padding:12px 16px;border-radius:20px 20px 20px 6px;background:var(--ink-3);border:1px solid var(--line);font-size:14px;line-height:1.35;color:var(--cream);box-shadow:0 20px 50px rgba(0,0,0,.35);will-change:transform}
-.fbubble.bot{border-radius:20px 20px 6px 20px;background:var(--accent);color:var(--ink);border-color:transparent}
-.fbubble small{display:block;font:400 10px var(--mono);text-transform:uppercase;letter-spacing:.06em;opacity:.6;margin-bottom:4px}
-@media (max-width:900px){.fbubble{display:none}.fbubble.keep{display:block;max-width:200px;font-size:13px;top:13%!important;right:16px!important}}
-
-/* ---------- marquee ---------- */
-.marquee{padding:clamp(40px,6vw,80px) 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:var(--ink)}
-.marquee__row{display:flex;white-space:nowrap;will-change:transform}
-.marquee__row+.marquee__row{margin-top:14px}
-.marquee__item{display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-size:clamp(34px,6vw,92px);letter-spacing:-.04em;font-weight:500}
-.marquee__item .serif{color:var(--accent)}
-.marquee__item i.sep{display:inline-block;width:.5em;height:.42em;background:var(--cream);border-radius:.25em .25em .25em .05em;opacity:.35}
-.marquee__row--meta .marquee__item{font:400 clamp(12px,1.2vw,15px) var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--mute);gap:18px;padding-right:18px}
-.marquee__row--meta b{color:var(--cream);font-weight:500}
-
-/* ---------- manifesto ---------- */
-.manifesto{padding:clamp(100px,16vw,220px) var(--gutter);max-width:1500px;margin:0 auto}
-.eyebrow{display:flex;align-items:center;gap:12px;color:var(--mute);margin-bottom:36px}
-.eyebrow::before{content:'';width:28px;height:1px;background:currentColor}
-.manifesto__text{font-size:clamp(30px,4.6vw,76px);line-height:1.04;letter-spacing:-.04em;font-weight:500}
-.manifesto__text .serif{color:var(--accent)}
-.manifesto__text .word{display:inline-block}
-
-/* ---------- approach ---------- */
-.approach{background:var(--cream);color:var(--ink);padding:clamp(80px,12vw,160px) var(--gutter);border-radius:clamp(24px,4vw,56px) clamp(24px,4vw,56px) 0 0;position:relative;z-index:2}
-.approach .eyebrow{color:#6d6860}
-.approach__head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-bottom:clamp(40px,8vw,100px)}
-.h2{font-size:clamp(44px,7.4vw,124px);line-height:.92;letter-spacing:-.055em;font-weight:600}
-.h2 .serif{font-weight:400;letter-spacing:-.03em}
-.approach__head p{max-width:34ch;font-size:18px;color:#4a4740}
-.approach__grid{display:grid;grid-template-columns:1fr minmax(320px,420px);gap:clamp(40px,7vw,120px)}
-.step{min-height:78vh;display:flex;flex-direction:column;justify-content:center;border-top:1px solid var(--line-dark);padding:40px 0;opacity:.28;transition:opacity .6s var(--ease)}
-.step.is-active{opacity:1}
-.step__num{font:500 13px var(--mono);color:var(--accent);margin-bottom:18px}
-.step h3{font-size:clamp(34px,4.6vw,72px);line-height:.98;letter-spacing:-.045em;font-weight:600;margin-bottom:22px}
-.step h3 .serif{font-weight:400}
-.step p{font-size:clamp(17px,1.4vw,20px);max-width:44ch;color:#3a3833}
-.step .from{margin-top:22px;color:#6d6860}
-.phone-wrap{position:sticky;top:12vh;height:76vh;display:flex;align-items:center}
-.phone{width:100%;height:min(76vh,720px);background:var(--ink);color:var(--cream);border-radius:44px;padding:14px;box-shadow:0 50px 100px -30px rgba(11,11,12,.55),inset 0 0 0 1px rgba(255,255,255,.08);display:flex;flex-direction:column}
-.phone__bar{display:flex;align-items:center;gap:12px;padding:14px 14px 16px;border-bottom:1px solid var(--line)}
-.phone__avatar{width:38px;height:38px;border-radius:14px 14px 14px 4px;background:var(--accent);display:grid;place-items:center;color:var(--ink);font-weight:600}
-.phone__name{font-weight:600;font-size:15px}
-.phone__sub{font:400 11px var(--mono);color:var(--mute)}
-.phone__body{flex:1;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;padding:18px 10px}
-.msg{max-width:84%;padding:11px 15px;border-radius:20px;font-size:15px;line-height:1.38;opacity:0;transform:translateY(14px) scale(.96);transform-origin:bottom left;animation:msgIn .55s var(--ease) forwards}
-.msg.user{align-self:flex-end;background:var(--ink-3);border-radius:20px 20px 6px 20px;transform-origin:bottom right}
-.msg.bot{align-self:flex-start;background:var(--accent);color:var(--ink);border-radius:20px 20px 20px 6px}
-.msg.sys{align-self:center;max-width:100%;background:none;border:1px dashed var(--line);font:400 11px/1.6 var(--mono);color:var(--mute);text-align:center;border-radius:12px}
-.msg.sys b{color:#3ddc84;font-weight:500}
-.msg.typing{display:inline-flex;gap:5px;padding:14px 16px}
-.msg.typing span{width:7px;height:7px;border-radius:50%;background:var(--ink);animation:typing 1s infinite}
-.msg.typing span:nth-child(2){animation-delay:.15s}.msg.typing span:nth-child(3){animation-delay:.3s}
-@keyframes msgIn{to{opacity:1;transform:none}}
-.phone__input{margin:6px;padding:12px 16px;border-radius:999px;border:1px solid var(--line);font-size:14px;color:var(--mute);display:flex;justify-content:space-between;align-items:center}
-.phone__input i{width:28px;height:28px;border-radius:50%;background:var(--accent);display:block}
-@media (max-width:900px){
-  .approach__grid{grid-template-columns:1fr}
-  .phone-wrap{position:sticky;top:64px;height:auto;z-index:2;order:-1}
-  .phone{height:330px;border-radius:28px}
-  .phone__bar{padding:8px 10px 10px}
-  .step{min-height:70vh}
+/* hero collage */
+.collage{position:relative;z-index:2;height:min(72vh,640px);min-height:480px}
+.tile{position:absolute;border-radius:26px;overflow:hidden;box-shadow:var(--shadow);will-change:transform}
+.tile img{width:100%;height:100%;object-fit:cover}
+.tile--contain img{object-fit:contain;padding:10px}
+.tile--plane{width:42%;aspect-ratio:16/10;left:0;top:4%;background:var(--sky);rotate:-6deg}
+.tile--map{width:30%;aspect-ratio:9/15;right:0;top:0;background:var(--sage);rotate:5deg}
+.tile--bike{width:40%;aspect-ratio:4/3;right:4%;bottom:2%;rotate:-4deg;background:var(--bg-2)}
+.tile--wallet{width:26%;aspect-ratio:1;left:2%;bottom:6%;background:var(--butter);rotate:7deg}
+.hchat{position:absolute;left:22%;top:22%;width:min(56%,340px);background:var(--card);border-radius:28px;padding:16px;box-shadow:0 40px 80px -30px rgba(52,48,74,.4);z-index:3;display:flex;flex-direction:column;gap:8px;min-height:300px}
+.hchat__bar{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:4px}
+.av{width:34px;height:34px;border-radius:12px 12px 12px 4px;background:var(--coral);color:#fff;display:grid;place-items:center;font:600 12px var(--sans);flex:0 0 auto}
+.hchat__name{font-weight:600;font-size:14px;line-height:1.2}
+.hchat__sub{font:400 10px var(--mono);color:var(--mute);text-transform:uppercase}
+.hchat__body{display:flex;flex-direction:column;gap:8px;justify-content:flex-end;flex:1}
+.sticker{position:absolute;z-index:4;font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.04em;padding:8px 12px;border-radius:999px;box-shadow:var(--shadow);white-space:nowrap}
+.sticker--a{background:var(--lav);left:-5%;top:46%}
+.sticker--b{background:var(--sage);right:30%;top:12%}
+.sticker--c{background:var(--peach);right:2%;bottom:36%;display:flex;align-items:center;gap:8px}
+.mini-eq{display:inline-flex;gap:2px;align-items:center;height:14px}
+.mini-eq i{width:3px;border-radius:3px;background:var(--coral);animation:eq .9s infinite ease-in-out alternate}
+@media (max-width:980px){
+  .hero{grid-template-columns:1fr;padding-top:100px}
+  .collage{height:440px;min-height:0;margin-top:10px}
+  .hchat{left:12%;width:70%;top:16%}
+  .sticker--a{display:none}
 }
 
-/* ---------- numbers ---------- */
-.numbers{background:var(--cream);color:var(--ink);padding:0 var(--gutter) clamp(80px,10vw,140px)}
-.numbers__grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line-dark)}
-.num{padding:32px 24px 0 0;border-right:1px solid var(--line-dark)}
-.num:last-child{border-right:0}
-.num+.num{padding-left:24px}
-.num__v{font-size:clamp(56px,7.5vw,128px);font-weight:600;letter-spacing:-.06em;line-height:1;font-variant-numeric:tabular-nums}
-.num__v sup{font-size:.4em;color:var(--accent);vertical-align:.9em;margin-left:2px}
-.num__l{margin-top:14px;max-width:24ch;color:#4a4740;font-size:15px}
-@media (max-width:900px){.numbers__grid{grid-template-columns:1fr 1fr;column-gap:20px}.num{border-right:0;border-bottom:1px solid var(--line-dark);padding:28px 0!important}}
+/* chat bubbles shared */
+.msg{max-width:86%;padding:10px 14px;border-radius:18px;font-size:14px;line-height:1.38;opacity:0;transform:translateY(12px) scale(.96);transform-origin:bottom left;animation:msgIn .55s var(--ease) forwards}
+.msg.user{align-self:flex-end;background:var(--bg-2);border-radius:18px 18px 6px 18px;transform-origin:bottom right}
+.msg.bot{align-self:flex-start;background:var(--peach);border-radius:18px 18px 18px 6px}
+.msg.sys{align-self:center;max-width:100%;background:none;border:1px dashed var(--line);font:400 11px/1.6 var(--mono);color:var(--mute);text-align:center;border-radius:12px}
+.msg.sys b{color:#3f9a62;font-weight:500}
+.msg.opts{background:none;padding:0;display:flex;gap:6px;flex-wrap:wrap}
+.msg.opts span{background:var(--lav);border-radius:999px;padding:6px 10px;font-size:12px}
+.msg.typing{display:inline-flex;gap:5px;padding:13px 15px}
+.msg.typing span{width:7px;height:7px;border-radius:50%;background:var(--coral);animation:typing 1s infinite}
+.msg.typing span:nth-child(2){animation-delay:.15s}.msg.typing span:nth-child(3){animation-delay:.3s}
+@keyframes msgIn{to{opacity:1;transform:none}}
 
-/* ---------- work (horizontal) ---------- */
-.work{position:relative;background:var(--ink);overflow:hidden}
-.work__head{padding:clamp(90px,12vw,160px) var(--gutter) 40px;display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
-.work__head p{color:var(--mute);max-width:36ch}
-.work__pin{height:100vh;display:flex;align-items:center}
-.work__track{display:flex;gap:clamp(20px,3vw,40px);padding:0 var(--gutter);will-change:transform}
-.card{position:relative;flex:0 0 auto;width:clamp(320px,62vw,980px);height:min(74vh,640px);display:grid;grid-template-columns:1fr 1.1fr;border-radius:28px;overflow:hidden;background:var(--ink-2);border:1px solid var(--line);isolation:isolate}
-.card__info{position:relative;z-index:2;padding:clamp(24px,3vw,44px);display:flex;flex-direction:column;justify-content:space-between}
-.card__top{display:flex;justify-content:space-between;color:var(--mute)}
-.card__idx{font:500 13px var(--mono);color:var(--accent)}
-.card__title{font-size:clamp(40px,5vw,86px);line-height:.92;letter-spacing:-.055em;font-weight:600}
-.card__title .serif{font-weight:400;color:var(--accent)}
-.card__desc{color:#bdb8ae;font-size:16px;max-width:36ch;margin-top:18px}
-.card__bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
-.card__metric b{display:block;font-size:clamp(30px,3vw,48px);letter-spacing:-.04em;font-weight:600;line-height:1}
-.card__metric span{font:400 11px var(--mono);text-transform:uppercase;color:var(--mute);letter-spacing:.05em}
-.card__go{width:64px;height:64px;border-radius:50%;background:var(--cream);color:var(--ink);display:grid;place-items:center;font-size:22px;transition:transform .5s var(--ease),background .3s}
-.card:hover .card__go{transform:rotate(-45deg);background:var(--accent)}
-.card__media{position:relative;overflow:hidden;background:var(--ink-3)}
-.card__media img{position:absolute;inset:-6% -14%;width:128%;height:112%;object-fit:cover;transition:transform 1.2s var(--ease),filter .6s}
-.card:hover .card__media img{transform:scale(1.05)}
-.card__media::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--ink-2) 0%,transparent 30%)}
-.card--light{background:var(--cream);color:var(--ink);border-color:transparent}
-.card--light .card__desc{color:#4a4740}
-.card--light .card__media::after{background:linear-gradient(90deg,var(--cream) 0%,transparent 30%)}
-.card--light .card__go{background:var(--ink);color:var(--cream)}
-.card--accent{background:var(--accent);color:var(--ink);border-color:transparent}
-.card--accent .card__title .serif,.card--accent .card__idx{color:var(--ink)}
-.card--accent .card__desc,.card--accent .card__top,.card--accent .card__metric span{color:rgba(11,11,12,.72)}
-.card--accent .card__go{background:var(--ink);color:var(--cream)}
-.card--accent .card__media{background:transparent}
-.card--accent .card__media::after{display:none}
-/* typographic cover for the voice project */
-.voicecover{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:30px;padding:30px}
-.voicecover__bars{display:flex;align-items:center;gap:6px;height:140px}
-.voicecover__bars i{width:7px;border-radius:7px;background:var(--ink);animation:eq 1.1s infinite ease-in-out alternate}
-@keyframes eq{0%{height:10%}100%{height:100%}}
-.voicecover q{font-family:var(--serif);font-style:italic;font-size:clamp(22px,2.4vw,36px);line-height:1.1;text-align:center;max-width:16ch;color:var(--ink)}
-.work__end{flex:0 0 auto;width:clamp(280px,32vw,460px);height:min(74vh,640px);display:flex;flex-direction:column;justify-content:center;gap:24px}
-.work__end a{display:inline-flex;align-items:center;gap:14px;font-size:clamp(30px,3.4vw,56px);letter-spacing:-.04em;font-weight:600;line-height:1}
-.work__end a span{color:var(--accent)}
-.work__progress{position:absolute;left:var(--gutter);right:var(--gutter);bottom:28px;height:1px;background:var(--line)}
-.work__progress i{position:absolute;inset:0;background:var(--accent);transform:scaleX(0);transform-origin:left}
+/* bubble marquee */
+.bmarquee{padding:28px 0;overflow:hidden}
+.bmarquee__row{display:flex;width:max-content;white-space:nowrap;will-change:transform}
+.bmarquee__row+.bmarquee__row{margin-top:14px}
+.bmarquee__item{display:inline-flex;gap:14px;padding-right:14px}
+.pill{display:inline-flex;align-items:center;gap:10px;font-size:clamp(18px,2vw,26px);letter-spacing:-.02em;padding:14px 24px;border-radius:30px 30px 30px 8px}
+.pill--r{border-radius:30px 30px 8px 30px}
+.pill small{font:400 11px var(--mono);text-transform:uppercase;letter-spacing:.04em;opacity:.65}
+
+/* manifesto */
+.manifesto{padding:clamp(90px,13vw,180px) var(--gutter);text-align:center}
+.manifesto__text{font-size:clamp(30px,4.4vw,68px);line-height:1.08;letter-spacing:-.04em;font-weight:500;max-width:18ch;margin:0 auto}
+.manifesto__text .serif{color:var(--coral)}
+.manifesto__text .word{display:inline-block}
+
+/* approach */
+.approach__grid{display:grid;grid-template-columns:1fr minmax(320px,400px);gap:clamp(40px,7vw,110px)}
+.step{min-height:72vh;display:flex;flex-direction:column;justify-content:center;opacity:.3;transition:opacity .6s var(--ease)}
+.step.is-active{opacity:1}
+.step__tag{align-self:flex-start;font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.05em;padding:7px 12px;border-radius:999px;margin-bottom:22px}
+.step h3{font-size:clamp(36px,4.8vw,76px);line-height:.98;letter-spacing:-.05em;font-weight:600;margin-bottom:18px}
+.step h3 .serif{font-weight:400;color:var(--coral)}
+.step p{font-size:clamp(17px,1.35vw,19px);max-width:34ch;color:var(--ink-2)}
+.phone-wrap{position:sticky;top:12vh;height:76vh;display:flex;align-items:center}
+.phone{width:100%;height:min(74vh,680px);background:var(--card);border-radius:44px;padding:14px;box-shadow:0 50px 100px -40px rgba(52,48,74,.45),0 0 0 10px var(--lav);display:flex;flex-direction:column}
+.phone__bar{display:flex;align-items:center;gap:12px;padding:12px 10px 14px;border-bottom:1px solid var(--line)}
+.phone__body{flex:1;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;padding:16px 8px}
+.phone__body .msg{font-size:15px}
+.phone__input{margin:6px;padding:11px 14px;border-radius:999px;background:var(--bg);font-size:14px;color:var(--mute);display:flex;justify-content:space-between;align-items:center}
+.phone__input i{width:28px;height:28px;border-radius:50%;background:var(--coral);display:block}
 @media (max-width:900px){
-  .work__pin{height:auto;display:block;padding-bottom:60px}
+  .approach__grid{grid-template-columns:1fr}
+  .phone-wrap{position:sticky;top:76px;height:auto;z-index:2;order:-1}
+  .phone{height:320px;border-radius:30px;box-shadow:0 30px 60px -30px rgba(52,48,74,.45),0 0 0 6px var(--lav)}
+  .phone__bar{padding:6px 8px 10px}
+  .step{min-height:64vh}
+}
+
+/* numbers bento */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:0 var(--gutter)}
+.stat{border-radius:28px;padding:28px;min-height:230px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.stat__v{font-size:clamp(54px,6.4vw,104px);font-weight:600;letter-spacing:-.06em;line-height:1;font-variant-numeric:tabular-nums}
+.stat__v sup{font-size:.4em;vertical-align:.9em;margin-left:2px;color:var(--coral)}
+.stat p{color:var(--ink-2);font-size:15px;max-width:20ch}
+.stat__icon{position:absolute;right:20px;top:20px;width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,.6);display:grid;place-items:center}
+@media (max-width:900px){.bento{grid-template-columns:1fr 1fr}.stat{min-height:190px;padding:22px}}
+
+/* work */
+.work{position:relative;overflow:hidden}
+.work__pin{height:100vh;display:flex;align-items:center}
+.work__track{display:flex;gap:clamp(18px,2.4vw,32px);padding:0 var(--gutter);will-change:transform}
+.card{position:relative;flex:0 0 auto;width:clamp(320px,44vw,700px);height:min(78vh,660px);border-radius:32px;overflow:hidden;display:flex;flex-direction:column;padding:16px;isolation:isolate}
+.card__visual{position:relative;flex:1;border-radius:22px;overflow:hidden;background:rgba(255,255,255,.55)}
+.card__visual>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.card__visual>img.contain{object-fit:contain;padding:18px}
+.card:hover .card__visual>img{transform:scale(1.04)}
+.card__meta{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:20px 10px 8px}
+.card__tag{font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-2)}
+.card__title{font-size:clamp(32px,3.4vw,56px);line-height:.95;letter-spacing:-.05em;font-weight:600;margin-top:8px}
+.card__title .serif{font-weight:400;color:var(--coral)}
+.card__go{flex:0 0 auto;width:58px;height:58px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-size:20px;transition:transform .5s var(--ease),background .3s,color .3s}
+.card:hover .card__go{transform:rotate(-45deg);background:var(--ink);color:var(--bg)}
+.card__chip{position:absolute;left:16px;top:16px;z-index:3;background:var(--card);border-radius:999px;padding:8px 14px;font:500 12px var(--mono);box-shadow:var(--shadow)}
+.card__visual>img.sticker-img{inset:auto 5% 6% auto;width:30%;height:auto;max-width:170px;border-radius:20px;box-shadow:var(--shadow);background:var(--card);padding:8px;rotate:6deg;z-index:2;object-fit:contain}
+/* ICICI visual */
+.vc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:24px}
+.vc__bars{display:flex;align-items:center;gap:6px;height:120px}
+.vc__bars i{width:8px;border-radius:8px;background:var(--lav-2);animation:eq 1.1s infinite ease-in-out alternate}
+.vc__bars i:nth-child(3n){background:var(--coral)}
+@keyframes eq{0%{height:12%}100%{height:100%}}
+.vc__bubble{background:var(--card);border-radius:24px 24px 24px 6px;padding:16px 20px;font-family:var(--serif);font-style:italic;font-size:clamp(20px,1.9vw,28px);line-height:1.15;max-width:18ch;box-shadow:var(--shadow)}
+/* UPI gates visual */
+.gates{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:26px;padding:60px 28px 28px}
+.gates__row{display:flex;align-items:flex-start;justify-content:space-between;position:relative}
+.gates__row::before{content:'';position:absolute;left:24px;right:24px;top:23px;height:3px;background:rgba(52,48,74,.12);border-radius:3px}
+.gates__fill{position:absolute;left:24px;top:23px;height:3px;background:var(--coral);border-radius:3px;width:0;animation:fill 4s var(--ease) infinite}
+@keyframes fill{0%{width:0}70%,100%{width:calc(100% - 48px)}}
+.gate{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px;font:500 10px var(--mono);text-transform:uppercase;color:var(--ink-2)}
+.gate b{width:48px;height:48px;border-radius:16px;background:var(--card);display:grid;place-items:center;font:600 15px var(--sans);color:var(--ink);box-shadow:var(--shadow);animation:gatePop 4s infinite}
+.gate:nth-of-type(2) b{animation-delay:.5s}.gate:nth-of-type(3) b{animation-delay:1s}.gate:nth-of-type(4) b{animation-delay:1.5s}.gate:nth-of-type(5) b{animation-delay:2s}
+@keyframes gatePop{0%,8%{background:var(--card)}14%,100%{background:var(--sage)}}
+.gates__chat{display:flex;flex-direction:column;gap:8px}
+.gates__chat .msg{opacity:1;transform:none;animation:none;max-width:80%}
+.work__end{flex:0 0 auto;width:clamp(260px,26vw,380px);height:min(78vh,660px);display:flex;flex-direction:column;justify-content:center;gap:14px}
+.work__end a{display:flex;justify-content:space-between;align-items:center;padding:22px 24px;border-radius:24px;background:var(--card);border:1px solid var(--line);font-size:20px;font-weight:500;letter-spacing:-.02em;transition:background .3s}
+.work__end a:hover{background:var(--lav)}
+.work__progress{position:absolute;left:var(--gutter);right:var(--gutter);bottom:26px;height:3px;border-radius:3px;background:var(--line)}
+.work__progress i{position:absolute;inset:0;border-radius:3px;background:var(--coral);transform:scaleX(0);transform-origin:left}
+@media (max-width:900px){
+  .work__pin{height:auto;display:block;padding-bottom:40px}
   .work__track{flex-direction:column}
-  .card{width:100%;height:auto;grid-template-columns:1fr}
-  .card__media{height:240px;order:-1}
-  .card__media::after{background:linear-gradient(0deg,var(--ink-2) 0%,transparent 40%)}
-  .card--light .card__media::after{background:linear-gradient(0deg,var(--cream) 0%,transparent 40%)}
-  .card__bottom{margin-top:28px}
-  .work__end{width:100%;height:auto;padding:40px 0}
+  .card{width:100%;height:auto}
+  .card__visual{height:300px;flex:none}
+  .work__end{width:100%;height:auto;padding:20px 0}
   .work__progress{display:none}
 }
 
-/* ---------- chat ---------- */
-.talk{background:var(--cream);color:var(--ink);padding:clamp(90px,12vw,160px) var(--gutter);border-radius:clamp(24px,4vw,56px);margin:0 clamp(0px,1vw,12px)}
-.talk .eyebrow{color:#6d6860}
-.talk__grid{display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(32px,6vw,96px);align-items:start}
-.talk__intro p{font-size:18px;color:#4a4740;max-width:38ch;margin-top:26px}
-.talk__legend{margin-top:36px;display:grid;gap:12px}
-.talk__legend div{display:flex;gap:14px;align-items:baseline;border-top:1px solid var(--line-dark);padding-top:12px}
-.talk__legend span{font:500 12px var(--mono);color:var(--accent);min-width:28px}
-.chat{background:var(--ink);color:var(--cream);border-radius:32px;overflow:hidden;box-shadow:0 60px 120px -40px rgba(11,11,12,.6);display:flex;flex-direction:column;height:min(720px,82vh)}
-.chat__bar{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line)}
+/* field gallery */
+.gallery{padding:clamp(70px,9vw,120px) 0;overflow:hidden}
+.gallery .sec__head{padding:0 var(--gutter)}
+.grow{display:flex;width:max-content;will-change:transform}
+.grow+.grow{margin-top:16px}
+.grow__set{display:flex;gap:16px;padding-right:16px}
+.gimg{position:relative;height:clamp(180px,22vw,280px);border-radius:24px;overflow:hidden;flex:0 0 auto;background:var(--card)}
+.gimg img{height:100%;width:auto;object-fit:cover;transition:transform 1s var(--ease)}
+.gimg:hover img{transform:scale(1.06)}
+.gimg span{position:absolute;left:12px;bottom:12px;background:rgba(255,253,250,.9);backdrop-filter:blur(6px);border-radius:999px;padding:6px 12px;font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.04em}
+
+/* talk */
+.talk{margin:0 clamp(0px,1.2vw,16px);border-radius:clamp(28px,4vw,48px);background:var(--lav);padding:clamp(70px,10vw,130px) var(--gutter)}
+.talk__grid{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(32px,6vw,90px);align-items:center}
+.talk__intro p{font-size:18px;color:var(--ink-2);max-width:32ch;margin-top:22px}
+.ladder{margin-top:30px;display:flex;flex-wrap:wrap;gap:8px}
+.ladder span{background:var(--card);border-radius:999px;padding:8px 14px;font-size:14px}
+.ladder span b{color:var(--coral);font-family:var(--mono);font-size:12px;margin-right:6px}
+.chat{background:var(--card);border-radius:32px;overflow:hidden;box-shadow:0 50px 100px -40px rgba(52,48,74,.45);display:flex;flex-direction:column;height:min(680px,80vh)}
+.chat__bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line)}
 .chat__who{display:flex;align-items:center;gap:12px}
-.toggle{display:inline-flex;align-items:center;gap:10px;font:400 11px var(--mono);text-transform:uppercase;color:var(--mute);letter-spacing:.05em}
-.toggle__sw{width:38px;height:22px;border-radius:999px;background:var(--ink-3);position:relative;transition:background .3s;border:1px solid var(--line)}
-.toggle__sw::after{content:'';position:absolute;left:2px;top:2px;width:16px;height:16px;border-radius:50%;background:var(--cream);transition:transform .35s var(--ease)}
-.toggle[aria-pressed="true"] .toggle__sw{background:var(--accent)}
+.toggle{display:inline-flex;align-items:center;gap:10px;font:400 11px var(--mono);text-transform:uppercase;color:var(--ink-2);letter-spacing:.05em}
+.toggle__sw{width:38px;height:22px;border-radius:999px;background:var(--bg-2);position:relative;transition:background .3s;flex:0 0 auto}
+.toggle__sw::after{content:'';position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .35s var(--ease)}
+.toggle[aria-pressed="true"] .toggle__sw{background:var(--coral)}
 .toggle[aria-pressed="true"] .toggle__sw::after{transform:translateX(16px)}
-.chat__log{flex:1;overflow-y:auto;padding:22px;display:flex;flex-direction:column;gap:10px;scrollbar-width:thin;overscroll-behavior:contain}
-.chat__log .msg{max-width:82%}
+.chat__log{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:10px;scrollbar-width:thin;overscroll-behavior:contain}
+.chat__log .msg{font-size:15px}
 .chat__log .msg a{text-decoration:underline;text-underline-offset:3px}
-.nlu{align-self:flex-start;font:400 11px/1.6 var(--mono);color:var(--mute);border-left:2px solid var(--accent);padding:4px 10px;display:none;animation:msgIn .4s var(--ease) forwards;opacity:0}
-.nlu b{color:var(--cream);font-weight:500}
-.nlu .ok{color:#3ddc84}.nlu .warn{color:#ffc24d}.nlu .bad{color:var(--accent)}
+.nlu{align-self:flex-start;font:400 11px/1.6 var(--mono);color:var(--ink-2);background:var(--bg);border-radius:12px;padding:8px 12px;display:none;opacity:0;animation:msgIn .4s var(--ease) forwards}
+.nlu b{color:var(--ink);font-weight:500}
+.nlu .ok{color:#3f9a62}.nlu .warn{color:#b07d14}.nlu .bad{color:#c4553a}
 .chat.debug .nlu{display:block}
-.chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 22px 12px}
-.chip{border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:13px;color:var(--cream);transition:background .3s,color .3s,border-color .3s}
-.chip:hover{background:var(--cream);color:var(--ink);border-color:var(--cream)}
-.chat__form{display:flex;gap:10px;padding:14px;border-top:1px solid var(--line)}
-.chat__form input{flex:1;background:var(--ink-3);border:1px solid var(--line);border-radius:999px;padding:14px 18px;color:var(--cream);font:inherit;font-size:15px;outline:none}
-.chat__form input:focus{border-color:var(--accent)}
-.chat__form button{width:50px;height:50px;border-radius:50%;background:var(--accent);color:var(--ink);font-size:20px;flex:0 0 auto;transition:transform .4s var(--ease)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 12px}
+.chip{background:var(--bg);border-radius:999px;padding:8px 14px;font-size:13px;transition:background .3s}
+.chip:hover{background:var(--lav)}
+.chat__form{display:flex;gap:10px;padding:12px;border-top:1px solid var(--line)}
+.chat__form input{flex:1;min-width:0;background:var(--bg);border:1px solid transparent;border-radius:999px;padding:13px 18px;color:var(--ink);font:inherit;font-size:15px;outline:none}
+.chat__form input:focus{border-color:var(--lav-2)}
+.chat__form button{width:48px;height:48px;border-radius:50%;background:var(--coral);color:#fff;font-size:19px;flex:0 0 auto;transition:transform .4s var(--ease)}
 .chat__form button:hover{transform:rotate(-45deg)}
-@media (max-width:900px){.talk__grid{grid-template-columns:1fr}.chat{height:600px}.chat__who .phone__sub{display:none}}
+@media (max-width:900px){.talk__grid{grid-template-columns:1fr}.chat{height:580px}.chat__who .hchat__sub{display:none}}
 
-/* ---------- craft list ---------- */
-.craft{padding:clamp(90px,12vw,160px) var(--gutter)}
-.craft__list{margin-top:clamp(40px,6vw,80px);border-top:1px solid var(--line)}
-.craft__row{position:relative;display:grid;grid-template-columns:80px 1fr 1fr;gap:24px;align-items:center;padding:clamp(20px,2.4vw,34px) 0;border-bottom:1px solid var(--line);overflow:hidden}
-.craft__row::before{content:'';position:absolute;inset:0;background:var(--accent);transform:scaleY(0);transform-origin:bottom;transition:transform .6s var(--ease);z-index:0}
-.craft__row:hover::before{transform:scaleY(1)}
-.craft__row>*{position:relative;z-index:1;transition:color .4s,transform .6s var(--ease)}
-.craft__row:hover>*{color:var(--ink)}
-.craft__row:hover h4{transform:translateX(16px)}
-.craft__row .mono{color:var(--mute)}
-.craft__row h4{font-size:clamp(26px,3.6vw,56px);letter-spacing:-.045em;font-weight:500;line-height:1}
-.craft__row p{color:#bdb8ae;max-width:46ch}
-@media (max-width:760px){.craft__row{grid-template-columns:1fr;gap:10px}}
+/* craft tiles */
+.craft__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ctile{border-radius:28px;padding:28px;min-height:230px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .6s var(--ease)}
+.ctile:hover{transform:translateY(-6px) rotate(-.6deg)}
+.ctile svg{width:54px;height:54px}
+.ctile h4{font-size:clamp(22px,2vw,30px);letter-spacing:-.035em;font-weight:600;line-height:1.05;margin-top:28px}
+.ctile p{color:var(--ink-2);font-size:15px;margin-top:8px;max-width:30ch}
+@media (max-width:900px){.craft__grid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.craft__grid{grid-template-columns:1fr}}
 
-/* ---------- footer ---------- */
-.foot{background:var(--accent);color:var(--ink);padding:clamp(80px,10vw,140px) var(--gutter) 28px;border-radius:clamp(24px,4vw,56px) clamp(24px,4vw,56px) 0 0;margin-top:clamp(40px,6vw,80px);overflow:hidden}
-.foot__q{font-family:var(--serif);font-style:italic;font-size:clamp(22px,2.4vw,34px);max-width:28ch;line-height:1.15}
-.foot__big{display:block;font-size:clamp(78px,19.5vw,360px);line-height:.82;font-weight:600;letter-spacing:-.07em;margin:clamp(30px,5vw,60px) 0;white-space:nowrap}
+/* footer */
+.foot{background:var(--peach);padding:clamp(70px,9vw,120px) var(--gutter) 26px;border-radius:clamp(28px,4vw,48px) clamp(28px,4vw,48px) 0 0;margin-top:clamp(60px,8vw,110px);overflow:hidden}
+.foot__bubble{display:inline-block;background:var(--card);border-radius:24px 24px 24px 6px;padding:14px 20px;font-family:var(--serif);font-style:italic;font-size:clamp(20px,2vw,28px);box-shadow:var(--shadow)}
+.foot__big{display:block;font-size:clamp(70px,17vw,300px);line-height:.9;font-weight:600;letter-spacing:-.07em;margin:clamp(26px,4vw,50px) 0;white-space:nowrap}
 .foot__big span{display:inline-block;transition:transform .6s var(--ease);transition-delay:calc(var(--i) * 25ms)}
-.foot__big:hover span{transform:translateY(-12%) rotate(-3deg)}
-.foot__big:hover span:nth-child(even){transform:translateY(8%) rotate(3deg)}
-.foot__row{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:12px;padding:20px 30px;border-radius:999px;background:var(--ink);color:var(--cream);font-size:clamp(16px,1.4vw,20px);font-weight:500}
-.btn--ghost{background:transparent;border:1px solid var(--ink);color:var(--ink)}
-.foot__links{display:flex;gap:12px;flex-wrap:wrap}
-.foot__base{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:clamp(60px,8vw,110px);padding-top:20px;border-top:1px solid rgba(11,11,12,.2);font:400 12px var(--mono);text-transform:uppercase;letter-spacing:.04em}
+.foot__big span:last-child{color:var(--coral)}
+.foot__big:hover span{transform:translateY(-10%) rotate(-3deg)}
+.foot__big:hover span:nth-child(even){transform:translateY(6%) rotate(3deg)}
+.foot__row{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.foot__links{display:flex;gap:10px;flex-wrap:wrap}
+.foot__base{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:clamp(50px,7vw,90px);padding-top:18px;border-top:1px solid rgba(52,48,74,.15);font:400 12px var(--mono);text-transform:uppercase;color:var(--ink-2)}
 
-/* ---------- motion helpers ---------- */
-.js .reveal-up{opacity:0;transform:translateY(40px)}
-.reduced .reveal-up{opacity:1!important;transform:none!important}
-@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important}.grain{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important}.grain,.blob{animation:none}}
 </style>
 </head>
 <body>
@@ -314,14 +332,12 @@ img{display:block;max-width:100%}
 <a class="skip" href="#main">Skip to content</a>
 <div class="grain" aria-hidden="true"></div>
 
-<!-- Loader -->
 <div class="loader" aria-hidden="true">
   <div class="loader__top mono"><span>Samruddhi Pahune</span><span>Conversation Design</span></div>
   <div class="loader__mid"><div class="loader__bubble"><span></span><span></span><span></span></div><span class="loader__word">listening…</span></div>
   <div class="loader__count">00</div>
 </div>
 
-<!-- Cursor -->
 <div class="cursor" aria-hidden="true"><div class="cursor__dot"></div><div class="cursor__label"></div></div>
 
 <header class="nav">
@@ -337,95 +353,107 @@ img{display:block;max-width:100%}
 </header>
 
 <main id="main">
-<!-- ============ HERO ============ -->
+<!-- HERO -->
 <section class="hero" id="top">
+  <div class="blob blob--1" aria-hidden="true"></div>
+  <div class="blob blob--2" aria-hidden="true"></div>
+  <div class="blob blob--3" aria-hidden="true"></div>
   <canvas class="hero__wave" aria-hidden="true"></canvas>
-  <div class="bubbles" aria-hidden="true">
-    <div class="fbubble" data-depth="1.2" style="right:4%;top:63%"><small>user · 08:42 PM</small>paisa kat gaya, but shop didn’t get it 😟</div>
-    <div class="fbubble bot keep" data-depth="2" style="right:5%;top:22%"><small>bot · intent: dispute</small>Checking the ledger first — one second.</div>
-    <div class="fbubble" data-depth="0.8" style="right:15%;top:44%"><small>user</small>block my card. now.</div>
-    <div class="fbubble bot" data-depth="1.6" style="left:36%;top:7%"><small>bot · confidence 0.41</small>Did you mean Delhi or Dehradun?</div>
-  </div>
 
-  <div class="hero__meta mono">
-    <span class="status"><span class="status__dot"></span>Open to conversation design roles</span>
-    <span>Voice &amp; chat AI · Fintech · India</span>
-  </div>
-
-  <h1 class="hero__title" aria-label="I design what machines say — and when they should stop.">
-    <span class="line"><span>I design what</span></span>
-    <span class="line"><span>machines <span class="serif">say</span> —</span></span>
-    <span class="line"><span>and when they</span></span>
-    <span class="line"><span>should <span class="serif">stop.</span><span class="caret"></span></span></span>
-  </h1>
-
-  <div class="hero__foot">
-    <p class="hero__lede">Samruddhi Pahune is a <em>conversation designer</em> for voice and chat AI in places where a misheard word costs real money — banking voicebots, payment disputes, airline booking.</p>
-    <div class="hero__tags">
-      <span class="tag">Voice UX</span><span class="tag">Conversation architecture</span><span class="tag">Fallback &amp; escalation</span><span class="tag">Microcopy</span><span class="tag">NLU intents</span><span class="tag">Bot persona</span>
+  <div class="hero__copy">
+    <span class="status mono"><span class="status__dot"></span>Conversation Designer · Voice &amp; Chat AI</span>
+    <h1 class="hero__title" aria-label="I design what machines say, and when they should stop.">
+      <span class="line"><span>I design what</span></span>
+      <span class="line"><span>machines <span class="serif">say</span>,</span></span>
+      <span class="line"><span>and when they</span></span>
+      <span class="line"><span>should <span class="serif">stop.</span><span class="caret"></span></span></span>
+    </h1>
+    <p class="hero__lede">Samruddhi Pahune designs <em>voice and chat AI</em> for banking, payments and travel.</p>
+    <div class="hero__ctas">
+      <a class="btn magnetic" href="#work">See the work ↓</a>
+      <a class="btn btn--soft magnetic" href="#talk">Talk to my portfolio</a>
     </div>
-    <div class="scroll-cue mono"><span class="scroll-cue__bar"></span>Scroll</div>
+  </div>
+
+  <div class="collage" aria-hidden="true">
+    <div class="tile tile--plane tile--contain" data-depth="1.4"><img src="Images/Dottie/Defining%20the%20travellers%20-%20frequent%20flyer%20illustration.avif" alt=""></div>
+    <div class="tile tile--map" data-depth="0.8"><img src="Images/Vihar/Final%20Design%20-%20on%20the%20road%20-%20road%20layout%20map.avif" alt=""></div>
+    <div class="tile tile--bike" data-depth="1.1"><img src="Images/Bhopal%20by%20Bike/SELF%20SAFARI%20-%20Field%20work%20-%20image%202.avif" alt=""></div>
+    <div class="tile tile--wallet tile--contain" data-depth="1.8"><img src="Images/Dottie/Defining%20the%20travellers%20-%20savvy%20saver%20illustration.avif" alt=""></div>
+    <div class="hchat" data-depth="0.5">
+      <div class="hchat__bar"><div class="av">6E</div><div><div class="hchat__name">Dottie</div><div class="hchat__sub">voice · booking</div></div></div>
+      <div class="hchat__body" id="heroChat"></div>
+    </div>
+    <span class="sticker sticker--a" data-depth="2.2">intent · book_flight</span>
+    <span class="sticker sticker--b" data-depth="1.6">confidence 0.93</span>
+    <span class="sticker sticker--c" data-depth="2"><span class="mini-eq"><i></i><i></i><i></i><i></i><i></i></span>listening</span>
   </div>
 </section>
 
-<!-- ============ MARQUEE ============ -->
-<section class="marquee" aria-label="Things real users say">
-  <div class="marquee__row" data-dir="-1">
-    <div class="marquee__item">where did my money go? <i class="sep"></i> <span class="serif">book me a flight to Goa</span> <i class="sep"></i> block my card <i class="sep"></i> <span class="serif">paisa kat gaya</span> <i class="sep"></i> actually, anything cheaper? <i class="sep"></i> <span class="serif">talk to a human</span> <i class="sep"></i></div>
+<!-- BUBBLE MARQUEE -->
+<section class="bmarquee" aria-label="Things real users say">
+  <div class="bmarquee__row" data-dir="-1">
+    <div class="bmarquee__item">
+      <span class="pill" style="background:var(--lav)">where did my money go? <small>dispute</small></span>
+      <span class="pill pill--r" style="background:var(--peach)">Ding! You’re set for Goa 🌴</span>
+      <span class="pill" style="background:var(--sage)">block my card. now. <small>card.block</small></span>
+      <span class="pill pill--r" style="background:var(--butter)">Did you mean Delhi or Dehradun?</span>
+      <span class="pill" style="background:var(--sky)">paisa kat gaya 😟 <small>hinglish</small></span>
+    </div>
   </div>
-  <div class="marquee__row marquee__row--meta" data-dir="1">
-    <div class="marquee__item"><span>intent: <b>dispute.upi_debit</b></span>·<span>entity: <b>₹1,200</b></span>·<span>gate 4: <b>reversal found</b></span>·<span>intent: <b>card.block</b></span>·<span>confirm: <b>required</b></span>·<span>asr: <b>“Belly” → Delhi?</b></span>·<span>fallback: <b>rephrase</b></span>·<span>handoff: <b>context preserved</b></span>·<span>status: <b>resolved · no ticket</b></span>·</div>
+  <div class="bmarquee__row" data-dir="1">
+    <div class="bmarquee__item">
+      <span class="pill pill--r" style="background:var(--rose)">Your card is now blocked.</span>
+      <span class="pill" style="background:var(--card)">actually, anything cheaper? <small>repair</small></span>
+      <span class="pill pill--r" style="background:var(--lav)">Checking the ledger first.</span>
+      <span class="pill" style="background:var(--sage)">talk to a human <small>handoff</small></span>
+      <span class="pill pill--r" style="background:var(--peach)">The ₹1,200 is already back ✓</span>
+    </div>
   </div>
 </section>
 
-<!-- ============ MANIFESTO ============ -->
-<section class="manifesto" aria-label="Manifesto">
-  <p class="eyebrow mono">01 — The belief</p>
-  <p class="manifesto__text" data-words>In voice, there is <span class="serif">no undo.</span> So every word is load-bearing. I design the error path first — clarify once, rephrase, then hand off with context — because a bot is only as trustworthy as its <span class="serif">worst moment.</span></p>
+<!-- MANIFESTO -->
+<section class="manifesto" aria-label="Belief">
+  <p class="manifesto__text" data-words>In voice, there is <span class="serif">no undo.</span> Every word is load-bearing.</p>
 </section>
 
-<!-- ============ APPROACH ============ -->
-<section class="approach" id="approach">
-  <div class="approach__head">
+<!-- APPROACH -->
+<section class="sec" id="approach" style="padding-top:0">
+  <div class="sec__head">
     <div>
-      <p class="eyebrow mono">02 — How I design conversations</p>
-      <h2 class="h2">Four rules,<br><span class="serif">played out</span> live.</h2>
+      <span class="eyebrow mono"><i></i>How I design</span>
+      <h2 class="h2">Four rules, <span class="serif">live.</span></h2>
     </div>
-    <p>Scroll. Each principle runs as a real exchange from a shipped or speculative project.</p>
+    <p>Keep scrolling. Each rule plays out on the phone as a real exchange.</p>
   </div>
-
   <div class="approach__grid">
     <div class="steps">
       <article class="step" data-step="0">
-        <p class="step__num">01 / Failed UPI Debit</p>
+        <span class="step__tag" style="background:var(--sky)">Failed UPI Debit</span>
         <h3>Diagnose first, <span class="serif">talk second.</span></h3>
-        <p>Reassuring someone before you’ve checked the ledger isn’t kindness. It’s a guess. My dispute engine runs five ledger checks before the conversation makes a single promise, so tickets for money that already came back can’t get raised in the first place.</p>
-        <p class="from mono">Banking AI · Tier I Indian bank</p>
+        <p>Check the ledger before making any promise.</p>
       </article>
       <article class="step" data-step="1">
-        <p class="step__num">02 / Dottie for IndiGo</p>
+        <span class="step__tag" style="background:var(--peach)">Dottie · IndiGo</span>
         <h3>Clarify once. Rephrase. <span class="serif">Hand off.</span></h3>
-        <p>When the bot doesn’t understand, it has exactly three moves, in this order. It never loops, never asks the same question twice, and never leaves anyone stuck. The handoff carries everything the user already said.</p>
-        <p class="from mono">Voice AI · Speculative</p>
+        <p>No loops. A human picks up with full context.</p>
       </article>
       <article class="step" data-step="2">
-        <p class="step__num">03 / Beyond Touchscreens · ICICI</p>
+        <span class="step__tag" style="background:var(--lav)">ICICI voice banking</span>
         <h3>Words <span class="serif">are</span> the interface.</h3>
-        <p>On a phone call there’s no screen to check and nothing to re-read. Every response has to tell the user what happened, what state they’re in now, and what happens next. The confirmation prompt is how the bot shows it understood.</p>
-        <p class="from mono">Production · 70+ live flows</p>
+        <p>State and consequence, in two sentences.</p>
       </article>
       <article class="step" data-step="3">
-        <p class="step__num">04 / Dottie for IndiGo</p>
-        <h3>Personality carries <span class="serif">the relationship.</span></h3>
-        <p>A bot without personality is just a menu with a voice. The brand comes through in how the bot handles things going slightly wrong, and in a shortlist of three flights instead of a list of thirty.</p>
-        <p class="from mono">Brand voice · Decision architecture</p>
+        <span class="step__tag" style="background:var(--butter)">Dottie · IndiGo</span>
+        <h3>Personality carries <span class="serif">trust.</span></h3>
+        <p>A shortlist of three flights, delivered in the brand’s own voice.</p>
       </article>
     </div>
     <div class="phone-wrap" aria-hidden="true">
       <div class="phone">
         <div class="phone__bar">
-          <div class="phone__avatar" id="phoneAvatar">₹</div>
-          <div><div class="phone__name" id="phoneName">Bank Assistant</div><div class="phone__sub" id="phoneSub">voice · live transcript</div></div>
+          <div class="av" id="phoneAvatar">₹</div>
+          <div><div class="hchat__name" id="phoneName">Bank Assistant</div><div class="hchat__sub" id="phoneSub">chat · dispute engine</div></div>
         </div>
         <div class="phone__body" id="phoneBody"></div>
         <div class="phone__input"><span>Speak or type…</span><i></i></div>
@@ -434,131 +462,140 @@ img{display:block;max-width:100%}
   </div>
 </section>
 
-<section class="numbers" aria-label="Impact in numbers">
-  <div class="numbers__grid">
-    <div class="num"><div class="num__v" data-count="70">0<sup>+</sup></div><p class="num__l">live transactional voice flows designed for ICICI Bank</p></div>
-    <div class="num"><div class="num__v" data-count="160">0<sup>M</sup></div><p class="num__l">failed-payment moments a month that one diagnostic engine is built for</p></div>
-    <div class="num"><div class="num__v" data-count="1">0<sup>L+</sup></div><p class="num__l">lakh users narrowed down to 3 real people for SmartCoin</p></div>
-    <div class="num"><div class="num__v" data-count="60">0<sup>%</sup></div><p class="num__l">scan rate at the Bhopal by Bike pilot dock, up from 3% adoption</p></div>
-  </div>
+<!-- NUMBERS -->
+<section class="bento" aria-label="Impact">
+  <div class="stat" style="background:var(--lav)">
+    <span class="stat__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34304a" stroke-width="1.8" stroke-linecap="round"><path d="M4 10v4M8 6v12M12 3v18M16 7v10M20 10v4"/></svg></span>
+    <div class="stat__v" data-count="70">0<sup>+</sup></div><p>live voice flows at ICICI Bank</p></div>
+  <div class="stat" style="background:var(--sky)">
+    <span class="stat__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34304a" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M3 10h18"/></svg></span>
+    <div class="stat__v" data-count="160">0<sup>M</sup></div><p>failed payments a month</p></div>
+  <div class="stat" style="background:var(--butter)">
+    <span class="stat__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34304a" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 19c.8-3.4 3.2-5 6-5s5.2 1.6 6 5M15 14.5c2.6 0 4.6 1.4 5.2 4.5"/></svg></span>
+    <div class="stat__v" data-count="1">0<sup>L+</sup></div><p>users → 3 real personas</p></div>
+  <div class="stat" style="background:var(--sage)">
+    <span class="stat__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34304a" stroke-width="1.8" stroke-linecap="round"><circle cx="6" cy="16" r="3.5"/><circle cx="18" cy="16" r="3.5"/><path d="M6 16l4-8h5l3 8M9 8h3"/></svg></span>
+    <div class="stat__v" data-count="60">0<sup>%</sup></div><p>scan rate at the pilot bike dock</p></div>
 </section>
 
-<!-- ============ WORK ============ -->
+<!-- WORK -->
 <section class="work" id="work">
-  <div class="work__head">
-    <div>
-      <p class="eyebrow mono">03 — Selected work</p>
-      <h2 class="h2">Conversations<br>that <span class="serif accent">shipped.</span></h2>
+  <div class="sec" style="padding-bottom:20px">
+    <div class="sec__head" style="margin-bottom:0">
+      <div>
+        <span class="eyebrow mono"><i></i>Selected work</span>
+        <h2 class="h2">Conversations <span class="serif">that shipped.</span></h2>
+      </div>
+      <p>Six projects. Hover, scroll, open.</p>
     </div>
-    <p>Six case studies across voice banking, payment disputes, airline booking and service design. Each one is about what a system should say, and when it should hold off.</p>
   </div>
   <div class="work__pin">
     <div class="work__track">
 
-      <a class="card card--accent" href="work.html#cs-icici" data-cursor="Read">
-        <div class="card__info">
-          <div>
-            <div class="card__top"><span class="card__idx">01</span><span class="mono">Production · Voice banking</span></div>
-            <h3 class="card__title" style="margin-top:26px">Beyond<br><span class="serif">Touchscreens</span></h3>
-            <p class="card__desc">One of India’s first transactional voicebots, with 70+ mission-critical flows for ICICI Bank. Fallbacks, mandatory confirmations and safe-failure patterns for voice banking.</p>
-          </div>
-          <div class="card__bottom"><div class="card__metric"><b>70+</b><span>flows in production</span></div><span class="card__go">↗</span></div>
+      <a class="card" href="work.html#cs-icici" data-cursor="Read" style="background:var(--lav)">
+        <div class="card__visual">
+          <span class="card__chip">70+ flows live</span>
+          <div class="vc"><div class="vc__bars" id="eqBars"></div><div class="vc__bubble">“Your card is now blocked.”</div></div>
         </div>
-        <div class="card__media">
-          <div class="voicecover">
-            <div class="voicecover__bars" id="eqBars"></div>
-            <q>Your card is now blocked. No further transactions can go through.</q>
-          </div>
-        </div>
+        <div class="card__meta"><div><span class="card__tag">01 · ICICI · Voice banking</span><h3 class="card__title">Beyond <span class="serif">Touchscreens</span></h3></div><span class="card__go">↗</span></div>
       </a>
 
-      <a class="card" href="work.html#cs2" data-cursor="Read">
-        <div class="card__info">
-          <div>
-            <div class="card__top"><span class="card__idx">02</span><span class="mono">Behavior design · Banking AI</span></div>
-            <h3 class="card__title" style="margin-top:26px">Where did my <span class="serif">money go?</span></h3>
-            <p class="card__desc">A five-gate diagnostic engine for failed UPI debits. Escalation is decided by ledger state, not by how upset the user sounds.</p>
+      <a class="card" href="work.html#cs2" data-cursor="Read" style="background:var(--sky)">
+        <div class="card__visual">
+          <span class="card__chip">Resolved · no ticket</span>
+          <div class="gates">
+            <div class="gates__row"><span class="gates__fill"></span>
+              <span class="gate"><b>1</b>Debit</span><span class="gate"><b>2</b>Rail</span><span class="gate"><b>3</b>Ledger</span><span class="gate"><b>4</b>Reversal</span><span class="gate"><b>5</b>Window</span>
+            </div>
+            <div class="gates__chat">
+              <div class="msg user">Money got deducted 😟</div>
+              <div class="msg bot">Good news. The ₹1,200 is already back in your account.</div>
+            </div>
           </div>
-          <div class="card__bottom"><div class="card__metric"><b>&lt; 2 min</b><span>resolved · no ticket</span></div><span class="card__go">↗</span></div>
         </div>
-        <div class="card__media"><img src="Content/The%205-gate%20diagnostic%20engine%20%E2%80%94%20from%20complaint%20intake%20to%20verified%20escalation.png" alt="Diagram of the five-gate diagnostic engine" loading="lazy" data-parallax></div>
+        <div class="card__meta"><div><span class="card__tag">02 · Banking AI · Disputes</span><h3 class="card__title">Where did my <span class="serif">money go?</span></h3></div><span class="card__go">↗</span></div>
       </a>
 
-      <a class="card card--light" href="work.html#cs-dottie" data-cursor="Read">
-        <div class="card__info">
-          <div>
-            <div class="card__top"><span class="card__idx">03</span><span class="mono">Voice AI · Speculative</span></div>
-            <h3 class="card__title" style="margin-top:26px">Dottie<span class="serif">, Ding!</span></h3>
-            <p class="card__desc">A voice persona for IndiGo. It branches on ASR confidence, keeps payment out of the voice call, and offers three flights to choose from (cheapest, fastest, balanced).</p>
-          </div>
-          <div class="card__bottom"><div class="card__metric"><b>3-step</b><span>error ladder · never loops</span></div><span class="card__go">↗</span></div>
+      <a class="card" href="work.html#cs-dottie" data-cursor="Read" style="background:var(--peach)">
+        <div class="card__visual">
+          <span class="card__chip">Voice persona</span>
+          <img class="contain" src="Images/Dottie/Final%20Design%20-%20the%20happy%20path%20-%20part%201.webp" alt="Dottie happy-path conversation design" loading="lazy" data-parallax>
+          <img class="sticker-img" src="Images/Dottie/Final%20Design%20-%20Dottie%20persona%20illustration.webp" alt="" loading="lazy">
         </div>
-        <div class="card__media"><img src="Images/Dottie/Final%20Design%20-%20Dottie%20persona%20illustration.webp" alt="Dottie voice assistant persona illustration" loading="lazy" data-parallax></div>
+        <div class="card__meta"><div><span class="card__tag">03 · IndiGo · Speculative</span><h3 class="card__title">Dottie<span class="serif">, Ding!</span></h3></div><span class="card__go">↗</span></div>
       </a>
 
-      <a class="card" href="work.html#cs-smartcoin" data-cursor="Read">
-        <div class="card__info">
-          <div>
-            <div class="card__top"><span class="card__idx">04</span><span class="mono">Fintech · Product behavior</span></div>
-            <h3 class="card__title" style="margin-top:26px">Smart<span class="serif">Coin</span></h3>
-            <p class="card__desc">Linked borrowing to saving for 1.1 crore underbanked users, and rebuilt Help as a step-by-step conversation that replaced a wall of FAQs.</p>
-          </div>
-          <div class="card__bottom"><div class="card__metric"><b>3 → 3</b><span>dead ends → continuations</span></div><span class="card__go">↗</span></div>
+      <a class="card" href="work.html#cs-smartcoin" data-cursor="Read" style="background:var(--butter)">
+        <div class="card__visual">
+          <span class="card__chip">1.1 crore users</span>
+          <img class="contain" src="Images/Smartcoin/Goal%20Oriented%20UI.avif" alt="SmartCoin goal-oriented screens" loading="lazy" data-parallax>
         </div>
-        <div class="card__media"><img src="Images/Smartcoin/CHILLAR%20-%20SAVE%20WHILE%20YOU%20BORROW%20-%20Save%20while%20you%20borrow.avif" alt="CHILLAR save-while-you-borrow screens" loading="lazy" data-parallax></div>
+        <div class="card__meta"><div><span class="card__tag">04 · Fintech · Saving</span><h3 class="card__title">Smart<span class="serif">Coin</span></h3></div><span class="card__go">↗</span></div>
       </a>
 
-      <a class="card card--light" href="work.html#cs-vihar" data-cursor="Read">
-        <div class="card__info">
-          <div>
-            <div class="card__top"><span class="card__idx">05</span><span class="mono">Service design · Wayfinding</span></div>
-            <h3 class="card__title" style="margin-top:26px">Van <span class="serif">Vihar</span></h3>
-            <p class="card__desc">80% of first-time visitors never found the butterfly garden. An invisible guide took the risk out of taking an unmarked path.</p>
-          </div>
-          <div class="card__bottom"><div class="card__metric"><b>80%</b><span>missed it before</span></div><span class="card__go">↗</span></div>
+      <a class="card" href="work.html#cs-vihar" data-cursor="Read" style="background:var(--sage)">
+        <div class="card__visual">
+          <span class="card__chip">80% missed it</span>
+          <img src="Images/Vihar/Final%20Design%20-%20on%20the%20road%20-%20zebra%20stripes%20on%20the%20path%20and%20on%20the%20app.avif" alt="Zebra stripes on the path matching the app map" loading="lazy" data-parallax>
         </div>
-        <div class="card__media"><img src="Images/Vihar/Final%20Design%20-%20on%20the%20road%20-%20zebra%20stripes%20on%20the%20path%20and%20on%20the%20app.avif" alt="Zebra stripes on the path matching the app map" loading="lazy" data-parallax></div>
+        <div class="card__meta"><div><span class="card__tag">05 · Service design</span><h3 class="card__title">Van <span class="serif">Vihar</span></h3></div><span class="card__go">↗</span></div>
       </a>
 
-      <a class="card" href="work.html#cs-bhopal" data-cursor="Read">
-        <div class="card__info">
-          <div>
-            <div class="card__top"><span class="card__idx">06</span><span class="mono">Adoption · Phygital</span></div>
-            <h3 class="card__title" style="margin-top:26px">Bhopal <span class="serif">by Bike</span></h3>
-            <p class="card__desc">500 bikes and 3% adoption. The bikes worked; nobody was explaining how to use them. Service design is conversation at scale.</p>
-          </div>
-          <div class="card__bottom"><div class="card__metric"><b>60%</b><span>scan rate at pilot dock</span></div><span class="card__go">↗</span></div>
+      <a class="card" href="work.html#cs-bhopal" data-cursor="Read" style="background:var(--rose)">
+        <div class="card__visual">
+          <span class="card__chip">3% → 60%</span>
+          <img src="Images/Bhopal%20by%20Bike/Final%20Design%20-%20At%20the%20dock.webp" alt="Redesigned bike dock with a kiosk" loading="lazy" data-parallax>
         </div>
-        <div class="card__media"><img src="Images/Bhopal%20by%20Bike/Final%20Design%20-%20On%20the%20Cycle%20-%20New%20Design.webp" alt="Redesigned bike with pricing message on the frame" loading="lazy" data-parallax></div>
+        <div class="card__meta"><div><span class="card__tag">06 · Adoption · Phygital</span><h3 class="card__title">Bhopal <span class="serif">by Bike</span></h3></div><span class="card__go">↗</span></div>
       </a>
 
       <div class="work__end">
-        <p class="mono" style="color:var(--mute)">That’s the shortlist.</p>
         <a href="work.html" data-cursor="Open">All case studies <span>→</span></a>
-        <a href="#talk" data-cursor="Ask">Or ask my portfolio <span>→</span></a>
+        <a href="#talk" data-cursor="Ask">Ask my portfolio <span>→</span></a>
       </div>
     </div>
   </div>
   <div class="work__progress" aria-hidden="true"><i></i></div>
 </section>
 
-<!-- ============ TALK ============ -->
+<!-- FIELD GALLERY -->
+<section class="gallery" aria-label="From the field">
+  <div class="sec__head">
+    <div>
+      <span class="eyebrow mono"><i></i>From the field</span>
+      <h2 class="h2">Research, <span class="serif">in pictures.</span></h2>
+    </div>
+  </div>
+  <div class="grow" data-dir="-1"><div class="grow__set">
+    <figure class="gimg"><img src="Images/Bhopal%20by%20Bike/SELF%20SAFARI%20-%20Field%20work%20-%20image%201.avif" alt="Docking station field visit"><span>Dock safari</span></figure>
+    <figure class="gimg"><img src="Images/Dottie/Final%20Design%20-%20alternative%20path.webp" alt="Dottie alternative path flow"><span>Alternative path</span></figure>
+    <figure class="gimg"><img src="Images/Vihar/self%20safari%20-%20immersion%203.avif" alt="Van Vihar immersion"><span>Self safari</span></figure>
+    <figure class="gimg"><img src="Images/Smartcoin/Savings%20Page%20Redesign%20-%20Making%20the%20score%20understandable.avif" alt="Savings score redesign"><span>Savings score</span></figure>
+    <figure class="gimg"><img src="Images/Bhopal%20by%20Bike/Final%20Design%20-%20COMMUNICATE%20TO%20BE%20UNDERSTOOD%20-%20New%20Design.webp" alt="New dock app design"><span>Communicate to be understood</span></figure>
+    <figure class="gimg"><img src="Images/Vihar/Final%20Design%20-%20from%20park%20to%20campus%20-%20field%20pictures.avif" alt="QR prototype tested in the field"><span>Field test</span></figure>
+  </div></div>
+  <div class="grow" data-dir="1"><div class="grow__set">
+    <figure class="gimg"><img src="Images/Smartcoin/Ideation%20-%20part%201.avif" alt="SmartCoin ideation sketches"><span>Ideation</span></figure>
+    <figure class="gimg"><img src="Images/Bhopal%20by%20Bike/SELF%20SAFARI%20-%20Field%20work%20-%20image%203.avif" alt="Cycle track field visit"><span>On the road</span></figure>
+    <figure class="gimg"><img src="Images/Vihar/A%20road%20that%20pushes%20you%20forward%20-%20early%20field%20insights.avif" alt="Van Vihar map illustration"><span>Early insights</span></figure>
+    <figure class="gimg"><img src="Images/Dottie/Final%20Design%20-%20the%20happy%20path%20-%20part%203.webp" alt="Dottie happy path, part 3"><span>Happy path</span></figure>
+    <figure class="gimg"><img src="Images/Bhopal%20by%20Bike/Final%20Design%20-%20SHOP%20AT%20THE%20DOCK%20-%20part%202.webp" alt="Kiosk at the dock render"><span>Shop at the dock</span></figure>
+    <figure class="gimg"><img src="Images/Vihar/self%20safari%20-%20immersion.avif" alt="Van Vihar signage"><span>Immersion</span></figure>
+  </div></div>
+</section>
+
+<!-- TALK -->
 <section class="talk" id="talk">
   <div class="talk__grid">
     <div class="talk__intro">
-      <p class="eyebrow mono">04 — Try it</p>
+      <span class="eyebrow mono"><i></i>Try it</span>
       <h2 class="h2">Ask my <span class="serif">portfolio.</span></h2>
-      <p>This assistant follows the same rules as my production bots. Ask it anything. Turn on <b>Show the logic</b> to see the intent, confidence score and fallback step behind each reply.</p>
-      <div class="talk__legend mono">
-        <div><span>≥.6</span>Confident: answer</div>
-        <div><span>1×</span>Unsure: clarify once, with options</div>
-        <div><span>2×</span>Still unsure: rephrase what it can do</div>
-        <div><span>3×</span>Hand off to a human, with context</div>
-      </div>
+      <p>A small bot built to the same rules as my production work. Turn on <b>Show the logic</b> to see how it decides.</p>
+      <div class="ladder"><span><b>≥.6</b>answer</span><span><b>1×</b>clarify</span><span><b>2×</b>rephrase</span><span><b>3×</b>hand off</span></div>
     </div>
     <div class="chat" id="chat">
       <div class="chat__bar">
-        <div class="chat__who"><div class="phone__avatar">SP</div><div><div class="phone__name">Portfolio Assistant</div><div class="phone__sub">rule-based · no LLM · no tracking</div></div></div>
+        <div class="chat__who"><div class="av">SP</div><div><div class="hchat__name">Portfolio Assistant</div><div class="hchat__sub">rule-based · no tracking</div></div></div>
         <button class="toggle" id="debugToggle" aria-pressed="false"><span class="toggle__sw"></span>Show the logic</button>
       </div>
       <div class="chat__log" id="chatLog" aria-live="polite"></div>
@@ -572,31 +609,46 @@ img{display:block;max-width:100%}
   </div>
 </section>
 
-<!-- ============ CRAFT ============ -->
-<section class="craft" aria-label="What I do">
-  <p class="eyebrow mono">05 — The craft</p>
-  <h2 class="h2">What I bring <span class="serif">to the table.</span></h2>
-  <div class="craft__list">
-    <div class="craft__row"><span class="mono">01</span><h4>Conversation architecture</h4><p>Happy paths, alternative paths, error paths. Flows that bend when people change their minds and pick up where they left off.</p></div>
-    <div class="craft__row"><span class="mono">02</span><h4>Voice UX &amp; prompts</h4><p>Designing for ASR misfires, noisy streets, code-switching and Indian English. “Tomorrow morning” means 7–11 AM.</p></div>
-    <div class="craft__row"><span class="mono">03</span><h4>Fallback &amp; escalation logic</h4><p>Confidence thresholds set by how risky each flow is. Warm handoffs that keep context. Decision boundaries for when to act, when to verify and when to stop.</p></div>
-    <div class="craft__row"><span class="mono">04</span><h4>NLU intents &amp; entities</h4><p>Intent hierarchies, annotation rules and training data, worked out with ML engineers. Edge cases go back in as training data.</p></div>
-    <div class="craft__row"><span class="mono">05</span><h4>Microcopy &amp; persona</h4><p>Brand voice turned into the exact words a bot uses. Professional, empathetic and precise, with everything the user needs in two sentences.</p></div>
-    <div class="craft__row"><span class="mono">06</span><h4>Compliance as design input</h4><p>Making the case for design decisions in terms legal, brand and risk teams can evaluate.</p></div>
+<!-- CRAFT -->
+<section class="sec" aria-label="Craft">
+  <div class="sec__head">
+    <div>
+      <span class="eyebrow mono"><i></i>The craft</span>
+      <h2 class="h2">What I <span class="serif">bring.</span></h2>
+    </div>
+  </div>
+  <div class="craft__grid">
+    <div class="ctile" style="background:var(--lav)">
+      <svg viewBox="0 0 54 54" fill="none" stroke="#34304a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="27" r="5"/><circle cx="44" cy="12" r="5"/><circle cx="44" cy="42" r="5"/><path d="M15 27h10l14-13M25 27l14 13"/></svg>
+      <div><h4>Conversation architecture</h4><p>Happy, alternative and error paths.</p></div></div>
+    <div class="ctile" style="background:var(--peach)">
+      <svg viewBox="0 0 54 54" fill="none" stroke="#34304a" stroke-width="2" stroke-linecap="round"><rect x="20" y="6" width="14" height="26" rx="7"/><path d="M12 26c0 8 7 14 15 14s15-6 15-14M27 40v8M19 48h16"/></svg>
+      <div><h4>Voice UX</h4><p>ASR misfires, noise, Indian English.</p></div></div>
+    <div class="ctile" style="background:var(--sage)">
+      <svg viewBox="0 0 54 54" fill="none" stroke="#34304a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M27 6l17 7v12c0 11-7 19-17 23C17 44 10 36 10 25V13z"/><path d="M20 27l5 5 10-11"/></svg>
+      <div><h4>Fallback &amp; escalation</h4><p>When to act, verify or stop.</p></div></div>
+    <div class="ctile" style="background:var(--sky)">
+      <svg viewBox="0 0 54 54" fill="none" stroke="#34304a" stroke-width="2" stroke-linecap="round"><rect x="6" y="10" width="18" height="12" rx="4"/><rect x="30" y="10" width="18" height="12" rx="4"/><rect x="18" y="32" width="18" height="12" rx="4"/><path d="M15 22v5h24v-5M27 27v5"/></svg>
+      <div><h4>NLU intents &amp; entities</h4><p>Intent trees and annotation rules for training data.</p></div></div>
+    <div class="ctile" style="background:var(--butter)">
+      <svg viewBox="0 0 54 54" fill="none" stroke="#34304a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12h38a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H24l-10 8v-8H8a4 4 0 0 1-4-4V16a4 4 0 0 1 4-4z"/><path d="M14 22h24M14 28h14"/></svg>
+      <div><h4>Microcopy &amp; persona</h4><p>Brand voice, turned into the words a bot uses.</p></div></div>
+    <div class="ctile" style="background:var(--rose)">
+      <svg viewBox="0 0 54 54" fill="none" stroke="#34304a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="6" width="34" height="42" rx="5"/><path d="M18 18h18M18 26h18M18 34h10"/></svg>
+      <div><h4>Compliance as input</h4><p>Design decisions that legal teams can sign off.</p></div></div>
   </div>
 </section>
 </main>
 
-<!-- ============ FOOTER ============ -->
 <footer class="foot" id="contact">
-  <p class="foot__q">“Every fallback is a relationship saved.” If you’re building a bot that has to get it right the first time, let’s talk.</p>
+  <span class="foot__bubble">Building a bot that has to get it right the first time?</span>
   <a class="foot__big" href="https://mail.google.com/mail/u/0/?fs=1&amp;tf=cm&amp;source=mailto&amp;su=Let%27s+Connect&amp;to=pahunesamruddhi@gmail.com" target="_blank" rel="noopener" data-cursor="Say hi" aria-label="Email Samruddhi">Let’s talk.</a>
   <div class="foot__row">
-    <a class="btn magnetic" href="mailto:pahunesamruddhi@gmail.com">pahunesamruddhi@gmail.com <span>↗</span></a>
+    <a class="btn magnetic" href="mailto:pahunesamruddhi@gmail.com">pahunesamruddhi@gmail.com ↗</a>
     <div class="foot__links">
-      <a class="btn btn--ghost magnetic" href="https://drive.google.com/file/d/1OugKg6lI93XfWEavk6nsZLw7-aemWc5g/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
-      <a class="btn btn--ghost magnetic" href="https://www.instagram.com/decisions_by_design/" target="_blank" rel="noopener">Instagram</a>
-      <a class="btn btn--ghost magnetic" href="work.html">Case studies</a>
+      <a class="btn btn--soft magnetic" href="https://drive.google.com/file/d/1OugKg6lI93XfWEavk6nsZLw7-aemWc5g/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
+      <a class="btn btn--soft magnetic" href="https://www.instagram.com/decisions_by_design/" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn btn--soft magnetic" href="work.html">Case studies</a>
     </div>
   </div>
   <div class="foot__base"><span>© 2026 Samruddhi Pahune</span><span>Designed in conversation · India</span><a href="#top">Back to top ↑</a></div>
@@ -609,22 +661,18 @@ img{display:block;max-width:100%}
 (() => {
   const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const HAS_GSAP = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
-  const isDesktop = () => matchMedia('(min-width: 901px)').matches;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const sleep = ms => new Promise(r => setTimeout(r, ms));
-
   if (!HAS_GSAP) document.documentElement.classList.add('reduced');
   else gsap.registerPlugin(ScrollTrigger);
 
-  /* ---------- clock ---------- */
+  /* clock */
   const clock = $('#clock');
-  const tick = () => {
-    clock.textContent = 'IST ' + new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' }).format(new Date());
-  };
+  const tick = () => clock.textContent = 'IST ' + new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' }).format(new Date());
   tick(); setInterval(tick, 30000);
 
-  /* ---------- smooth scroll ---------- */
+  /* smooth scroll */
   let lenis = null;
   if (HAS_GSAP && !REDUCED && window.Lenis) {
     lenis = new Lenis({ duration: 1.15, smoothWheel: true });
@@ -638,28 +686,19 @@ img{display:block;max-width:100%}
     if (!el && id !== '#top') return;
     e.preventDefault();
     const target = id === '#top' ? 0 : el;
-    lenis ? lenis.scrollTo(target, { offset: 0 }) : (target === 0 ? scrollTo({ top: 0, behavior: 'smooth' }) : el.scrollIntoView({ behavior: 'smooth' }));
+    lenis ? lenis.scrollTo(target, { offset: -20 }) : (target === 0 ? scrollTo({ top: 0, behavior: 'smooth' }) : el.scrollIntoView({ behavior: 'smooth' }));
   }));
 
-  /* ---------- nav hide on scroll down ---------- */
-  const nav = $('.nav');
-  let lastY = 0;
-  addEventListener('scroll', () => {
-    const y = scrollY;
-    nav.classList.toggle('is-hidden', y > lastY && y > 200);
-    lastY = y;
-  }, { passive: true });
+  /* nav hide */
+  const nav = $('.nav'); let lastY = 0;
+  addEventListener('scroll', () => { const y = scrollY; nav.classList.toggle('is-hidden', y > lastY && y > 200); lastY = y; }, { passive: true });
 
-  /* ---------- cursor ---------- */
+  /* cursor */
   const cursor = $('.cursor'), label = $('.cursor__label');
   if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
     let mx = innerWidth / 2, my = innerHeight / 2, cx = mx, cy = my;
     addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
-    (function loop() {
-      cx += (mx - cx) * 0.2; cy += (my - cy) * 0.2;
-      cursor.style.transform = `translate(${cx}px, ${cy}px)`;
-      requestAnimationFrame(loop);
-    })();
+    (function loop() { cx += (mx - cx) * 0.2; cy += (my - cy) * 0.2; cursor.style.transform = `translate(${cx}px, ${cy}px)`; requestAnimationFrame(loop); })();
     document.addEventListener('mouseover', e => {
       const t = e.target.closest('[data-cursor], a, button, .chip, input');
       cursor.classList.remove('is-label', 'is-hover');
@@ -669,125 +708,120 @@ img{display:block;max-width:100%}
     });
   }
 
-  /* ---------- magnetic ---------- */
+  /* magnetic */
   if (!REDUCED) $$('.magnetic').forEach(el => {
     el.addEventListener('mousemove', e => {
       const r = el.getBoundingClientRect();
-      const x = e.clientX - r.left - r.width / 2, y = e.clientY - r.top - r.height / 2;
-      el.style.transform = `translate(${x * 0.3}px, ${y * 0.4}px)`;
+      el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * 0.25}px, ${(e.clientY - r.top - r.height / 2) * 0.35}px)`;
     });
     el.addEventListener('mouseleave', () => { el.style.transition = 'transform .6s cubic-bezier(.22,1,.36,1)'; el.style.transform = ''; setTimeout(() => el.style.transition = '', 600); });
   });
 
-  /* ---------- hero waveform (voice motif) ---------- */
+  /* hero waveform: soft voice lines */
   const cvs = $('.hero__wave'), ctx = cvs.getContext('2d');
-  let W, H, DPR, mouseX = 0.5, energy = 0.35, lastMX = 0, heroVisible = true;
-  const resize = () => {
-    DPR = Math.min(devicePixelRatio || 1, 2);
-    W = cvs.clientWidth; H = cvs.clientHeight;
-    cvs.width = W * DPR; cvs.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-  };
+  let W, H, mouseX = 0.5, energy = 0.3, lastMX = 0, heroVisible = true;
+  const resize = () => { const d = Math.min(devicePixelRatio || 1, 2); W = cvs.clientWidth; H = cvs.clientHeight; cvs.width = W * d; cvs.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); };
   resize(); addEventListener('resize', resize);
-  addEventListener('mousemove', e => {
-    const nx = e.clientX / innerWidth;
-    energy = Math.min(1.6, energy + Math.abs(nx - lastMX) * 6);
-    lastMX = nx; mouseX = nx;
-  }, { passive: true });
+  addEventListener('mousemove', e => { const nx = e.clientX / innerWidth; energy = Math.min(1.3, energy + Math.abs(nx - lastMX) * 5); lastMX = nx; mouseX = nx; }, { passive: true });
   new IntersectionObserver(([e]) => heroVisible = e.isIntersecting).observe(cvs);
   const lines = [
-    { a: 1, f: 1.6, s: 1.1, c: 'rgba(255,77,31,.9)', w: 2 },
-    { a: .75, f: 2.3, s: -.8, c: 'rgba(239,234,224,.28)', w: 1 },
-    { a: .55, f: 3.1, s: 1.6, c: 'rgba(239,234,224,.18)', w: 1 },
-    { a: .9, f: 1.2, s: -1.3, c: 'rgba(239,234,224,.12)', w: 1 },
-    { a: .4, f: 4.2, s: 2.1, c: 'rgba(255,177,153,.35)', w: 1 },
+    { a: 1, f: 1.4, s: 1, c: 'rgba(233,120,90,.45)', w: 2 },
+    { a: .8, f: 2.1, s: -.8, c: 'rgba(191,180,236,.8)', w: 1.5 },
+    { a: .6, f: 2.9, s: 1.5, c: 'rgba(52,48,74,.10)', w: 1 },
+    { a: .45, f: 3.8, s: -1.2, c: 'rgba(233,120,90,.2)', w: 1 },
   ];
-  let t0 = performance.now(), smx = 0.5;
+  let smx = 0.5;
   function draw(now) {
-    requestAnimationFrame(draw);
+    if (!REDUCED) requestAnimationFrame(draw);
     if (!heroVisible) return;
-    const t = (now - t0) / 1000;
-    smx += (mouseX - smx) * 0.05;
-    energy += (0.35 - energy) * 0.02;
+    const t = now / 1000;
+    smx += (mouseX - smx) * 0.05; energy += (0.3 - energy) * 0.02;
     ctx.clearRect(0, 0, W, H);
-    const mid = H * 0.42, amp = Math.min(H * 0.16, 140) * energy;
+    const mid = H * 0.88, amp = Math.min(H * 0.07, 60) * energy;
     lines.forEach((l, i) => {
       ctx.beginPath(); ctx.strokeStyle = l.c; ctx.lineWidth = l.w;
       for (let x = 0; x <= W; x += 4) {
-        const nx = x / W;
-        const env = Math.exp(-Math.pow((nx - smx) * 3.2, 2)) * 0.85 + 0.15;
-        const y = mid + Math.sin(nx * Math.PI * 2 * l.f + t * l.s + i) * amp * l.a * env
-                      + Math.sin(nx * 23 + t * 3 * l.s) * amp * 0.08 * env;
+        const nx = x / W, env = Math.exp(-Math.pow((nx - smx) * 3, 2)) * 0.85 + 0.15;
+        const y = mid + Math.sin(nx * Math.PI * 2 * l.f + t * l.s + i) * amp * l.a * env + Math.sin(nx * 21 + t * 3 * l.s) * amp * .08 * env;
         x ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
       }
       ctx.stroke();
     });
   }
-  if (!REDUCED) requestAnimationFrame(draw); else draw(performance.now());
+  requestAnimationFrame(draw);
 
-  /* ---------- floating bubbles parallax ---------- */
-  const fbs = $$('.fbubble');
+  /* collage parallax */
+  const depthEls = $$('.collage [data-depth]');
   if (!REDUCED) addEventListener('mousemove', e => {
     const dx = e.clientX / innerWidth - .5, dy = e.clientY / innerHeight - .5;
-    fbs.forEach(b => { const d = +b.dataset.depth; b.style.translate = `${-dx * 40 * d}px ${-dy * 30 * d}px`; });
+    depthEls.forEach(b => { const d = +b.dataset.depth; b.style.translate = `${-dx * 26 * d}px ${-dy * 20 * d}px`; });
   }, { passive: true });
 
-  /* ---------- equalizer bars on voice card ---------- */
+  /* equalizers */
   const eq = $('#eqBars');
-  for (let i = 0; i < 28; i++) {
-    const b = document.createElement('i');
-    b.style.animationDelay = (-Math.random() * 1.1).toFixed(2) + 's';
-    b.style.animationDuration = (0.6 + Math.random() * 0.8).toFixed(2) + 's';
-    eq.appendChild(b);
+  for (let i = 0; i < 26; i++) { const b = document.createElement('i'); b.style.animationDelay = (-Math.random() * 1.1).toFixed(2) + 's'; b.style.animationDuration = (.6 + Math.random() * .8).toFixed(2) + 's'; eq.appendChild(b); }
+  $$('.mini-eq i').forEach(b => { b.style.animationDelay = (-Math.random()).toFixed(2) + 's'; });
+
+  /* chat bubble helpers */
+  function bubble(parent, who, html) {
+    const m = document.createElement('div'); m.className = 'msg ' + who; m.innerHTML = html; parent.appendChild(m); return m;
+  }
+  async function typeIn(parent, ms) {
+    const ty = bubble(parent, 'bot typing', '<span></span><span></span><span></span>');
+    await sleep(REDUCED ? 0 : ms); ty.remove();
   }
 
-  /* ---------- manifesto: split into words ---------- */
-  const mf = $('[data-words]');
-  const splitWords = node => {
-    [...node.childNodes].forEach(n => {
-      if (n.nodeType === 3) {
-        const frag = document.createDocumentFragment();
-        n.textContent.split(/(\s+)/).forEach(part => {
-          if (!part) return;
-          if (/^\s+$/.test(part)) frag.appendChild(document.createTextNode(part));
-          else { const s = document.createElement('span'); s.className = 'word'; s.textContent = part; frag.appendChild(s); }
-        });
-        n.replaceWith(frag);
-      } else if (n.nodeType === 1) splitWords(n);
-    });
-  };
-  splitWords(mf);
+  /* hero chat loop */
+  const heroChat = $('#heroChat');
+  const HERO = [['user', 'Delhi to Goa, tomorrow morning ✈️'], ['bot', 'Here are three:'], ['opts', '<span>Cheapest ₹6,990</span><span>Fastest ₹7,669</span><span>Balanced ₹7,313</span>'], ['user', 'Balanced!'], ['bot', 'Ding! You’re set for Goa 🌴']];
+  (async function heroLoop() {
+    while (true) {
+      heroChat.innerHTML = '';
+      for (const [who, text] of HERO) {
+        if (who === 'bot') await typeIn(heroChat, 900);
+        bubble(heroChat, who, text);
+        await sleep(REDUCED ? 0 : 900);
+      }
+      if (REDUCED) return;
+      await sleep(2800);
+    }
+  })();
 
-  /* ---------- APPROACH: phone conversations ---------- */
+  /* manifesto words */
+  const splitWords = node => [...node.childNodes].forEach(n => {
+    if (n.nodeType === 3) {
+      const frag = document.createDocumentFragment();
+      n.textContent.split(/(\s+)/).forEach(p => { if (!p) return; if (/^\s+$/.test(p)) frag.appendChild(document.createTextNode(p)); else { const s = document.createElement('span'); s.className = 'word'; s.textContent = p; frag.appendChild(s); } });
+      n.replaceWith(frag);
+    } else if (n.nodeType === 1) splitWords(n);
+  });
+  splitWords($('[data-words]'));
+
+  /* approach phone */
   const SCRIPTS = [
     { name: 'Bank Assistant', sub: 'chat · dispute engine', av: '₹', msgs: [
-      ['user', 'My payment says pending but money got deducted 😟'],
-      ['bot', 'I can see three recent transactions. Was it the ₹1,200 to BigBasket at 8:42 PM?'],
-      ['user', 'Yes, that one.'],
-      ['sys', 'gate 1 <b>✓</b> debit · gate 2 <b>✓</b> UPI rail · gate 3 <b>✓</b> ledger · gate 4 → <b>reversal found</b>'],
-      ['bot', 'Good news. The ₹1,200 has already been reversed and credited back to your account. No ticket needed.'],
-      ['sys', '✓ resolved · under 2 min · no ticket created'],
+      ['user', 'Payment pending but money got deducted 😟'],
+      ['sys', 'gate 1 <b>✓</b> · gate 2 <b>✓</b> · gate 3 <b>✓</b> · gate 4 → <b>reversal found</b>'],
+      ['bot', 'Good news. The ₹1,200 to BigBasket is already back in your account. No ticket needed.'],
     ]},
-    { name: 'Dottie · IndiGo', sub: 'voice · asr confidence', av: '6E', msgs: [
-      ['user', 'Book me a flight to Belly tomorrow morning'],
-      ['sys', 'asr: “Belly” · confidence <b>0.41</b> → clarify'],
+    { name: 'Dottie', sub: 'voice · asr confidence', av: '6E', msgs: [
+      ['user', 'Book me a flight to Belly'],
+      ['sys', 'asr confidence <b>0.41</b> → clarify'],
       ['bot', 'Did you mean Delhi or Dehradun?'],
-      ['user', 'Neither, ugh, the other one—'],
-      ['sys', 'miss ×2 → hand off · context preserved'],
-      ['bot', 'This one’s a bit outside my lane. I’m getting someone who can help, and they’ll see everything you’ve told me.'],
+      ['user', 'Neither, ugh—'],
+      ['bot', 'Let me get someone who can help. They’ll see everything you’ve said.'],
     ]},
     { name: 'ICICI Voice Banking', sub: 'voice · card management', av: 'iB', msgs: [
       ['user', 'Block my card. Now.'],
-      ['bot', 'You want to block your debit card ending 4321, correct?'],
-      ['sys', 'irreversible action → <b>explicit confirmation</b> required'],
+      ['bot', 'Block your debit card ending 4321, correct?'],
       ['user', 'Yes.'],
       ['bot', 'Your card is now blocked. No further transactions can go through.'],
-      ['sys', 'state + consequence · two sentences · complete certainty'],
     ]},
-    { name: 'Dottie · IndiGo', sub: 'voice · booking', av: '6E', msgs: [
+    { name: 'Dottie', sub: 'voice · booking', av: '6E', msgs: [
       ['user', 'Delhi to Goa, tomorrow morning'],
-      ['bot', 'I found three: Cheapest at ₹6,990 (1 stop), Fastest at ₹7,669 (direct), and Balanced at ₹7,313 (non-stop). Which works best?'],
+      ['bot', 'Three picks for you:'],
+      ['opts', '<span>Cheapest ₹6,990</span><span>Fastest ₹7,669</span><span>Balanced ₹7,313</span>'],
       ['user', 'Balanced.'],
-      ['sys', 'payment never on-call → secure link via WhatsApp'],
       ['bot', 'Ding! You’re set for Goa. Get packing 🌴'],
     ]},
   ];
@@ -795,156 +829,135 @@ img{display:block;max-width:100%}
   let playToken = 0, currentStep = -1;
   async function playScript(i) {
     if (i === currentStep) return;
-    currentStep = i;
-    const token = ++playToken;
-    const s = SCRIPTS[i];
+    currentStep = i; const token = ++playToken, s = SCRIPTS[i];
     $('#phoneName').textContent = s.name; $('#phoneSub').textContent = s.sub; $('#phoneAvatar').textContent = s.av;
     body.innerHTML = '';
     for (const [who, text] of s.msgs) {
       if (token !== playToken) return;
-      if (who === 'bot' && !REDUCED) {
-        const ty = document.createElement('div');
-        ty.className = 'msg bot typing'; ty.innerHTML = '<span></span><span></span><span></span>';
-        body.appendChild(ty);
-        await sleep(650 + Math.min(text.length * 8, 700));
-        ty.remove();
-        if (token !== playToken) return;
-      }
-      const m = document.createElement('div');
-      m.className = 'msg ' + who; m.innerHTML = text;
-      body.appendChild(m);
-      await sleep(REDUCED ? 0 : who === 'user' ? 650 : 450);
+      if (who === 'bot') { await typeIn(body, 600 + Math.min(text.length * 8, 600)); if (token !== playToken) return; }
+      bubble(body, who, text);
+      await sleep(REDUCED ? 0 : 600);
     }
   }
   const steps = $$('.step');
   const activate = i => { steps.forEach((s, j) => s.classList.toggle('is-active', i === j)); playScript(i); };
-  if (HAS_GSAP) {
-    steps.forEach((s, i) => ScrollTrigger.create({ trigger: s, start: 'top 60%', end: 'bottom 60%', onToggle: self => self.isActive && activate(i) }));
-  } else {
-    const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && activate(steps.indexOf(e.target))), { rootMargin: '-45% 0px -45% 0px' });
-    steps.forEach(s => io.observe(s));
-  }
+  if (HAS_GSAP) steps.forEach((s, i) => ScrollTrigger.create({ trigger: s, start: 'top 60%', end: 'bottom 60%', onToggle: self => self.isActive && activate(i) }));
+  else { const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && activate(steps.indexOf(e.target))), { rootMargin: '-45% 0px -45% 0px' }); steps.forEach(s => io.observe(s)); }
   activate(0);
 
-  /* ---------- counters ---------- */
+  /* counters */
   const runCount = el => {
     const end = +el.dataset.count, sup = el.querySelector('sup').outerHTML;
     if (REDUCED || !HAS_GSAP) { el.innerHTML = end + sup; return; }
-    const o = { v: 0 };
-    gsap.to(o, { v: end, duration: 1.8, ease: 'power3.out', onUpdate: () => el.innerHTML = Math.round(o.v) + sup });
+    const o = { v: 0 }; gsap.to(o, { v: end, duration: 1.8, ease: 'power3.out', onUpdate: () => el.innerHTML = Math.round(o.v) + sup });
   };
   const cio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { runCount(e.target); cio.unobserve(e.target); } }), { threshold: .5 });
   $$('[data-count]').forEach(el => cio.observe(el));
 
-  /* ---------- GSAP choreography ---------- */
+  /* infinite rows (bubbles + gallery) */
+  function loopRow(row, speed) {
+    const set = row.firstElementChild;
+    for (let k = 0; k < 3; k++) row.appendChild(set.cloneNode(true));
+    if (!HAS_GSAP || REDUCED) return;
+    const dir = +row.dataset.dir;
+    const tw = gsap.fromTo(row, { xPercent: dir < 0 ? 0 : -25 }, { xPercent: dir < 0 ? -25 : 0, duration: speed, ease: 'none', repeat: -1 });
+    ScrollTrigger.create({ trigger: row, start: 'top bottom', end: 'bottom top', onUpdate: self => {
+      const v = Math.min(Math.abs(self.getVelocity()) / 400, 4);
+      gsap.to(tw, { timeScale: 1 + v, duration: .2, overwrite: true });
+      gsap.to(tw, { timeScale: 1, duration: 1.2, delay: .2 });
+    }});
+    row.addEventListener('mouseenter', () => gsap.to(tw, { timeScale: .2, duration: .5, overwrite: true }));
+    row.addEventListener('mouseleave', () => gsap.to(tw, { timeScale: 1, duration: .5, overwrite: true }));
+  }
+  $$('.bmarquee__row').forEach(r => loopRow(r, 34));
+  $$('.grow').forEach(r => loopRow(r, 60));
+
+  /* choreography */
   function intro() {
     if (!HAS_GSAP || REDUCED) return;
-    const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
-    tl.from('.hero__title .line > span', { yPercent: 115, rotate: 4, duration: 1.4, stagger: .09 })
-      .from('.hero__meta > *', { y: 20, opacity: 0, duration: 1, stagger: .08 }, '-=1.1')
-      .from('.hero__foot > *', { y: 30, opacity: 0, duration: 1, stagger: .1 }, '-=.9')
-      .from('.fbubble', { scale: .6, opacity: 0, y: 30, duration: 1, stagger: .12, ease: 'back.out(1.7)' }, '-=.8')
-      .from('.nav', { yPercent: -100, opacity: 0, duration: 1 }, '-=1');
+    gsap.timeline({ defaults: { ease: 'expo.out' } })
+      .from('.hero__title .line > span', { yPercent: 115, rotate: 4, duration: 1.4, stagger: .09 })
+      .from('.status, .hero__lede, .hero__ctas', { y: 24, opacity: 0, duration: 1, stagger: .08 }, '-=1.1')
+      .from('.collage .tile', { scale: .5, opacity: 0, duration: 1.3, stagger: .1, ease: 'back.out(1.4)' }, '-=1.2')
+      .from('.hchat', { y: 60, opacity: 0, duration: 1.2 }, '-=1.1')
+      .from('.sticker', { scale: 0, opacity: 0, duration: .8, stagger: .1, ease: 'back.out(2)' }, '-=.8')
+      .from('.nav', { y: -40, opacity: 0, duration: 1 }, '-=1');
   }
-
   function loader() {
     const el = $('.loader');
     if (!HAS_GSAP || REDUCED) { el && el.remove(); intro(); return; }
     lenis && lenis.stop();
     const count = $('.loader__count'), o = { v: 0 };
+    gsap.set(el, { clipPath: 'circle(150% at 50% 50%)' });
     gsap.timeline()
-      .to(o, { v: 100, duration: 1.7, ease: 'power2.inOut', onUpdate: () => count.textContent = String(Math.round(o.v)).padStart(2, '0') })
+      .to(o, { v: 100, duration: 1.5, ease: 'power2.inOut', onUpdate: () => count.textContent = String(Math.round(o.v)).padStart(2, '0') })
       .add(() => { $('.loader__word').textContent = 'got it.'; })
-      .to('.loader__bubble, .loader__word, .loader__top', { opacity: 0, y: -20, duration: .4, stagger: .05 }, '+=.15')
-      .to(el, { clipPath: 'inset(0 0 100% 0)', duration: 1.1, ease: 'expo.inOut' }, '-=.2')
-      .add(() => { intro(); }, '-=.75')
+      .to('.loader__bubble, .loader__word, .loader__top, .loader__count', { opacity: 0, y: -20, duration: .4, stagger: .04 }, '+=.15')
+      .to(el, { clipPath: 'circle(0% at 50% 50%)', duration: 1.1, ease: 'expo.inOut' }, '-=.15')
+      .add(() => intro(), '-=.8')
       .add(() => { el.remove(); lenis && lenis.start(); });
   }
 
   if (HAS_GSAP && !REDUCED) {
-    // hero parallax out
-    gsap.to('.hero__title', { yPercent: -18, opacity: .25, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-    gsap.to('.bubbles', { yPercent: -40, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+    gsap.to('.collage', { yPercent: -12, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+    gsap.to('.hero__copy', { yPercent: -10, opacity: .3, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+    gsap.fromTo('.manifesto__text .word', { opacity: .15, y: 10 }, { opacity: 1, y: 0, stagger: .06, ease: 'none', scrollTrigger: { trigger: '.manifesto__text', start: 'top 80%', end: 'bottom 50%', scrub: true } });
+    $$('.h2').forEach(h => gsap.from(h, { y: 60, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: h, start: 'top 88%' } }));
+    gsap.from('.stat', { y: 60, opacity: 0, rotate: () => gsap.utils.random(-4, 4), duration: 1.1, stagger: .08, ease: 'expo.out', scrollTrigger: { trigger: '.bento', start: 'top 85%' } });
+    gsap.from('.ctile', { y: 60, opacity: 0, rotate: () => gsap.utils.random(-3, 3), duration: 1.1, stagger: .07, ease: 'expo.out', scrollTrigger: { trigger: '.craft__grid', start: 'top 85%' } });
+    gsap.from('.chat', { y: 80, rotate: 2, opacity: 0, duration: 1.3, ease: 'expo.out', scrollTrigger: { trigger: '.chat', start: 'top 88%' } });
+    gsap.from('.foot__big span', { yPercent: 60, opacity: 0, duration: 1.2, stagger: .04, ease: 'expo.out', scrollTrigger: { trigger: '.foot', start: 'top 75%' } });
 
-    // marquee with scroll-velocity boost
-    $$('.marquee__row').forEach(row => {
-      const item = row.firstElementChild;
-      for (let k = 0; k < 3; k++) row.appendChild(item.cloneNode(true));
-      const dir = +row.dataset.dir;
-      const tw = gsap.fromTo(row, { xPercent: dir < 0 ? 0 : -25 }, { xPercent: dir < 0 ? -25 : 0, duration: dir < 0 ? 22 : 30, ease: 'none', repeat: -1 });
-      ScrollTrigger.create({ trigger: '.marquee', start: 'top bottom', end: 'bottom top', onUpdate: self => {
-        const v = Math.min(Math.abs(self.getVelocity()) / 300, 6);
-        gsap.to(tw, { timeScale: 1 + v, duration: .2, overwrite: true });
-        gsap.to(tw, { timeScale: 1, duration: 1.2, delay: .2 });
-      }});
-    });
-
-    // manifesto words light up on scroll
-    gsap.fromTo('.manifesto__text .word', { opacity: .12 }, { opacity: 1, stagger: .05, ease: 'none',
-      scrollTrigger: { trigger: '.manifesto__text', start: 'top 80%', end: 'bottom 45%', scrub: true } });
-
-    // section headings rise
-    $$('.h2').forEach(h => gsap.from(h, { y: 80, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: h, start: 'top 85%' } }));
-    gsap.from('.craft__row', { y: 40, opacity: 0, duration: 1, stagger: .08, ease: 'expo.out', scrollTrigger: { trigger: '.craft__list', start: 'top 80%' } });
-    gsap.from('.chat', { y: 80, rotate: 2, opacity: 0, duration: 1.3, ease: 'expo.out', scrollTrigger: { trigger: '.chat', start: 'top 85%' } });
-    gsap.from('.foot__big', { yPercent: 40, opacity: 0, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: '.foot', start: 'top 75%' } });
-
-    // horizontal work scroll
     ScrollTrigger.matchMedia({
       '(min-width: 901px)': () => {
         const track = $('.work__track');
         const dist = () => track.scrollWidth - innerWidth;
-        const hz = gsap.to(track, { x: () => -dist(), ease: 'none',
-          scrollTrigger: { trigger: '.work__pin', start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true, anticipatePin: 1 } });
+        const hz = gsap.to(track, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: '.work__pin', start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true, anticipatePin: 1 } });
         gsap.to('.work__progress i', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: '.work__pin', start: 'top top', end: () => '+=' + dist(), scrub: true } });
         $$('.card').forEach(card => {
-          gsap.from(card, { rotate: 3, scale: .92, opacity: .4, ease: 'none',
-            scrollTrigger: { trigger: card, containerAnimation: hz, start: 'left right', end: 'left 45%', scrub: true } });
+          gsap.from(card, { rotate: 4, scale: .9, y: 40, ease: 'none', scrollTrigger: { trigger: card, containerAnimation: hz, start: 'left right', end: 'left 50%', scrub: true } });
           const img = card.querySelector('[data-parallax]');
-          if (img) gsap.fromTo(img, { xPercent: -8 }, { xPercent: 8, ease: 'none',
-            scrollTrigger: { trigger: card, containerAnimation: hz, start: 'left right', end: 'right left', scrub: true } });
+          if (img) gsap.fromTo(img, { xPercent: -5 }, { xPercent: 5, ease: 'none', scrollTrigger: { trigger: card, containerAnimation: hz, start: 'left right', end: 'right left', scrub: true } });
         });
       },
       '(max-width: 900px)': () => {
-        $$('.card').forEach(card => gsap.from(card, { y: 60, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: card, start: 'top 88%' } }));
+        $$('.card').forEach(card => gsap.from(card, { y: 60, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: card, start: 'top 90%' } }));
       }
     });
     addEventListener('load', () => ScrollTrigger.refresh());
   }
 
-  /* ---------- foot big letters ---------- */
+  /* footer letters */
   const big = $('.foot__big');
   big.innerHTML = [...big.textContent].map((c, i) => `<span style="--i:${i}">${c === ' ' ? '&nbsp;' : c}</span>`).join('');
 
-  /* ======================================================
-     ASK MY PORTFOLIO — a tiny rule-based NLU with a
-     designed fallback ladder: clarify → rephrase → handoff
-     ====================================================== */
+  /* ============ ASK MY PORTFOLIO ============
+     rule-based NLU + fallback ladder: clarify → rephrase → handoff */
   const EMAIL = 'pahunesamruddhi@gmail.com';
   const RESUME = 'https://drive.google.com/file/d/1OugKg6lI93XfWEavk6nsZLw7-aemWc5g/view?usp=sharing';
   const INTENTS = [
     { id: 'greet', kw: ['hi', 'hello', 'hey', 'namaste', 'yo', 'hola', 'good morning', 'good evening'],
       say: ['Hey 👋 I’m Samruddhi’s portfolio. Ask about the work, the process, or how to get in touch.'], chips: ['What do you do?', 'Show me the best work', 'How do you handle errors?'] },
     { id: 'about', kw: ['who', 'what do you do', 'about', 'role', 'conversation design', 'designer', 'background', 'yourself', 'introduce', 'experience'],
-      say: ['Samruddhi is a conversation designer working on voice and chat AI in fintech. That covers flow architecture, microcopy, NLU intent design, and fallback and escalation logic.', 'The focus is high-stakes moments, like a blocked card or a failed payment, where a misheard word costs real money.'], chips: ['Show me the best work', 'Voice experience?', 'Are you hiring-ready?'] },
+      say: ['Samruddhi is a conversation designer for voice and chat AI in fintech: flows, microcopy, intents, and fallback logic.', 'The focus is high-stakes moments, like a blocked card or a failed payment.'], chips: ['Show me the best work', 'Voice experience?', 'Are you hiring-ready?'] },
     { id: 'work', kw: ['work', 'project', 'case', 'best', 'portfolio', 'show', 'examples', 'studies'],
-      say: ['Three to start with:<br>① <a href="work.html#cs-icici">Beyond Touchscreens</a>: 70+ live voice-banking flows<br>② <a href="work.html#cs2">Where did my money go?</a>: a five-gate dispute engine<br>③ <a href="work.html#cs-dottie">Dottie</a>: a voice persona for IndiGo'], chips: ['Tell me about the voicebot', 'What’s the UPI one?', 'Who is Dottie?'] },
+      say: ['Three to start with:<br>① <a href="work.html#cs-icici">Beyond Touchscreens</a>: 70+ voice-banking flows<br>② <a href="work.html#cs2">Where did my money go?</a>: a five-gate dispute engine<br>③ <a href="work.html#cs-dottie">Dottie</a>: a voice persona for IndiGo'], chips: ['Tell me about the voicebot', 'What’s the UPI one?', 'Who is Dottie?'] },
     { id: 'voice', kw: ['voice', 'ivr', 'icici', 'bank', 'call', 'phone', 'voicebot', 'asr', 'speech', 'touchscreen'],
-      say: ['At ICICI Bank, Samruddhi designed 70+ transactional voice flows covering card blocking, PIN resets and bill payments. It was one of India’s first voicebots that could actually carry out banking actions.', 'The core rule: before anything irreversible, the bot reads the action back and waits for an explicit “yes”. <a href="work.html#cs-icici">Read the case study →</a>'], chips: ['How do you handle errors?', 'What about microcopy?'] },
+      say: ['At ICICI Bank: 70+ transactional voice flows, including card blocking, PIN resets and bill payments. It was one of India’s first voicebots that could act on a customer’s behalf.', 'Before anything irreversible, it reads the action back and waits for a “yes”. <a href="work.html#cs-icici">Read it →</a>'], chips: ['How do you handle errors?', 'What about microcopy?'] },
     { id: 'errors', kw: ['error', 'fallback', 'fail', 'misunderstand', 'handoff', 'hand off', 'escalat', 'confus', 'wrong', 'edge case', 'recover', 'repair'],
-      say: ['Three moves, in this order: clarify once, rephrase, then hand off to a human with context kept. No loops, and no asking the same question twice.', 'You can try it here: type something I won’t understand, a few times in a row. 😉'], chips: ['Show me the best work', 'How do I contact you?'] },
+      say: ['Three moves: clarify once, rephrase, then hand off to a human with context. No loops.', 'Try it: type something I won’t understand, a few times in a row. 😉'], chips: ['Show me the best work', 'How do I contact you?'] },
     { id: 'copy', kw: ['microcopy', 'copy', 'words', 'tone', 'writing', 'persona', 'personality', 'brand'],
-      say: ['Compare “Your request has been processed” with “Your card is now blocked. No further transactions can go through.”', 'The second one says what happened, what state you’re in now and what happens next. On a voice call, the words are the whole interface.'], chips: ['Who is Dottie?', 'Show me the best work'] },
+      say: ['Compare “Your request has been processed” with “Your card is now blocked. No further transactions can go through.” The second tells you what happened and what state you’re in now.'], chips: ['Who is Dottie?', 'Show me the best work'] },
     { id: 'upi', kw: ['upi', 'money', 'payment', 'debit', 'refund', 'ledger', 'dispute', 'gate'],
-      say: ['160M failed UPI payments a month, and each one is someone at a shop counter wondering where their money went. The engine checks the ledger through five gates before it says anything or opens a ticket.', 'So there are no tickets for money that already came back. <a href="work.html#cs2">Read it →</a>'], chips: ['Who is Dottie?', 'How do you handle errors?'] },
+      say: ['160M failed UPI payments a month. The engine checks the ledger at five gates before it says anything, so there are no tickets for money that already came back. <a href="work.html#cs2">Read it →</a>'], chips: ['Who is Dottie?', 'How do you handle errors?'] },
     { id: 'dottie', kw: ['dottie', 'indigo', 'flight', 'airline', 'goa', 'book', 'travel'],
-      say: ['Dottie is a speculative voice assistant for IndiGo. It offers three flights (cheapest, fastest, balanced), never takes payment on the call, and turns uncertain speech recognition into one clarifying question.', 'Ding! You’re set for Goa. 🌴 <a href="work.html#cs-dottie">Read it →</a>'], chips: ['What about microcopy?', 'Show me the best work'] },
+      say: ['Dottie is a speculative voice persona for IndiGo. It offers three flights to choose from, never takes payment on the call, and asks one clarifying question when it’s unsure. Ding! 🌴 <a href="work.html#cs-dottie">Read it →</a>'], chips: ['What about microcopy?', 'Show me the best work'] },
     { id: 'ai', kw: ['llm', 'gpt', 'genai', 'gen ai', 'prompt', 'ai', 'agent', 'claude', 'gemini', 'chatgpt', 'automation', 'guardrail'],
-      say: ['For AI systems, the work is deciding boundaries: when the system acts, when it checks first, and when it stops. That’s the logic between what a user says and what the system is allowed to do.', 'Also, I’m not an LLM. I’m rule-based on purpose, so you can see how every decision gets made.'], chips: ['How do you handle errors?', 'How do I contact you?'] },
+      say: ['For AI systems, the work is deciding when the system acts, when it checks first, and when it stops.', 'Also, I’m not an LLM. I’m rule-based on purpose, so every decision is visible.'], chips: ['How do you handle errors?', 'How do I contact you?'] },
     { id: 'hire', kw: ['hire', 'hiring', 'email', 'contact', 'available', 'job', 'work together', 'resume', 'cv', 'reach', 'connect', 'collab', 'freelance', 'open to', 'hiring-ready'],
-      say: [`Yes, Samruddhi is open to conversation design roles. Email <a href="mailto:${EMAIL}">${EMAIL}</a> or <a href="${RESUME}" target="_blank" rel="noopener">grab the resume ↗</a>.`], chips: ['Show me the best work', 'What do you do?'] },
+      say: [`Samruddhi is open to conversation design roles. Email <a href="mailto:${EMAIL}">${EMAIL}</a> or <a href="${RESUME}" target="_blank" rel="noopener">grab the resume ↗</a>.`], chips: ['Show me the best work', 'What do you do?'] },
     { id: 'thanks', kw: ['thanks', 'thank you', 'cool', 'nice', 'great', 'awesome', 'love', 'bye', 'wow'],
-      say: ['Glad it helped. One more principle: design the worst moments first, and the rest tends to follow. 👋'], chips: ['How do I contact you?'] },
+      say: ['Glad it helped. Design the worst moments first. 👋'], chips: ['How do I contact you?'] },
   ];
   const CHIP_MAP = { 'Voice experience?': 'voice', 'Are you hiring-ready?': 'hire', 'Tell me about the voicebot': 'voice', 'What’s the UPI one?': 'upi', 'Who is Dottie?': 'dottie', 'What about microcopy?': 'copy', 'How do I contact you?': 'hire', 'Your work': 'work', 'Your process': 'errors', 'Getting in touch': 'hire', 'Voice projects': 'voice', 'Error handling': 'errors', 'Hiring': 'hire' };
 
@@ -952,62 +965,37 @@ img{display:block;max-width:100%}
   let misses = 0, busy = false;
   const esc = s => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const scrollLog = () => log.scrollTop = log.scrollHeight;
-
   function classify(text) {
     const t = ' ' + text.toLowerCase().replace(/[^\p{L}\p{N}\s'-]/gu, ' ').replace(/\s+/g, ' ') + ' ';
     let best = { id: null, score: 0 };
     INTENTS.forEach(it => {
       let s = 0;
-      it.kw.forEach(k => {
-        const hit = k.length <= 3 ? t.includes(' ' + k + ' ') : t.includes(k);
-        if (hit) s += k.includes(' ') ? 1.5 : 1;
-      });
+      it.kw.forEach(k => { if (k.length <= 3 ? t.includes(' ' + k + ' ') : t.includes(k)) s += k.includes(' ') ? 1.5 : 1; });
       if (s > best.score) best = { id: it.id, score: s };
     });
-    const conf = best.score ? Math.min(.62 + best.score * .14 + Math.random() * .04, .98) : .12 + Math.random() * .25;
-    return { id: best.id, conf };
+    return { id: best.id, conf: best.score ? Math.min(.62 + best.score * .14 + Math.random() * .04, .98) : .12 + Math.random() * .25 };
   }
-
-  function addMsg(who, html) {
-    const m = document.createElement('div');
-    m.className = 'msg ' + who; m.innerHTML = html;
-    log.appendChild(m); scrollLog();
-  }
+  const addMsg = (who, html) => { bubble(log, who, html); scrollLog(); };
   function addNlu(utt, intent, conf, action, cls) {
-    const n = document.createElement('div');
-    n.className = 'nlu';
+    const n = document.createElement('div'); n.className = 'nlu';
     n.innerHTML = `utterance: <b>“${esc(utt)}”</b><br>intent: <b>${intent || 'none'}</b> · confidence: <span class="${cls}">${conf.toFixed(2)}</span><br>action: <b>${action}</b>`;
     log.appendChild(n); scrollLog();
   }
   function setChips(list) {
     chipsEl.innerHTML = '';
-    (list || []).forEach(c => {
-      const b = document.createElement('button');
-      b.className = 'chip'; b.type = 'button'; b.textContent = c;
-      b.addEventListener('click', () => handle(c, CHIP_MAP[c]));
-      chipsEl.appendChild(b);
-    });
+    (list || []).forEach(c => { const b = document.createElement('button'); b.className = 'chip'; b.type = 'button'; b.textContent = c; b.addEventListener('click', () => handle(c, CHIP_MAP[c])); chipsEl.appendChild(b); });
   }
   async function botSay(lines) {
-    for (const line of lines) {
-      const ty = document.createElement('div');
-      ty.className = 'msg bot typing'; ty.innerHTML = '<span></span><span></span><span></span>';
-      log.appendChild(ty); scrollLog();
-      await sleep(REDUCED ? 100 : 500 + Math.min(line.length * 6, 900));
-      ty.remove(); addMsg('bot', line);
-    }
+    for (const line of lines) { const p = typeIn(log, 500 + Math.min(line.length * 6, 900)); scrollLog(); await p; addMsg('bot', line); }
   }
-
   async function handle(text, forced) {
     if (busy || !text.trim()) return;
     busy = true; setChips([]);
     addMsg('user', esc(text));
-    let { id, conf } = forced ? { id: forced, conf: .99 } : classify(text);
+    const { id, conf } = forced ? { id: forced, conf: .99 } : classify(text);
     if (id && conf >= .6) {
-      misses = 0;
-      addNlu(text, id, conf, 'respond', 'ok');
-      const it = INTENTS.find(i => i.id === id);
-      await botSay(it.say); setChips(it.chips);
+      misses = 0; addNlu(text, id, conf, 'respond', 'ok');
+      const it = INTENTS.find(i => i.id === id); await botSay(it.say); setChips(it.chips);
     } else {
       misses++;
       if (misses === 1) {
@@ -1021,31 +1009,19 @@ img{display:block;max-width:100%}
       } else {
         addNlu(text, id, conf, 'handoff → human (context kept)', 'bad');
         await botSay([`That’s outside what I can answer, so I won’t keep guessing. Samruddhi can pick it up from here: <a href="mailto:${EMAIL}?subject=${encodeURIComponent('From your portfolio')}&body=${encodeURIComponent('I asked your portfolio: “' + text + '”')}">email with your question attached ↗</a>`]);
-        misses = 0;
-        setChips(['Show me the best work', 'What do you do?']);
+        misses = 0; setChips(['Show me the best work', 'What do you do?']);
       }
     }
     busy = false;
   }
-
-  $('#chatForm').addEventListener('submit', e => {
-    e.preventDefault();
-    const inp = $('#chatInput'); const v = inp.value; inp.value = '';
-    handle(v);
-  });
-  $('#debugToggle').addEventListener('click', e => {
-    const b = e.currentTarget, on = b.getAttribute('aria-pressed') !== 'true';
-    b.setAttribute('aria-pressed', on); chatEl.classList.toggle('debug', on); scrollLog();
-  });
-  // Mark the inner chat log so Lenis lets it scroll natively
+  $('#chatForm').addEventListener('submit', e => { e.preventDefault(); const inp = $('#chatInput'); const v = inp.value; inp.value = ''; handle(v); });
+  $('#debugToggle').addEventListener('click', e => { const b = e.currentTarget, on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', on); chatEl.classList.toggle('debug', on); scrollLog(); });
   log.setAttribute('data-lenis-prevent', '');
-
-  // greet once when the chat scrolls into view
   let greeted = false;
   new IntersectionObserver(([e]) => {
     if (e.isIntersecting && !greeted) {
       greeted = true;
-      botSay(['Hi! I’m a small, rule-based bot built to the same principles as the work you just scrolled past.', 'Ask me anything, or pick a question below.']).then(() => setChips(['What do you do?', 'Show me the best work', 'How do you handle errors?', 'How do I contact you?']));
+      botSay(['Hi! 👋 I’m a small rule-based bot, built to the same principles as the work above.', 'Ask me anything, or tap a question.']).then(() => setChips(['What do you do?', 'Show me the best work', 'How do you handle errors?', 'How do I contact you?']));
     }
   }, { threshold: .35 }).observe(chatEl);
 
