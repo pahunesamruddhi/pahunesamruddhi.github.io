@@ -74,6 +74,10 @@ img{display:block;max-width:100%}
 .loader__count{font-size:clamp(90px,20vw,300px);font-weight:600;line-height:.8;letter-spacing:-.06em;align-self:flex-end;font-variant-numeric:tabular-nums}
 @keyframes typing{0%,60%,100%{transform:translateY(0);opacity:.45}30%{transform:translateY(-7px);opacity:1}}
 .reduced .loader{display:none}
+/* failsafe: never let the intro block the page if scripts are slow or blocked */
+.loader{animation:loaderOut .6s ease 4.5s forwards}
+.loader.is-running{animation:none}
+@keyframes loaderOut{to{opacity:0;visibility:hidden;pointer-events:none}}
 
 /* cursor */
 .cursor{position:fixed;left:0;top:0;z-index:140;pointer-events:none}
@@ -886,6 +890,8 @@ img{display:block;max-width:100%}
   function loader() {
     const el = $('.loader');
     if (!HAS_GSAP || REDUCED) { el && el.remove(); intro(); return; }
+    if (getComputedStyle(el).visibility === 'hidden') { el.remove(); intro(); return; }
+    el.classList.add('is-running');
     lenis && lenis.stop();
     const count = $('.loader__count'), o = { v: 0 };
     gsap.set(el, { clipPath: 'circle(150% at 50% 50%)' });
