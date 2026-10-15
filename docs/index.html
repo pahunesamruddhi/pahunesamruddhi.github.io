@@ -4,1034 +4,907 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Samruddhi Pahune — Conversation Designer</title>
-<meta name="description" content="Samruddhi Pahune designs voice and chat AI for high-stakes moments — banking voicebots, payment disputes, airline booking.">
+<meta name="description" content="Samruddhi Pahune is a conversation designer for voice and chat AI in banking, payments and travel. Skip the keypad.">
 <meta property="og:title" content="Samruddhi Pahune — Conversation Designer">
-<meta property="og:description" content="I design what machines say — and when they should stop.">
+<meta property="og:description" content="You've reached Samruddhi Pahune. Press a key, or skip the keypad.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#f6f1ea">
+<meta name="theme-color" content="#f5f3ee">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23cfc6f2'/%3E%3Cpath d='M16 20h32a6 6 0 0 1 6 6v12a6 6 0 0 1-6 6H30l-10 8v-8h-4a6 6 0 0 1-6-6V26a6 6 0 0 1 6-6z' fill='%23e9785a'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231f1e1c'/%3E%3Cg fill='%23f5f3ee'%3E%3Ccircle cx='20' cy='20' r='5'/%3E%3Ccircle cx='32' cy='20' r='5'/%3E%3Ccircle cx='44' cy='20' r='5'/%3E%3Ccircle cx='20' cy='32' r='5'/%3E%3Ccircle cx='32' cy='32' r='5'/%3E%3Ccircle cx='44' cy='32' r='5'/%3E%3Ccircle cx='32' cy='44' r='5' fill='%23c24a2c'/%3E%3C/g%3E%3C/svg%3E">
 <style>
 :root{
-  --bg:#f6f1ea;
-  --bg-2:#efe8de;
-  --card:#fffdfa;
-  --ink:#34304a;
-  --ink-2:#5c586b;
-  --mute:#8f8a99;
-  --line:rgba(52,48,74,.12);
-  --coral:#e9785a;
-  --lav:#d9d2f5;
-  --lav-2:#bfb4ec;
-  --sage:#d3e6d6;
-  --peach:#fadccd;
-  --butter:#f7e7b0;
-  --sky:#d4e6f4;
-  --rose:#f3d1dc;
-  --sans:'Inter Tight',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-  --serif:'Instrument Serif',Georgia,serif;
-  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --paper:#f5f3ee;
+  --paper-2:#eeebe4;
+  --card:#fbfaf7;
+  --ink:#1f1e1c;
+  --ink-2:#5e5b55;
+  --ink-3:#8c8880;
+  --rule:#dcd7ce;
+  --red:#c24a2c;
+  --red-soft:rgba(194,74,44,.08);
+  --green:#3d7a55;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  --g:clamp(16px,4vw,48px);
   --ease:cubic-bezier(.22,1,.36,1);
-  --gutter:clamp(16px,4vw,56px);
-  --shadow:0 30px 60px -30px rgba(52,48,74,.28);
+  --note-w:260px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html.lenis,html.lenis body{height:auto}
-.lenis.lenis-smooth{scroll-behavior:auto!important}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:96px}
+a{color:inherit}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 img{display:block;max-width:100%}
-::selection{background:var(--lav);color:var(--ink)}
-.serif{font-family:var(--serif);font-weight:400;font-style:italic;letter-spacing:-.01em}
-.mono{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+::selection{background:var(--red);color:var(--paper)}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:4px}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.03em}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.skip{position:fixed;left:16px;top:-60px;z-index:200;background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:8px}
-.skip:focus{top:16px}
-:focus-visible{outline:2px solid var(--coral);outline-offset:3px;border-radius:6px}
-.grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:90;opacity:.035;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation:grain 1.2s steps(6) infinite}
-@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-4%)}75%{transform:translate(-4%,-1%)}100%{transform:translate(0,0)}}
-.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--ink-2);margin-bottom:22px;background:var(--card);border:1px solid var(--line);padding:7px 14px;border-radius:999px}
-.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--coral)}
-.h2{font-size:clamp(40px,6vw,96px);line-height:.95;letter-spacing:-.05em;font-weight:600}
-.h2 .serif{font-weight:400;letter-spacing:-.03em;color:var(--coral)}
-.sec{padding:clamp(80px,11vw,150px) var(--gutter)}
-.sec__head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:clamp(36px,6vw,72px)}
-.sec__head p{max-width:30ch;color:var(--ink-2);font-size:17px}
+.skip-link{position:fixed;left:16px;top:-60px;z-index:300;background:var(--ink);color:var(--paper);padding:10px 14px;border-radius:6px;text-decoration:none}
+.skip-link:focus{top:16px}
 
-/* loader */
-.loader{position:fixed;inset:0;z-index:150;background:var(--lav);color:var(--ink);display:flex;flex-direction:column;justify-content:space-between;padding:var(--gutter)}
-.loader__top{display:flex;justify-content:space-between}
-.loader__mid{display:flex;align-items:center;gap:18px}
-.loader__bubble{display:inline-flex;gap:8px;background:var(--card);padding:18px 22px;border-radius:28px 28px 28px 6px;box-shadow:var(--shadow)}
-.loader__bubble span{width:12px;height:12px;border-radius:50%;background:var(--coral);animation:typing 1s infinite var(--ease)}
-.loader__bubble span:nth-child(2){animation-delay:.15s}.loader__bubble span:nth-child(3){animation-delay:.3s}
-.loader__word{font-family:var(--serif);font-style:italic;font-size:clamp(28px,4vw,52px)}
-.loader__count{font-size:clamp(90px,20vw,300px);font-weight:600;line-height:.8;letter-spacing:-.06em;align-self:flex-end;font-variant-numeric:tabular-nums}
-@keyframes typing{0%,60%,100%{transform:translateY(0);opacity:.45}30%{transform:translateY(-7px);opacity:1}}
-.reduced .loader{display:none}
-/* failsafe: never let the intro block the page if scripts are slow or blocked */
-.loader{animation:loaderOut .6s ease 4.5s forwards}
-.loader.is-running{animation:none}
-@keyframes loaderOut{to{opacity:0;visibility:hidden;pointer-events:none}}
+/* ---------- header ---------- */
+.top{position:sticky;top:0;z-index:50;background:rgba(245,243,238,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.top__in{max-width:1240px;margin:0 auto;padding:12px var(--g);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:baseline;gap:12px;text-decoration:none}
+.brand b{font-family:var(--serif);font-weight:500;font-size:20px;letter-spacing:-.01em}
+.brand span{color:var(--ink-3)}
+.top__actions{display:flex;gap:8px;align-items:center}
+.pillbtn{text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--rule);background:var(--card);border-radius:999px;padding:7px 14px;font-size:13px;transition:border-color .2s,background .2s}
+.pillbtn:hover{border-color:var(--ink-3)}
+.pillbtn .dot{width:8px;height:8px;border-radius:50%;background:var(--red)}
+body.notes-off .pillbtn[data-notes] .dot{background:var(--rule)}
+.pillbtn--ink{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+@media (max-width:640px){.brand span,.hide-sm{display:none}}
 
-/* cursor */
-.cursor{position:fixed;left:0;top:0;z-index:140;pointer-events:none}
-.cursor__dot{position:absolute;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--coral);opacity:.85;transition:transform .35s var(--ease),opacity .3s}
-.cursor__label{position:absolute;transform:translate(-50%,-50%) scale(0);width:92px;height:92px;border-radius:50% 50% 50% 10px;background:var(--lav-2);color:var(--ink);display:grid;place-items:center;font:500 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;transition:transform .45s var(--ease)}
-.cursor.is-label .cursor__label{transform:translate(-50%,-50%) scale(1)}
-.cursor.is-label .cursor__dot{transform:scale(0)}
-.cursor.is-hover .cursor__dot{transform:scale(3);opacity:.35}
-@media (hover:none),(pointer:coarse){.cursor{display:none}}
-
-/* nav */
-.nav{position:fixed;top:14px;left:var(--gutter);right:var(--gutter);z-index:100;display:flex;align-items:center;justify-content:space-between;padding:10px 12px 10px 16px;border-radius:999px;background:rgba(255,253,250,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);transition:transform .5s var(--ease)}
-.nav.is-hidden{transform:translateY(-140%)}
-.logo{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.02em;font-size:17px}
-.logo__mark{width:30px;height:30px;border-radius:10px 10px 10px 3px;background:var(--coral);color:#fff;display:grid;place-items:center;font:600 12px var(--sans)}
-.nav__links{display:flex;gap:24px;align-items:center}
-.nav__links a{font-size:14px;color:var(--ink-2);transition:color .3s}
-.nav__links a:hover{color:var(--ink)}
-.nav__clock{font:400 12px var(--mono);color:var(--mute)}
-.nav__cta{background:var(--ink);color:var(--bg)!important;border-radius:999px;padding:9px 16px}
-@media (max-width:820px){.nav__links a:not(.nav__cta),.nav__clock{display:none}}
-
-/* hero */
-.hero{position:relative;min-height:100svh;display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(24px,4vw,64px);align-items:center;padding:110px var(--gutter) 60px;overflow:hidden}
-.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;z-index:0;animation:drift 18s ease-in-out infinite alternate}
-.blob--1{width:46vw;height:46vw;background:var(--lav);left:-12vw;top:-14vw}
-.blob--2{width:36vw;height:36vw;background:var(--peach);right:-8vw;top:8vh;animation-duration:22s}
-.blob--3{width:30vw;height:30vw;background:var(--sage);left:30vw;bottom:-14vw;animation-duration:26s}
-@keyframes drift{to{transform:translate(4vw,3vw) scale(1.12)}}
-.hero__wave{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
-.hero__copy{position:relative;z-index:2}
-.status{display:inline-flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 14px;color:var(--ink-2)}
-.status__dot{width:8px;height:8px;border-radius:50%;background:#6cc28a;animation:pulse 2s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(108,194,138,.6)}70%{box-shadow:0 0 0 10px rgba(108,194,138,0)}100%{box-shadow:0 0 0 0 rgba(108,194,138,0)}}
-.hero__title{margin:26px 0 24px;font-size:clamp(44px,min(6.6vw,11vh),118px);line-height:.94;font-weight:600;letter-spacing:-.055em}
-.hero__title .line{display:block;overflow:hidden;padding-bottom:.07em}
-.hero__title .line>span{display:inline-block}
-.hero__title .serif{font-weight:400;letter-spacing:-.03em;color:var(--coral)}
-.caret{display:inline-block;width:.06em;height:.75em;background:var(--coral);margin-left:.06em;vertical-align:-.03em;border-radius:2px;animation:blink 1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-.hero__lede{font-size:clamp(17px,1.4vw,20px);max-width:34ch;color:var(--ink-2)}
-.hero__lede em{font-family:var(--serif);font-size:1.15em;color:var(--ink)}
-.hero__ctas{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 24px;border-radius:999px;background:var(--ink);color:var(--bg);font-size:15px;font-weight:500;transition:background .3s}
-.btn--soft{background:var(--card);color:var(--ink);border:1px solid var(--line)}
-.btn--soft:hover{background:var(--lav)}
-
-/* hero collage */
-.collage{position:relative;z-index:2;height:min(72vh,640px);min-height:480px}
-.tile{position:absolute;border-radius:26px;overflow:hidden;box-shadow:var(--shadow);will-change:transform}
-.tile img{width:100%;height:100%;object-fit:cover}
-.tile--contain img{object-fit:contain;padding:10px}
-.tile--plane{width:42%;aspect-ratio:16/10;left:0;top:4%;background:var(--sky);rotate:-6deg}
-.tile--map{width:30%;aspect-ratio:9/15;right:0;top:0;background:var(--sage);rotate:5deg}
-.tile--bike{width:40%;aspect-ratio:4/3;right:4%;bottom:2%;rotate:-4deg;background:var(--bg-2)}
-.tile--wallet{width:26%;aspect-ratio:1;left:2%;bottom:6%;background:var(--butter);rotate:7deg}
-.hchat{position:absolute;left:22%;top:22%;width:min(56%,340px);background:var(--card);border-radius:28px;padding:16px;box-shadow:0 40px 80px -30px rgba(52,48,74,.4);z-index:3;display:flex;flex-direction:column;gap:8px;min-height:300px}
-.hchat__bar{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:4px}
-.av{width:34px;height:34px;border-radius:12px 12px 12px 4px;background:var(--coral);color:#fff;display:grid;place-items:center;font:600 12px var(--sans);flex:0 0 auto}
-.hchat__name{font-weight:600;font-size:14px;line-height:1.2}
-.hchat__sub{font:400 10px var(--mono);color:var(--mute);text-transform:uppercase}
-.hchat__body{display:flex;flex-direction:column;gap:8px;justify-content:flex-end;flex:1}
-.sticker{position:absolute;z-index:4;font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.04em;padding:8px 12px;border-radius:999px;box-shadow:var(--shadow);white-space:nowrap}
-.sticker--a{background:var(--lav);left:-5%;top:46%}
-.sticker--b{background:var(--sage);right:30%;top:12%}
-.sticker--c{background:var(--peach);right:2%;bottom:36%;display:flex;align-items:center;gap:8px}
-.mini-eq{display:inline-flex;gap:2px;align-items:center;height:14px}
-.mini-eq i{width:3px;border-radius:3px;background:var(--coral);animation:eq .9s infinite ease-in-out alternate}
+/* ---------- layout ---------- */
+.page{max-width:1240px;margin:0 auto;padding:0 var(--g)}
+.turn{padding:clamp(72px,10vw,128px) 0;border-bottom:1px solid var(--rule)}
+.turn__label{display:flex;align-items:center;gap:12px;color:var(--ink-3);margin-bottom:28px}
+.turn__label::after{content:'';flex:1;height:1px;background:var(--rule)}
+.turn__label b{color:var(--red);font-weight:500}
+.row{display:grid;grid-template-columns:minmax(0,1fr) var(--note-w);column-gap:64px;align-items:start}
+.row+.row{margin-top:28px}
+.main{min-width:0}
+.note{position:relative;font-size:14px;line-height:1.55;color:var(--ink-2);padding:2px 0 2px 16px;border-left:2px solid var(--red);transition:background .25s,opacity .4s var(--ease),transform .4s var(--ease)}
+.note__tag{display:block;font:500 11px var(--mono);letter-spacing:.06em;color:var(--red);margin-bottom:4px}
+.note.is-hot{background:var(--red-soft)}
+.ref{text-decoration:underline dotted var(--red);text-decoration-thickness:1.5px;text-underline-offset:4px;transition:background .25s}
+.ref::after{content:attr(data-n);font:500 10px var(--mono);color:var(--red);vertical-align:super;margin-left:2px}
+.ref.is-hot{background:var(--red-soft)}
+body.notes-off .row{grid-template-columns:minmax(0,1fr) 0;column-gap:0}
+body.notes-off .note{display:none}
+body.notes-off .ref{text-decoration:none}
+body.notes-off .ref::after{display:none}
 @media (max-width:980px){
-  .hero{grid-template-columns:1fr;padding-top:100px}
-  .collage{height:440px;min-height:0;margin-top:10px}
-  .hchat{left:12%;width:70%;top:16%}
-  .sticker--a{display:none}
+  .row{grid-template-columns:1fr}
+  .note{margin-top:16px;background:var(--card);border-radius:0 8px 8px 0;padding:10px 14px}
 }
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
 
-/* chat bubbles shared */
-.msg{max-width:86%;padding:10px 14px;border-radius:18px;font-size:14px;line-height:1.38;opacity:0;transform:translateY(12px) scale(.96);transform-origin:bottom left;animation:msgIn .55s var(--ease) forwards}
-.msg.user{align-self:flex-end;background:var(--bg-2);border-radius:18px 18px 6px 18px;transform-origin:bottom right}
-.msg.bot{align-self:flex-start;background:var(--peach);border-radius:18px 18px 18px 6px}
-.msg.sys{align-self:center;max-width:100%;background:none;border:1px dashed var(--line);font:400 11px/1.6 var(--mono);color:var(--mute);text-align:center;border-radius:12px}
-.msg.sys b{color:#3f9a62;font-weight:500}
-.msg.opts{background:none;padding:0;display:flex;gap:6px;flex-wrap:wrap}
-.msg.opts span{background:var(--lav);border-radius:999px;padding:6px 10px;font-size:12px}
-.msg.typing{display:inline-flex;gap:5px;padding:13px 15px}
-.msg.typing span{width:7px;height:7px;border-radius:50%;background:var(--coral);animation:typing 1s infinite}
-.msg.typing span:nth-child(2){animation-delay:.15s}.msg.typing span:nth-child(3){animation-delay:.3s}
-@keyframes msgIn{to{opacity:1;transform:none}}
+.h1,.h2{font-family:var(--serif);font-weight:400;letter-spacing:-.02em;line-height:1.04}
+.h1{font-size:clamp(40px,6.4vw,84px)}
+.h2{font-size:clamp(34px,4.8vw,62px)}
+.h1 em,.h2 em{font-style:italic}
+.lede{font-size:clamp(18px,1.6vw,21px);color:var(--ink-2);max-width:40ch;margin-top:22px}
 
-/* bubble marquee */
-.bmarquee{padding:28px 0;overflow:hidden}
-.bmarquee__row{display:flex;width:max-content;white-space:nowrap;will-change:transform}
-.bmarquee__row+.bmarquee__row{margin-top:14px}
-.bmarquee__item{display:inline-flex;gap:14px;padding-right:14px}
-.pill{display:inline-flex;align-items:center;gap:10px;font-size:clamp(18px,2vw,26px);letter-spacing:-.02em;padding:14px 24px;border-radius:30px 30px 30px 8px}
-.pill--r{border-radius:30px 30px 8px 30px}
-.pill small{font:400 11px var(--mono);text-transform:uppercase;letter-spacing:.04em;opacity:.65}
+/* ---------- hero / keypad ---------- */
+.hero{padding:clamp(48px,7vw,96px) 0 clamp(64px,8vw,110px);border-bottom:1px solid var(--rule)}
+.call{display:flex;align-items:center;gap:10px;color:var(--ink-2);margin-bottom:26px}
+.call__dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:ring 1.6s infinite}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(61,122,85,.5)}80%{box-shadow:0 0 0 9px rgba(61,122,85,0)}100%{box-shadow:0 0 0 0 rgba(61,122,85,0)}}
+.hero__grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(32px,6vw,80px);align-items:center}
+.ivr{font-family:var(--serif);font-size:clamp(26px,3.2vw,40px);line-height:1.25;letter-spacing:-.01em;min-height:5.2em}
+.ivr .k{font-family:var(--mono);font-size:.62em;border:1px solid var(--rule);background:var(--card);border-radius:6px;padding:1px 7px;vertical-align:.15em}
+.ivr__caret{display:inline-block;width:2px;height:.9em;background:var(--red);margin-left:3px;vertical-align:-.1em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero__cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;margin-top:34px}
+.skipbtn{display:inline-flex;align-items:center;gap:14px;background:var(--ink);color:var(--paper);border-radius:999px;padding:18px 28px;font-size:17px;font-weight:500;text-decoration:none;transition:transform .3s var(--ease),background .3s}
+.skipbtn:hover{background:#000;transform:translateY(-2px)}
+.skipbtn i{font-style:normal;transition:transform .3s var(--ease)}
+.skipbtn:hover i{transform:translateY(3px)}
+.hero__hint{color:var(--ink-3)}
+.keypad{width:min(300px,78vw);background:var(--card);border:1px solid var(--rule);border-radius:28px;padding:20px;box-shadow:0 30px 60px -40px rgba(31,30,28,.35)}
+.keypad__screen{height:48px;border-radius:12px;background:var(--paper-2);display:flex;align-items:center;justify-content:space-between;padding:0 14px;margin-bottom:16px;font:500 13px var(--mono);color:var(--ink-2);overflow:hidden}
+.keypad__screen b{font-size:18px;color:var(--ink);letter-spacing:.12em}
+.keys{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.key{aspect-ratio:1/1;border-radius:50%;border:1px solid var(--rule);background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;transition:background .15s,transform .15s,border-color .2s}
+.key b{font:400 26px var(--serif)}
+.key small{font:500 8.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-top:4px;height:10px}
+.key.mapped{border-color:var(--ink-3)}
+.key.mapped small{color:var(--red)}
+.key:hover{background:var(--card)}
+.key.down,.key:active{background:var(--ink);color:var(--paper);transform:scale(.94)}
+.key.down small{color:var(--paper)}
+@media (max-width:860px){.hero__grid{grid-template-columns:minmax(0,1fr)}.keypad{justify-self:start}}
+.hero__grid>*{min-width:0}
 
-/* manifesto */
-.manifesto{padding:clamp(90px,13vw,180px) var(--gutter);text-align:center}
-.manifesto__text{font-size:clamp(30px,4.4vw,68px);line-height:1.08;letter-spacing:-.04em;font-weight:500;max-width:18ch;margin:0 auto}
-.manifesto__text .serif{color:var(--coral)}
-.manifesto__text .word{display:inline-block}
+/* ASR self-correct headline */
+.asr{position:relative}
+.asr__wrong{display:inline-block;max-width:9em;overflow:hidden;white-space:nowrap;vertical-align:bottom;transition:opacity .4s,max-width .8s var(--ease);text-decoration:underline wavy var(--red);text-decoration-thickness:1.5px;text-underline-offset:6px;transition:opacity .4s}
+.asr__tag{display:inline-block;font:500 11px var(--mono);color:var(--red);border:1px solid var(--red);border-radius:4px;padding:1px 6px;vertical-align:.9em;margin-left:6px;transition:all .4s}
+.asr.fixed .asr__wrong{text-decoration:line-through;text-decoration-color:var(--red);opacity:.35}
+.asr__right{display:inline-block;max-width:0;overflow:hidden;white-space:nowrap;vertical-align:bottom;transition:max-width 1.1s var(--ease)}
+.asr.fixed .asr__right{max-width:9em}
+.asr.fixed .asr__tag{color:var(--green);border-color:var(--green)}
+.asr.done .asr__wrong{max-width:0;opacity:0}
+.asr.done .asr__tag{display:none}
 
-/* approach */
-.approach__grid{display:grid;grid-template-columns:1fr minmax(320px,400px);gap:clamp(40px,7vw,110px)}
-.step{min-height:72vh;display:flex;flex-direction:column;justify-content:center;opacity:.3;transition:opacity .6s var(--ease)}
-.step.is-active{opacity:1}
-.step__tag{align-self:flex-start;font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.05em;padding:7px 12px;border-radius:999px;margin-bottom:22px}
-.step h3{font-size:clamp(36px,4.8vw,76px);line-height:.98;letter-spacing:-.05em;font-weight:600;margin-bottom:18px}
-.step h3 .serif{font-weight:400;color:var(--coral)}
-.step p{font-size:clamp(17px,1.35vw,19px);max-width:34ch;color:var(--ink-2)}
-.phone-wrap{position:sticky;top:12vh;height:76vh;display:flex;align-items:center}
-.phone{width:100%;height:min(74vh,680px);background:var(--card);border-radius:44px;padding:14px;box-shadow:0 50px 100px -40px rgba(52,48,74,.45),0 0 0 10px var(--lav);display:flex;flex-direction:column}
-.phone__bar{display:flex;align-items:center;gap:12px;padding:12px 10px 14px;border-bottom:1px solid var(--line)}
-.phone__body{flex:1;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;padding:16px 8px}
-.phone__body .msg{font-size:15px}
-.phone__input{margin:6px;padding:11px 14px;border-radius:999px;background:var(--bg);font-size:14px;color:var(--mute);display:flex;justify-content:space-between;align-items:center}
-.phone__input i{width:28px;height:28px;border-radius:50%;background:var(--coral);display:block}
-@media (max-width:900px){
-  .approach__grid{grid-template-columns:1fr}
-  .phone-wrap{position:sticky;top:76px;height:auto;z-index:2;order:-1}
-  .phone{height:320px;border-radius:30px;box-shadow:0 30px 60px -30px rgba(52,48,74,.45),0 0 0 6px var(--lav)}
-  .phone__bar{padding:6px 8px 10px}
-  .step{min-height:64vh}
-}
+.facts{display:flex;flex-wrap:wrap;gap:28px 48px;margin-top:40px;padding-top:24px;border-top:1px solid var(--rule)}
+.fact b{display:block;font:400 clamp(34px,3.6vw,46px)/1 var(--serif);letter-spacing:-.02em}
+.fact span{color:var(--ink-2);font-size:14px}
+.reply{display:inline-flex;align-items:center;gap:10px;margin-top:34px;border:1px solid var(--ink);border-radius:999px;padding:11px 20px;font-size:15px;text-decoration:none;transition:background .2s,color .2s}
+.reply:hover{background:var(--ink);color:var(--paper)}
 
-/* numbers bento */
-.bento{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:0 var(--gutter)}
-.stat{border-radius:28px;padding:28px;min-height:230px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
-.stat__v{font-size:clamp(54px,6.4vw,104px);font-weight:600;letter-spacing:-.06em;line-height:1;font-variant-numeric:tabular-nums}
-.stat__v sup{font-size:.4em;vertical-align:.9em;margin-left:2px;color:var(--coral)}
-.stat p{color:var(--ink-2);font-size:15px;max-width:20ch}
-.stat__icon{position:absolute;right:20px;top:20px;width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,.6);display:grid;place-items:center}
-@media (max-width:900px){.bento{grid-template-columns:1fr 1fr}.stat{min-height:190px;padding:22px}}
+/* ---------- work cards ---------- */
+.cases{display:grid;gap:22px;margin-top:8px}
+.case{background:var(--card);border:1px solid var(--rule);border-radius:18px;padding:clamp(20px,2.6vw,32px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,3vw,40px);transition:border-color .3s,box-shadow .3s}
+.case:hover{border-color:var(--ink-3);box-shadow:0 24px 50px -40px rgba(31,30,28,.4)}
+.case__meta{display:flex;justify-content:space-between;gap:12px;color:var(--ink-3)}
+.case__meta b{color:var(--red);font-weight:500}
+.case h3{font:400 clamp(28px,3vw,40px)/1.05 var(--serif);letter-spacing:-.02em;margin:14px 0 18px}
+.case h3 em{font-style:italic}
+.depth{display:inline-flex;border:1px solid var(--rule);border-radius:999px;padding:3px;background:var(--paper)}
+.depth button{font:500 12px var(--mono);padding:6px 12px;border-radius:999px;color:var(--ink-2);transition:background .2s,color .2s}
+.depth button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.depth__body{margin-top:16px;color:var(--ink-2);font-size:16px;min-height:4.8em}
+.depth__body ul{list-style:none;display:grid;gap:6px}
+.depth__body li{padding-left:18px;position:relative}
+.depth__body li::before{content:'—';position:absolute;left:0;color:var(--red)}
+.case__read{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-weight:500;font-size:15px;text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:2px}
+.case__read:hover{color:var(--red);border-color:var(--red)}
+.script{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:16px 18px;font-size:15px;display:grid;gap:10px;align-content:start}
+.line{display:grid;grid-template-columns:62px 1fr;gap:10px;align-items:baseline}
+.line .who{font:500 10.5px var(--mono);letter-spacing:.08em;color:var(--ink-3)}
+.line.bot .who{color:var(--red)}
+.line.sys{color:var(--ink-3);font:400 12px var(--mono)}
+.line.sys .who{color:var(--green)}
+.line .said{font-family:var(--serif);font-size:18px;line-height:1.35}
+.line.bot .said{font-style:italic}
+.case__img{margin-top:12px;border-radius:10px;overflow:hidden;border:1px solid var(--rule);aspect-ratio:16/9;background:var(--paper-2)}
+.case__img img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.case:hover .case__img img{transform:scale(1.03)}
+@media (max-width:860px){.case{grid-template-columns:1fr}}
 
-/* work */
-.work{position:relative;overflow:hidden}
-.work__pin{height:100vh;display:flex;align-items:center}
-.work__track{display:flex;gap:clamp(18px,2.4vw,32px);padding:0 var(--gutter);will-change:transform}
-.card{position:relative;flex:0 0 auto;width:clamp(320px,44vw,700px);height:min(78vh,660px);border-radius:32px;overflow:hidden;display:flex;flex-direction:column;padding:16px;isolation:isolate}
-.card__visual{position:relative;flex:1;border-radius:22px;overflow:hidden;background:rgba(255,255,255,.55)}
-.card__visual>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
-.card__visual>img.contain{object-fit:contain;padding:18px}
-.card:hover .card__visual>img{transform:scale(1.04)}
-.card__meta{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:20px 10px 8px}
-.card__tag{font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-2)}
-.card__title{font-size:clamp(32px,3.4vw,56px);line-height:.95;letter-spacing:-.05em;font-weight:600;margin-top:8px}
-.card__title .serif{font-weight:400;color:var(--coral)}
-.card__go{flex:0 0 auto;width:58px;height:58px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-size:20px;transition:transform .5s var(--ease),background .3s,color .3s}
-.card:hover .card__go{transform:rotate(-45deg);background:var(--ink);color:var(--bg)}
-.card__chip{position:absolute;left:16px;top:16px;z-index:3;background:var(--card);border-radius:999px;padding:8px 14px;font:500 12px var(--mono);box-shadow:var(--shadow)}
-.card__visual>img.sticker-img{inset:auto 5% 6% auto;width:30%;height:auto;max-width:170px;border-radius:20px;box-shadow:var(--shadow);background:var(--card);padding:8px;rotate:6deg;z-index:2;object-fit:contain}
-/* ICICI visual */
-.vc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:24px}
-.vc__bars{display:flex;align-items:center;gap:6px;height:120px}
-.vc__bars i{width:8px;border-radius:8px;background:var(--lav-2);animation:eq 1.1s infinite ease-in-out alternate}
-.vc__bars i:nth-child(3n){background:var(--coral)}
-@keyframes eq{0%{height:12%}100%{height:100%}}
-.vc__bubble{background:var(--card);border-radius:24px 24px 24px 6px;padding:16px 20px;font-family:var(--serif);font-style:italic;font-size:clamp(20px,1.9vw,28px);line-height:1.15;max-width:18ch;box-shadow:var(--shadow)}
-/* UPI gates visual */
-.gates{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:26px;padding:60px 28px 28px}
-.gates__row{display:flex;align-items:flex-start;justify-content:space-between;position:relative}
-.gates__row::before{content:'';position:absolute;left:24px;right:24px;top:23px;height:3px;background:rgba(52,48,74,.12);border-radius:3px}
-.gates__fill{position:absolute;left:24px;top:23px;height:3px;background:var(--coral);border-radius:3px;width:0;animation:fill 4s var(--ease) infinite}
-@keyframes fill{0%{width:0}70%,100%{width:calc(100% - 48px)}}
-.gate{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px;font:500 10px var(--mono);text-transform:uppercase;color:var(--ink-2)}
-.gate b{width:48px;height:48px;border-radius:16px;background:var(--card);display:grid;place-items:center;font:600 15px var(--sans);color:var(--ink);box-shadow:var(--shadow);animation:gatePop 4s infinite}
-.gate:nth-of-type(2) b{animation-delay:.5s}.gate:nth-of-type(3) b{animation-delay:1s}.gate:nth-of-type(4) b{animation-delay:1.5s}.gate:nth-of-type(5) b{animation-delay:2s}
-@keyframes gatePop{0%,8%{background:var(--card)}14%,100%{background:var(--sage)}}
-.gates__chat{display:flex;flex-direction:column;gap:8px}
-.gates__chat .msg{opacity:1;transform:none;animation:none;max-width:80%}
-.work__end{flex:0 0 auto;width:clamp(260px,26vw,380px);height:min(78vh,660px);display:flex;flex-direction:column;justify-content:center;gap:14px}
-.work__end a{display:flex;justify-content:space-between;align-items:center;padding:22px 24px;border-radius:24px;background:var(--card);border:1px solid var(--line);font-size:20px;font-weight:500;letter-spacing:-.02em;transition:background .3s}
-.work__end a:hover{background:var(--lav)}
-.work__progress{position:absolute;left:var(--gutter);right:var(--gutter);bottom:26px;height:3px;border-radius:3px;background:var(--line)}
-.work__progress i{position:absolute;inset:0;border-radius:3px;background:var(--coral);transform:scaleX(0);transform-origin:left}
-@media (max-width:900px){
-  .work__pin{height:auto;display:block;padding-bottom:40px}
-  .work__track{flex-direction:column}
-  .card{width:100%;height:auto}
-  .card__visual{height:300px;flex:none}
-  .work__end{width:100%;height:auto;padding:20px 0}
-  .work__progress{display:none}
-}
+/* ---------- process ladder ---------- */
+.ladder{display:grid;gap:0;margin-top:30px;border-top:1px solid var(--rule)}
+.rung{display:grid;grid-template-columns:120px 1fr;gap:18px;padding:20px 0;border-bottom:1px solid var(--rule)}
+.rung__step{font:500 12px var(--mono);color:var(--ink-3)}
+.rung__step b{display:block;color:var(--red);font-size:13px}
+.rung p{font-family:var(--serif);font-size:20px;line-height:1.35}
+.rung small{display:block;color:var(--ink-2);font-size:14px;margin-top:4px;font-family:var(--sans)}
+.try{margin-top:28px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;color:var(--ink-2)}
+.try button{border:1px dashed var(--red);color:var(--red);border-radius:999px;padding:8px 14px;font-size:14px}
+.try button:hover{background:var(--red-soft)}
+@media (max-width:560px){.rung{grid-template-columns:1fr;gap:4px}}
 
-/* field gallery */
-.gallery{padding:clamp(70px,9vw,120px) 0;overflow:hidden}
-.gallery .sec__head{padding:0 var(--gutter)}
-.grow{display:flex;width:max-content;will-change:transform}
-.grow+.grow{margin-top:16px}
-.grow__set{display:flex;gap:16px;padding-right:16px}
-.gimg{position:relative;height:clamp(180px,22vw,280px);border-radius:24px;overflow:hidden;flex:0 0 auto;background:var(--card)}
-.gimg img{height:100%;width:auto;object-fit:cover;transition:transform 1s var(--ease)}
-.gimg:hover img{transform:scale(1.06)}
-.gimg span{position:absolute;left:12px;bottom:12px;background:rgba(255,253,250,.9);backdrop-filter:blur(6px);border-radius:999px;padding:6px 12px;font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.04em}
+/* ---------- handoff ---------- */
+.transfer{display:flex;align-items:center;gap:12px;color:var(--ink-2);margin-bottom:20px}
+.transfer__bars{display:inline-flex;gap:3px;align-items:flex-end;height:14px}
+.transfer__bars i{width:3px;background:var(--green);border-radius:2px;animation:bars 1s infinite ease-in-out alternate}
+.transfer__bars i:nth-child(2){animation-delay:.2s}.transfer__bars i:nth-child(3){animation-delay:.4s}
+@keyframes bars{from{height:30%}to{height:100%}}
+.context{margin-top:26px;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:16px 18px;font:400 13px/1.7 var(--mono);color:var(--ink-2)}
+.context b{color:var(--ink);font-weight:500}
+.handoff__btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:15px 24px;font-size:16px;font-weight:500;text-decoration:none;border:1px solid var(--ink);transition:background .2s,color .2s}
+.btn--ink{background:var(--ink);color:var(--paper)}
+.btn--ink:hover{background:#000}
+.btn:not(.btn--ink):hover{background:var(--ink);color:var(--paper)}
+.foot{max-width:1240px;margin:0 auto;padding:28px var(--g) 40px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--ink-3)}
+.foot a{text-decoration:none}
+.foot a:hover{color:var(--red)}
 
-/* talk */
-.talk{margin:0 clamp(0px,1.2vw,16px);border-radius:clamp(28px,4vw,48px);background:var(--lav);padding:clamp(70px,10vw,130px) var(--gutter)}
-.talk__grid{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(32px,6vw,90px);align-items:center}
-.talk__intro p{font-size:18px;color:var(--ink-2);max-width:32ch;margin-top:22px}
-.ladder{margin-top:30px;display:flex;flex-wrap:wrap;gap:8px}
-.ladder span{background:var(--card);border-radius:999px;padding:8px 14px;font-size:14px}
-.ladder span b{color:var(--coral);font-family:var(--mono);font-size:12px;margin-right:6px}
-.chat{background:var(--card);border-radius:32px;overflow:hidden;box-shadow:0 50px 100px -40px rgba(52,48,74,.45);display:flex;flex-direction:column;height:min(680px,80vh)}
-.chat__bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line)}
-.chat__who{display:flex;align-items:center;gap:12px}
-.toggle{display:inline-flex;align-items:center;gap:10px;font:400 11px var(--mono);text-transform:uppercase;color:var(--ink-2);letter-spacing:.05em}
-.toggle__sw{width:38px;height:22px;border-radius:999px;background:var(--bg-2);position:relative;transition:background .3s;flex:0 0 auto}
-.toggle__sw::after{content:'';position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .35s var(--ease)}
-.toggle[aria-pressed="true"] .toggle__sw{background:var(--coral)}
-.toggle[aria-pressed="true"] .toggle__sw::after{transform:translateX(16px)}
-.chat__log{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:10px;scrollbar-width:thin;overscroll-behavior:contain}
-.chat__log .msg{font-size:15px}
-.chat__log .msg a{text-decoration:underline;text-underline-offset:3px}
-.nlu{align-self:flex-start;font:400 11px/1.6 var(--mono);color:var(--ink-2);background:var(--bg);border-radius:12px;padding:8px 12px;display:none;opacity:0;animation:msgIn .4s var(--ease) forwards}
-.nlu b{color:var(--ink);font-weight:500}
-.nlu .ok{color:#3f9a62}.nlu .warn{color:#b07d14}.nlu .bad{color:#c4553a}
-.chat.debug .nlu{display:block}
-.chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 12px}
-.chip{background:var(--bg);border-radius:999px;padding:8px 14px;font-size:13px;transition:background .3s}
-.chip:hover{background:var(--lav)}
-.chat__form{display:flex;gap:10px;padding:12px;border-top:1px solid var(--line)}
-.chat__form input{flex:1;min-width:0;background:var(--bg);border:1px solid transparent;border-radius:999px;padding:13px 18px;color:var(--ink);font:inherit;font-size:15px;outline:none}
-.chat__form input:focus{border-color:var(--lav-2)}
-.chat__form button{width:48px;height:48px;border-radius:50%;background:var(--coral);color:#fff;font-size:19px;flex:0 0 auto;transition:transform .4s var(--ease)}
-.chat__form button:hover{transform:rotate(-45deg)}
-@media (max-width:900px){.talk__grid{grid-template-columns:1fr}.chat{height:580px}.chat__who .hchat__sub{display:none}}
+/* ---------- dock (live conversation) ---------- */
+.dock{position:fixed;left:50%;bottom:16px;transform:translate(-50%,140%);width:min(680px,calc(100% - 24px));z-index:60;transition:transform .6s var(--ease)}
+.dock.on{transform:translate(-50%,0)}
+.dock__log{background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:14px 16px;margin-bottom:8px;box-shadow:0 30px 60px -30px rgba(31,30,28,.35);display:none;max-height:min(46vh,340px);overflow-y:auto;font-size:15px}
+.dock__log.open{display:grid;gap:10px}
+.dock__log .line .said{font-size:17px}
+.dock__log .line.sys{font-size:11.5px}
+.dock__log a{color:var(--red)}
+.dock__head{display:flex;justify-content:space-between;align-items:center;color:var(--ink-3)}
+.dock__head button{font:500 11px var(--mono);color:var(--ink-3)}
+.dock__bar{display:flex;align-items:center;gap:8px;background:var(--ink);border-radius:999px;padding:6px 6px 6px 18px;box-shadow:0 20px 40px -20px rgba(31,30,28,.5)}
+.dock__bar label{font:500 11px var(--mono);color:#a9a49b;white-space:nowrap}
+.dock__bar input{flex:1;min-width:0;background:transparent;border:0;outline:none;color:var(--paper);font:inherit;font-size:16px;padding:10px 4px}
+.dock__bar input::placeholder{color:#8c8880}
+.dock__bar button{width:42px;height:42px;border-radius:50%;background:var(--red);color:var(--paper);font-size:18px;flex:0 0 auto}
+.parse{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:8px 6px 0;min-height:30px;font:400 12px var(--mono);color:var(--ink-3)}
+.parse .tok{padding:2px 6px;border-radius:4px;background:var(--paper-2);color:var(--ink-2)}
+.parse .tok.hit{background:var(--ink);color:var(--paper)}
+.parse .tok.hit sub{color:#e9a08c;font-size:9.5px;margin-left:4px;vertical-align:baseline}
+.conf{display:inline-flex;align-items:center;gap:6px;margin-left:auto}
+.conf__bar{width:64px;height:4px;border-radius:4px;background:var(--rule);overflow:hidden}
+.conf__bar i{display:block;height:100%;width:0;background:var(--red);transition:width .25s,background .25s}
+.conf.ok .conf__bar i{background:var(--green)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{border:1px solid var(--rule);background:var(--paper);border-radius:999px;padding:5px 12px;font-size:13px}
+.chips button:hover{border-color:var(--ink)}
+@media (max-width:560px){.dock__bar label{display:none}}
 
-/* craft tiles */
-.craft__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.ctile{border-radius:28px;padding:28px;min-height:230px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .6s var(--ease)}
-.ctile:hover{transform:translateY(-6px) rotate(-.6deg)}
-.ctile svg{width:54px;height:54px}
-.ctile h4{font-size:clamp(22px,2vw,30px);letter-spacing:-.035em;font-weight:600;line-height:1.05;margin-top:28px}
-.ctile p{color:var(--ink-2);font-size:15px;margin-top:8px;max-width:30ch}
-@media (max-width:900px){.craft__grid{grid-template-columns:1fr 1fr}}
-@media (max-width:560px){.craft__grid{grid-template-columns:1fr}}
+/* ---------- flowchart sitemap ---------- */
+.map{position:fixed;inset:0;z-index:100;background:#f1efe9;background-image:radial-gradient(circle,#cfc9be 1px,transparent 1.2px);background-size:22px 22px;display:none;flex-direction:column}
+.map.open{display:flex;animation:mapIn .45s var(--ease)}
+@keyframes mapIn{from{opacity:0;transform:scale(.985)}to{opacity:1;transform:none}}
+.map__bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px var(--g);background:rgba(251,250,247,.92);border-bottom:1px solid var(--rule)}
+.map__title{display:flex;align-items:baseline;gap:12px}
+.map__title b{font:500 18px var(--serif)}
+.map__tools{display:flex;gap:6px}
+.map__tools button{border:1px solid var(--rule);background:var(--card);border-radius:8px;min-width:34px;height:34px;padding:0 10px;font-size:14px}
+.map__vp{flex:1;overflow:hidden;position:relative;cursor:grab;touch-action:none}
+.map__vp.dragging{cursor:grabbing}
+.map__canvas{position:absolute;left:0;top:0;width:1560px;height:900px;transform-origin:0 0}
+.map__canvas svg{position:absolute;inset:0;overflow:visible}
+.frame{position:absolute;border:1.5px dashed #bfb8ab;border-radius:14px}
+.frame span{position:absolute;top:-24px;left:0;font:500 11px var(--mono);color:var(--ink-2);letter-spacing:.05em}
+.node{position:absolute;background:#fff;border:1.5px solid #1f1e1c;border-radius:10px;padding:10px 14px;font-size:14px;line-height:1.3;box-shadow:0 2px 0 #1f1e1c;cursor:pointer;transition:transform .15s,box-shadow .15s;user-select:none}
+.node:hover{transform:translateY(-2px);box-shadow:0 4px 0 #1f1e1c}
+.node small{display:block;font:500 10px var(--mono);color:var(--ink-3);letter-spacing:.04em;margin-bottom:2px}
+.node.start{border-radius:999px;background:var(--ink);color:var(--paper);text-align:center}
+.node.start small{color:#b8b2a7}
+.node.decision{width:132px;height:132px;padding:0;border:0;box-shadow:none;background:none;display:grid;place-items:center;text-align:center;cursor:default}
+.node.decision::before{content:'';position:absolute;inset:18px;background:#fff8e6;border:1.5px solid #1f1e1c;transform:rotate(45deg);border-radius:8px}
+.node.decision span{position:relative;font-size:13px;max-width:90px}
+.node.error{border-color:var(--red);box-shadow:0 2px 0 var(--red);color:var(--red)}
+.node.human{background:#e9f2ec;border-color:var(--green);box-shadow:0 2px 0 var(--green)}
+.node.here{outline:3px solid var(--red);outline-offset:4px}
+.node.here::after{content:'You are here';position:absolute;top:-30px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;font:500 10px var(--mono);padding:3px 8px;border-radius:4px;white-space:nowrap}
+.node.seen small::after{content:' ✓';color:var(--green)}
+.sticky{position:absolute;width:210px;background:#fde68a;padding:14px;font-size:13.5px;line-height:1.4;box-shadow:0 10px 20px -10px rgba(0,0,0,.3);transform:rotate(-2deg)}
+.sticky b{display:block;font:500 10px var(--mono);margin-bottom:6px;color:#7a5c00}
+.edge{fill:none;stroke:#1f1e1c;stroke-width:1.5}
+.edge.dash{stroke-dasharray:5 5;stroke:#8c8880}
+.edge.red{stroke:var(--red)}
+.elabel{font:500 11px var(--mono);fill:var(--ink-2)}
 
-/* footer */
-.foot{background:var(--peach);padding:clamp(70px,9vw,120px) var(--gutter) 26px;border-radius:clamp(28px,4vw,48px) clamp(28px,4vw,48px) 0 0;margin-top:clamp(60px,8vw,110px);overflow:hidden}
-.foot__bubble{display:inline-block;background:var(--card);border-radius:24px 24px 24px 6px;padding:14px 20px;font-family:var(--serif);font-style:italic;font-size:clamp(20px,2vw,28px);box-shadow:var(--shadow)}
-.foot__big{display:block;font-size:clamp(70px,17vw,300px);line-height:.9;font-weight:600;letter-spacing:-.07em;margin:clamp(26px,4vw,50px) 0;white-space:nowrap}
-.foot__big span{display:inline-block;transition:transform .6s var(--ease);transition-delay:calc(var(--i) * 25ms)}
-.foot__big span:last-child{color:var(--coral)}
-.foot__big:hover span{transform:translateY(-10%) rotate(-3deg)}
-.foot__big:hover span:nth-child(even){transform:translateY(6%) rotate(3deg)}
-.foot__row{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-.foot__links{display:flex;gap:10px;flex-wrap:wrap}
-.foot__base{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:clamp(50px,7vw,90px);padding-top:18px;border-top:1px solid rgba(52,48,74,.15);font:400 12px var(--mono);text-transform:uppercase;color:var(--ink-2)}
-
-@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important}.grain,.blob{animation:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<script>document.documentElement.className='js'+(matchMedia('(prefers-reduced-motion: reduce)').matches?' reduced':'');</script>
-<a class="skip" href="#main">Skip to content</a>
-<div class="grain" aria-hidden="true"></div>
+<script>document.documentElement.classList.add('js')</script>
+<a class="skip-link" href="#t1">Skip to content</a>
 
-<div class="loader" aria-hidden="true">
-  <div class="loader__top mono"><span>Samruddhi Pahune</span><span>Conversation Design</span></div>
-  <div class="loader__mid"><div class="loader__bubble"><span></span><span></span><span></span></div><span class="loader__word">listening…</span></div>
-  <div class="loader__count">00</div>
-</div>
-
-<div class="cursor" aria-hidden="true"><div class="cursor__dot"></div><div class="cursor__label"></div></div>
-
-<header class="nav">
-  <a class="logo" href="#top" aria-label="Samruddhi Pahune, home"><span class="logo__mark">SP</span><span>Samruddhi</span></a>
-  <nav class="nav__links" aria-label="Primary">
-    <span class="nav__clock" id="clock">IST --:--</span>
-    <a href="#approach">Approach</a>
-    <a href="#work">Work</a>
-    <a href="#talk">Ask my portfolio</a>
-    <a href="https://drive.google.com/file/d/1OugKg6lI93XfWEavk6nsZLw7-aemWc5g/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
-    <a class="nav__cta magnetic" href="#contact">Let’s talk</a>
-  </nav>
+<header class="top">
+  <div class="top__in">
+    <a class="brand" href="#top"><b>Samruddhi Pahune</b><span class="mono">Conversation Designer</span></a>
+    <div class="top__actions">
+      <button class="pillbtn" data-notes aria-pressed="true" title="Show or hide the design notes"><span class="dot"></span>Notes</button>
+      <button class="pillbtn" data-open-map><span aria-hidden="true">⌗</span>Sitemap</button>
+      <a class="pillbtn pillbtn--ink hide-sm" href="#t4">Talk to a human</a>
+    </div>
+  </div>
 </header>
 
-<main id="main">
-<!-- HERO -->
-<section class="hero" id="top">
-  <div class="blob blob--1" aria-hidden="true"></div>
-  <div class="blob blob--2" aria-hidden="true"></div>
-  <div class="blob blob--3" aria-hidden="true"></div>
-  <canvas class="hero__wave" aria-hidden="true"></canvas>
+<main class="page" id="top">
 
-  <div class="hero__copy">
-    <span class="status mono"><span class="status__dot"></span>Conversation Designer · Voice &amp; Chat AI</span>
-    <h1 class="hero__title" aria-label="I design what machines say, and when they should stop.">
-      <span class="line"><span>I design what</span></span>
-      <span class="line"><span>machines <span class="serif">say</span>,</span></span>
-      <span class="line"><span>and when they</span></span>
-      <span class="line"><span>should <span class="serif">stop.</span><span class="caret"></span></span></span>
-    </h1>
-    <p class="hero__lede">Samruddhi Pahune designs <em>voice and chat AI</em> for banking, payments and travel.</p>
-    <div class="hero__ctas">
-      <a class="btn magnetic" href="#work">See the work ↓</a>
-      <a class="btn btn--soft magnetic" href="#talk">Talk to my portfolio</a>
-    </div>
-  </div>
-
-  <div class="collage" aria-hidden="true">
-    <div class="tile tile--plane tile--contain" data-depth="1.4"><img src="Images/Dottie/Defining%20the%20travellers%20-%20frequent%20flyer%20illustration.avif" alt=""></div>
-    <div class="tile tile--map" data-depth="0.8"><img src="Images/Vihar/Final%20Design%20-%20on%20the%20road%20-%20road%20layout%20map.avif" alt=""></div>
-    <div class="tile tile--bike" data-depth="1.1"><img src="Images/Bhopal%20by%20Bike/SELF%20SAFARI%20-%20Field%20work%20-%20image%202.avif" alt=""></div>
-    <div class="tile tile--wallet tile--contain" data-depth="1.8"><img src="Images/Dottie/Defining%20the%20travellers%20-%20savvy%20saver%20illustration.avif" alt=""></div>
-    <div class="hchat" data-depth="0.5">
-      <div class="hchat__bar"><div class="av">6E</div><div><div class="hchat__name">Dottie</div><div class="hchat__sub">voice · booking</div></div></div>
-      <div class="hchat__body" id="heroChat"></div>
-    </div>
-    <span class="sticker sticker--a" data-depth="2.2">intent · book_flight</span>
-    <span class="sticker sticker--b" data-depth="1.6">confidence 0.93</span>
-    <span class="sticker sticker--c" data-depth="2"><span class="mini-eq"><i></i><i></i><i></i><i></i><i></i></span>listening</span>
-  </div>
-</section>
-
-<!-- BUBBLE MARQUEE -->
-<section class="bmarquee" aria-label="Things real users say">
-  <div class="bmarquee__row" data-dir="-1">
-    <div class="bmarquee__item">
-      <span class="pill" style="background:var(--lav)">where did my money go? <small>dispute</small></span>
-      <span class="pill pill--r" style="background:var(--peach)">Ding! You’re set for Goa 🌴</span>
-      <span class="pill" style="background:var(--sage)">block my card. now. <small>card.block</small></span>
-      <span class="pill pill--r" style="background:var(--butter)">Did you mean Delhi or Dehradun?</span>
-      <span class="pill" style="background:var(--sky)">paisa kat gaya 😟 <small>hinglish</small></span>
-    </div>
-  </div>
-  <div class="bmarquee__row" data-dir="1">
-    <div class="bmarquee__item">
-      <span class="pill pill--r" style="background:var(--rose)">Your card is now blocked.</span>
-      <span class="pill" style="background:var(--card)">actually, anything cheaper? <small>repair</small></span>
-      <span class="pill pill--r" style="background:var(--lav)">Checking the ledger first.</span>
-      <span class="pill" style="background:var(--sage)">talk to a human <small>handoff</small></span>
-      <span class="pill pill--r" style="background:var(--peach)">The ₹1,200 is already back ✓</span>
-    </div>
-  </div>
-</section>
-
-<!-- MANIFESTO -->
-<section class="manifesto" aria-label="Belief">
-  <p class="manifesto__text" data-words>In voice, there is <span class="serif">no undo.</span> Every word is load-bearing.</p>
-</section>
-
-<!-- APPROACH -->
-<section class="sec" id="approach" style="padding-top:0">
-  <div class="sec__head">
-    <div>
-      <span class="eyebrow mono"><i></i>How I design</span>
-      <h2 class="h2">Four rules, <span class="serif">live.</span></h2>
-    </div>
-    <p>Keep scrolling. Each rule plays out on the phone as a real exchange.</p>
-  </div>
-  <div class="approach__grid">
-    <div class="steps">
-      <article class="step" data-step="0">
-        <span class="step__tag" style="background:var(--sky)">Failed UPI Debit</span>
-        <h3>Diagnose first, <span class="serif">talk second.</span></h3>
-        <p>Check the ledger before making any promise.</p>
-      </article>
-      <article class="step" data-step="1">
-        <span class="step__tag" style="background:var(--peach)">Dottie · IndiGo</span>
-        <h3>Clarify once. Rephrase. <span class="serif">Hand off.</span></h3>
-        <p>No loops. A human picks up with full context.</p>
-      </article>
-      <article class="step" data-step="2">
-        <span class="step__tag" style="background:var(--lav)">ICICI voice banking</span>
-        <h3>Words <span class="serif">are</span> the interface.</h3>
-        <p>State and consequence, in two sentences.</p>
-      </article>
-      <article class="step" data-step="3">
-        <span class="step__tag" style="background:var(--butter)">Dottie · IndiGo</span>
-        <h3>Personality carries <span class="serif">trust.</span></h3>
-        <p>A shortlist of three flights, delivered in the brand’s own voice.</p>
-      </article>
-    </div>
-    <div class="phone-wrap" aria-hidden="true">
-      <div class="phone">
-        <div class="phone__bar">
-          <div class="av" id="phoneAvatar">₹</div>
-          <div><div class="hchat__name" id="phoneName">Bank Assistant</div><div class="hchat__sub" id="phoneSub">chat · dispute engine</div></div>
-        </div>
-        <div class="phone__body" id="phoneBody"></div>
-        <div class="phone__input"><span>Speak or type…</span><i></i></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- NUMBERS -->
-<section class="bento" aria-label="Impact">
-  <div class="stat" style="background:var(--lav)">
-    <span class="stat__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34304a" stroke-width="1.8" stroke-linecap="round"><path d="M4 10v4M8 6v12M12 3v18M16 7v10M20 10v4"/></svg></span>
-    <div class="stat__v" data-count="70">0<sup>+</sup></div><p>live voice flows at ICICI Bank</p></div>
-  <div class="stat" style="background:var(--sky)">
-    <span class="stat__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34304a" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M3 10h18"/></svg></span>
-    <div class="stat__v" data-count="160">0<sup>M</sup></div><p>failed payments a month</p></div>
-  <div class="stat" style="background:var(--butter)">
-    <span class="stat__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34304a" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 19c.8-3.4 3.2-5 6-5s5.2 1.6 6 5M15 14.5c2.6 0 4.6 1.4 5.2 4.5"/></svg></span>
-    <div class="stat__v" data-count="1">0<sup>L+</sup></div><p>users → 3 real personas</p></div>
-  <div class="stat" style="background:var(--sage)">
-    <span class="stat__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34304a" stroke-width="1.8" stroke-linecap="round"><circle cx="6" cy="16" r="3.5"/><circle cx="18" cy="16" r="3.5"/><path d="M6 16l4-8h5l3 8M9 8h3"/></svg></span>
-    <div class="stat__v" data-count="60">0<sup>%</sup></div><p>scan rate at the pilot bike dock</p></div>
-</section>
-
-<!-- WORK -->
-<section class="work" id="work">
-  <div class="sec" style="padding-bottom:20px">
-    <div class="sec__head" style="margin-bottom:0">
-      <div>
-        <span class="eyebrow mono"><i></i>Selected work</span>
-        <h2 class="h2">Conversations <span class="serif">that shipped.</span></h2>
-      </div>
-      <p>Six projects. Hover, scroll, open.</p>
-    </div>
-  </div>
-  <div class="work__pin">
-    <div class="work__track">
-
-      <a class="card" href="work.html#cs-icici" data-cursor="Read" style="background:var(--lav)">
-        <div class="card__visual">
-          <span class="card__chip">70+ flows live</span>
-          <div class="vc"><div class="vc__bars" id="eqBars"></div><div class="vc__bubble">“Your card is now blocked.”</div></div>
-        </div>
-        <div class="card__meta"><div><span class="card__tag">01 · ICICI · Voice banking</span><h3 class="card__title">Beyond <span class="serif">Touchscreens</span></h3></div><span class="card__go">↗</span></div>
-      </a>
-
-      <a class="card" href="work.html#cs2" data-cursor="Read" style="background:var(--sky)">
-        <div class="card__visual">
-          <span class="card__chip">Resolved · no ticket</span>
-          <div class="gates">
-            <div class="gates__row"><span class="gates__fill"></span>
-              <span class="gate"><b>1</b>Debit</span><span class="gate"><b>2</b>Rail</span><span class="gate"><b>3</b>Ledger</span><span class="gate"><b>4</b>Reversal</span><span class="gate"><b>5</b>Window</span>
-            </div>
-            <div class="gates__chat">
-              <div class="msg user">Money got deducted 😟</div>
-              <div class="msg bot">Good news. The ₹1,200 is already back in your account.</div>
-            </div>
+<!-- ===== TURN 00 · KEYPAD ===== -->
+<section class="hero" id="t0" data-node="start">
+  <div class="row">
+    <div class="main">
+      <p class="call mono"><span class="call__dot"></span>Call connected · <span id="timer">00:00</span></p>
+      <div class="hero__grid">
+        <div>
+          <p class="ivr" id="ivr" aria-live="polite"><span class="sr-only">Welcome. You've reached Samruddhi Pahune, conversation designer. For work, press 1. About, press 2. Process, press 3. Resume, press 4. To speak to a human, press 0.</span></p>
+          <div class="hero__cta">
+            <a class="skipbtn" href="#t1" id="skipBtn">Skip the keypad <i>↓</i></a>
+            <span class="hero__hint mono">Let the site walk you through it</span>
           </div>
         </div>
-        <div class="card__meta"><div><span class="card__tag">02 · Banking AI · Disputes</span><h3 class="card__title">Where did my <span class="serif">money go?</span></h3></div><span class="card__go">↗</span></div>
-      </a>
-
-      <a class="card" href="work.html#cs-dottie" data-cursor="Read" style="background:var(--peach)">
-        <div class="card__visual">
-          <span class="card__chip">Voice persona</span>
-          <img class="contain" src="Images/Dottie/Final%20Design%20-%20the%20happy%20path%20-%20part%201.webp" alt="Dottie happy-path conversation design" loading="lazy" data-parallax>
-          <img class="sticker-img" src="Images/Dottie/Final%20Design%20-%20Dottie%20persona%20illustration.webp" alt="" loading="lazy">
+        <div class="keypad" role="group" aria-label="Keypad navigation">
+          <div class="keypad__screen" aria-live="polite"><span id="kpMsg">Press a key</span><b id="kpDigits"></b></div>
+          <div class="keys" id="keys"></div>
         </div>
-        <div class="card__meta"><div><span class="card__tag">03 · IndiGo · Speculative</span><h3 class="card__title">Dottie<span class="serif">, Ding!</span></h3></div><span class="card__go">↗</span></div>
-      </a>
-
-      <a class="card" href="work.html#cs-smartcoin" data-cursor="Read" style="background:var(--butter)">
-        <div class="card__visual">
-          <span class="card__chip">1.1 crore users</span>
-          <img class="contain" src="Images/Smartcoin/Goal%20Oriented%20UI.avif" alt="SmartCoin goal-oriented screens" loading="lazy" data-parallax>
-        </div>
-        <div class="card__meta"><div><span class="card__tag">04 · Fintech · Saving</span><h3 class="card__title">Smart<span class="serif">Coin</span></h3></div><span class="card__go">↗</span></div>
-      </a>
-
-      <a class="card" href="work.html#cs-vihar" data-cursor="Read" style="background:var(--sage)">
-        <div class="card__visual">
-          <span class="card__chip">80% missed it</span>
-          <img src="Images/Vihar/Final%20Design%20-%20on%20the%20road%20-%20zebra%20stripes%20on%20the%20path%20and%20on%20the%20app.avif" alt="Zebra stripes on the path matching the app map" loading="lazy" data-parallax>
-        </div>
-        <div class="card__meta"><div><span class="card__tag">05 · Service design</span><h3 class="card__title">Van <span class="serif">Vihar</span></h3></div><span class="card__go">↗</span></div>
-      </a>
-
-      <a class="card" href="work.html#cs-bhopal" data-cursor="Read" style="background:var(--rose)">
-        <div class="card__visual">
-          <span class="card__chip">3% → 60%</span>
-          <img src="Images/Bhopal%20by%20Bike/Final%20Design%20-%20At%20the%20dock.webp" alt="Redesigned bike dock with a kiosk" loading="lazy" data-parallax>
-        </div>
-        <div class="card__meta"><div><span class="card__tag">06 · Adoption · Phygital</span><h3 class="card__title">Bhopal <span class="serif">by Bike</span></h3></div><span class="card__go">↗</span></div>
-      </a>
-
-      <div class="work__end">
-        <a href="work.html" data-cursor="Open">All case studies <span>→</span></a>
-        <a href="#talk" data-cursor="Ask">Ask my portfolio <span>→</span></a>
       </div>
     </div>
+    <aside class="note reveal" data-for="n1"><span class="note__tag">COPY · 01</span>A keypad makes you learn my structure before you get what you came for. <b>“Skip the keypad”</b> puts the effort on me, which is what conversation design should do.</aside>
   </div>
-  <div class="work__progress" aria-hidden="true"><i></i></div>
+  <div class="row">
+    <div class="main"></div>
+    <aside class="note reveal"><span class="note__tag">FLOW · 02</span>The keypad still works. Some visitors know exactly where they’re going. A recruiter can press 4 for the resume and be done.</aside>
+  </div>
 </section>
 
-<!-- FIELD GALLERY -->
-<section class="gallery" aria-label="From the field">
-  <div class="sec__head">
-    <div>
-      <span class="eyebrow mono"><i></i>From the field</span>
-      <h2 class="h2">Research, <span class="serif">in pictures.</span></h2>
+<!-- ===== TURN 01 · WHO'S THIS ===== -->
+<section class="turn" id="t1" data-node="t1">
+  <p class="turn__label mono"><b>TURN 01</b> Who’s this?</p>
+  <div class="row">
+    <div class="main reveal">
+      <h1 class="h1"><span class="ref" data-n="03">I design what <span class="asr" id="asr"><span class="asr__wrong">machine stay&nbsp;</span><span class="asr__right"><em>machines say</em></span><span class="asr__tag" id="asrTag">asr 0.48</span></span></span><br>— and when they should <em>stop.</em></h1>
+      <p class="lede">I’m Samruddhi Pahune, a conversation designer for voice and chat AI. I work on the moments where <span class="ref" data-n="04">a misheard word costs real money</span>: blocked cards, failed payments, flight bookings.</p>
     </div>
+    <aside class="note reveal" data-for="03"><span class="note__tag">COPY · 03</span>The headline mishears itself on purpose. Speech recognition gets words wrong all the time. What earns trust is how quickly and visibly the system corrects itself.</aside>
   </div>
-  <div class="grow" data-dir="-1"><div class="grow__set">
-    <figure class="gimg"><img src="Images/Bhopal%20by%20Bike/SELF%20SAFARI%20-%20Field%20work%20-%20image%201.avif" alt="Docking station field visit"><span>Dock safari</span></figure>
-    <figure class="gimg"><img src="Images/Dottie/Final%20Design%20-%20alternative%20path.webp" alt="Dottie alternative path flow"><span>Alternative path</span></figure>
-    <figure class="gimg"><img src="Images/Vihar/self%20safari%20-%20immersion%203.avif" alt="Van Vihar immersion"><span>Self safari</span></figure>
-    <figure class="gimg"><img src="Images/Smartcoin/Savings%20Page%20Redesign%20-%20Making%20the%20score%20understandable.avif" alt="Savings score redesign"><span>Savings score</span></figure>
-    <figure class="gimg"><img src="Images/Bhopal%20by%20Bike/Final%20Design%20-%20COMMUNICATE%20TO%20BE%20UNDERSTOOD%20-%20New%20Design.webp" alt="New dock app design"><span>Communicate to be understood</span></figure>
-    <figure class="gimg"><img src="Images/Vihar/Final%20Design%20-%20from%20park%20to%20campus%20-%20field%20pictures.avif" alt="QR prototype tested in the field"><span>Field test</span></figure>
-  </div></div>
-  <div class="grow" data-dir="1"><div class="grow__set">
-    <figure class="gimg"><img src="Images/Smartcoin/Ideation%20-%20part%201.avif" alt="SmartCoin ideation sketches"><span>Ideation</span></figure>
-    <figure class="gimg"><img src="Images/Bhopal%20by%20Bike/SELF%20SAFARI%20-%20Field%20work%20-%20image%203.avif" alt="Cycle track field visit"><span>On the road</span></figure>
-    <figure class="gimg"><img src="Images/Vihar/A%20road%20that%20pushes%20you%20forward%20-%20early%20field%20insights.avif" alt="Van Vihar map illustration"><span>Early insights</span></figure>
-    <figure class="gimg"><img src="Images/Dottie/Final%20Design%20-%20the%20happy%20path%20-%20part%203.webp" alt="Dottie happy path, part 3"><span>Happy path</span></figure>
-    <figure class="gimg"><img src="Images/Bhopal%20by%20Bike/Final%20Design%20-%20SHOP%20AT%20THE%20DOCK%20-%20part%202.webp" alt="Kiosk at the dock render"><span>Shop at the dock</span></figure>
-    <figure class="gimg"><img src="Images/Vihar/self%20safari%20-%20immersion.avif" alt="Van Vihar signage"><span>Immersion</span></figure>
-  </div></div>
-</section>
-
-<!-- TALK -->
-<section class="talk" id="talk">
-  <div class="talk__grid">
-    <div class="talk__intro">
-      <span class="eyebrow mono"><i></i>Try it</span>
-      <h2 class="h2">Ask my <span class="serif">portfolio.</span></h2>
-      <p>A small bot built to the same rules as my production work. Turn on <b>Show the logic</b> to see how it decides.</p>
-      <div class="ladder"><span><b>≥.6</b>answer</span><span><b>1×</b>clarify</span><span><b>2×</b>rephrase</span><span><b>3×</b>hand off</span></div>
-    </div>
-    <div class="chat" id="chat">
-      <div class="chat__bar">
-        <div class="chat__who"><div class="av">SP</div><div><div class="hchat__name">Portfolio Assistant</div><div class="hchat__sub">rule-based · no tracking</div></div></div>
-        <button class="toggle" id="debugToggle" aria-pressed="false"><span class="toggle__sw"></span>Show the logic</button>
+  <div class="row">
+    <div class="main reveal">
+      <div class="facts">
+        <div class="fact"><b>70+</b><span>live voice flows, ICICI Bank</span></div>
+        <div class="fact"><b>160M</b><span>failed-payment moments a month</span></div>
+        <div class="fact"><b>1 lakh+</b><span>users researched, SmartCoin</span></div>
       </div>
-      <div class="chat__log" id="chatLog" aria-live="polite"></div>
-      <div class="chips" id="chips"></div>
-      <form class="chat__form" id="chatForm" autocomplete="off">
-        <label class="sr-only" for="chatInput">Message</label>
-        <input id="chatInput" placeholder="Try: “how do you handle errors?”" maxlength="200">
-        <button type="submit" aria-label="Send">↑</button>
-      </form>
+      <a class="reply" href="#t2">Show me the work ↓</a>
+    </div>
+    <aside class="note reveal" data-for="04"><span class="note__tag">FLOW · 04</span>You learn what I do before where I studied. Credentials can wait for the resume. The stakes come first because that’s what shapes every decision I make.</aside>
+  </div>
+</section>
+
+<!-- ===== TURN 02 · THE WORK ===== -->
+<section class="turn" id="t2" data-node="t2">
+  <p class="turn__label mono"><b>TURN 02</b> The work</p>
+  <div class="row">
+    <div class="main reveal">
+      <h2 class="h2">Every project starts with <em>what someone actually said.</em></h2>
+      <p class="lede">Six case studies. Pick how deep you want to go: <span class="ref" data-n="05">10 seconds, a minute, or the full story</span>.</p>
+    </div>
+    <aside class="note reveal" data-for="05"><span class="note__tag">FLOW · 05</span>A recruiter and a design lead need different amounts. Asking once, upfront, beats making both of them scroll through the same thing.</aside>
+  </div>
+
+  <div class="row">
+    <div class="main cases" id="cases"></div>
+    <div>
+      <aside class="note reveal" style="margin-bottom:28px"><span class="note__tag">COPY · 06</span>Each card opens with a real line from the project. A user quote shows the problem faster than any title can.</aside>
+      <aside class="note reveal"><span class="note__tag">CUT · 07</span>No grid of thumbnails. A grid makes a 70-flow production system and a two-week sprint look the same size.</aside>
     </div>
   </div>
 </section>
 
-<!-- CRAFT -->
-<section class="sec" aria-label="Craft">
-  <div class="sec__head">
+<!-- ===== TURN 03 · BEING WRONG ===== -->
+<section class="turn" id="t3" data-node="t3">
+  <p class="turn__label mono"><b>TURN 03</b> How I handle being wrong</p>
+  <div class="row">
+    <div class="main reveal">
+      <h2 class="h2">A bot is only as trustworthy as <em>its worst moment.</em></h2>
+      <p class="lede">So I design the error path first. When the system isn’t sure, it gets exactly three moves, in this order.</p>
+      <div class="ladder">
+        <div class="rung"><span class="rung__step"><b>Miss 1</b>Clarify</span><p>“The voice banking flows, or the UPI payment disputes?”<small>Offer options instead of an open question.</small></p></div>
+        <div class="rung"><span class="rung__step"><b>Miss 2</b>Rephrase</span><p>“I’m best at three things: the work, the process, or getting in touch.”<small>Never repeat the same prompt.</small></p></div>
+        <div class="rung"><span class="rung__step"><b>Miss 3</b>Hand off</span><p>“This one’s better with a human. I’ve attached your question.”<small>Context goes with the handoff.</small></p></div>
+      </div>
+      <div class="try"><span>The bar at the bottom of the screen follows these rules.</span><button type="button" data-try>Try to confuse it</button></div>
+    </div>
     <div>
-      <span class="eyebrow mono"><i></i>The craft</span>
-      <h2 class="h2">What I <span class="serif">bring.</span></h2>
+      <aside class="note reveal" style="margin-bottom:28px"><span class="note__tag">COPY · 08</span>Two options are faster than “Sorry, could you rephrase that?” The user shouldn’t have to guess what the system can understand.</aside>
+      <aside class="note reveal" style="margin-bottom:28px"><span class="note__tag">FLOW · 09</span>Asking the same question twice feels like a loop, and a loop feels like a trap. The second attempt changes the framing instead.</aside>
+      <aside class="note reveal"><span class="note__tag">FLOW · 10</span>This site acts at 60% confidence. In banking I set the threshold per flow: blocking a card needs far more certainty than checking a balance.</aside>
     </div>
   </div>
-  <div class="craft__grid">
-    <div class="ctile" style="background:var(--lav)">
-      <svg viewBox="0 0 54 54" fill="none" stroke="#34304a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="27" r="5"/><circle cx="44" cy="12" r="5"/><circle cx="44" cy="42" r="5"/><path d="M15 27h10l14-13M25 27l14 13"/></svg>
-      <div><h4>Conversation architecture</h4><p>Happy, alternative and error paths.</p></div></div>
-    <div class="ctile" style="background:var(--peach)">
-      <svg viewBox="0 0 54 54" fill="none" stroke="#34304a" stroke-width="2" stroke-linecap="round"><rect x="20" y="6" width="14" height="26" rx="7"/><path d="M12 26c0 8 7 14 15 14s15-6 15-14M27 40v8M19 48h16"/></svg>
-      <div><h4>Voice UX</h4><p>ASR misfires, noise, Indian English.</p></div></div>
-    <div class="ctile" style="background:var(--sage)">
-      <svg viewBox="0 0 54 54" fill="none" stroke="#34304a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M27 6l17 7v12c0 11-7 19-17 23C17 44 10 36 10 25V13z"/><path d="M20 27l5 5 10-11"/></svg>
-      <div><h4>Fallback &amp; escalation</h4><p>When to act, verify or stop.</p></div></div>
-    <div class="ctile" style="background:var(--sky)">
-      <svg viewBox="0 0 54 54" fill="none" stroke="#34304a" stroke-width="2" stroke-linecap="round"><rect x="6" y="10" width="18" height="12" rx="4"/><rect x="30" y="10" width="18" height="12" rx="4"/><rect x="18" y="32" width="18" height="12" rx="4"/><path d="M15 22v5h24v-5M27 27v5"/></svg>
-      <div><h4>NLU intents &amp; entities</h4><p>Intent trees and annotation rules for training data.</p></div></div>
-    <div class="ctile" style="background:var(--butter)">
-      <svg viewBox="0 0 54 54" fill="none" stroke="#34304a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12h38a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H24l-10 8v-8H8a4 4 0 0 1-4-4V16a4 4 0 0 1 4-4z"/><path d="M14 22h24M14 28h14"/></svg>
-      <div><h4>Microcopy &amp; persona</h4><p>Brand voice, turned into the words a bot uses.</p></div></div>
-    <div class="ctile" style="background:var(--rose)">
-      <svg viewBox="0 0 54 54" fill="none" stroke="#34304a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="6" width="34" height="42" rx="5"/><path d="M18 18h18M18 26h18M18 34h10"/></svg>
-      <div><h4>Compliance as input</h4><p>Design decisions that legal teams can sign off.</p></div></div>
+</section>
+
+<!-- ===== TURN 04 · HANDOFF ===== -->
+<section class="turn" id="t4" data-node="t4" style="border-bottom:0">
+  <p class="turn__label mono"><b>TURN 04</b> Transfer to a human</p>
+  <div class="row">
+    <div class="main reveal">
+      <p class="transfer mono"><span class="transfer__bars"><i></i><i></i><i></i></span>Connecting you to Samruddhi…</p>
+      <h2 class="h2">The real conversation <em>starts here.</em></h2>
+      <p class="lede">I’m open to conversation design roles in voice and chat AI. <span class="ref" data-n="11">I’ll pass along what you looked at</span>, so you don’t have to explain.</p>
+      <div class="context" id="context">context: <b>visitor came in via the homepage</b></div>
+      <div class="handoff__btns">
+        <a class="btn btn--ink" id="mailBtn" href="mailto:pahunesamruddhi@gmail.com">Email Samruddhi ↗</a>
+        <a class="btn" href="https://drive.google.com/file/d/1OugKg6lI93XfWEavk6nsZLw7-aemWc5g/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
+        <a class="btn" href="work.html">All case studies</a>
+      </div>
+    </div>
+    <div>
+      <aside class="note reveal" data-for="11" style="margin-bottom:28px"><span class="note__tag">FLOW · 11</span>Same rule as in production: the human should never have to ask “so what’s this about?” The email already lists the case studies you opened.</aside>
+      <aside class="note reveal"><span class="note__tag">CUT · 12</span>No contact form. A form makes you start over; an email that already has your context lets you carry on.</aside>
+    </div>
   </div>
 </section>
 </main>
 
-<footer class="foot" id="contact">
-  <span class="foot__bubble">Building a bot that has to get it right the first time?</span>
-  <a class="foot__big" href="https://mail.google.com/mail/u/0/?fs=1&amp;tf=cm&amp;source=mailto&amp;su=Let%27s+Connect&amp;to=pahunesamruddhi@gmail.com" target="_blank" rel="noopener" data-cursor="Say hi" aria-label="Email Samruddhi">Let’s talk.</a>
-  <div class="foot__row">
-    <a class="btn magnetic" href="mailto:pahunesamruddhi@gmail.com">pahunesamruddhi@gmail.com ↗</a>
-    <div class="foot__links">
-      <a class="btn btn--soft magnetic" href="https://drive.google.com/file/d/1OugKg6lI93XfWEavk6nsZLw7-aemWc5g/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
-      <a class="btn btn--soft magnetic" href="https://www.instagram.com/decisions_by_design/" target="_blank" rel="noopener">Instagram</a>
-      <a class="btn btn--soft magnetic" href="work.html">Case studies</a>
-    </div>
-  </div>
-  <div class="foot__base"><span>© 2026 Samruddhi Pahune</span><span>Designed in conversation · India</span><a href="#top">Back to top ↑</a></div>
+<footer class="foot mono">
+  <span>© 2026 Samruddhi Pahune</span>
+  <span><a href="https://www.instagram.com/decisions_by_design/" target="_blank" rel="noopener">Instagram</a> · <a href="https://drive.google.com/file/d/1OugKg6lI93XfWEavk6nsZLw7-aemWc5g/view?usp=sharing" target="_blank" rel="noopener">Resume</a> · <a href="#" data-open-map>Sitemap</a></span>
+  <span>End of call · <a href="#top">Back to the keypad ↑</a></span>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<!-- ===== DOCK ===== -->
+<div class="dock" id="dock">
+  <div class="dock__log" id="log" aria-live="polite">
+    <div class="dock__head mono"><span>live transcript</span><button type="button" id="logClose">close ×</button></div>
+  </div>
+  <form class="dock__bar" id="dockForm" autocomplete="off">
+    <label for="dockInput">SAY ›</label>
+    <input id="dockInput" placeholder="Where to? Try “the banking work”" maxlength="160">
+    <button type="submit" aria-label="Send">↑</button>
+  </form>
+  <div class="parse" id="parse" aria-hidden="true"></div>
+</div>
+
+<!-- ===== FLOWCHART SITEMAP ===== -->
+<div class="map" id="map" role="dialog" aria-modal="true" aria-label="Sitemap flowchart">
+  <div class="map__bar">
+    <div class="map__title"><b>Sitemap</b><span class="mono" style="color:var(--ink-3)">how this site decides · drag to pan</span></div>
+    <div class="map__tools">
+      <button type="button" data-zoom="-1" aria-label="Zoom out">−</button>
+      <button type="button" data-zoom="0">Fit</button>
+      <button type="button" data-zoom="1" aria-label="Zoom in">+</button>
+      <button type="button" id="mapClose" aria-label="Close sitemap">Close ×</button>
+    </div>
+  </div>
+  <div class="map__vp" id="mapVp"><div class="map__canvas" id="mapCanvas"></div></div>
+</div>
+
 <script>
 (() => {
-  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const HAS_GSAP = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const sleep = ms => new Promise(r => setTimeout(r, ms));
-  if (!HAS_GSAP) document.documentElement.classList.add('reduced');
-  else gsap.registerPlugin(ScrollTrigger);
+  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const EMAIL = 'pahunesamruddhi@gmail.com';
+  const RESUME = 'https://drive.google.com/file/d/1OugKg6lI93XfWEavk6nsZLw7-aemWc5g/view?usp=sharing';
+  const go = id => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth' }); };
 
-  /* clock */
-  const clock = $('#clock');
-  const tick = () => clock.textContent = 'IST ' + new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' }).format(new Date());
-  tick(); setInterval(tick, 30000);
-
-  /* smooth scroll */
-  let lenis = null;
-  if (HAS_GSAP && !REDUCED && window.Lenis) {
-    lenis = new Lenis({ duration: 1.15, smoothWheel: true });
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add(t => lenis.raf(t * 1000));
-    gsap.ticker.lagSmoothing(0);
-  }
-  $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
-    const id = a.getAttribute('href');
-    const el = id.length > 1 && $(id);
-    if (!el && id !== '#top') return;
-    e.preventDefault();
-    const target = id === '#top' ? 0 : el;
-    lenis ? lenis.scrollTo(target, { offset: -20 }) : (target === 0 ? scrollTo({ top: 0, behavior: 'smooth' }) : el.scrollIntoView({ behavior: 'smooth' }));
-  }));
-
-  /* nav hide */
-  const nav = $('.nav'); let lastY = 0;
-  addEventListener('scroll', () => { const y = scrollY; nav.classList.toggle('is-hidden', y > lastY && y > 200); lastY = y; }, { passive: true });
-
-  /* cursor */
-  const cursor = $('.cursor'), label = $('.cursor__label');
-  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    let mx = innerWidth / 2, my = innerHeight / 2, cx = mx, cy = my;
-    addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
-    (function loop() { cx += (mx - cx) * 0.2; cy += (my - cy) * 0.2; cursor.style.transform = `translate(${cx}px, ${cy}px)`; requestAnimationFrame(loop); })();
-    document.addEventListener('mouseover', e => {
-      const t = e.target.closest('[data-cursor], a, button, .chip, input');
-      cursor.classList.remove('is-label', 'is-hover');
-      if (!t) return;
-      if (t.dataset.cursor) { label.textContent = t.dataset.cursor; cursor.classList.add('is-label'); }
-      else cursor.classList.add('is-hover');
-    });
+  /* ---------- context the handoff will carry ---------- */
+  const seen = new Set();
+  const opened = new Set();
+  function updateContext() {
+    const parts = [];
+    if (opened.size) parts.push('opened <b>' + [...opened].join(', ') + '</b>');
+    if (seen.size) parts.push('read <b>' + [...seen].join(' → ') + '</b>');
+    $('#context').innerHTML = 'context: ' + (parts.length ? parts.join(' · ') : '<b>visitor came in via the homepage</b>');
+    const body = 'Hi Samruddhi,\n\nI found your portfolio' + (opened.size ? ' and looked at: ' + [...opened].join(', ') : '') + '.\n\n';
+    $('#mailBtn').href = `mailto:${EMAIL}?subject=${encodeURIComponent('From your portfolio')}&body=${encodeURIComponent(body)}`;
   }
 
-  /* magnetic */
-  if (!REDUCED) $$('.magnetic').forEach(el => {
-    el.addEventListener('mousemove', e => {
-      const r = el.getBoundingClientRect();
-      el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * 0.25}px, ${(e.clientY - r.top - r.height / 2) * 0.35}px)`;
-    });
-    el.addEventListener('mouseleave', () => { el.style.transition = 'transform .6s cubic-bezier(.22,1,.36,1)'; el.style.transform = ''; setTimeout(() => el.style.transition = '', 600); });
-  });
+  /* ---------- call timer ---------- */
+  const t0 = Date.now();
+  setInterval(() => { const s = Math.floor((Date.now() - t0) / 1000); $('#timer').textContent = String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); }, 1000);
 
-  /* hero waveform: soft voice lines */
-  const cvs = $('.hero__wave'), ctx = cvs.getContext('2d');
-  let W, H, mouseX = 0.5, energy = 0.3, lastMX = 0, heroVisible = true;
-  const resize = () => { const d = Math.min(devicePixelRatio || 1, 2); W = cvs.clientWidth; H = cvs.clientHeight; cvs.width = W * d; cvs.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); };
-  resize(); addEventListener('resize', resize);
-  addEventListener('mousemove', e => { const nx = e.clientX / innerWidth; energy = Math.min(1.3, energy + Math.abs(nx - lastMX) * 5); lastMX = nx; mouseX = nx; }, { passive: true });
-  new IntersectionObserver(([e]) => heroVisible = e.isIntersecting).observe(cvs);
-  const lines = [
-    { a: 1, f: 1.4, s: 1, c: 'rgba(233,120,90,.45)', w: 2 },
-    { a: .8, f: 2.1, s: -.8, c: 'rgba(191,180,236,.8)', w: 1.5 },
-    { a: .6, f: 2.9, s: 1.5, c: 'rgba(52,48,74,.10)', w: 1 },
-    { a: .45, f: 3.8, s: -1.2, c: 'rgba(233,120,90,.2)', w: 1 },
+  /* ---------- IVR prompt ---------- */
+  const IVR = [
+    ['Welcome. You’ve reached Samruddhi Pahune, conversation designer. '],
+    ['For work, ', '1'], ['About, ', '2'], ['Process, ', '3'], ['Resume, ', '4'], ['To speak to a human, ', '0'],
   ];
-  let smx = 0.5;
-  function draw(now) {
-    if (!REDUCED) requestAnimationFrame(draw);
-    if (!heroVisible) return;
-    const t = now / 1000;
-    smx += (mouseX - smx) * 0.05; energy += (0.3 - energy) * 0.02;
-    ctx.clearRect(0, 0, W, H);
-    const mid = H * 0.88, amp = Math.min(H * 0.07, 60) * energy;
-    lines.forEach((l, i) => {
-      ctx.beginPath(); ctx.strokeStyle = l.c; ctx.lineWidth = l.w;
-      for (let x = 0; x <= W; x += 4) {
-        const nx = x / W, env = Math.exp(-Math.pow((nx - smx) * 3, 2)) * 0.85 + 0.15;
-        const y = mid + Math.sin(nx * Math.PI * 2 * l.f + t * l.s + i) * amp * l.a * env + Math.sin(nx * 21 + t * 3 * l.s) * amp * .08 * env;
-        x ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+  const ivr = $('#ivr');
+  (async () => {
+    const out = document.createElement('span'); out.setAttribute('aria-hidden', 'true'); ivr.appendChild(out);
+    const caret = document.createElement('span'); caret.className = 'ivr__caret';
+    for (const [text, key] of IVR) {
+      const span = document.createElement('span'); if (key) span.className = 'opt';
+      out.appendChild(span); span.after(caret);
+      for (const ch of text) { span.textContent += ch; if (!REDUCED) await sleep(ch === '.' ? 160 : 22); }
+      if (key) {
+        span.append('press\u00a0');
+        const k = document.createElement('span'); k.className = 'k'; k.textContent = key; span.appendChild(k);
+        span.append('.'); out.append(' '); if (!REDUCED) await sleep(140);
       }
-      ctx.stroke();
-    });
-  }
-  requestAnimationFrame(draw);
-
-  /* collage parallax */
-  const depthEls = $$('.collage [data-depth]');
-  if (!REDUCED) addEventListener('mousemove', e => {
-    const dx = e.clientX / innerWidth - .5, dy = e.clientY / innerHeight - .5;
-    depthEls.forEach(b => { const d = +b.dataset.depth; b.style.translate = `${-dx * 26 * d}px ${-dy * 20 * d}px`; });
-  }, { passive: true });
-
-  /* equalizers */
-  const eq = $('#eqBars');
-  for (let i = 0; i < 26; i++) { const b = document.createElement('i'); b.style.animationDelay = (-Math.random() * 1.1).toFixed(2) + 's'; b.style.animationDuration = (.6 + Math.random() * .8).toFixed(2) + 's'; eq.appendChild(b); }
-  $$('.mini-eq i').forEach(b => { b.style.animationDelay = (-Math.random()).toFixed(2) + 's'; });
-
-  /* chat bubble helpers */
-  function bubble(parent, who, html) {
-    const m = document.createElement('div'); m.className = 'msg ' + who; m.innerHTML = html; parent.appendChild(m); return m;
-  }
-  async function typeIn(parent, ms) {
-    const ty = bubble(parent, 'bot typing', '<span></span><span></span><span></span>');
-    await sleep(REDUCED ? 0 : ms); ty.remove();
-  }
-
-  /* hero chat loop */
-  const heroChat = $('#heroChat');
-  const HERO = [['user', 'Delhi to Goa, tomorrow morning ✈️'], ['bot', 'Here are three:'], ['opts', '<span>Cheapest ₹6,990</span><span>Fastest ₹7,669</span><span>Balanced ₹7,313</span>'], ['user', 'Balanced!'], ['bot', 'Ding! You’re set for Goa 🌴']];
-  (async function heroLoop() {
-    while (true) {
-      heroChat.innerHTML = '';
-      for (const [who, text] of HERO) {
-        if (who === 'bot') await typeIn(heroChat, 900);
-        bubble(heroChat, who, text);
-        await sleep(REDUCED ? 0 : 900);
-      }
-      if (REDUCED) return;
-      await sleep(2800);
     }
   })();
 
-  /* manifesto words */
-  const splitWords = node => [...node.childNodes].forEach(n => {
-    if (n.nodeType === 3) {
-      const frag = document.createDocumentFragment();
-      n.textContent.split(/(\s+)/).forEach(p => { if (!p) return; if (/^\s+$/.test(p)) frag.appendChild(document.createTextNode(p)); else { const s = document.createElement('span'); s.className = 'word'; s.textContent = p; frag.appendChild(s); } });
-      n.replaceWith(frag);
-    } else if (n.nodeType === 1) splitWords(n);
+  /* ---------- keypad with DTMF tones ---------- */
+  const KEYS = [
+    ['1', 'work', 't2'], ['2', 'about', 't1'], ['3', 'process', 't3'],
+    ['4', 'resume', RESUME], ['5'], ['6'], ['7'], ['8'], ['9'],
+    ['*', 'sitemap', 'MAP'], ['0', 'human', 't4'], ['#', 'notes', 'NOTES'],
+  ];
+  const ROW = { 1: 697, 2: 697, 3: 697, 4: 770, 5: 770, 6: 770, 7: 852, 8: 852, 9: 852, '*': 941, 0: 941, '#': 941 };
+  const COL = { 1: 1209, 4: 1209, 7: 1209, '*': 1209, 2: 1336, 5: 1336, 8: 1336, 0: 1336, 3: 1477, 6: 1477, 9: 1477, '#': 1477 };
+  let actx;
+  function tone(k) {
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      const g = actx.createGain(); g.gain.value = 0.0001; g.connect(actx.destination);
+      const now = actx.currentTime;
+      g.gain.exponentialRampToValueAtTime(0.06, now + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, now + 0.16);
+      [ROW[k], COL[k]].forEach(f => { const o = actx.createOscillator(); o.frequency.value = f; o.connect(g); o.start(now); o.stop(now + 0.17); });
+    } catch (e) {}
+  }
+  const keysEl = $('#keys'), kpMsg = $('#kpMsg'), kpDigits = $('#kpDigits');
+  KEYS.forEach(([k, label, target]) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'key' + (label ? ' mapped' : '');
+    b.innerHTML = `<b>${k}</b><small>${label || ''}</small>`;
+    b.setAttribute('aria-label', label ? `${k}: ${label}` : `${k}: not assigned`);
+    b.addEventListener('click', () => press(k));
+    keysEl.appendChild(b);
   });
-  splitWords($('[data-words]'));
-
-  /* approach phone */
-  const SCRIPTS = [
-    { name: 'Bank Assistant', sub: 'chat · dispute engine', av: '₹', msgs: [
-      ['user', 'Payment pending but money got deducted 😟'],
-      ['sys', 'gate 1 <b>✓</b> · gate 2 <b>✓</b> · gate 3 <b>✓</b> · gate 4 → <b>reversal found</b>'],
-      ['bot', 'Good news. The ₹1,200 to BigBasket is already back in your account. No ticket needed.'],
-    ]},
-    { name: 'Dottie', sub: 'voice · asr confidence', av: '6E', msgs: [
-      ['user', 'Book me a flight to Belly'],
-      ['sys', 'asr confidence <b>0.41</b> → clarify'],
-      ['bot', 'Did you mean Delhi or Dehradun?'],
-      ['user', 'Neither, ugh—'],
-      ['bot', 'Let me get someone who can help. They’ll see everything you’ve said.'],
-    ]},
-    { name: 'ICICI Voice Banking', sub: 'voice · card management', av: 'iB', msgs: [
-      ['user', 'Block my card. Now.'],
-      ['bot', 'Block your debit card ending 4321, correct?'],
-      ['user', 'Yes.'],
-      ['bot', 'Your card is now blocked. No further transactions can go through.'],
-    ]},
-    { name: 'Dottie', sub: 'voice · booking', av: '6E', msgs: [
-      ['user', 'Delhi to Goa, tomorrow morning'],
-      ['bot', 'Three picks for you:'],
-      ['opts', '<span>Cheapest ₹6,990</span><span>Fastest ₹7,669</span><span>Balanced ₹7,313</span>'],
-      ['user', 'Balanced.'],
-      ['bot', 'Ding! You’re set for Goa. Get packing 🌴'],
-    ]},
-  ];
-  const body = $('#phoneBody');
-  let playToken = 0, currentStep = -1;
-  async function playScript(i) {
-    if (i === currentStep) return;
-    currentStep = i; const token = ++playToken, s = SCRIPTS[i];
-    $('#phoneName').textContent = s.name; $('#phoneSub').textContent = s.sub; $('#phoneAvatar').textContent = s.av;
-    body.innerHTML = '';
-    for (const [who, text] of s.msgs) {
-      if (token !== playToken) return;
-      if (who === 'bot') { await typeIn(body, 600 + Math.min(text.length * 8, 600)); if (token !== playToken) return; }
-      bubble(body, who, text);
-      await sleep(REDUCED ? 0 : 600);
+  let unmapped = 0;
+  function press(k) {
+    const def = KEYS.find(x => x[0] === k); if (!def) return;
+    const btn = [...keysEl.children][KEYS.indexOf(def)];
+    btn.classList.add('down'); setTimeout(() => btn.classList.remove('down'), 160);
+    tone(k);
+    kpDigits.textContent = (kpDigits.textContent + k).slice(-6);
+    const [, label, target] = def;
+    if (!label) {
+      unmapped++;
+      kpMsg.textContent = unmapped > 1 ? 'Try “skip the keypad”' : `${k} isn’t an option`;
+      return;
     }
+    unmapped = 0;
+    kpMsg.textContent = '→ ' + label;
+    setTimeout(() => {
+      if (target === 'MAP') openMap();
+      else if (target === 'NOTES') toggleNotes();
+      else if (target.startsWith('http')) window.open(target, '_blank', 'noopener');
+      else go(target);
+    }, 260);
   }
-  const steps = $$('.step');
-  const activate = i => { steps.forEach((s, j) => s.classList.toggle('is-active', i === j)); playScript(i); };
-  if (HAS_GSAP) steps.forEach((s, i) => ScrollTrigger.create({ trigger: s, start: 'top 60%', end: 'bottom 60%', onToggle: self => self.isActive && activate(i) }));
-  else { const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && activate(steps.indexOf(e.target))), { rootMargin: '-45% 0px -45% 0px' }); steps.forEach(s => io.observe(s)); }
-  activate(0);
+  addEventListener('keydown', e => {
+    if (e.target.closest('input, textarea') || e.metaKey || e.ctrlKey || e.altKey) return;
+    if ($('#map').classList.contains('open')) { if (e.key === 'Escape') closeMap(); return; }
+    const heroVisible = $('#t0').getBoundingClientRect().bottom > 80;
+    if (heroVisible && /^[0-9*#]$/.test(e.key)) press(e.key);
+  });
 
-  /* counters */
-  const runCount = el => {
-    const end = +el.dataset.count, sup = el.querySelector('sup').outerHTML;
-    if (REDUCED || !HAS_GSAP) { el.innerHTML = end + sup; return; }
-    const o = { v: 0 }; gsap.to(o, { v: end, duration: 1.8, ease: 'power3.out', onUpdate: () => el.innerHTML = Math.round(o.v) + sup });
-  };
-  const cio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { runCount(e.target); cio.unobserve(e.target); } }), { threshold: .5 });
-  $$('[data-count]').forEach(el => cio.observe(el));
-
-  /* infinite rows (bubbles + gallery) */
-  function loopRow(row, speed) {
-    const set = row.firstElementChild;
-    for (let k = 0; k < 3; k++) row.appendChild(set.cloneNode(true));
-    if (!HAS_GSAP || REDUCED) return;
-    const dir = +row.dataset.dir;
-    const tw = gsap.fromTo(row, { xPercent: dir < 0 ? 0 : -25 }, { xPercent: dir < 0 ? -25 : 0, duration: speed, ease: 'none', repeat: -1 });
-    ScrollTrigger.create({ trigger: row, start: 'top bottom', end: 'bottom top', onUpdate: self => {
-      const v = Math.min(Math.abs(self.getVelocity()) / 400, 4);
-      gsap.to(tw, { timeScale: 1 + v, duration: .2, overwrite: true });
-      gsap.to(tw, { timeScale: 1, duration: 1.2, delay: .2 });
-    }});
-    row.addEventListener('mouseenter', () => gsap.to(tw, { timeScale: .2, duration: .5, overwrite: true }));
-    row.addEventListener('mouseleave', () => gsap.to(tw, { timeScale: 1, duration: .5, overwrite: true }));
+  /* ---------- notes toggle + ref ↔ note highlighting ---------- */
+  const notesBtn = $('[data-notes]');
+  function toggleNotes() {
+    const off = document.body.classList.toggle('notes-off');
+    notesBtn.setAttribute('aria-pressed', String(!off));
   }
-  $$('.bmarquee__row').forEach(r => loopRow(r, 34));
-  $$('.grow').forEach(r => loopRow(r, 60));
+  notesBtn.addEventListener('click', toggleNotes);
+  $$('.ref').forEach(ref => {
+    const note = $(`.note[data-for="${ref.dataset.n}"]`); if (!note) return;
+    const on = () => { ref.classList.add('is-hot'); note.classList.add('is-hot'); };
+    const off = () => { ref.classList.remove('is-hot'); note.classList.remove('is-hot'); };
+    [ref, note].forEach(el => { el.addEventListener('mouseenter', on); el.addEventListener('mouseleave', off); });
+  });
 
-  /* choreography */
-  function intro() {
-    if (!HAS_GSAP || REDUCED) return;
-    gsap.timeline({ defaults: { ease: 'expo.out' } })
-      .from('.hero__title .line > span', { yPercent: 115, rotate: 4, duration: 1.4, stagger: .09 })
-      .from('.status, .hero__lede, .hero__ctas', { y: 24, opacity: 0, duration: 1, stagger: .08 }, '-=1.1')
-      .from('.collage .tile', { scale: .5, opacity: 0, duration: 1.3, stagger: .1, ease: 'back.out(1.4)' }, '-=1.2')
-      .from('.hchat', { y: 60, opacity: 0, duration: 1.2 }, '-=1.1')
-      .from('.sticker', { scale: 0, opacity: 0, duration: .8, stagger: .1, ease: 'back.out(2)' }, '-=.8')
-      .from('.nav', { y: -40, opacity: 0, duration: 1 }, '-=1');
-  }
-  function loader() {
-    const el = $('.loader');
-    if (!HAS_GSAP || REDUCED) { el && el.remove(); intro(); return; }
-    if (getComputedStyle(el).visibility === 'hidden') { el.remove(); intro(); return; }
-    el.classList.add('is-running');
-    lenis && lenis.stop();
-    const count = $('.loader__count'), o = { v: 0 };
-    gsap.set(el, { clipPath: 'circle(150% at 50% 50%)' });
-    gsap.timeline()
-      .to(o, { v: 100, duration: 1.5, ease: 'power2.inOut', onUpdate: () => count.textContent = String(Math.round(o.v)).padStart(2, '0') })
-      .add(() => { $('.loader__word').textContent = 'got it.'; })
-      .to('.loader__bubble, .loader__word, .loader__top, .loader__count', { opacity: 0, y: -20, duration: .4, stagger: .04 }, '+=.15')
-      .to(el, { clipPath: 'circle(0% at 50% 50%)', duration: 1.1, ease: 'expo.inOut' }, '-=.15')
-      .add(() => intro(), '-=.8')
-      .add(() => { el.remove(); lenis && lenis.start(); });
-  }
+  /* ---------- reveal on scroll ---------- */
+  const rio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rio.unobserve(e.target); } }), { threshold: .12 });
+  $$('.reveal').forEach(el => rio.observe(el));
 
-  if (HAS_GSAP && !REDUCED) {
-    gsap.to('.collage', { yPercent: -12, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-    gsap.to('.hero__copy', { yPercent: -10, opacity: .3, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-    gsap.fromTo('.manifesto__text .word', { opacity: .15, y: 10 }, { opacity: 1, y: 0, stagger: .06, ease: 'none', scrollTrigger: { trigger: '.manifesto__text', start: 'top 80%', end: 'bottom 50%', scrub: true } });
-    $$('.h2').forEach(h => gsap.from(h, { y: 60, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: h, start: 'top 88%' } }));
-    gsap.from('.stat', { y: 60, opacity: 0, rotate: () => gsap.utils.random(-4, 4), duration: 1.1, stagger: .08, ease: 'expo.out', scrollTrigger: { trigger: '.bento', start: 'top 85%' } });
-    gsap.from('.ctile', { y: 60, opacity: 0, rotate: () => gsap.utils.random(-3, 3), duration: 1.1, stagger: .07, ease: 'expo.out', scrollTrigger: { trigger: '.craft__grid', start: 'top 85%' } });
-    gsap.from('.chat', { y: 80, rotate: 2, opacity: 0, duration: 1.3, ease: 'expo.out', scrollTrigger: { trigger: '.chat', start: 'top 88%' } });
-    gsap.from('.foot__big span', { yPercent: 60, opacity: 0, duration: 1.2, stagger: .04, ease: 'expo.out', scrollTrigger: { trigger: '.foot', start: 'top 75%' } });
+  /* ---------- ASR headline self-correction ---------- */
+  const asr = $('#asr');
+  const aio = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    aio.disconnect();
+    setTimeout(() => { asr.classList.add('fixed'); $('#asrTag').textContent = 'corrected 0.97'; }, REDUCED ? 0 : 1000);
+    setTimeout(() => asr.classList.add('done'), REDUCED ? 0 : 3200);
+  }, { threshold: .3 });
+  aio.observe(asr);
 
-    ScrollTrigger.matchMedia({
-      '(min-width: 901px)': () => {
-        const track = $('.work__track');
-        const dist = () => track.scrollWidth - innerWidth;
-        const hz = gsap.to(track, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: '.work__pin', start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true, anticipatePin: 1 } });
-        gsap.to('.work__progress i', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: '.work__pin', start: 'top top', end: () => '+=' + dist(), scrub: true } });
-        $$('.card').forEach(card => {
-          gsap.from(card, { rotate: 4, scale: .9, y: 40, ease: 'none', scrollTrigger: { trigger: card, containerAnimation: hz, start: 'left right', end: 'left 50%', scrub: true } });
-          const img = card.querySelector('[data-parallax]');
-          if (img) gsap.fromTo(img, { xPercent: -5 }, { xPercent: 5, ease: 'none', scrollTrigger: { trigger: card, containerAnimation: hz, start: 'left right', end: 'right left', scrub: true } });
-        });
-      },
-      '(max-width: 900px)': () => {
-        $$('.card').forEach(card => gsap.from(card, { y: 60, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: card, start: 'top 90%' } }));
-      }
-    });
-    addEventListener('load', () => ScrollTrigger.refresh());
-  }
-
-  /* footer letters */
-  const big = $('.foot__big');
-  big.innerHTML = [...big.textContent].map((c, i) => `<span style="--i:${i}">${c === ' ' ? '&nbsp;' : c}</span>`).join('');
-
-  /* ============ ASK MY PORTFOLIO ============
-     rule-based NLU + fallback ladder: clarify → rephrase → handoff */
-  const EMAIL = 'pahunesamruddhi@gmail.com';
-  const RESUME = 'https://drive.google.com/file/d/1OugKg6lI93XfWEavk6nsZLw7-aemWc5g/view?usp=sharing';
-  const INTENTS = [
-    { id: 'greet', kw: ['hi', 'hello', 'hey', 'namaste', 'yo', 'hola', 'good morning', 'good evening'],
-      say: ['Hey 👋 I’m Samruddhi’s portfolio. Ask about the work, the process, or how to get in touch.'], chips: ['What do you do?', 'Show me the best work', 'How do you handle errors?'] },
-    { id: 'about', kw: ['who', 'what do you do', 'about', 'role', 'conversation design', 'designer', 'background', 'yourself', 'introduce', 'experience'],
-      say: ['Samruddhi is a conversation designer for voice and chat AI in fintech: flows, microcopy, intents, and fallback logic.', 'The focus is high-stakes moments, like a blocked card or a failed payment.'], chips: ['Show me the best work', 'Voice experience?', 'Are you hiring-ready?'] },
-    { id: 'work', kw: ['work', 'project', 'case', 'best', 'portfolio', 'show', 'examples', 'studies'],
-      say: ['Three to start with:<br>① <a href="work.html#cs-icici">Beyond Touchscreens</a>: 70+ voice-banking flows<br>② <a href="work.html#cs2">Where did my money go?</a>: a five-gate dispute engine<br>③ <a href="work.html#cs-dottie">Dottie</a>: a voice persona for IndiGo'], chips: ['Tell me about the voicebot', 'What’s the UPI one?', 'Who is Dottie?'] },
-    { id: 'voice', kw: ['voice', 'ivr', 'icici', 'bank', 'call', 'phone', 'voicebot', 'asr', 'speech', 'touchscreen'],
-      say: ['At ICICI Bank: 70+ transactional voice flows, including card blocking, PIN resets and bill payments. It was one of India’s first voicebots that could act on a customer’s behalf.', 'Before anything irreversible, it reads the action back and waits for a “yes”. <a href="work.html#cs-icici">Read it →</a>'], chips: ['How do you handle errors?', 'What about microcopy?'] },
-    { id: 'errors', kw: ['error', 'fallback', 'fail', 'misunderstand', 'handoff', 'hand off', 'escalat', 'confus', 'wrong', 'edge case', 'recover', 'repair'],
-      say: ['Three moves: clarify once, rephrase, then hand off to a human with context. No loops.', 'Try it: type something I won’t understand, a few times in a row. 😉'], chips: ['Show me the best work', 'How do I contact you?'] },
-    { id: 'copy', kw: ['microcopy', 'copy', 'words', 'tone', 'writing', 'persona', 'personality', 'brand'],
-      say: ['Compare “Your request has been processed” with “Your card is now blocked. No further transactions can go through.” The second tells you what happened and what state you’re in now.'], chips: ['Who is Dottie?', 'Show me the best work'] },
-    { id: 'upi', kw: ['upi', 'money', 'payment', 'debit', 'refund', 'ledger', 'dispute', 'gate'],
-      say: ['160M failed UPI payments a month. The engine checks the ledger at five gates before it says anything, so there are no tickets for money that already came back. <a href="work.html#cs2">Read it →</a>'], chips: ['Who is Dottie?', 'How do you handle errors?'] },
-    { id: 'dottie', kw: ['dottie', 'indigo', 'flight', 'airline', 'goa', 'book', 'travel'],
-      say: ['Dottie is a speculative voice persona for IndiGo. It offers three flights to choose from, never takes payment on the call, and asks one clarifying question when it’s unsure. Ding! 🌴 <a href="work.html#cs-dottie">Read it →</a>'], chips: ['What about microcopy?', 'Show me the best work'] },
-    { id: 'ai', kw: ['llm', 'gpt', 'genai', 'gen ai', 'prompt', 'ai', 'agent', 'claude', 'gemini', 'chatgpt', 'automation', 'guardrail'],
-      say: ['For AI systems, the work is deciding when the system acts, when it checks first, and when it stops.', 'Also, I’m not an LLM. I’m rule-based on purpose, so every decision is visible.'], chips: ['How do you handle errors?', 'How do I contact you?'] },
-    { id: 'hire', kw: ['hire', 'hiring', 'email', 'contact', 'available', 'job', 'work together', 'resume', 'cv', 'reach', 'connect', 'collab', 'freelance', 'open to', 'hiring-ready'],
-      say: [`Samruddhi is open to conversation design roles. Email <a href="mailto:${EMAIL}">${EMAIL}</a> or <a href="${RESUME}" target="_blank" rel="noopener">grab the resume ↗</a>.`], chips: ['Show me the best work', 'What do you do?'] },
-    { id: 'thanks', kw: ['thanks', 'thank you', 'cool', 'nice', 'great', 'awesome', 'love', 'bye', 'wow'],
-      say: ['Glad it helped. Design the worst moments first. 👋'], chips: ['How do I contact you?'] },
+  /* ---------- case studies ---------- */
+  const CASES = [
+    { id: 'cs-icici', key: 'Voice banking', n: '01', tag: 'Production · ICICI Bank', title: 'Beyond <em>Touchscreens</em>',
+      script: [['user', 'Block my card. Now.'], ['bot', 'You want to block your debit card ending 4321, correct?'], ['user', 'Yes.'], ['bot', 'Your card is now blocked. No further transactions can go through.']],
+      s10: 'One of India’s first transactional voicebots: 70+ live banking flows, from balance checks to card blocking.',
+      m1: ['A read-back confirmation before every irreversible action', 'Layered fallback: re-prompt once, rephrase, then hand off with context', 'Confidence thresholds set per flow, by risk', 'Annotation rules for Indian English and code-switching, with the ML team'] },
+    { id: 'cs2', key: 'UPI disputes', n: '02', tag: 'Behavior design · Banking AI', title: 'Where did my <em>money go?</em>',
+      script: [['user', 'My payment says pending but money got deducted.'], ['sys', 'gate 1 ✓ · gate 2 ✓ · gate 3 ✓ · gate 4 → reversal found'], ['bot', 'Good news. The ₹1,200 was already credited back. No ticket needed.']],
+      s10: 'A five-gate diagnostic engine that checks the ledger before the conversation promises anything.',
+      m1: ['160M failed UPI moments a month, and most of them fix themselves', 'Five gates: debit, rail, live ledger, reversal, reversal window', 'Escalation driven by ledger state, not by how upset the user sounds', 'Shipped: rail detection and the five-gate engine'] },
+    { id: 'cs-dottie', key: 'Dottie', n: '03', tag: 'Voice AI · Speculative · IndiGo', title: 'Dottie, <em>Ding!</em>',
+      script: [['user', 'Book me a flight to Belly tomorrow morning.'], ['sys', 'asr confidence 0.41 → clarify'], ['bot', 'Did you mean Delhi or Dehradun?']],
+      s10: 'A voice persona for IndiGo: brand voice, confidence branching and a three-option shortlist.',
+      m1: ['Three flights to choose from: cheapest, fastest, balanced', 'Payment never happens on the call; a secure link goes by SMS', 'Clarify once, rephrase, then hand off', '“Ding! You’re set for Goa” instead of “Your booking has been confirmed”'],
+      img: 'Images/Dottie/Final%20Design%20-%20the%20happy%20path%20-%20part%201.webp' },
+    { id: 'cs-smartcoin', key: 'SmartCoin', n: '04', tag: 'Fintech · Product behavior', title: 'Smart<em>Coin</em>',
+      script: [['user', 'If I had money to save, why would I take a loan from you?'], ['sys', 'belief: saving needs surplus → design around it']],
+      s10: 'Connected borrowing to saving for 1.1 crore underbanked users, without asking anyone to change their habits.',
+      m1: ['Narrowed 1 lakh+ users down to three real personas', 'CHILLAR: a small saving attached to every EMI payment', 'Reward coins shown at the moment they’re earned', 'Help rebuilt as a step-by-step conversation instead of an FAQ wall'],
+      img: 'Images/Smartcoin/Goal%20Oriented%20UI.avif' },
+    { id: 'cs-vihar', key: 'Van Vihar', n: '05', tag: 'Service design · Wayfinding', title: 'Van <em>Vihar</em>',
+      script: [['user', 'Hum to Lion, Tiger, Crocodile pe hi rukte hai.'], ['sys', '“We only stop at the lion, tiger, crocodile.” · 80% never found the butterfly garden']],
+      s10: 'An invisible guide that took the risk out of unmarked paths in a 4.5 km forest park.',
+      m1: ['Self-safari immersion and shadowing real visitors', 'Two archetypes: the Caretaker and the Seeker', 'QR entry replaced cash queues and paper forms', 'Matching stripes on the path and on the living map'],
+      img: 'Images/Vihar/Final%20Design%20-%20on%20the%20road%20-%20zebra%20stripes%20on%20the%20path%20and%20on%20the%20app.avif' },
+    { id: 'cs-bhopal', key: 'Bhopal by Bike', n: '06', tag: 'Adoption · Phygital', title: 'Bhopal <em>by Bike</em>',
+      script: [['user', 'Don’t know how to use them.'], ['sys', 'operators believed: “tyres punctured, lock problems”']],
+      s10: '500 bikes, under 3% adoption. The barrier was communication, not price. The pilot dock reached a 60% scan rate.',
+      m1: ['Dock safaris, surveys and stakeholder interviews', 'Three chains of failure: business model, signage, social proof', 'A shopkeeper kiosk at each dock as a human guide', 'A QR code to a one-minute explainer; “₹20 for an hour” on the frame'],
+      img: 'Images/Bhopal%20by%20Bike/Final%20Design%20-%20At%20the%20dock.webp' },
   ];
-  const CHIP_MAP = { 'Voice experience?': 'voice', 'Are you hiring-ready?': 'hire', 'Tell me about the voicebot': 'voice', 'What’s the UPI one?': 'upi', 'Who is Dottie?': 'dottie', 'What about microcopy?': 'copy', 'How do I contact you?': 'hire', 'Your work': 'work', 'Your process': 'errors', 'Getting in touch': 'hire', 'Voice projects': 'voice', 'Error handling': 'errors', 'Hiring': 'hire' };
-
-  const log = $('#chatLog'), chipsEl = $('#chips'), chatEl = $('#chat');
-  let misses = 0, busy = false;
+  const casesEl = $('#cases');
   const esc = s => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const scrollLog = () => log.scrollTop = log.scrollHeight;
+  CASES.forEach(c => {
+    const art = document.createElement('article');
+    art.className = 'case reveal'; art.id = 'case-' + c.id;
+    art.innerHTML = `
+      <div>
+        <div class="case__meta mono"><span><b>${c.n}</b> · ${c.tag}</span></div>
+        <h3>${c.title}</h3>
+        <div class="depth" role="group" aria-label="How deep">
+          <button type="button" data-d="s" aria-pressed="true">10 sec</button>
+          <button type="button" data-d="m" aria-pressed="false">1 min</button>
+          <button type="button" data-d="f" aria-pressed="false">Full story</button>
+        </div>
+        <div class="depth__body" aria-live="polite"><p>${c.s10}</p></div>
+        <a class="case__read" href="work.html#${c.id}">Read the case study →</a>
+      </div>
+      <div>
+        <div class="script">${c.script.map(([w, t]) => `<div class="line ${w}"><span class="who">${w === 'user' ? 'USER' : w === 'bot' ? 'BOT' : 'SYSTEM'}</span><span class="said">${esc(t)}</span></div>`).join('')}</div>
+        ${c.img ? `<div class="case__img"><img src="${c.img}" alt="" loading="lazy"></div>` : ''}
+      </div>`;
+    const body = art.querySelector('.depth__body');
+    art.querySelectorAll('.depth button').forEach(b => b.addEventListener('click', () => {
+      art.querySelectorAll('.depth button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+      const d = b.dataset.d;
+      opened.add(c.key); updateContext(); markSeen('case-' + c.id);
+      if (d === 's') body.innerHTML = `<p>${c.s10}</p>`;
+      if (d === 'm') body.innerHTML = `<ul>${c.m1.map(x => `<li>${x}</li>`).join('')}</ul>`;
+      if (d === 'f') location.href = `work.html#${c.id}`;
+    }));
+    art.querySelector('.case__read').addEventListener('click', () => { opened.add(c.key); updateContext(); });
+    casesEl.appendChild(art);
+    rio.observe(art);
+  });
+
+  /* ---------- section tracking (for "you are here" + context) ---------- */
+  const SECTION_NAMES = { t1: 'Who’s this', t2: 'The work', t3: 'Being wrong', t4: 'Handoff' };
+  let current = 'start';
+  const sio = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    current = e.target.dataset.node;
+    const id = e.target.id;
+    if (SECTION_NAMES[id] && !seen.has(SECTION_NAMES[id])) { seen.add(SECTION_NAMES[id]); updateContext(); }
+    markSeen(current);
+    if (id !== 't0') showDock();
+  }), { rootMargin: '-45% 0px -45% 0px' });
+  $$('[data-node]').forEach(s => sio.observe(s));
+  const seenNodes = new Set();
+  function markSeen(n) { seenNodes.add(n); }
+
+  /* ======================================================
+     LIVE CONVERSATION: rule-based NLU with a designed
+     fallback ladder (clarify → rephrase → hand off)
+     ====================================================== */
+  const INTENTS = [
+    { id: 'work', label: 'work', kw: ['work', 'project', 'projects', 'case', 'cases', 'portfolio', 'best', 'examples'], go: 't2', say: 'Here’s the work. Each card opens with a real line from the project.' },
+    { id: 'about', label: 'about', kw: ['who', 'about', 'yourself', 'background', 'introduce', 'what do you do', 'role'], go: 't1', say: 'Here’s the short version of who I am.' },
+    { id: 'process', label: 'process', kw: ['process', 'error', 'errors', 'fallback', 'wrong', 'fail', 'handle', 'approach', 'method', 'principle', 'misunderstand'], go: 't3', say: 'This is how I handle being wrong.' },
+    { id: 'resume', label: 'resume', kw: ['resume', 'cv', 'résumé', 'experience', 'linkedin'], href: RESUME, say: `Here’s the resume: <a href="${RESUME}" target="_blank" rel="noopener">open it ↗</a>` },
+    { id: 'human', label: 'contact', kw: ['hire', 'hiring', 'contact', 'email', 'talk', 'human', 'person', 'job', 'available', 'reach', 'connect', 'interview'], go: 't4', say: 'Transferring you to Samruddhi, with your context.' },
+    { id: 'map', label: 'sitemap', kw: ['sitemap', 'map', 'menu', 'navigation', 'flow', 'flowchart', 'everything'], map: true, say: 'Opening the sitemap. It’s a flowchart of how this site decides.' },
+    { id: 'icici', label: 'case', kw: ['icici', 'voice', 'voicebot', 'ivr', 'call', 'card', 'touchscreen', 'touchscreens'], case: 'cs-icici', say: 'Beyond Touchscreens: 70+ voice banking flows.' },
+    { id: 'upi', label: 'case', kw: ['upi', 'payment', 'payments', 'refund', 'debit', 'dispute', 'ledger', 'money'], case: 'cs2', say: 'Where did my money go? The five-gate dispute engine.' },
+    { id: 'dottie', label: 'case', kw: ['dottie', 'indigo', 'flight', 'airline', 'travel', 'booking', 'goa'], case: 'cs-dottie', say: 'Dottie, a voice persona for IndiGo.' },
+    { id: 'smartcoin', label: 'case', kw: ['smartcoin', 'saving', 'savings', 'loan', 'lending', 'borrow', 'chillar'], case: 'cs-smartcoin', say: 'SmartCoin: borrowing connected to saving.' },
+    { id: 'vihar', label: 'case', kw: ['vihar', 'park', 'zoo', 'forest', 'wayfinding', 'butterfly'], case: 'cs-vihar', say: 'Van Vihar: the invisible guide.' },
+    { id: 'bhopal', label: 'case', kw: ['bhopal', 'bike', 'bikes', 'cycle', 'cycling', 'adoption'], case: 'cs-bhopal', say: 'Bhopal by Bike: 3% adoption, and why.' },
+    { id: 'greet', label: 'greet', kw: ['hi', 'hello', 'hey', 'namaste', 'yo'], say: 'Hello. Where would you like to go: the work, the process, or straight to a human?' },
+  ];
+  // deliberately ambiguous words that need a clarifying question
+  const AMBIGUOUS = { bank: ['icici', 'upi'], banking: ['icici', 'upi'], fintech: ['upi', 'smartcoin'], service: ['vihar', 'bhopal'] };
+  const OPTION_LABEL = { icici: 'Voice banking flows', upi: 'UPI payment disputes', smartcoin: 'SmartCoin', vihar: 'Van Vihar', bhopal: 'Bhopal by Bike' };
+
+  const tokenize = text => text.toLowerCase().replace(/[^\p{L}\p{N}\s'-]/gu, ' ').split(/\s+/).filter(Boolean);
   function classify(text) {
-    const t = ' ' + text.toLowerCase().replace(/[^\p{L}\p{N}\s'-]/gu, ' ').replace(/\s+/g, ' ') + ' ';
-    let best = { id: null, score: 0 };
+    const lower = ' ' + text.toLowerCase().replace(/[^\p{L}\p{N}\s'-]/gu, ' ').replace(/\s+/g, ' ') + ' ';
+    const toks = tokenize(text);
+    const hits = {};
+    let best = null, bestScore = 0, ambiguous = null;
     INTENTS.forEach(it => {
       let s = 0;
-      it.kw.forEach(k => { if (k.length <= 3 ? t.includes(' ' + k + ' ') : t.includes(k)) s += k.includes(' ') ? 1.5 : 1; });
-      if (s > best.score) best = { id: it.id, score: s };
+      it.kw.forEach(k => {
+        const hit = k.includes(' ') ? lower.includes(' ' + k + ' ') : toks.includes(k);
+        if (hit) { s += (k.includes(' ') ? 1.5 : 1) * (it.label === 'case' ? 2 : 1); k.split(' ').forEach(w => hits[w] = it.label === 'case' ? it.id : it.label); }
+      });
+      if (s > bestScore) { bestScore = s; best = it; }
     });
-    return { id: best.id, conf: best.score ? Math.min(.62 + best.score * .14 + Math.random() * .04, .98) : .12 + Math.random() * .25 };
+    toks.forEach(t => { if (AMBIGUOUS[t]) { hits[t] = '?'; if (!best || best.label === 'work' || best.label === 'greet') ambiguous = AMBIGUOUS[t]; } });
+    const conf = ambiguous ? .44 : best ? Math.min(.6 + bestScore * .15, .98) : (toks.length ? .18 : 0);
+    return { intent: ambiguous ? null : best, conf, hits, ambiguous };
   }
-  const addMsg = (who, html) => { bubble(log, who, html); scrollLog(); };
-  function addNlu(utt, intent, conf, action, cls) {
-    const n = document.createElement('div'); n.className = 'nlu';
-    n.innerHTML = `utterance: <b>“${esc(utt)}”</b><br>intent: <b>${intent || 'none'}</b> · confidence: <span class="${cls}">${conf.toFixed(2)}</span><br>action: <b>${action}</b>`;
-    log.appendChild(n); scrollLog();
-  }
-  function setChips(list) {
-    chipsEl.innerHTML = '';
-    (list || []).forEach(c => { const b = document.createElement('button'); b.className = 'chip'; b.type = 'button'; b.textContent = c; b.addEventListener('click', () => handle(c, CHIP_MAP[c])); chipsEl.appendChild(b); });
-  }
-  async function botSay(lines) {
-    for (const line of lines) { const p = typeIn(log, 500 + Math.min(line.length * 6, 900)); scrollLog(); await p; addMsg('bot', line); }
-  }
-  async function handle(text, forced) {
-    if (busy || !text.trim()) return;
-    busy = true; setChips([]);
-    addMsg('user', esc(text));
-    const { id, conf } = forced ? { id: forced, conf: .99 } : classify(text);
-    if (id && conf >= .6) {
-      misses = 0; addNlu(text, id, conf, 'respond', 'ok');
-      const it = INTENTS.find(i => i.id === id); await botSay(it.say); setChips(it.chips);
-    } else {
-      misses++;
-      if (misses === 1) {
-        addNlu(text, id, conf, 'clarify (miss 1/3)', 'warn');
-        await botSay(['Hmm, I didn’t quite catch that. Are you asking about the work, the process, or getting in touch?']);
-        setChips(['Your work', 'Your process', 'Getting in touch']);
-      } else if (misses === 2) {
-        addNlu(text, id, conf, 'rephrase (miss 2/3)', 'warn');
-        await botSay(['Let me put it another way. I’m best at three things: voice projects, how errors get handled, and hiring questions. Pick one?']);
-        setChips(['Voice projects', 'Error handling', 'Hiring']);
-      } else {
-        addNlu(text, id, conf, 'handoff → human (context kept)', 'bad');
-        await botSay([`That’s outside what I can answer, so I won’t keep guessing. Samruddhi can pick it up from here: <a href="mailto:${EMAIL}?subject=${encodeURIComponent('From your portfolio')}&body=${encodeURIComponent('I asked your portfolio: “' + text + '”')}">email with your question attached ↗</a>`]);
-        misses = 0; setChips(['Show me the best work', 'What do you do?']);
-      }
-    }
-    busy = false;
-  }
-  $('#chatForm').addEventListener('submit', e => { e.preventDefault(); const inp = $('#chatInput'); const v = inp.value; inp.value = ''; handle(v); });
-  $('#debugToggle').addEventListener('click', e => { const b = e.currentTarget, on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', on); chatEl.classList.toggle('debug', on); scrollLog(); });
-  log.setAttribute('data-lenis-prevent', '');
-  let greeted = false;
-  new IntersectionObserver(([e]) => {
-    if (e.isIntersecting && !greeted) {
-      greeted = true;
-      botSay(['Hi! 👋 I’m a small rule-based bot, built to the same principles as the work above.', 'Ask me anything, or tap a question.']).then(() => setChips(['What do you do?', 'Show me the best work', 'How do you handle errors?', 'How do I contact you?']));
-    }
-  }, { threshold: .35 }).observe(chatEl);
 
-  loader();
+  const input = $('#dockInput'), parseEl = $('#parse'), log = $('#log');
+  function renderParse() {
+    const v = input.value;
+    if (!v.trim()) { parseEl.innerHTML = ''; return; }
+    const { conf, hits, intent } = classify(v);
+    const toks = tokenize(v);
+    parseEl.innerHTML = toks.map(t => hits[t] ? `<span class="tok hit">${esc(t)}<sub>${esc(hits[t])}</sub></span>` : `<span class="tok">${esc(t)}</span>`).join('') +
+      `<span class="conf ${conf >= .6 ? 'ok' : ''}"><span class="conf__bar"><i style="width:${Math.round(conf * 100)}%"></i></span>${conf.toFixed(2)}</span>`;
+  }
+  input.addEventListener('input', renderParse);
+
+  function showDock() { $('#dock').classList.add('on'); }
+  function openLog() { log.classList.add('open'); }
+  $('#logClose').addEventListener('click', () => log.classList.remove('open'));
+  function addLine(who, html) {
+    const d = document.createElement('div');
+    d.className = 'line ' + who;
+    d.innerHTML = `<span class="who">${who === 'user' ? 'YOU' : who === 'bot' ? 'SITE' : 'SYSTEM'}</span><span class="said">${html}</span>`;
+    log.appendChild(d); log.scrollTop = log.scrollHeight;
+    return d;
+  }
+  function addChips(list) {
+    const wrap = document.createElement('div'); wrap.className = 'chips';
+    list.forEach(([label, fn]) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = label; b.addEventListener('click', () => { wrap.remove(); fn(); }); wrap.appendChild(b); });
+    log.appendChild(wrap); log.scrollTop = log.scrollHeight;
+  }
+  function act(it) {
+    if (it.map) return setTimeout(openMap, 500);
+    if (it.href) return;
+    if (it.case) { setTimeout(() => { const el = document.getElementById('case-' + it.case); el && el.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'center' }); }, 400); return; }
+    if (it.go) setTimeout(() => go(it.go), 400);
+  }
+  let misses = 0;
+  function respond(text) {
+    openLog();
+    addLine('user', esc(text));
+    const r = classify(text);
+    input.value = ''; renderParse();
+    if (r.intent && r.conf >= .6) {
+      misses = 0;
+      addLine('sys', `intent: ${r.intent.id} · confidence ${r.conf.toFixed(2)} → act`);
+      addLine('bot', r.intent.say);
+      act(r.intent);
+      return;
+    }
+    if (r.ambiguous) {
+      addLine('sys', `ambiguous · confidence ${r.conf.toFixed(2)} → clarify with options`);
+      addLine('bot', 'Happy to. Which one?');
+      addChips(r.ambiguous.map(id => [OPTION_LABEL[id], () => { const it = INTENTS.find(i => i.id === id); addLine('user', OPTION_LABEL[id]); addLine('bot', it.say); act(it); }]));
+      return;
+    }
+    misses++;
+    if (misses === 1) {
+      addLine('sys', `no intent · confidence ${r.conf.toFixed(2)} → clarify (miss 1 of 3)`);
+      addLine('bot', 'I didn’t quite catch that. Are you looking for the work, the process, or a person?');
+      addChips([['The work', () => respond('the work')], ['The process', () => respond('process')], ['A person', () => respond('talk to a human')]]);
+    } else if (misses === 2) {
+      addLine('sys', `no intent · confidence ${r.conf.toFixed(2)} → rephrase, don’t repeat (miss 2 of 3)`);
+      addLine('bot', 'Let me put it another way. You can ask about a project by name, like “Dottie” or “the banking work”, or ask for my resume.');
+    } else {
+      misses = 0;
+      addLine('sys', `confidence ${r.conf.toFixed(2)} → hand off to a human, context attached (miss 3 of 3)`);
+      const href = `mailto:${EMAIL}?subject=${encodeURIComponent('A question from your portfolio')}&body=${encodeURIComponent('I asked your portfolio: “' + text + '”\n\n')}`;
+      addLine('bot', `I won’t keep guessing. Samruddhi can take this one, and your question is already attached: <a href="${href}">email it ↗</a>`);
+    }
+  }
+  $('#dockForm').addEventListener('submit', e => { e.preventDefault(); if (input.value.trim()) respond(input.value.trim()); });
+  $('[data-try]').addEventListener('click', () => {
+    showDock(); openLog();
+    if (!log.querySelector('.line')) addLine('bot', 'Go ahead. Type something I won’t understand, three times in a row.');
+    input.focus();
+  });
+
+  /* ======================================================
+     FLOWCHART SITEMAP
+     ====================================================== */
+  const NODES = [
+    { id: 'start', x: 40, y: 400, w: 150, type: 'start', small: 'entry', label: 'Call connects', go: 't0' },
+    { id: 'choice', x: 238, y: 370, type: 'decision', label: 'Keypad or skip?' },
+    { id: 'k1', x: 450, y: 70, w: 170, small: 'press 1', label: 'Work', go: 't2' },
+    { id: 'k2', x: 450, y: 140, w: 170, small: 'press 2', label: 'About', go: 't1' },
+    { id: 'k3', x: 450, y: 210, w: 170, small: 'press 3', label: 'Process', go: 't3' },
+    { id: 'k4', x: 450, y: 280, w: 170, small: 'press 4', label: 'Resume ↗', href: RESUME },
+    { id: 'k0', x: 450, y: 350, w: 170, small: 'press 0', label: 'Human', go: 't4', type: 'human' },
+    { id: 't1', x: 450, y: 560, w: 180, small: 'turn 01', label: 'Who’s this?', go: 't1' },
+    { id: 't2', x: 700, y: 560, w: 180, small: 'turn 02', label: 'The work', go: 't2' },
+    { id: 't3', x: 950, y: 560, w: 200, small: 'turn 03', label: 'Being wrong', go: 't3' },
+    { id: 't4', x: 1220, y: 560, w: 200, small: 'turn 04', label: 'Transfer to a human', go: 't4', type: 'human' },
+    ...CASES.map((c, i) => ({ id: 'case-' + c.id, x: 450 + i * 172, y: 740, w: 158, small: 'case ' + c.n, label: c.key, caseId: c.id })),
+    { id: 'dock', x: 720, y: 250, w: 190, small: 'any time', label: 'Type where to go', },
+    { id: 'conf', x: 950, y: 220, type: 'decision', label: 'Confident? ≥ 0.6' },
+    { id: 'clarify', x: 1150, y: 120, w: 140, small: 'miss 1', label: 'Clarify', type: 'error' },
+    { id: 'rephrase', x: 1150, y: 200, w: 140, small: 'miss 2', label: 'Rephrase', type: 'error' },
+    { id: 'handoff', x: 1150, y: 280, w: 140, small: 'miss 3', label: 'Hand off', type: 'error' },
+    { id: 'route', x: 1150, y: 380, w: 180, small: 'yes', label: 'Go to the page' },
+  ];
+  const EDGES = [
+    ['start', 'choice'], ['choice', 'k1', 'keypad'], ['choice', 'k2'], ['choice', 'k3'], ['choice', 'k4'], ['choice', 'k0'],
+    ['choice', 't1', 'skip the keypad', 'red'],
+    ['t1', 't2', '', 'red'], ['t2', 't3', '', 'red'], ['t3', 't4', '', 'red'],
+    ...CASES.map(c => ['t2', 'case-' + c.id, '', 'dash']),
+    ['dock', 'conf'], ['conf', 'clarify', 'no'], ['clarify', 'rephrase'], ['rephrase', 'handoff'], ['handoff', 't4', 'context kept', 'red'], ['conf', 'route', 'yes'],
+  ];
+  const FRAMES = [
+    { x: 420, y: 40, w: 230, h: 380, label: 'KEYPAD · direct' },
+    { x: 420, y: 520, w: 1030, h: 300, label: 'SKIP THE KEYPAD · guided' },
+    { x: 690, y: 90, w: 680, h: 380, label: 'LIVE BAR · error ladder' },
+  ];
+  const canvas = $('#mapCanvas'), vp = $('#mapVp');
+  const nodeEls = {};
+  function buildMap() {
+    if (canvas.childElementCount) return;
+    FRAMES.forEach(f => { const d = document.createElement('div'); d.className = 'frame'; Object.assign(d.style, { left: f.x + 'px', top: f.y + 'px', width: f.w + 'px', height: f.h + 'px' }); d.innerHTML = `<span>${f.label}</span>`; canvas.appendChild(d); });
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.setAttribute('width', 1560); svg.setAttribute('height', 900);
+    svg.innerHTML = '<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1f1e1c"/></marker><marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c24a2c"/></marker></defs>';
+    canvas.appendChild(svg);
+    NODES.forEach(n => {
+      const d = document.createElement('div');
+      d.className = 'node ' + (n.type || '');
+      d.style.left = n.x + 'px'; d.style.top = n.y + 'px'; if (n.w) d.style.width = n.w + 'px';
+      d.innerHTML = n.type === 'decision' ? `<span>${n.label}</span>` : `${n.small ? `<small>${n.small}</small>` : ''}${n.label}`;
+      if (n.go || n.href || n.caseId) {
+        d.tabIndex = 0; d.setAttribute('role', 'link');
+        const nav = () => {
+          if (n.href) return window.open(n.href, '_blank', 'noopener');
+          closeMap();
+          if (n.caseId) setTimeout(() => { const el = document.getElementById('case-' + n.caseId); el && el.scrollIntoView({ block: 'center' }); }, 50);
+          else setTimeout(() => go(n.go), 50);
+        };
+        d.addEventListener('click', e => { if (!vp.dataset.moved) nav(); });
+        d.addEventListener('keydown', e => { if (e.key === 'Enter') nav(); });
+      }
+      canvas.appendChild(d); nodeEls[n.id] = d;
+    });
+    // edges, drawn after layout so we can measure nodes
+    requestAnimationFrame(() => {
+      const box = id => { const el = nodeEls[id]; return { x: el.offsetLeft, y: el.offsetTop, w: el.offsetWidth, h: el.offsetHeight }; };
+      EDGES.forEach(([a, b, label, style]) => {
+        const A = box(a), B = box(b);
+        let x1, y1, x2, y2, d;
+        if (a === 'handoff') { // around the "go to the page" node, down into turn 4
+          x1 = A.x + A.w; y1 = A.y + A.h / 2; x2 = B.x + B.w - 30; y2 = B.y;
+          d = `M${x1} ${y1} H${x2} V${y2}`;
+        } else if (B.y > A.y + A.h + 10 && Math.abs((A.x + A.w / 2) - (B.x + B.w / 2)) < 400 && a !== 'choice') { // downward
+          x1 = A.x + A.w / 2; y1 = A.y + A.h; x2 = B.x + B.w / 2; y2 = B.y;
+          const my = (y1 + y2) / 2; d = `M${x1} ${y1} V${my} H${x2} V${y2}`;
+        } else if (B.y + B.h < A.y - 10 && Math.abs(A.x - B.x) < 60) { // upward in same column
+          x1 = A.x + A.w / 2; y1 = A.y; x2 = B.x + B.w / 2; y2 = B.y + B.h; d = `M${x1} ${y1} V${y2}`;
+        } else if (B.y > A.y + A.h && a !== 'choice') { // handoff down to turn 4
+          x1 = A.x + A.w / 2; y1 = A.y + A.h; x2 = B.x + B.w / 2; y2 = B.y; d = `M${x1} ${y1} V${(y1 + y2) / 2} H${x2} V${y2}`;
+        } else { // rightward elbow
+          x1 = A.x + A.w; y1 = A.y + A.h / 2; x2 = B.x; y2 = B.y + B.h / 2;
+          if (a === 'choice' || a === 'conf') { x1 = A.x + A.w - 18; }
+          const mx = x1 + Math.max(24, (x2 - x1) / 2); d = `M${x1} ${y1} H${mx} V${y2} H${x2}`;
+        }
+        const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        p.setAttribute('d', d); p.setAttribute('class', 'edge ' + (style || ''));
+        p.setAttribute('marker-end', style === 'red' ? 'url(#ahr)' : 'url(#ah)');
+        svg.appendChild(p);
+        if (label) {
+          const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          t.setAttribute('class', 'elabel'); t.textContent = label;
+          let lx = a === 'choice' ? x1 + 30 : (x1 + x2) / 2 + 6, ly = a === 'choice' ? (b === 't1' ? y1 + 110 : y1 - 172) : (y1 + y2) / 2 - 6;
+          if (a === 'handoff') { lx = x2 + 8; ly = y1 + 120; }
+          t.setAttribute('x', lx); t.setAttribute('y', ly);
+          if (style === 'red') t.setAttribute('fill', '#c24a2c');
+          svg.appendChild(t);
+        }
+      });
+    });
+    const s = document.createElement('div'); s.className = 'sticky'; s.style.left = '60px'; s.style.top = '120px';
+    s.innerHTML = '<b>NOTE FROM SAMRUDDHI</b>Most sitemaps show pages. This one shows decisions, because that’s what I design.';
+    canvas.appendChild(s);
+    const s2 = document.createElement('div'); s2.className = 'sticky'; s2.style.left = '1300px'; s2.style.top = '40px'; s2.style.transform = 'rotate(2deg)';
+    s2.innerHTML = '<b>WHY IT’S RED</b>The red line is the path I’d like you to take. The keypad is for people in a hurry.';
+    canvas.appendChild(s2);
+  }
+  let view = { s: 1, x: 0, y: 0 };
+  const apply = () => canvas.style.transform = `translate(${view.x}px, ${view.y}px) scale(${view.s})`;
+  function fit() {
+    const r = vp.getBoundingClientRect();
+    const s = Math.min(r.width / 1600, r.height / 920, 1.1);
+    view = { s, x: (r.width - 1560 * s) / 2, y: Math.max(20, (r.height - 880 * s) / 2) };
+    if (r.width < 700) { view.s = .62; view.x = 10; view.y = 30; }
+    apply();
+  }
+  function zoom(dir) {
+    if (dir === 0) return fit();
+    const r = vp.getBoundingClientRect(), cx = r.width / 2, cy = r.height / 2;
+    const ns = Math.min(2, Math.max(.35, view.s * (dir > 0 ? 1.2 : 1 / 1.2)));
+    view.x = cx - (cx - view.x) * ns / view.s; view.y = cy - (cy - view.y) * ns / view.s; view.s = ns; apply();
+  }
+  $$('[data-zoom]').forEach(b => b.addEventListener('click', () => zoom(+b.dataset.zoom)));
+  let drag = null;
+  vp.addEventListener('pointerdown', e => { drag = { x: e.clientX, y: e.clientY, vx: view.x, vy: view.y }; delete vp.dataset.moved; });
+  addEventListener('pointermove', e => {
+    if (!drag) return;
+    const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (Math.abs(dx) + Math.abs(dy) > 4) { vp.dataset.moved = '1'; vp.classList.add('dragging'); }
+    view.x = drag.vx + dx; view.y = drag.vy + dy; apply();
+  });
+  addEventListener('pointerup', () => { drag = null; vp.classList.remove('dragging'); setTimeout(() => delete vp.dataset.moved, 0); });
+  vp.addEventListener('wheel', e => { e.preventDefault(); if (e.ctrlKey) { zoom(e.deltaY < 0 ? 1 : -1); } else { view.x -= e.deltaX; view.y -= e.deltaY; apply(); } }, { passive: false });
+
+  let lastFocus = null;
+  function openMap() {
+    lastFocus = document.activeElement;
+    buildMap();
+    $('#map').classList.add('open'); document.body.style.overflow = 'hidden';
+    Object.values(nodeEls).forEach(el => el.classList.remove('here'));
+    const here = nodeEls[current] || nodeEls.start; here && here.classList.add('here');
+    seenNodes.forEach(n => nodeEls[n] && nodeEls[n].classList.add('seen'));
+    requestAnimationFrame(fit);
+    $('#mapClose').focus();
+  }
+  function closeMap() { $('#map').classList.remove('open'); document.body.style.overflow = ''; lastFocus && lastFocus.focus && lastFocus.focus(); }
+  $$('[data-open-map]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); openMap(); }));
+  $('#mapClose').addEventListener('click', closeMap);
+  addEventListener('resize', () => { if ($('#map').classList.contains('open')) fit(); });
+
+  updateContext();
 })();
 </script>
 </body>
